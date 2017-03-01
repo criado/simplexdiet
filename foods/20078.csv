@@ -1,0 +1,82 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
+Full Report (All Nutrients)
+Report Run at: February 26, 2017 16:14 EST
+"Nutrient data for: 20078, Wheat germ, crude"
+Food Group:  Cereal Grains and Pasta
+Common Name:
+Carbohydrate Factor: 3.78 Fat Factor: 8.37 Protein Factor: 3.59 Nitrogen to Protein Conversion Factor: 5.8 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup = 115.0g",
+Proximates
+"Water",g,11.12,10,0.864,12.79
+"Energy",kcal,360,--,--,414
+"Energy",kJ,1506,--,--,1732
+"Protein",g,23.15,7,1.447,26.62
+"Total lipid (fat)",g,9.72,8,0.403,11.18
+"Ash",g,4.21,9,0.121,4.84
+"Carbohydrate, by difference",g,51.80,--,--,59.57
+"Sugars, total",g,5.0
+"Fiber, total dietary",g,13.2,--,--,15.2
+Minerals
+"Calcium, Ca",mg,39,6,1.242,45
+"Iron, Fe",mg,6.26,7,0.905,7.20
+"Magnesium, Mg",mg,239,6,14.360,275
+"Phosphorus, P",mg,842,6,18.808,968
+"Potassium, K",mg,892,6,41.171,1026
+"Sodium, Na",mg,12,6,3.569,14
+"Zinc, Zn",mg,12.29,6,0.670,14.13
+"Copper, Cu",mg,0.796,6,0.034,0.915
+"Manganese, Mn",mg,13.301,9,2.224,15.296
+"Selenium, Se",µg,79.2,1,--,91.1
+Vitamins
+"Vitamin C, total ascorbic acid",mg,0.0,--,--,0.0
+"Thiamin",mg,1.882,7,0.189,2.164
+"Riboflavin",mg,0.499,7,0.059,0.574
+"Niacin",mg,6.813,7,1.221,7.835
+"Pantothenic acid",mg,2.257,6,0.141,2.596
+"Vitamin B-6",mg,1.300,7,0.190,1.495
+"Folate, total",µg,281,10,22.507,323
+"Folic acid",µg,0,--,--,0
+"Folate, food",µg,281,10,22.507,323
+"Folate, DFE",µg,281,--,--,323
+"Choline, total",mg,152
+"Vitamin B-12",µg,0.00,--,--,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00
+"Vitamin A, RAE",µg,0,--,--,0
+"Retinol",µg,0,--,--,0
+"Vitamin E (alpha-tocopherol)",mg,16.0
+"Vitamin A, IU",IU,0,--,--,0
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0
+"Vitamin D",IU,0,--,--,0
+"Vitamin K (phylloquinone)",µg,0.0
+Lipids
+"Fatty acids, total saturated",g,1.665,--,--,1.915
+"14:0",g,0.013,7,--,0.015
+"16:0",g,1.587,7,--,1.825
+"18:0",g,0.055,7,--,0.063
+"Fatty acids, total monounsaturated",g,1.365,--,--,1.570
+"16:1 undifferentiated",g,0.034,7,--,0.039
+"18:1 undifferentiated",g,1.332,7,--,1.532
+"Fatty acids, total polyunsaturated",g,6.010,--,--,6.912
+"18:2 undifferentiated",g,5.287,7,--,6.080
+"18:3 undifferentiated",g,0.723,7,--,0.831
+"Cholesterol",mg,0,--,--,0
+Amino Acids
+"Tryptophan",g,0.317,3,--,0.365
+"Threonine",g,0.968,13,--,1.113
+"Isoleucine",g,0.847,13,--,0.974
+"Leucine",g,1.571,13,--,1.807
+"Lysine",g,1.468,13,--,1.688
+"Methionine",g,0.456,13,--,0.524
+"Cystine",g,0.458,13,--,0.527
+"Phenylalanine",g,0.928,13,--,1.067
+"Tyrosine",g,0.704,12,--,0.810
+"Valine",g,1.198,13,--,1.378
+"Arginine",g,1.867,13,--,2.147
+"Histidine",g,0.643,13,--,0.739
+"Alanine",g,1.477,12,--,1.699
+"Aspartic acid",g,2.070,12,--,2.380
+"Glutamic acid",g,3.995,12,--,4.594
+"Glycine",g,1.424,12,--,1.638
+"Proline",g,1.231,12,--,1.416
+"Serine",g,1.102,12,--,1.267
+Other

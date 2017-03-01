@@ -1,0 +1,130 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
+Full Report (All Nutrients)
+Report Run at: March 01, 2017 11:11 EST
+"Nutrient data for: 04053, Oil, olive, salad or cooking"
+Food Group:  Fats and Oils
+Common Name:
+Fat Factor: 8.84 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 tablespoon = 13.5g","1 cup = 216.0g","1 tsp = 4.5g",
+Proximates
+"Water",g,0.00,4,0.000,0.00,0.00,0.00
+"Energy",kcal,884,--,--,119,1909,40
+"Energy",kJ,3699,--,--,499,7990,166
+"Protein",g,0.00,4,0.000,0.00,0.00,0.00
+"Total lipid (fat)",g,100.00,--,--,13.50,216.00,4.50
+"Ash",g,0.00,4,0.000,0.00,0.00,0.00
+"Carbohydrate, by difference",g,0.00,--,--,0.00,0.00,0.00
+"Fiber, total dietary",g,0.0,--,--,0.0,0.0,0.0
+"Sugars, total",g,0.00,--,--,0.00,0.00,0.00
+Minerals
+"Calcium, Ca",mg,1,4,0.189,0,2,0
+"Iron, Fe",mg,0.56,4,0.081,0.08,1.21,0.03
+"Magnesium, Mg",mg,0,4,0.050,0,0,0
+"Phosphorus, P",mg,0,4,0.000,0,0,0
+"Potassium, K",mg,1,4,0.149,0,2,0
+"Sodium, Na",mg,2,4,0.323,0,4,0
+"Zinc, Zn",mg,0.00,4,0.000,0.00,0.00,0.00
+"Copper, Cu",mg,0.000,4,0.000,0.000,0.000,0.000
+"Manganese, Mn",mg,0.000,4,0.000,0.000,0.000,0.000
+"Selenium, Se",µg,0.0,2,--,0.0,0.0,0.0
+Vitamins
+"Vitamin C, total ascorbic acid",mg,0.0,--,--,0.0,0.0,0.0
+"Thiamin",mg,0.000,--,--,0.000,0.000,0.000
+"Riboflavin",mg,0.000,--,--,0.000,0.000,0.000
+"Niacin",mg,0.000,--,--,0.000,0.000,0.000
+"Pantothenic acid",mg,0.000,--,--,0.000,0.000,0.000
+"Vitamin B-6",mg,0.000,--,--,0.000,0.000,0.000
+"Folate, total",µg,0,--,--,0,0,0
+"Folic acid",µg,0,--,--,0,0,0
+"Folate, food",µg,0,--,--,0,0,0
+"Folate, DFE",µg,0,--,--,0,0,0
+"Choline, total",mg,0.3,--,--,0.0,0.6,0.0
+"Betaine",mg,0.1,--,--,0.0,0.2,0.0
+"Vitamin B-12",µg,0.00,--,--,0.00,0.00,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00,0.00
+"Vitamin A, RAE",µg,0,--,--,0,0,0
+"Retinol",µg,0,--,--,0,0,0
+"Carotene, beta",µg,0,--,--,0,0,0
+"Carotene, alpha",µg,0,--,--,0,0,0
+"Cryptoxanthin, beta",µg,0,--,--,0,0,0
+"Vitamin A, IU",IU,0,--,--,0,0,0
+"Lycopene",µg,0,--,--,0,0,0
+"Lutein + zeaxanthin",µg,0,--,--,0,0,0
+"Vitamin E (alpha-tocopherol)",mg,14.35,6,1.535,1.94,31.00,0.65
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00,0.00
+"Tocopherol, beta",mg,0.11,6,0.052,0.01,0.24,0.00
+"Tocopherol, gamma",mg,0.83,6,0.184,0.11,1.79,0.04
+"Tocopherol, delta",mg,0.00,6,0.000,0.00,0.00,0.00
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0,0.0,0.0
+"Vitamin D",IU,0,--,--,0,0,0
+"Vitamin K (phylloquinone)",µg,60.2,2,--,8.1,130.0,2.7
+Lipids
+"Fatty acids, total saturated",g,13.808,--,--,1.864,29.825,0.621
+"4:0",g,0.000,4,0.000,0.000,0.000,0.000
+"6:0",g,0.000,4,0.000,0.000,0.000,0.000
+"8:0",g,0.000,4,0.000,0.000,0.000,0.000
+"10:0",g,0.000,4,0.000,0.000,0.000,0.000
+"12:0",g,0.000,4,0.000,0.000,0.000,0.000
+"14:0",g,0.000,4,0.000,0.000,0.000,0.000
+"16:0",g,11.290,4,0.583,1.524,24.386,0.508
+"17:0",g,0.022,3,0.023,0.003,0.048,0.001
+"18:0",g,1.953,4,0.024,0.264,4.218,0.088
+"20:0",g,0.414,4,0.003,0.056,0.894,0.019
+"22:0",g,0.129,4,0.003,0.017,0.279,0.006
+"24:0",g,0.000,4,0.000,0.000,0.000,0.000
+"Fatty acids, total monounsaturated",g,72.961,--,--,9.850,157.596,3.283
+"14:1",g,0.000,4,0.000,0.000,0.000,0.000
+"16:1 undifferentiated",g,1.255,4,0.140,0.169,2.711,0.056
+"17:1",g,0.125,4,0.014,0.017,0.270,0.006
+"18:1 undifferentiated",g,71.269,4,1.689,9.621,153.941,3.207
+"20:1",g,0.311,4,0.017,0.042,0.672,0.014
+"22:1 undifferentiated",g,0.000,4,0.000,0.000,0.000,0.000
+"Fatty acids, total polyunsaturated",g,10.523,--,--,1.421,22.730,0.474
+"18:2 undifferentiated",g,9.762,4,0.720,1.318,21.086,0.439
+"18:3 undifferentiated",g,0.761,4,0.040,0.103,1.644,0.034
+"18:4",g,0.000,4,0.000,0.000,0.000,0.000
+"20:4 undifferentiated",g,0.000,4,0.000,0.000,0.000,0.000
+"20:5 n-3 (EPA)",g,0.000,4,0.000,0.000,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,4,0.000,0.000,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,4,0.000,0.000,0.000,0.000
+"Cholesterol",mg,0,--,--,0,0,0
+"Phytosterols",mg,221,13,41.923,30,477,10
+Amino Acids
+"Tryptophan",g,0.000,--,--,0.000,0.000,0.000
+"Threonine",g,0.000,--,--,0.000,0.000,0.000
+"Isoleucine",g,0.000,--,--,0.000,0.000,0.000
+"Leucine",g,0.000,--,--,0.000,0.000,0.000
+"Lysine",g,0.000,--,--,0.000,0.000,0.000
+"Methionine",g,0.000,--,--,0.000,0.000,0.000
+"Cystine",g,0.000,--,--,0.000,0.000,0.000
+"Phenylalanine",g,0.000,--,--,0.000,0.000,0.000
+"Tyrosine",g,0.000,--,--,0.000,0.000,0.000
+"Valine",g,0.000,--,--,0.000,0.000,0.000
+"Arginine",g,0.000,--,--,0.000,0.000,0.000
+"Histidine",g,0.000,--,--,0.000,0.000,0.000
+"Alanine",g,0.000,--,--,0.000,0.000,0.000
+"Aspartic acid",g,0.000,--,--,0.000,0.000,0.000
+"Glutamic acid",g,0.000,--,--,0.000,0.000,0.000
+"Glycine",g,0.000,--,--,0.000,0.000,0.000
+"Proline",g,0.000,--,--,0.000,0.000,0.000
+"Serine",g,0.000,--,--,0.000,0.000,0.000
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0,0.0
+"Caffeine",mg,0,--,--,0,0,0
+"Theobromine",mg,0,--,--,0,0,0
+Flavonoids
+Flavones
+"Apigenin",mg,0.1,21,0.010,0.0,0.2,0.0
+"Luteolin",mg,0.1,456,0.000,0.0,0.3,0.0
+
+
+Sources of Data
+1,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 2a",1999,,BeltsvilleMD
+2,"Nutrient Data Laboratory, ARS, USDA","NDL Report Vitamin E 1997",1997,,BeltsvilleMD
+3,"Brenes, M., Garcia, A., Garcia, P., and Garrido, A.","Rapid and complete extraction of phenols from olive oil and determination by means of a coulometric electrode array system.",2000,J. Agric. Food Chem.,48 pp. 5178-5178
+4,"De la Torre-Carbot, K., Jauregui, O., Gimeno, E., Castellote, A. J., Lamuela-Raventós, R. M., and López-Sabater, M. C.","Charaterization and quantification of phenolic compounds in olive oil by solid-phase extraction, HPLC_DAD, and HPLC-MS/MS.",2005,J. Agric. Food Chem.,53 pp. 4331-4331
+5,"Morelló, J-R., Romero, M-P., and Motilva, M-J.","Effect of the maturation process of the olive fruit on the phenolic fraction of drupes and oils from Arbequina, Farga, and Morrut cultivars.. J. Agric. Food Chem.",2004,J. Agric. Food Chem.,52 pp. 6002-6002
+6,"Yousfi, K., Cert, R. M., and Gar?ia, J. M.","Changes in quality and phenolic compounds of virgn olive oils during objectively described fruit maturation",2006,Eur. Food Res. Technol.,223 pp. 117-117
+7,"Artajo, L.S., Romero, M. P., and Motilva, M. J.","Transfer of phenolic compounds during olive oil extraction in relation to ripening stage of the fruit.",2006,J. Sci. Food Agric.,86 pp. 518-518
+8,"Gar?ia, A., Brenes, M., Romero, C., Gar?ia, P. and Garrido, A.","Study of phenolic compounds in virgin olive oil of the Picual variety.",1998,Phytochem. Anal.,9 pp. 274-274
+9,"Kachouri, F., and Hamdi, M.","Use Lactobacillus planatrum in olive oil process and improvement of phenolic compounds content.",2006,J. Food Engineering,77 pp. 746-746
