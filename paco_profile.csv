@@ -9,7 +9,7 @@
 "Calcium",             "mg",   "Calcium, Ca",                    1000,          2500
 "Iron",                "mg",   "Iron, Fe",                       14.4,          45
 "Magnesium",           "mg",   "Magnesium, Mg",                  400,           None
-"Phosphorus",          "mg",   "Phosphorus, P",                  700,           400
+"Phosphorus",          "mg",   "Phosphorus, P",                  700,           4000
 "Potassium",           "mg",   "Potassium, K",                   4700,          None
 "Sodium",              "mg",   "Sodium, Na",                     1500,          2300
 "Zinc",                "mg",   "Zinc, Zn",                       16.5,          40
@@ -26,8 +26,8 @@
 "Choline",             "mg",   "Choline, total",                 550,           3500
 "Vit B12",             "µg",   "Vitamin B-12",                   2.4,           None
 "Vit A",               "µg",   "Vitamin A, RAE",                 900,           1350
-"Vit E",               "mg",   "Vitamin E (alpha-tocopherol)",   15,            100
-"Vit D",               "µg",   "Vitamin D (D2 + D3)",            15,            100
+"Vit E",               "mg",   "Vitamin E (alpha-tocopherol)",   15,            1000
+"Vit D",               "µg",   "Vitamin D (D2 + D3)",            5,            100
 "Vit K",               "µg",   "Vitamin K (phylloquinone)",      120,           None
 "Alpha Linoleic Acid", "g",    "18:3 undifferentiated",          1.584,         1.616
 "Linoleic Acid",       "g",    "18:2 undifferentiated",          16.83,         17.17

@@ -1,0 +1,12 @@
+"Calories",            "kcal", "Energy",                         2388.0,        2412.0
+"Fat",                 "g",    "Total lipid (fat)",              76,            84.0
+"Saturated fats",      "g",    "Fatty acids, total saturated",   None,          17.74
+"Cholesterol",         "mg",   "Cholesterol",                    300,           None
+"Carbs",               "g",    "Carbohydrate, by difference",    313.5,         346.5
+"Sugar",               "g",    "Sugars, total",                  None,          150.0
+"Fiber",               "g",    "Fiber, total dietary",           38,            45
+"Protein",             "g",    "Protein",                        84.6,          94.5
+"Calcium",             "mg",   "Calcium, Ca",                    1000,          2500
+"Iron",                "mg",   "Iron, Fe",                       14.4,          45
+"Magnesium",           "mg",   "Magnesium, Mg",                  400,           None
+"Phosphorus",          "mg",   "Phosphorus, P",                  400,           700
