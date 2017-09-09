@@ -1,0 +1,14 @@
+{
+  "name": "dietweb",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.20.0",
+    "meteor-node-stubs": "~0.2.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-rangeslider": "^2.0.1"
+  }
+}

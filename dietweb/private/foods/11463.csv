@@ -1,0 +1,141 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
+Full Report (All Nutrients)
+Report Run at: February 26, 2017 16:36 EST
+"Nutrient data for: 11463, Spinach, frozen, chopped or leaf, unprepared"
+Food Group:  Vegetables and Vegetable Products
+Common Name:
+Carbohydrate Factor: 3.57 Fat Factor: 8.37 Protein Factor: 2.44 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup = 156.0g","1 package (10 oz) = 284.0g",
+Proximates
+"Water",g,90.17,11,0.117,140.67,256.08
+"Energy",kcal,29,--,--,45,82
+"Energy",kJ,120,--,--,187,341
+"Protein",g,3.63,11,0.066,5.66,10.31
+"Total lipid (fat)",g,0.57,11,0.083,0.89,1.62
+"Ash",g,1.43,11,0.016,2.23,4.06
+"Carbohydrate, by difference",g,4.21,--,--,6.57,11.96
+"Fiber, total dietary",g,2.9,11,0.130,4.5,8.2
+"Sugars, total",g,0.65,11,0.046,1.01,1.85
+"Sucrose",g,0.24,11,0.019,0.37,0.68
+"Glucose (dextrose)",g,0.24,11,0.020,0.37,0.68
+"Fructose",g,0.18,11,0.028,0.28,0.51
+"Lactose",g,0.00,11,0.000,0.00,0.00
+"Maltose",g,0.00,11,0.000,0.00,0.00
+"Galactose",g,0.00,11,0.000,0.00,0.00
+"Starch",g,0.00,11,0.000,0.00,0.00
+Minerals
+"Calcium, Ca",mg,129,11,4.176,201,366
+"Iron, Fe",mg,1.89,11,0.071,2.95,5.37
+"Magnesium, Mg",mg,75,11,2.107,117,213
+"Phosphorus, P",mg,49,11,0.644,76,139
+"Potassium, K",mg,346,11,7.867,540,983
+"Sodium, Na",mg,74,25,8.386,115,210
+"Zinc, Zn",mg,0.56,11,0.031,0.87,1.59
+"Copper, Cu",mg,0.144,11,0.006,0.225,0.409
+"Manganese, Mn",mg,0.704,11,0.017,1.098,1.999
+"Selenium, Se",µg,6.0,4,0.025,9.4,17.0
+Vitamins
+"Vitamin C, total ascorbic acid",mg,5.5,11,0.691,8.6,15.6
+"Thiamin",mg,0.094,5,0.005,0.147,0.267
+"Riboflavin",mg,0.224,5,0.002,0.349,0.636
+"Niacin",mg,0.507,5,0.002,0.791,1.440
+"Pantothenic acid",mg,0.094,5,0.000,0.147,0.267
+"Vitamin B-6",mg,0.172,5,0.003,0.268,0.488
+"Folate, total",µg,145,11,8.325,226,412
+"Folic acid",µg,0,--,--,0,0
+"Folate, food",µg,145,11,8.325,226,412
+"Folate, DFE",µg,145,--,--,226,412
+"Choline, total",mg,22.1,3,1.250,34.5,62.8
+"Betaine",mg,117.4,3,8.072,183.1,333.4
+"Vitamin B-12",µg,0.00,--,--,0.00,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00
+"Vitamin A, RAE",µg,586,--,--,914,1664
+"Retinol",µg,0,--,--,0,0
+"Carotene, beta",µg,7035,--,--,10975,19979
+"Carotene, alpha",µg,0,--,--,0,0
+"Cryptoxanthin, beta",µg,0,--,--,0,0
+"Vitamin A, IU",IU,11726,--,--,18293,33302
+"Lycopene",µg,0,--,--,0,0
+"Lutein + zeaxanthin",µg,12651,--,--,19736,35929
+"Vitamin E (alpha-tocopherol)",mg,2.90,2,--,4.52,8.24
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00
+"Tocopherol, beta",mg,0.01,2,--,0.02,0.03
+"Tocopherol, gamma",mg,0.14,2,--,0.22,0.40
+"Tocopherol, delta",mg,0.00,2,--,0.00,0.00
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0,0.0
+"Vitamin D",IU,0,--,--,0,0
+"Vitamin K (phylloquinone)",µg,372.0,4,30.457,580.3,1056.5
+Lipids
+"Fatty acids, total saturated",g,0.041,--,--,0.064,0.116
+"4:0",g,0.000,5,0.000,0.000,0.000
+"6:0",g,0.000,5,0.000,0.000,0.000
+"8:0",g,0.000,5,0.000,0.000,0.000
+"10:0",g,0.000,5,0.000,0.000,0.000
+"12:0",g,0.000,5,0.000,0.000,0.000
+"14:0",g,0.000,5,0.000,0.000,0.000
+"15:0",g,0.000,5,0.000,0.000,0.000
+"16:0",g,0.041,5,0.000,0.064,0.116
+"17:0",g,0.000,5,0.000,0.000,0.000
+"18:0",g,0.000,5,0.000,0.000,0.000
+"20:0",g,0.000,5,0.000,0.000,0.000
+"22:0",g,0.000,5,0.000,0.000,0.000
+"24:0",g,0.000,5,0.000,0.000,0.000
+"Fatty acids, total monounsaturated",g,0.000,--,--,0.000,0.000
+"14:1",g,0.000,5,0.000,0.000,0.000
+"16:1 undifferentiated",g,0.000,5,0.000,0.000,0.000
+"18:1 undifferentiated",g,0.000,5,0.000,0.000,0.000
+"20:1",g,0.000,5,0.000,0.000,0.000
+"22:1 undifferentiated",g,0.000,5,0.000,0.000,0.000
+"Fatty acids, total polyunsaturated",g,0.082,--,--,0.128,0.233
+"18:2 undifferentiated",g,0.000,5,0.000,0.000,0.000
+"18:3 undifferentiated",g,0.082,5,0.029,0.128,0.233
+"18:4",g,0.000,5,0.000,0.000,0.000
+"20:4 undifferentiated",g,0.000,5,0.000,0.000,0.000
+"20:5 n-3 (EPA)",g,0.000,5,0.000,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,5,0.000,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,5,0.000,0.000,0.000
+"Fatty acids, total trans",g,0.000,--,--,0.000,0.000
+"Cholesterol",mg,0,--,--,0,0
+Amino Acids
+"Tryptophan",g,0.100,--,--,0.156,0.284
+"Threonine",g,0.217,--,--,0.339,0.616
+"Isoleucine",g,0.126,--,--,0.197,0.358
+"Leucine",g,0.202,--,--,0.315,0.574
+"Lysine",g,0.251,--,--,0.392,0.713
+"Methionine",g,0.052,--,--,0.081,0.148
+"Cystine",g,0.029,--,--,0.045,0.082
+"Phenylalanine",g,0.207,--,--,0.323,0.588
+"Tyrosine",g,0.215,--,--,0.335,0.611
+"Valine",g,0.178,--,--,0.278,0.506
+"Arginine",g,0.481,--,--,0.750,1.366
+"Histidine",g,0.049,--,--,0.076,0.139
+"Alanine",g,0.218,--,--,0.340,0.619
+"Aspartic acid",g,0.429,--,--,0.669,1.218
+"Glutamic acid",g,0.508,--,--,0.792,1.443
+"Glycine",g,0.221,--,--,0.345,0.628
+"Proline",g,0.198,--,--,0.309,0.562
+"Serine",g,0.170,--,--,0.265,0.483
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0
+"Caffeine",mg,0,--,--,0,0
+"Theobromine",mg,0,--,--,0,0
+Flavonoids
+Flavones
+"Apigenin",mg,0.0,4,0.000,0.0,0.0
+"Luteolin",mg,0.0,4,0.000,0.0,0.0
+Flavonols
+"Kaempferol",mg,0.0,4,0.000,0.0,0.0
+"Myricetin",mg,0.0,4,0.000,0.0,0.0
+"Quercetin",mg,0.0,4,0.000,0.0,0.0
+Proanthocyanidin
+"Proanthocyanidin dimers",mg,0.0,1,--,0.0,0.0
+"Proanthocyanidin trimers",mg,0.0,1,--,0.0,0.0
+"Proanthocyanidin 4-6mers",mg,0.0,1,--,0.0,0.0
+"Proanthocyanidin 7-10mers",mg,0.0,1,--,0.0,0.0
+"Proanthocyanidin polymers (>10mers)",mg,0.0,1,--,0.0,0.0
+
+
+Sources of Data
+1,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 4a",2001,,BeltsvilleMD
+2,"Hellström, Törrönen, A.R., and Matilla, P.H.","Proanthocyanidins in common food products of plant origin",2009,J. Agric. Food Chem.,57 pp. 7899-7899
+3,"Hertog, M. G. L., Hollman, P. C. H., and Katan, M. B.","Content of potentially anticarcinogenic flavonoids of 28 vegetables and fruits commonly consumed in The Netherlands.",1992,J. Agric. Food Chem.,40 pp. 2379-2379

@@ -1,0 +1,84 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
+Full Report (All Nutrients)
+Report Run at: February 26, 2017 16:24 EST
+"Nutrient data for: 11675, Potatoes, microwaved, cooked in skin, flesh and skin, without salt"
+Food Group:  Vegetables and Vegetable Products
+Common Name:
+Carbohydrate Factor: 4.03 Fat Factor: 8.37 Protein Factor: 2.78 Nitrogen to Protein Conversion Factor: 6.25 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 potato (2-3/4"" dia by 4-3/4"" long) = 202.0g",
+Proximates
+"Water",g,72.04,10,1.061,145.52
+"Energy",kcal,105,--,--,212
+"Energy",kJ,441,--,--,891
+"Protein",g,2.44,6,0.120,4.93
+"Total lipid (fat)",g,0.10,--,--,0.20
+"Ash",g,1.18,6,0.077,2.38
+"Carbohydrate, by difference",g,24.24,--,--,48.96
+"Sugars, total",g,1.7
+"Fiber, total dietary",g,2.3,--,--,4.6
+Minerals
+"Calcium, Ca",mg,11,10,3.037,22
+"Iron, Fe",mg,1.24,10,0.089,2.50
+"Magnesium, Mg",mg,27,10,1.825,55
+"Phosphorus, P",mg,105,10,44.634,212
+"Potassium, K",mg,447,10,19.494,903
+"Sodium, Na",mg,8,10,1.513,16
+"Zinc, Zn",mg,0.36,10,0.033,0.73
+"Copper, Cu",mg,0.334,10,0.036,0.675
+"Manganese, Mn",mg,0.292,10,0.029,0.590
+"Selenium, Se",µg,0.4,--,--,0.8
+Vitamins
+"Vitamin C, total ascorbic acid",mg,15.1,3,--,30.5
+"Thiamin",mg,0.120,10,0.006,0.242
+"Riboflavin",mg,0.032,10,0.001,0.065
+"Niacin",mg,1.714,10,0.107,3.462
+"Pantothenic acid",mg,0.454,--,--,0.917
+"Vitamin B-6",mg,0.344,10,0.022,0.695
+"Folate, total",µg,12,10,0.559,24
+"Folic acid",µg,0,--,--,0
+"Folate, food",µg,12,10,0.559,24
+"Folate, DFE",µg,12,--,--,24
+"Choline, total",mg,14.4
+"Vitamin B-12",µg,0.00,--,--,0.00
+"Vitamin A, RAE",µg,0,--,--,0
+"Retinol",µg,0,--,--,0
+"Vitamin A, IU",IU,0,--,--,0
+"Vitamin E (alpha-tocopherol)",mg,0.07
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0
+"Vitamin D",IU,0,--,--,0
+"Vitamin K (phylloquinone)",µg,1.9
+Lipids
+"Fatty acids, total saturated",g,0.026,--,--,0.053
+"10:0",g,0.001,--,--,0.002
+"12:0",g,0.003,--,--,0.006
+"14:0",g,0.001,--,--,0.002
+"16:0",g,0.016,--,--,0.032
+"18:0",g,0.004,--,--,0.008
+"Fatty acids, total monounsaturated",g,0.002,--,--,0.004
+"16:1 undifferentiated",g,0.001,--,--,0.002
+"18:1 undifferentiated",g,0.001,--,--,0.002
+"Fatty acids, total polyunsaturated",g,0.043,--,--,0.087
+"18:2 undifferentiated",g,0.032,--,--,0.065
+"18:3 undifferentiated",g,0.010,--,--,0.020
+"Fatty acids, total trans",g,0.000,--,--,0.000
+"Cholesterol",mg,0,--,--,0
+Amino Acids
+"Tryptophan",g,0.038,--,--,0.077
+"Threonine",g,0.089,--,--,0.180
+"Isoleucine",g,0.099,--,--,0.200
+"Leucine",g,0.147,--,--,0.297
+"Lysine",g,0.149,--,--,0.301
+"Methionine",g,0.039,--,--,0.079
+"Cystine",g,0.031,--,--,0.063
+"Phenylalanine",g,0.109,--,--,0.220
+"Tyrosine",g,0.091,--,--,0.184
+"Valine",g,0.138,--,--,0.279
+"Arginine",g,0.113,--,--,0.228
+"Histidine",g,0.054,--,--,0.109
+"Alanine",g,0.075,--,--,0.151
+"Aspartic acid",g,0.598,--,--,1.208
+"Glutamic acid",g,0.410,--,--,0.828
+"Glycine",g,0.073,--,--,0.147
+"Proline",g,0.088,--,--,0.178
+"Serine",g,0.106,--,--,0.214
+Other
