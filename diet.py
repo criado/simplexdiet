@@ -52,7 +52,7 @@ def optimizeDiet(profile, foods):
     # We will minimize c'x subject to Gx<=h. Read the docs of cv.solvers.lp
     print([(n.lower,n.upper) for n in profile])
 
-    foods+=Food.dummyFoods(profile)
+    # foods+=Food.dummyFoods(profile)
     print([f.cost for f in foods])
     c= np.array([f.cost for f in foods])
     equations= ([n.name + "<=" + str(n.upper) for n in profile if n.upper is not None] +
@@ -68,10 +68,11 @@ def optimizeDiet(profile, foods):
     G= np.concatenate((G, np.eye(len(foods)), -np.eye(len(foods))))
 
     x= cv.solvers.lp(cv.matrix(c), cv.matrix(G), cv.matrix(h), solver= "glpk")
+
     return (x['primal objective'], x['x'], x['z'], equations)
 
 def main():
-    with open('paco_profile.csv', 'r') as file_profile:
+    with open('guille_profile.csv', 'r') as file_profile:
         profile= [NutrientRequirements(line)
                   for line in csv.reader(file_profile, skipinitialspace=True)]
 
@@ -84,7 +85,7 @@ def main():
     try:
         for i, food in enumerate(foods):
             if (x[i] > 1e-5):
-                print("%.2f" % x[i], food.name )
+                print("ing_amount,%.2f" % x[i], "," ,food.name )
     except:
         print('no solution found')
 

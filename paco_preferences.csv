@@ -1,4 +1,4 @@
-01174, 0.044, 6.0, None
+01174, 0.044, None, 6.0
 08120, 0.075, None, 0.9
 19165, 1.129, None, None
 20078, 0.275, None, None
@@ -9,6 +9,6 @@
 04053, 0.411, None, None
 12036, 0.59, None, None
 "choline_bitartrate", 0.0534, None, None
-"cod_liver_oil", 0.038, 1,None
+"cod_liver_oil", 0.038, None,1
 20445, 0.045, None, None
 salt, 0.0001, None, None

@@ -1,0 +1,110 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.1 2017-07-28
+Full Report (All Nutrients)
+Report Run at: September 16, 2017 10:51 EDT
+"Nutrient data for: 08084, Cereals ready-to-eat, wheat germ, toasted, plain"
+Food Group:  Breakfast Cereals
+Common Name:
+Carbohydrate Factor: 3.78 Fat Factor: 8.37 Protein Factor: 3.59 Nitrogen to Protein Conversion Factor: 5.8 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 oz = 28.35g","1 cup = 113.0g",
+Proximates
+"Water",g,5.60,14,0.251,1.59,6.33
+"Energy",kcal,382,--,--,108,432
+"Energy",kJ,1598,--,--,453,1806
+"Protein",g,29.10,14,0.516,8.25,32.88
+"Total lipid (fat)",g,10.70,13,0.326,3.03,12.09
+"Ash",g,5.00,7,0.094,1.42,5.65
+"Carbohydrate, by difference",g,49.60,--,--,14.06,56.05
+"Fiber, total dietary",g,15.1,5,1.042,4.3,17.1
+"Sugars, total",g,7.80,--,--,2.21,8.81
+"Sucrose",g,7.80,3,0.252,2.21,8.81
+Minerals
+"Calcium, Ca",mg,45,2,--,13,51
+"Iron, Fe",mg,9.09,12,0.437,2.58,10.27
+"Magnesium, Mg",mg,320,5,16.369,91,362
+"Phosphorus, P",mg,1146,10,28.137,325,1295
+"Potassium, K",mg,947,1,--,268,1070
+"Sodium, Na",mg,4,7,0.403,1,5
+"Zinc, Zn",mg,16.67,9,0.915,4.73,18.84
+"Copper, Cu",mg,0.620,9,0.110,0.176,0.701
+"Manganese, Mn",mg,19.956,4,0.282,5.658,22.550
+"Selenium, Se",µg,65.0,2,--,18.4,73.5
+Vitamins
+"Vitamin C, total ascorbic acid",mg,6.0,9,1.440,1.7,6.8
+"Thiamin",mg,1.670,10,0.069,0.473,1.887
+"Riboflavin",mg,0.820,10,0.025,0.232,0.927
+"Niacin",mg,5.590,12,0.224,1.585,6.317
+"Pantothenic acid",mg,1.387,9,0.184,0.393,1.567
+"Vitamin B-6",mg,0.978,12,0.072,0.277,1.105
+"Folate, total",µg,352,4,20.218,100,398
+"Folic acid",µg,0,--,--,0,0
+"Folate, food",µg,352,--,--,100,398
+"Folate, DFE",µg,352,--,--,100,398
+"Choline, total",mg,178.6,--,--,50.6,201.8
+"Vitamin B-12",µg,0.00,--,--,0.00,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00
+"Vitamin A, RAE",µg,5,--,--,1,6
+"Retinol",µg,0,--,--,0,0
+"Carotene, beta",µg,62,1,--,18,70
+"Carotene, alpha",µg,0,--,--,0,0
+"Cryptoxanthin, beta",µg,0,--,--,0,0
+"Vitamin A, IU",IU,103,--,--,29,116
+"Lycopene",µg,0,--,--,0,0
+"Lutein + zeaxanthin",µg,790,1,--,224,893
+"Vitamin E (alpha-tocopherol)",mg,15.99,--,--,4.53,18.07
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0,0.0
+"Vitamin D",IU,0,--,--,0,0
+"Vitamin K (phylloquinone)",µg,4.0,1,--,1.1,4.5
+Lipids
+"Fatty acids, total saturated",g,1.830,--,--,0.519,2.068
+"4:0",g,0.000,--,--,0.000,0.000
+"6:0",g,0.000,--,--,0.000,0.000
+"8:0",g,0.000,--,--,0.000,0.000
+"10:0",g,0.000,--,--,0.000,0.000
+"12:0",g,0.000,--,--,0.000,0.000
+"14:0",g,0.010,--,--,0.003,0.011
+"16:0",g,1.750,--,--,0.496,1.978
+"18:0",g,0.060,--,--,0.017,0.068
+"Fatty acids, total monounsaturated",g,1.500,--,--,0.425,1.695
+"16:1 undifferentiated",g,0.040,--,--,0.011,0.045
+"18:1 undifferentiated",g,1.470,--,--,0.417,1.661
+"20:1",g,0.000,--,--,0.000,0.000
+"22:1 undifferentiated",g,0.000,--,--,0.000,0.000
+"Fatty acids, total polyunsaturated",g,6.620,--,--,1.877,7.481
+"18:2 undifferentiated",g,5.820,--,--,1.650,6.577
+"18:3 undifferentiated",g,0.800,--,--,0.227,0.904
+"18:4",g,0.000,--,--,0.000,0.000
+"20:4 undifferentiated",g,0.000,--,--,0.000,0.000
+"20:5 n-3 (EPA)",g,0.000,--,--,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,--,--,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,--,--,0.000,0.000
+"Cholesterol",mg,0,--,--,0,0
+Amino Acids
+"Tryptophan",g,0.398,--,--,0.113,0.450
+"Threonine",g,1.218,--,--,0.345,1.376
+"Isoleucine",g,1.066,--,--,0.302,1.205
+"Leucine",g,1.976,--,--,0.560,2.233
+"Lysine",g,1.847,--,--,0.524,2.087
+"Methionine",g,0.574,--,--,0.163,0.649
+"Cystine",g,0.576,--,--,0.163,0.651
+"Phenylalanine",g,1.168,--,--,0.331,1.320
+"Tyrosine",g,0.885,--,--,0.251,1.000
+"Valine",g,1.507,--,--,0.427,1.703
+"Arginine",g,2.348,--,--,0.666,2.653
+"Histidine",g,0.810,--,--,0.230,0.915
+"Alanine",g,1.858,--,--,0.527,2.100
+"Aspartic acid",g,2.604,--,--,0.738,2.943
+"Glutamic acid",g,5.026,--,--,1.425,5.679
+"Glycine",g,1.791,--,--,0.508,2.024
+"Proline",g,1.549,--,--,0.439,1.750
+"Serine",g,1.386,--,--,0.393,1.566
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0
+"Caffeine",mg,0,--,--,0,0
+"Theobromine",mg,0,--,--,0,0
+
+
+Sources of Data
+1,"I.M. Heinonen, V. Ollilainen, E. Linkola, P. Varo, P. Koivistoinen","Carotenoids and Retinoids in Finnish Foods:  Cereal and Bakery Products",1989,Cereal Chemistry,664 pp. 270-270
+2,"Nutrient Data Laboratory, ARS, USDA","Choline Study, Local pickup VPI, NFNAP",2006,,BeltsvilleMD pp. 270-270
+3,"T.J. Koivu, V. I. Piironen, P.H. Mattila","Phylloquinone (Vitamin K) in Cereal Products",1997,Cereal Chemistry,751 pp. 1-1

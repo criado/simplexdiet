@@ -1,0 +1,139 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.1 2017-07-28
+Full Report (All Nutrients)
+Report Run at: September 16, 2017 11:33 EDT
+"Nutrient data for: 01211, Milk, whole, 3.25% milkfat, without added vitamin A and vitamin D"
+Food Group:  Dairy and Egg Products
+Common Name:
+
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup = 244.0g","1 tbsp = 15.0g","1 fl oz = 30.5g","1 quart = 976.0g",
+Proximates
+"Water",g,88.13,28,0.050,215.04,13.22,26.88,860.15
+"Energy",kcal,61,--,--,149,9,19,595
+"Energy",kJ,256,--,--,625,38,78,2499
+"Protein",g,3.15,27,0.029,7.69,0.47,0.96,30.74
+"Total lipid (fat)",g,3.27,27,0.024,7.98,0.49,1.00,31.92
+"Ash",g,0.67,24,0.004,1.63,0.10,0.20,6.54
+"Carbohydrate, by difference",g,4.78,--,--,11.66,0.72,1.46,46.65
+"Fiber, total dietary",g,0.0,--,--,0.0,0.0,0.0,0.0
+"Sugars, total",g,5.05,--,--,12.32,0.76,1.54,49.29
+"Sucrose",g,0.00,24,0.000,0.00,0.00,0.00,0.00
+"Glucose (dextrose)",g,0.00,24,0.000,0.00,0.00,0.00,0.00
+"Fructose",g,0.00,24,0.000,0.00,0.00,0.00,0.00
+"Lactose",g,5.05,24,0.052,12.32,0.76,1.54,49.29
+"Maltose",g,0.00,24,0.000,0.00,0.00,0.00,0.00
+"Galactose",g,0.00,12,0.000,0.00,0.00,0.00,0.00
+Minerals
+"Calcium, Ca",mg,113,16,1.760,276,17,34,1103
+"Iron, Fe",mg,0.03,46,0.002,0.07,0.00,0.01,0.29
+"Magnesium, Mg",mg,10,42,0.116,24,2,3,98
+"Phosphorus, P",mg,84,42,1.087,205,13,26,820
+"Potassium, K",mg,132,41,1.985,322,20,40,1288
+"Sodium, Na",mg,43,42,0.548,105,6,13,420
+"Zinc, Zn",mg,0.37,42,0.007,0.90,0.06,0.11,3.61
+"Copper, Cu",mg,0.025,42,0.001,0.061,0.004,0.008,0.244
+"Manganese, Mn",mg,0.004,41,0.000,0.010,0.001,0.001,0.039
+"Selenium, Se",µg,3.7,29,0.185,9.0,0.6,1.1,36.1
+Vitamins
+"Vitamin C, total ascorbic acid",mg,0.0,7,0.000,0.0,0.0,0.0,0.0
+"Thiamin",mg,0.046,24,0.001,0.112,0.007,0.014,0.449
+"Riboflavin",mg,0.169,23,0.001,0.412,0.025,0.052,1.649
+"Niacin",mg,0.089,24,0.003,0.217,0.013,0.027,0.869
+"Pantothenic acid",mg,0.373,8,0.003,0.910,0.056,0.114,3.640
+"Vitamin B-6",mg,0.036,24,0.000,0.088,0.005,0.011,0.351
+"Folate, total",µg,5,8,0.534,12,1,2,49
+"Folic acid",µg,0,--,--,0,0,0,0
+"Folate, food",µg,5,8,0.534,12,1,2,49
+"Folate, DFE",µg,5,--,--,12,1,2,49
+"Choline, total",mg,14.3,--,--,34.9,2.1,4.4,139.6
+"Betaine",mg,0.6,1,--,1.5,0.1,0.2,5.9
+"Vitamin B-12",µg,0.45,14,0.021,1.10,0.07,0.14,4.39
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00,0.00,0.00
+"Vitamin A, RAE",µg,46,--,--,112,7,14,449
+"Retinol",µg,45,4,1.926,110,7,14,439
+"Carotene, beta",µg,7,10,0.618,17,1,2,68
+"Carotene, alpha",µg,0,10,0.000,0,0,0,0
+"Cryptoxanthin, beta",µg,0,10,0.000,0,0,0,0
+"Vitamin A, IU",IU,162,--,--,395,24,49,1581
+"Lycopene",µg,0,6,0.000,0,0,0,0
+"Lutein + zeaxanthin",µg,0,6,0.000,0,0,0,0
+"Vitamin E (alpha-tocopherol)",mg,0.07,24,0.003,0.17,0.01,0.02,0.68
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00,0.00,0.00
+"Tocopherol, beta",mg,0.00,24,0.000,0.00,0.00,0.00,0.00
+"Tocopherol, gamma",mg,0.00,24,0.001,0.00,0.00,0.00,0.00
+"Tocopherol, delta",mg,0.00,24,0.000,0.00,0.00,0.00,0.00
+"Vitamin D (D2 + D3)",µg,0.1,--,--,0.2,0.0,0.0,1.0
+"Vitamin D3 (cholecalciferol)",µg,0.1,--,--,0.2,0.0,0.0,1.0
+"Vitamin D",IU,2,--,--,5,0,1,20
+"Vitamin K (phylloquinone)",µg,0.3,8,0.007,0.7,0.0,0.1,2.9
+Lipids
+"Fatty acids, total saturated",g,1.865,--,--,4.551,0.280,0.569,18.202
+"4:0",g,0.075,12,0.000,0.183,0.011,0.023,0.732
+"6:0",g,0.075,12,0.000,0.183,0.011,0.023,0.732
+"8:0",g,0.075,12,0.000,0.183,0.011,0.023,0.732
+"10:0",g,0.075,12,0.000,0.183,0.011,0.023,0.732
+"12:0",g,0.077,12,0.002,0.188,0.012,0.023,0.752
+"13:0",g,0.000,1,--,0.000,0.000,0.000,0.000
+"14:0",g,0.297,12,0.011,0.725,0.045,0.091,2.899
+"15:0",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"16:0",g,0.829,12,0.029,2.023,0.124,0.253,8.091
+"17:0",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"18:0",g,0.365,12,0.015,0.891,0.055,0.111,3.562
+"20:0",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"22:0",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"24:0",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"Fatty acids, total monounsaturated",g,0.812,--,--,1.981,0.122,0.248,7.925
+"14:1",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"16:1 undifferentiated",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"18:1 undifferentiated",g,0.812,12,0.032,1.981,0.122,0.248,7.925
+"20:1",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"22:1 undifferentiated",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"Fatty acids, total polyunsaturated",g,0.195,--,--,0.476,0.029,0.059,1.903
+"18:2 undifferentiated",g,0.120,12,0.005,0.293,0.018,0.037,1.171
+"18:3 undifferentiated",g,0.075,12,0.000,0.183,0.011,0.023,0.732
+"18:4",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"20:4 undifferentiated",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"20:5 n-3 (EPA)",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,12,0.000,0.000,0.000,0.000,0.000
+"Cholesterol",mg,10,12,0.549,24,2,3,98
+Amino Acids
+"Tryptophan",g,0.040,--,--,0.098,0.006,0.012,0.390
+"Threonine",g,0.134,--,--,0.327,0.020,0.041,1.308
+"Isoleucine",g,0.163,--,--,0.398,0.024,0.050,1.591
+"Leucine",g,0.299,--,--,0.730,0.045,0.091,2.918
+"Lysine",g,0.264,--,--,0.644,0.040,0.081,2.577
+"Methionine",g,0.083,--,--,0.203,0.012,0.025,0.810
+"Cystine",g,0.019,--,--,0.046,0.003,0.006,0.185
+"Phenylalanine",g,0.163,--,--,0.398,0.024,0.050,1.591
+"Tyrosine",g,0.159,--,--,0.388,0.024,0.048,1.552
+"Valine",g,0.206,--,--,0.503,0.031,0.063,2.011
+"Arginine",g,0.090,--,--,0.220,0.013,0.027,0.878
+"Histidine",g,0.095,--,--,0.232,0.014,0.029,0.927
+"Alanine",g,0.107,--,--,0.261,0.016,0.033,1.044
+"Aspartic acid",g,0.270,--,--,0.659,0.041,0.082,2.635
+"Glutamic acid",g,0.708,--,--,1.728,0.106,0.216,6.910
+"Glycine",g,0.062,--,--,0.151,0.009,0.019,0.605
+"Proline",g,0.311,--,--,0.759,0.047,0.095,3.035
+"Serine",g,0.190,--,--,0.464,0.029,0.058,1.854
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0,0.0,0.0
+"Caffeine",mg,0,--,--,0,0,0,0
+"Theobromine",mg,0,--,--,0,0,0,0
+
+
+Sources of Data
+1,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 4c",2001,,BeltsvilleMD
+2,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 8i",2004,,BeltsvilleMD
+3,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 11a",2007,,BeltsvilleMD
+4,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 11b",2007,,BeltsvilleMD
+5,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 11c",2007,,BeltsvilleMD
+6,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 11d",2007,,BeltsvilleMD
+7,"Food and Drug Administration (FDA), DHHS","FDA Total Diet Study",1995,,MD
+8,"Food and Drug Administration (FDA), DHHS","FDA Total Diet Study",1996,,MD
+9,"Food and Drug Administration (FDA), DHHS","FDA Total Diet Study",1997,,MD
+10,"Food and Drug Administration (FDA), DHHS","FDA Total Diet Study",1991,,MD
+11,"Food and Drug Administration (FDA), DHHS","FDA Total Diet Study",1992,,MD
+12,"Food and Drug Administration (FDA), DHHS","FDA Total Diet Study",1993,,MD
+13,"Food and Drug Administration (FDA), DHHS","FDA Total Diet Study",1994,,MD
+14,"National Institutes of Health (NIH)","Carotenoid analyses of U.S. foods, Food Composition Laboratory",1997,,MD
+15,"Nutrient Data Laboratory, ARS, USDA","Choline Study, Local pickup UNC, NFNAP",2003,,BeltsvilleMD
