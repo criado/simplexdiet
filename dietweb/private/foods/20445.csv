@@ -1,0 +1,103 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
+Full Report (All Nutrients)
+Report Run at: February 26, 2017 07:16 EST
+"Nutrient data for: 20445, Rice, white, long-grain, regular, unenriched, cooked without salt"
+Food Group:  Cereal Grains and Pasta
+Common Name:
+Carbohydrate Factor: 4.16 Fat Factor: 8.37 Protein Factor: 3.82 Nitrogen to Protein Conversion Factor: 5.95 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup = 158.0g",
+Proximates
+"Water",g,68.44,23,0.398,108.14
+"Energy",kcal,130,--,--,205
+"Energy",kJ,544,--,--,860
+"Protein",g,2.69,20,0.060,4.25
+"Total lipid (fat)",g,0.28,6,0.030,0.44
+"Ash",g,0.41,20,0.060,0.65
+"Carbohydrate, by difference",g,28.17,--,--,44.51
+"Fiber, total dietary",g,0.4,--,--,0.6
+"Sugars, total",g,0.05,--,--,0.08
+Minerals
+"Calcium, Ca",mg,10,33,0.868,16
+"Iron, Fe",mg,0.20,1,--,0.32
+"Magnesium, Mg",mg,12,38,0.566,19
+"Phosphorus, P",mg,43,27,1.833,68
+"Potassium, K",mg,35,34,1.936,55
+"Sodium, Na",mg,1,13,0.314,2
+"Zinc, Zn",mg,0.49,43,0.026,0.77
+"Copper, Cu",mg,0.069,42,0.005,0.109
+"Manganese, Mn",mg,0.472,35,0.024,0.746
+"Selenium, Se",µg,7.5,47,0.459,11.8
+Vitamins
+"Vitamin C, total ascorbic acid",mg,0.0,--,--,0.0
+"Thiamin",mg,0.020,1,--,0.032
+"Riboflavin",mg,0.013,9,0.001,0.021
+"Niacin",mg,0.400,1,--,0.632
+"Pantothenic acid",mg,0.390,13,0.033,0.616
+"Vitamin B-6",mg,0.093,12,0.012,0.147
+"Folate, total",µg,3,8,0.184,5
+"Folic acid",µg,0,--,--,0
+"Folate, food",µg,3,8,0.184,5
+"Folate, DFE",µg,3,--,--,5
+"Choline, total",mg,2.1,--,--,3.3
+"Vitamin B-12",µg,0.00,--,--,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00
+"Vitamin A, RAE",µg,0,--,--,0
+"Retinol",µg,0,--,--,0
+"Carotene, beta",µg,0,--,--,0
+"Carotene, alpha",µg,0,--,--,0
+"Cryptoxanthin, beta",µg,0,--,--,0
+"Vitamin A, IU",IU,0,--,--,0
+"Lycopene",µg,0,--,--,0
+"Lutein + zeaxanthin",µg,0,--,--,0
+"Vitamin E (alpha-tocopherol)",mg,0.04,--,--,0.06
+"Vitamin E, added",mg,0.00,--,--,0.00
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0
+"Vitamin D",IU,0,--,--,0
+"Vitamin K (phylloquinone)",µg,0.0,--,--,0.0
+Lipids
+"Fatty acids, total saturated",g,0.077,--,--,0.122
+"4:0",g,0.000,--,--,0.000
+"6:0",g,0.000,--,--,0.000
+"8:0",g,0.000,--,--,0.000
+"10:0",g,0.000,--,--,0.000
+"12:0",g,0.000,--,--,0.000
+"14:0",g,0.002,--,--,0.003
+"16:0",g,0.069,--,--,0.109
+"18:0",g,0.005,--,--,0.008
+"Fatty acids, total monounsaturated",g,0.088,--,--,0.139
+"16:1 undifferentiated",g,0.001,--,--,0.002
+"18:1 undifferentiated",g,0.087,--,--,0.137
+"20:1",g,0.000,--,--,0.000
+"22:1 undifferentiated",g,0.000,--,--,0.000
+"Fatty acids, total polyunsaturated",g,0.076,--,--,0.120
+"18:2 undifferentiated",g,0.062,--,--,0.098
+"18:3 undifferentiated",g,0.013,--,--,0.021
+"18:4",g,0.000,--,--,0.000
+"20:4 undifferentiated",g,0.000,--,--,0.000
+"20:5 n-3 (EPA)",g,0.000,--,--,0.000
+"22:5 n-3 (DPA)",g,0.000,--,--,0.000
+"22:6 n-3 (DHA)",g,0.000,--,--,0.000
+"Cholesterol",mg,0,--,--,0
+Amino Acids
+"Tryptophan",g,0.031,--,--,0.049
+"Threonine",g,0.096,--,--,0.152
+"Isoleucine",g,0.116,--,--,0.183
+"Leucine",g,0.222,--,--,0.351
+"Lysine",g,0.097,--,--,0.153
+"Methionine",g,0.063,--,--,0.100
+"Cystine",g,0.055,--,--,0.087
+"Phenylalanine",g,0.144,--,--,0.228
+"Tyrosine",g,0.090,--,--,0.142
+"Valine",g,0.164,--,--,0.259
+"Arginine",g,0.224,--,--,0.354
+"Histidine",g,0.063,--,--,0.100
+"Alanine",g,0.156,--,--,0.246
+"Aspartic acid",g,0.253,--,--,0.400
+"Glutamic acid",g,0.524,--,--,0.828
+"Glycine",g,0.122,--,--,0.193
+"Proline",g,0.127,--,--,0.201
+"Serine",g,0.141,--,--,0.223
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0
+"Caffeine",mg,0,--,--,0
+"Theobromine",mg,0,--,--,0

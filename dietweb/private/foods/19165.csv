@@ -1,0 +1,122 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
+Full Report (All Nutrients)
+Report Run at: February 26, 2017 15:58 EST
+"Nutrient data for: 19165, Cocoa, dry powder, unsweetened"
+Food Group:  Sweets
+Common Name:
+Carbohydrate Factor: 1.33 Fat Factor: 8.37 Protein Factor: 1.83 Nitrogen to Protein Conversion Factor: 5.63 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup = 86.0g","1 tbsp = 5.4g",
+Proximates
+"Water",g,3.00,8,0.305,2.58,0.16
+"Energy",kcal,228,--,--,196,12
+"Energy",kJ,952,--,--,819,51
+"Protein",g,19.60,8,0.520,16.86,1.06
+"Total lipid (fat)",g,13.70,8,0.495,11.78,0.74
+"Ash",g,5.80,7,0.558,4.99,0.31
+"Carbohydrate, by difference",g,57.90,--,--,49.79,3.13
+"Fiber, total dietary",g,37.0,--,--,31.8,2.0
+"Sugars, total",g,1.75,--,--,1.50,0.09
+Minerals
+"Calcium, Ca",mg,128,9,8.030,110,7
+"Iron, Fe",mg,13.86,9,1.608,11.92,0.75
+"Magnesium, Mg",mg,499,9,11.115,429,27
+"Phosphorus, P",mg,734,9,19.765,631,40
+"Potassium, K",mg,1524,6,74.068,1311,82
+"Sodium, Na",mg,21,8,3.184,18,1
+"Zinc, Zn",mg,6.81,9,0.256,5.86,0.37
+"Copper, Cu",mg,3.788,9,0.146,3.258,0.205
+"Manganese, Mn",mg,3.837,9,0.104,3.300,0.207
+"Selenium, Se",µg,14.3,3,3.095,12.3,0.8
+Vitamins
+"Vitamin C, total ascorbic acid",mg,0.0,1,--,0.0,0.0
+"Thiamin",mg,0.078,6,0.020,0.067,0.004
+"Riboflavin",mg,0.241,6,0.061,0.207,0.013
+"Niacin",mg,2.185,6,0.455,1.879,0.118
+"Pantothenic acid",mg,0.254,5,0.064,0.218,0.014
+"Vitamin B-6",mg,0.118,6,0.035,0.101,0.006
+"Folate, total",µg,32,2,--,28,2
+"Folic acid",µg,0,--,--,0,0
+"Folate, food",µg,32,2,--,28,2
+"Folate, DFE",µg,32,--,--,28,2
+"Choline, total",mg,12.0,--,--,10.3,0.6
+"Vitamin B-12",µg,0.00,1,--,0.00,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00
+"Vitamin A, RAE",µg,0,--,--,0,0
+"Retinol",µg,0,--,--,0,0
+"Carotene, beta",µg,0,--,--,0,0
+"Carotene, alpha",µg,0,--,--,0,0
+"Cryptoxanthin, beta",µg,0,--,--,0,0
+"Vitamin A, IU",IU,0,--,--,0,0
+"Lycopene",µg,0,--,--,0,0
+"Lutein + zeaxanthin",µg,38,--,--,33,2
+"Vitamin E (alpha-tocopherol)",mg,0.10,--,--,0.09,0.01
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0,0.0
+"Vitamin D",IU,0,--,--,0,0
+"Vitamin K (phylloquinone)",µg,2.5,--,--,2.1,0.1
+Lipids
+"Fatty acids, total saturated",g,8.070,--,--,6.940,0.436
+"4:0",g,0.000,--,--,0.000,0.000
+"6:0",g,0.000,--,--,0.000,0.000
+"8:0",g,0.000,--,--,0.000,0.000
+"10:0",g,0.000,--,--,0.000,0.000
+"12:0",g,0.000,--,--,0.000,0.000
+"14:0",g,0.020,6,--,0.017,0.001
+"16:0",g,3.690,6,--,3.173,0.199
+"18:0",g,4.250,6,--,3.655,0.230
+"Fatty acids, total monounsaturated",g,4.570,--,--,3.930,0.247
+"16:1 undifferentiated",g,0.000,--,--,0.000,0.000
+"18:1 undifferentiated",g,4.570,6,--,3.930,0.247
+"20:1",g,0.000,--,--,0.000,0.000
+"22:1 undifferentiated",g,0.000,--,--,0.000,0.000
+"Fatty acids, total polyunsaturated",g,0.440,--,--,0.378,0.024
+"18:2 undifferentiated",g,0.440,6,--,0.378,0.024
+"18:3 undifferentiated",g,0.000,--,--,0.000,0.000
+"18:4",g,0.000,--,--,0.000,0.000
+"20:4 undifferentiated",g,0.000,--,--,0.000,0.000
+"20:5 n-3 (EPA)",g,0.000,--,--,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,--,--,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,--,--,0.000,0.000
+"Cholesterol",mg,0,1,--,0,0
+Amino Acids
+"Tryptophan",g,0.293,--,--,0.252,0.016
+"Threonine",g,0.776,--,--,0.667,0.042
+"Isoleucine",g,0.760,--,--,0.654,0.041
+"Leucine",g,1.189,--,--,1.023,0.064
+"Lysine",g,0.983,--,--,0.845,0.053
+"Methionine",g,0.202,--,--,0.174,0.011
+"Cystine",g,0.239,--,--,0.206,0.013
+"Phenylalanine",g,0.941,--,--,0.809,0.051
+"Tyrosine",g,0.735,--,--,0.632,0.040
+"Valine",g,1.177,--,--,1.012,0.064
+"Arginine",g,1.111,--,--,0.955,0.060
+"Histidine",g,0.339,--,--,0.292,0.018
+"Alanine",g,0.904,--,--,0.777,0.049
+"Aspartic acid",g,1.953,--,--,1.680,0.105
+"Glutamic acid",g,2.948,--,--,2.535,0.159
+"Glycine",g,0.879,--,--,0.756,0.047
+"Proline",g,0.838,--,--,0.721,0.045
+"Serine",g,0.846,--,--,0.728,0.046
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0
+"Caffeine",mg,230,1,--,198,12
+"Theobromine",mg,2057,1,--,1769,111
+Flavonoids
+Flavan-3-ols
+"(+)-Catechin",mg,64.8,13,14.530,55.7,3.5
+"(-)-Epicatechin",mg,196.4,13,45.380,168.9,10.6
+Flavonols
+"Quercetin",mg,10.0,11,2.360,8.6,0.5
+Proanthocyanidin
+"Proanthocyanidin dimers",mg,277.1,12,131.980,238.3,15.0
+"Proanthocyanidin trimers",mg,195.7,12,93.670,168.3,10.6
+"Proanthocyanidin 4-6mers",mg,419.1,12,336.890,360.4,22.6
+"Proanthocyanidin 7-10mers",mg,925.2,12,875.930,795.7,50.0
+"Proanthocyanidin polymers (>10mers)",mg,2435.1,9,1354.960,2094.2,131.5
+1,"Gu, L., House, S.E., Wu, X., Ou, B., and Prior, R.L.","Procyanidin and catechin content and antioxidany capacity of cocoa and chocolate products",2006,J. Agric. Food Chem.,54 pp. 4057-4057
+2,"Hellström, Törrönen, A.R., and Matilla, P.H.","Proanthocyanidins in common food products of plant origin",2009,J. Agric. Food Chem.,57 pp. 7899-7899
+3,"Masterfoods, Inc., Hackettstown, New Jersey,","Unpublished data.",2004,, pp. 7899-7899
+4,"Miller, K.B., Hurst, W.J., Payne, M.J., Stuart, D.A., Apgar, J., Sweigart, D.S., and Ou, B.","Impact of alkalizationon the antioxidant and flavanol content of commercial cocoa powders",2008,J. Agric. Food Chem.,56 pp. 8527-8527
+5,"Andres-Laceuva, C., Monogas, M., Khan, N., Izquierdo-Pulido, M., Urpi-Sarda, M., Permanyer, J., and Lamuela-Raventos, R. M.","Flavanol and flavonol contents of cocoa powder products: Influence of the manufacturing process.",2008,J. Agric. Food Chem.,56 pp. 3111-3111
+6,"Gu, L., House, S. E., Wu, X., Ou, B., and Prior, R.","Procyanidin and catechin contents and antioxidant capacity of cocoa and chocolate products.",2006,J. Agric. Food Chem.,54 pp. 4057-4057
+7,"Lamuela-Raventós, R. M., Andrés-Lacueva, Permanyer, J., and Izquierdo-Pulido, M.","More antioxidants in cocoa.",2001,J. Nutr,,131 pp. 834-834

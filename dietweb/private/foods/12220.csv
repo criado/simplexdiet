@@ -1,0 +1,144 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
+Full Report (All Nutrients)
+Report Run at: February 26, 2017 16:21 EST
+"Nutrient data for: 12220, Seeds, flaxseed"
+Food Group:  Nut and Seed Products
+Common Name:
+Carbohydrate Factor: 4.07 Fat Factor: 8.37 Protein Factor: 3.47 Nitrogen to Protein Conversion Factor: 5.3 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 tbsp, whole = 10.3g","1 cup, whole = 168.0g","1 tbsp, ground = 7.0g","1 tsp, whole = 3.4g","1 tsp, ground = 2.5g",
+Proximates
+"Water",g,6.96,3,1.636,0.72,11.69,0.49,0.24,0.17
+"Energy",kcal,534,--,--,55,897,37,18,13
+"Energy",kJ,2234,--,--,230,3753,156,76,56
+"Protein",g,18.29,7,0.917,1.88,30.73,1.28,0.62,0.46
+"Total lipid (fat)",g,42.16,6,3.188,4.34,70.83,2.95,1.43,1.05
+"Ash",g,3.72,3,0.026,0.38,6.25,0.26,0.13,0.09
+"Carbohydrate, by difference",g,28.88,--,--,2.97,48.52,2.02,0.98,0.72
+"Fiber, total dietary",g,27.3,3,0.323,2.8,45.9,1.9,0.9,0.7
+"Sugars, total",g,1.55,--,--,0.16,2.60,0.11,0.05,0.04
+"Sucrose",g,1.15,3,0.310,0.12,1.93,0.08,0.04,0.03
+"Glucose (dextrose)",g,0.40,3,0.190,0.04,0.67,0.03,0.01,0.01
+"Fructose",g,0.00,3,0.000,0.00,0.00,0.00,0.00,0.00
+"Lactose",g,0.00,3,0.000,0.00,0.00,0.00,0.00,0.00
+"Maltose",g,0.00,3,0.000,0.00,0.00,0.00,0.00,0.00
+"Galactose",g,0.00,--,--,0.00,0.00,0.00,0.00,0.00
+Minerals
+"Calcium, Ca",mg,255,7,35.614,26,428,18,9,6
+"Iron, Fe",mg,5.73,7,0.555,0.59,9.63,0.40,0.19,0.14
+"Magnesium, Mg",mg,392,7,20.100,40,659,27,13,10
+"Phosphorus, P",mg,642,3,20.250,66,1079,45,22,16
+"Potassium, K",mg,813,7,9.340,84,1366,57,28,20
+"Sodium, Na",mg,30,7,3.989,3,50,2,1,1
+"Zinc, Zn",mg,4.34,7,0.118,0.45,7.29,0.30,0.15,0.11
+"Copper, Cu",mg,1.220,7,0.075,0.126,2.050,0.085,0.041,0.030
+"Manganese, Mn",mg,2.482,7,0.186,0.256,4.170,0.174,0.084,0.062
+"Selenium, Se",µg,25.4,2,--,2.6,42.7,1.8,0.9,0.6
+Vitamins
+"Vitamin C, total ascorbic acid",mg,0.6,3,0.108,0.1,1.0,0.0,0.0,0.0
+"Thiamin",mg,1.644,3,1.111,0.169,2.762,0.115,0.056,0.041
+"Riboflavin",mg,0.161,3,0.071,0.017,0.270,0.011,0.005,0.004
+"Niacin",mg,3.080,3,0.130,0.317,5.174,0.216,0.105,0.077
+"Pantothenic acid",mg,0.985,3,0.415,0.101,1.655,0.069,0.033,0.025
+"Vitamin B-6",mg,0.473,3,0.138,0.049,0.795,0.033,0.016,0.012
+"Folate, total",µg,87,3,24.975,9,146,6,3,2
+"Folic acid",µg,0,--,--,0,0,0,0,0
+"Folate, food",µg,87,3,24.975,9,146,6,3,2
+"Folate, DFE",µg,87,--,--,9,146,6,3,2
+"Choline, total",mg,78.7,--,--,8.1,132.2,5.5,2.7,2.0
+"Betaine",mg,3.1,1,--,0.3,5.2,0.2,0.1,0.1
+"Vitamin B-12",µg,0.00,1,--,0.00,0.00,0.00,0.00,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00,0.00,0.00,0.00
+"Vitamin A, RAE",µg,0,3,0.000,0,0,0,0,0
+"Retinol",µg,0,--,--,0,0,0,0,0
+"Carotene, beta",µg,0,3,0.000,0,0,0,0,0
+"Carotene, alpha",µg,0,3,0.000,0,0,0,0,0
+"Cryptoxanthin, beta",µg,0,2,--,0,0,0,0,0
+"Vitamin A, IU",IU,0,3,0.000,0,0,0,0,0
+"Lycopene",µg,0,2,--,0,0,0,0,0
+"Lutein + zeaxanthin",µg,651,9,52.611,67,1094,46,22,16
+"Vitamin E (alpha-tocopherol)",mg,0.31,6,0.006,0.03,0.52,0.02,0.01,0.01
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00,0.00,0.00,0.00
+"Tocopherol, beta",mg,0.00,2,--,0.00,0.00,0.00,0.00,0.00
+"Tocopherol, gamma",mg,19.95,6,5.066,2.05,33.52,1.40,0.68,0.50
+"Tocopherol, delta",mg,0.35,6,0.131,0.04,0.59,0.02,0.01,0.01
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0,0.0,0.0,0.0,0.0
+"Vitamin D",IU,0,--,--,0,0,0,0,0
+"Vitamin K (phylloquinone)",µg,4.3,2,--,0.4,7.2,0.3,0.1,0.1
+Lipids
+"Fatty acids, total saturated",g,3.663,--,--,0.377,6.154,0.256,0.125,0.092
+"4:0",g,0.000,--,--,0.000,0.000,0.000,0.000,0.000
+"6:0",g,0.000,--,--,0.000,0.000,0.000,0.000,0.000
+"8:0",g,0.000,2,--,0.000,0.000,0.000,0.000,0.000
+"10:0",g,0.000,2,--,0.000,0.000,0.000,0.000,0.000
+"12:0",g,0.000,2,--,0.000,0.000,0.000,0.000,0.000
+"14:0",g,0.008,3,0.008,0.001,0.013,0.001,0.000,0.000
+"15:0",g,0.005,1,--,0.001,0.008,0.000,0.000,0.000
+"16:0",g,2.165,7,0.191,0.223,3.637,0.152,0.074,0.054
+"17:0",g,0.018,1,--,0.002,0.030,0.001,0.001,0.000
+"18:0",g,1.330,7,0.064,0.137,2.234,0.093,0.045,0.033
+"20:0",g,0.052,3,0.005,0.005,0.087,0.004,0.002,0.001
+"22:0",g,0.052,3,0.011,0.005,0.087,0.004,0.002,0.001
+"24:0",g,0.031,3,0.001,0.003,0.052,0.002,0.001,0.001
+"Fatty acids, total monounsaturated",g,7.527,--,--,0.775,12.645,0.527,0.256,0.188
+"16:1 undifferentiated",g,0.024,3,0.006,0.002,0.040,0.002,0.001,0.001
+"18:1 undifferentiated",g,7.359,7,0.132,0.758,12.363,0.515,0.250,0.184
+"20:1",g,0.067,3,0.016,0.007,0.113,0.005,0.002,0.002
+"22:1 undifferentiated",g,0.013,3,0.013,0.001,0.022,0.001,0.000,0.000
+"24:1 c",g,0.064,3,0.056,0.007,0.108,0.004,0.002,0.002
+"Fatty acids, total polyunsaturated",g,28.730,--,--,2.959,48.266,2.011,0.977,0.718
+"18:2 undifferentiated",g,5.903,7,0.341,0.608,9.917,0.413,0.201,0.148
+"18:3 undifferentiated",g,22.813,7,1.439,2.350,38.326,1.597,0.776,0.570
+"18:4",g,0.000,--,--,0.000,0.000,0.000,0.000,0.000
+"20:2 n-6 c,c",g,0.007,3,0.007,0.001,0.012,0.000,0.000,0.000
+"20:4 undifferentiated",g,0.000,--,--,0.000,0.000,0.000,0.000,0.000
+"20:5 n-3 (EPA)",g,0.000,--,--,0.000,0.000,0.000,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,--,--,0.000,0.000,0.000,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,--,--,0.000,0.000,0.000,0.000,0.000
+"Cholesterol",mg,0,--,--,0,0,0,0,0
+"Stigmasterol",mg,11,2,--,1,18,1,0,0
+"Campesterol",mg,45,2,--,5,76,3,2,1
+"Beta-sitosterol",mg,90,2,--,9,151,6,3,2
+Amino Acids
+"Tryptophan",g,0.297,--,--,0.031,0.499,0.021,0.010,0.007
+"Threonine",g,0.766,--,--,0.079,1.287,0.054,0.026,0.019
+"Isoleucine",g,0.896,--,--,0.092,1.505,0.063,0.030,0.022
+"Leucine",g,1.235,--,--,0.127,2.075,0.086,0.042,0.031
+"Lysine",g,0.862,--,--,0.089,1.448,0.060,0.029,0.022
+"Methionine",g,0.370,--,--,0.038,0.622,0.026,0.013,0.009
+"Cystine",g,0.340,--,--,0.035,0.571,0.024,0.012,0.009
+"Phenylalanine",g,0.957,--,--,0.099,1.608,0.067,0.033,0.024
+"Tyrosine",g,0.493,--,--,0.051,0.828,0.035,0.017,0.012
+"Valine",g,1.072,--,--,0.110,1.801,0.075,0.036,0.027
+"Arginine",g,1.925,--,--,0.198,3.234,0.135,0.065,0.048
+"Histidine",g,0.472,--,--,0.049,0.793,0.033,0.016,0.012
+"Alanine",g,0.925,--,--,0.095,1.554,0.065,0.031,0.023
+"Aspartic acid",g,2.046,--,--,0.211,3.437,0.143,0.070,0.051
+"Glutamic acid",g,4.039,--,--,0.416,6.786,0.283,0.137,0.101
+"Glycine",g,1.248,--,--,0.129,2.097,0.087,0.042,0.031
+"Proline",g,0.806,--,--,0.083,1.354,0.056,0.027,0.020
+"Serine",g,0.970,--,--,0.100,1.630,0.068,0.033,0.024
+"Hydroxyproline",g,0.175,2,--,0.018,0.294,0.012,0.006,0.004
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0,0.0,0.0,0.0
+"Caffeine",mg,0,--,--,0,0,0,0,0
+"Theobromine",mg,0,--,--,0,0,0,0,0
+Flavonoids
+Isoflavones
+"Daidzein",mg,0.01,4,0.027,0.00,0.03,0.00,0.00,0.00
+"Genistein",mg,0.04,4,0.078,0.00,0.07,0.00,0.00,0.00
+"Glycitein",mg,0.06,1,--,0.01,0.10,0.00,0.00,0.00
+"Total isoflavones",mg,0.07,4,0.132,0.01,0.12,0.01,0.00,0.00
+"Biochanin A",mg,0.00,3,0.000,0.00,0.00,0.00,0.00,0.00
+"Formononetin",mg,0.02,4,0.024,0.00,0.03,0.00,0.00,0.00
+"Coumestrol",mg,0.02,4,0.033,0.00,0.04,0.00,0.00,0.00
+
+
+Sources of Data
+1,"J.K. Daun, R. Przybylski","Environmental effects on the composition of four Canadian flax cultivars",2000,Proceedings of the 58th Meeting of the Flax Institute of the United States, pp. 80-80
+2,"Flax Council of Canada","Nutrient Analysis of Flaxseed by Medallion Lab",1997,,Winnipeg pp. 80-80
+3,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 7h",2003,,BeltsvilleMD pp. 80-80
+4,"Thompson, L. U., Boucher, B. A., Liu, Z., Cotterchio, M., and Kreiger, N.","Phytoestrogen content of foods consumed in Canada, including isoflavones, lignans, and coumestan.",2006,Nutr. Cancer,54 pp. 184-184
+5,"Mazur, W., Fotsis, T., Wähälä, K., Ojala, S., Salakka, A. and Adlercreutz, H.","Isotope dilution gas chromatographic-mass spectrometric method for the determination of isoflavonoids, coumestrol, and lignans in food samples.",1996,Anal. Biochem.,233 pp. 169-169
+Footnotes
+(a)"Up to 12 percent flax seed can safely be used as an ingredient in food."
+(b)"Other phytosterols = 49.0 mg/100g; these include delta 5-avenasterol (21.2), campestanol (2.8), brassicasterol (1.1) and other minor phytosterols (23.9 mg)."

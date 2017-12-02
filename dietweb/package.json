@@ -1,0 +1,21 @@
+{
+  "name": "dietweb",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "bcrypt": "^1.0.3",
+    "csv": "^1.1.1",
+    "fast-csv": "^2.4.0",
+    "meteor-node-stubs": "~0.2.4",
+    "react": "^15.6.1",
+    "react-addons-pure-render-mixin": "^15.6.0",
+    "react-dom": "^15.6.1",
+    "react-mounter": "^1.2.0",
+    "react-numeric-input": "^2.2.0",
+    "react-rangeslider": "^2.1.0",
+    "react-select": "^1.0.0-rc.10"
+  }
+}

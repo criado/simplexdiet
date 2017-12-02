@@ -1,0 +1,140 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
+Full Report (All Nutrients)
+Report Run at: March 01, 2017 11:12 EST
+"Nutrient data for: 12036, Seeds, sunflower seed kernels, dried"
+Food Group:  Nut and Seed Products
+Common Name:
+Carbohydrate Factor: 4.07 Fat Factor: 8.37 Protein Factor: 3.47 Nitrogen to Protein Conversion Factor: 5.3 
+Refuse: 46% Refuse Description: Hulls 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup, with hulls, edible yield = 46.0g","1 cup = 140.0g",
+Proximates
+"Water",g,4.73,5,0.255,2.18,6.62
+"Energy",kcal,584,--,--,269,818
+"Energy",kJ,2445,--,--,1125,3423
+"Protein",g,20.78,2,--,9.56,29.09
+"Total lipid (fat)",g,51.46,2,--,23.67,72.04
+"Ash",g,3.02,2,--,1.39,4.23
+"Carbohydrate, by difference",g,20.00,--,--,9.20,28.00
+"Fiber, total dietary",g,8.6,5,1.883,4.0,12.0
+"Sugars, total",g,2.62,--,--,1.21,3.67
+"Sucrose",g,2.50,3,0.231,1.15,3.50
+Minerals
+"Calcium, Ca",mg,78,2,--,36,109
+"Iron, Fe",mg,5.25,2,--,2.42,7.35
+"Magnesium, Mg",mg,325,2,--,150,455
+"Phosphorus, P",mg,660,2,--,304,924
+"Potassium, K",mg,645,2,--,297,903
+"Sodium, Na",mg,9,2,--,4,13
+"Zinc, Zn",mg,5.00,2,--,2.30,7.00
+"Copper, Cu",mg,1.800,2,--,0.828,2.520
+"Manganese, Mn",mg,1.950,2,--,0.897,2.730
+"Selenium, Se",µg,53.0,11,8.050,24.4,74.2
+Vitamins
+"Vitamin C, total ascorbic acid",mg,1.4,--,--,0.6,2.0
+"Thiamin",mg,1.480,2,--,0.681,2.072
+"Riboflavin",mg,0.355,2,--,0.163,0.497
+"Niacin",mg,8.335,2,--,3.834,11.669
+"Pantothenic acid",mg,1.130,2,--,0.520,1.582
+"Vitamin B-6",mg,1.345,2,--,0.619,1.883
+"Folate, total",µg,227,--,--,104,318
+"Folic acid",µg,0,--,--,0,0
+"Folate, food",µg,227,--,--,104,318
+"Folate, DFE",µg,227,--,--,104,318
+"Choline, total",mg,55.1,--,--,25.3,77.1
+"Betaine",mg,35.4,2,--,16.3,49.6
+"Vitamin B-12",µg,0.00,--,--,0.00,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00
+"Vitamin A, RAE",µg,3,--,--,1,4
+"Retinol",µg,0,--,--,0,0
+"Carotene, beta",µg,30,--,--,14,42
+"Carotene, alpha",µg,0,--,--,0,0
+"Cryptoxanthin, beta",µg,0,--,--,0,0
+"Vitamin A, IU",IU,50,--,--,23,70
+"Lycopene",µg,0,--,--,0,0
+"Lutein + zeaxanthin",µg,0,--,--,0,0
+"Vitamin E (alpha-tocopherol)",mg,35.17,5,4.981,16.18,49.24
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00
+"Tocopherol, beta",mg,1.18,4,0.125,0.54,1.65
+"Tocopherol, gamma",mg,0.37,4,0.178,0.17,0.52
+"Tocopherol, delta",mg,0.02,4,0.015,0.01,0.03
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0,0.0
+"Vitamin D",IU,0,--,--,0,0
+"Vitamin K (phylloquinone)",µg,0.0,1,--,0.0,0.0
+Lipids
+"Fatty acids, total saturated",g,4.455,--,--,2.049,6.237
+"4:0",g,0.000,--,--,0.000,0.000
+"6:0",g,0.000,--,--,0.000,0.000
+"8:0",g,0.000,2,--,0.000,0.000
+"10:0",g,0.000,2,--,0.000,0.000
+"12:0",g,0.000,2,--,0.000,0.000
+"14:0",g,0.025,2,--,0.012,0.035
+"15:0",g,0.000,2,--,0.000,0.000
+"16:0",g,2.210,2,--,1.017,3.094
+"17:0",g,0.020,2,--,0.009,0.028
+"18:0",g,1.690,2,--,0.777,2.366
+"20:0",g,0.115,2,--,0.053,0.161
+"22:0",g,0.320,2,--,0.147,0.448
+"24:0",g,0.075,2,--,0.034,0.105
+"Fatty acids, total monounsaturated",g,18.528,--,--,8.523,25.939
+"14:1",g,0.000,2,--,0.000,0.000
+"15:1",g,0.000,2,--,0.000,0.000
+"16:1 undifferentiated",g,0.020,2,--,0.009,0.028
+"17:1",g,0.015,2,--,0.007,0.021
+"18:1 undifferentiated",g,18.380,2,--,8.455,25.732
+"20:1",g,0.085,2,--,0.039,0.119
+"22:1 undifferentiated",g,0.029,2,--,0.013,0.041
+"24:1 c",g,0.000,2,--,0.000,0.000
+"Fatty acids, total polyunsaturated",g,23.137,--,--,10.643,32.392
+"18:2 undifferentiated",g,23.050,2,--,10.603,32.270
+"18:3 undifferentiated",g,0.060,2,--,0.028,0.084
+"18:4",g,0.014,2,--,0.006,0.020
+"20:2 n-6 c,c",g,0.000,2,--,0.000,0.000
+"20:3 undifferentiated",g,0.000,2,--,0.000,0.000
+"20:4 undifferentiated",g,0.000,2,--,0.000,0.000
+"20:5 n-3 (EPA)",g,0.014,2,--,0.006,0.020
+"21:5",g,0.000,2,--,0.000,0.000
+"22:4",g,0.000,2,--,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,2,--,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,2,--,0.000,0.000
+"Cholesterol",mg,0,--,--,0,0
+"Phytosterols",mg,534,--,--,246,748
+Amino Acids
+"Tryptophan",g,0.348,25,--,0.160,0.487
+"Threonine",g,0.928,41,--,0.427,1.299
+"Isoleucine",g,1.139,41,--,0.524,1.595
+"Leucine",g,1.659,41,--,0.763,2.323
+"Lysine",g,0.937,44,--,0.431,1.312
+"Methionine",g,0.494,40,--,0.227,0.692
+"Cystine",g,0.451,26,--,0.207,0.631
+"Phenylalanine",g,1.169,40,--,0.538,1.637
+"Tyrosine",g,0.666,31,--,0.306,0.932
+"Valine",g,1.315,41,--,0.605,1.841
+"Arginine",g,2.403,35,--,1.105,3.364
+"Histidine",g,0.632,35,--,0.291,0.885
+"Alanine",g,1.117,26,--,0.514,1.564
+"Aspartic acid",g,2.446,26,--,1.125,3.424
+"Glutamic acid",g,5.579,26,--,2.566,7.811
+"Glycine",g,1.461,26,--,0.672,2.045
+"Proline",g,1.182,25,--,0.544,1.655
+"Serine",g,1.075,26,--,0.494,1.505
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0
+"Caffeine",mg,0,--,--,0,0
+"Theobromine",mg,0,--,--,0,0
+Flavonoids
+Isoflavones
+"Daidzein",mg,0.00,3,0.000,0.00,0.00
+"Genistein",mg,0.00,3,0.000,0.00,0.00
+"Total isoflavones",mg,0.00,3,0.000,0.00,0.01
+"Biochanin A",mg,0.01,3,0.000,0.00,0.01
+"Formononetin",mg,0.03,3,0.000,0.01,0.04
+"Coumestrol",mg,0.01,3,0.000,0.00,0.01
+
+
+Sources of Data
+1,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program, Wave 9p",2005,,BeltsvilleMD
+2,"Nutrient Data Laboratory, ARS, USDA","Investigation of the carbohydrate fraction of foods . . . raw, processed and prepared",1985,,BeltsvilleMD
+3,"O.E. Olson, I.S. Palmer","Selenium in foods purchased or produced in South Dakota",1984,Journal of Food Science,49MD
+4,"M.M. Delgado-Zamarreno, M. Bustamante-Rangel, A. Sanchez-Perez, J. Hernandez-Mendez","Analysis of vitamin D isomers in seeds & nuts with & without coupled hydrolysis by liquid chromatography & coulometric detection",2001,J. Chromatogr. A.,935MD pp. 77-77
+5,"National Sunflower Association","Phytochemicals in sunflower kernel (Helianthus annus L.) and selected tree nuts",2001,,BismarkND pp. 77-77
+6,"Mazur, W., Fotsis, T., Wähälä, K., Ojala, S., Salakka, A. and Adlercreutz, H.","Isotope dilution gas chromatographic-mass spectrometric method for the determination of isoflavonoids, coumestrol, and lignans in food samples.",1996,Anal. Biochem.,233 pp. 169-169

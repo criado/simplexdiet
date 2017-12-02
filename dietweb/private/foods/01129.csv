@@ -1,0 +1,115 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
+Full Report (All Nutrients)
+Report Run at: March 01, 2017 11:10 EST
+"Nutrient data for: 01129, Egg, whole, cooked, hard-boiled"
+Food Group:  Dairy and Egg Products
+Common Name:
+Carbohydrate Factor: 3.68 Fat Factor: 9.02 Protein Factor: 4.36 Nitrogen to Protein Conversion Factor: 6.25 
+Refuse: 12% Refuse Description: Shell 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup, chopped = 136.0g","1 tbsp = 8.5g","1 large = 50.0g",
+Proximates
+"Water",g,74.62,14,0.140,101.48,6.34,37.31
+"Energy",kcal,155,--,--,211,13,78
+"Energy",kJ,649,--,--,883,55,324
+"Protein",g,12.58,14,0.180,17.11,1.07,6.29
+"Total lipid (fat)",g,10.61,7,0.050,14.43,0.90,5.30
+"Ash",g,1.08,14,0.022,1.47,0.09,0.54
+"Carbohydrate, by difference",g,1.12,--,--,1.52,0.10,0.56
+"Fiber, total dietary",g,0.0,--,--,0.0,0.0,0.0
+"Sugars, total",g,1.12,--,--,1.52,0.10,0.56
+Minerals
+"Calcium, Ca",mg,50,14,0.650,68,4,25
+"Iron, Fe",mg,1.19,14,0.047,1.62,0.10,0.59
+"Magnesium, Mg",mg,10,14,0.275,14,1,5
+"Phosphorus, P",mg,172,14,3.551,234,15,86
+"Potassium, K",mg,126,14,2.228,171,11,63
+"Sodium, Na",mg,124,14,1.845,169,11,62
+"Zinc, Zn",mg,1.05,14,0.047,1.43,0.09,0.53
+"Copper, Cu",mg,0.013,14,0.000,0.018,0.001,0.007
+"Manganese, Mn",mg,0.026,14,0.001,0.035,0.002,0.013
+"Selenium, Se",µg,30.8,69,1.160,41.9,2.6,15.4
+"Fluoride, F",µg,4.8,66,0.576,6.5,0.4,2.4
+Vitamins
+"Vitamin C, total ascorbic acid",mg,0.0,2,--,0.0,0.0,0.0
+"Thiamin",mg,0.066,14,0.003,0.090,0.006,0.033
+"Riboflavin",mg,0.513,14,0.010,0.698,0.044,0.257
+"Niacin",mg,0.064,14,0.002,0.087,0.005,0.032
+"Pantothenic acid",mg,1.398,14,0.028,1.901,0.119,0.699
+"Vitamin B-6",mg,0.121,14,0.003,0.165,0.010,0.060
+"Folate, total",µg,44,14,2.248,60,4,22
+"Folic acid",µg,0,--,--,0,0,0
+"Folate, food",µg,44,14,2.248,60,4,22
+"Folate, DFE",µg,44,--,--,60,4,22
+"Choline, total",mg,293.8,--,--,399.6,25.0,146.9
+"Betaine",mg,0.6,4,0.033,0.8,0.1,0.3
+"Vitamin B-12",µg,1.11,14,0.060,1.51,0.09,0.56
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00,0.00
+"Vitamin A, RAE",µg,149,--,--,203,13,74
+"Retinol",µg,148,--,--,201,13,74
+"Carotene, beta",µg,11,--,--,15,1,6
+"Carotene, alpha",µg,0,--,--,0,0,0
+"Cryptoxanthin, beta",µg,10,--,--,14,1,5
+"Vitamin A, IU",IU,520,--,--,707,44,260
+"Lycopene",µg,0,--,--,0,0,0
+"Lutein + zeaxanthin",µg,353,--,--,480,30,176
+"Vitamin E (alpha-tocopherol)",mg,1.03,--,--,1.40,0.09,0.52
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00,0.00
+"Vitamin D (D2 + D3)",µg,2.2,--,--,3.0,0.2,1.1
+"Vitamin D3 (cholecalciferol)",µg,2.2,--,--,3.0,0.2,1.1
+"Vitamin D",IU,87,--,--,118,7,44
+"Vitamin K (phylloquinone)",µg,0.3,--,--,0.4,0.0,0.1
+Lipids
+"Fatty acids, total saturated",g,3.267,--,--,4.443,0.278,1.633
+"4:0",g,0.000,--,--,0.000,0.000,0.000
+"6:0",g,0.000,--,--,0.000,0.000,0.000
+"8:0",g,0.003,37,--,0.004,0.000,0.002
+"10:0",g,0.003,37,--,0.004,0.000,0.002
+"12:0",g,0.003,37,--,0.004,0.000,0.002
+"14:0",g,0.035,37,--,0.048,0.003,0.018
+"16:0",g,2.349,37,--,3.195,0.200,1.175
+"18:0",g,0.828,37,--,1.126,0.070,0.414
+"Fatty acids, total monounsaturated",g,4.077,--,--,5.545,0.347,2.038
+"16:1 undifferentiated",g,0.310,37,--,0.422,0.026,0.155
+"18:1 undifferentiated",g,3.725,37,--,5.066,0.317,1.863
+"20:1",g,0.030,37,--,0.041,0.003,0.015
+"22:1 undifferentiated",g,0.003,37,--,0.004,0.000,0.002
+"Fatty acids, total polyunsaturated",g,1.414,--,--,1.923,0.120,0.707
+"18:2 undifferentiated",g,1.188,37,--,1.616,0.101,0.594
+"18:3 undifferentiated",g,0.035,37,--,0.048,0.003,0.018
+"18:4",g,0.000,--,--,0.000,0.000,0.000
+"20:4 undifferentiated",g,0.149,37,--,0.203,0.013,0.074
+"20:5 n-3 (EPA)",g,0.005,37,--,0.007,0.000,0.003
+"22:5 n-3 (DPA)",g,0.000,--,--,0.000,0.000,0.000
+"22:6 n-3 (DHA)",g,0.038,37,--,0.052,0.003,0.019
+"Cholesterol",mg,373,--,--,507,32,186
+Amino Acids
+"Tryptophan",g,0.153,--,--,0.208,0.013,0.076
+"Threonine",g,0.604,--,--,0.821,0.051,0.302
+"Isoleucine",g,0.686,--,--,0.933,0.058,0.343
+"Leucine",g,1.075,--,--,1.462,0.091,0.537
+"Lysine",g,0.904,--,--,1.229,0.077,0.452
+"Methionine",g,0.392,--,--,0.533,0.033,0.196
+"Cystine",g,0.292,--,--,0.397,0.025,0.146
+"Phenylalanine",g,0.668,--,--,0.908,0.057,0.334
+"Tyrosine",g,0.513,--,--,0.698,0.044,0.257
+"Valine",g,0.767,--,--,1.043,0.065,0.384
+"Arginine",g,0.755,--,--,1.027,0.064,0.378
+"Histidine",g,0.298,--,--,0.405,0.025,0.149
+"Alanine",g,0.700,--,--,0.952,0.059,0.350
+"Aspartic acid",g,1.264,--,--,1.719,0.107,0.632
+"Glutamic acid",g,1.644,--,--,2.236,0.140,0.822
+"Glycine",g,0.423,--,--,0.575,0.036,0.211
+"Proline",g,0.501,--,--,0.681,0.043,0.251
+"Serine",g,0.936,--,--,1.273,0.080,0.468
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0,0.0
+"Caffeine",mg,0,--,--,0,0,0
+"Theobromine",mg,0,--,--,0,0,0
+
+
+Sources of Data
+1,"Donald Taves","Dietary Intake of Fluoride Ashed (total fluoride) v. Unashed (inorganic fluoride) Analysis of Individual Foods",1983,British Journal of Nutrition,49 pp. 295-295
+2,"J.D.B. Featherstone, Carol Shields","A Study of Fluoride Intake in New York State Residents",1988,New York State Fluoride Analysis Contract - report date 12/1/1988, pp. 295-295
+3,"Robert Ophaug","Fluoride, Unpublished - Ophaug",,Microdiffision, pp. 295-295
+4,"RD Jackson, EJ Brizendine, SA Kelly, R Hinesley, GK Stookey, AJ Dunipace","The fluoride content of foods and beverages from negligibly and optimally fluoridated communities.",2002,Community Dental Oral Epidemiology,305 pp. 382-382
+5,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 6b",2002,,BeltsvilleMD pp. 382-382
