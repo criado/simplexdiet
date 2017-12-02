@@ -1,5 +1,5 @@
-"Choline Bitartarte"
-"Energy",kcal,0.0
+"calories"
+"Energy",kcal,100.0
 "Protein",g,0.0
 "Total lipid (fat)",g,0.0
 "Carbohydrate, by difference",g,0.0
@@ -22,7 +22,7 @@
 "Pantothenic acid",mg,0.0
 "Vitamin B-6",mg,0.0
 "Folate, total",µg,0.0
-"Choline, total",mg, 500
+"Choline, total",mg,0.0
 "Vitamin B-12",µg,0.0
 "Vitamin A, RAE",µg,0.0
 "Vitamin E (alpha-tocopherol)",mg,0.0

@@ -1,0 +1,149 @@
+"Lemon juice"
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.1 2017-07-28
+Full Report (All Nutrients)
+Report Run at: September 07, 2017 08:01 EDT
+"Nutrient data for: 09152, Lemon juice, raw"
+Food Group:  Fruits and Fruit Juices
+Common Name:
+Carbohydrate Factor: 2.7 Fat Factor: 8.37 Protein Factor: 3.36 Nitrogen to Protein Conversion Factor: 6.25 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup = 244.0g","1 fl oz = 30.5g","1 lemon yields = 48.0g","1 wedge yields = 5.9g",
+Proximates
+"Water",g,92.31,6,0.259,225.24,28.15,44.31,5.45
+"Energy",kcal,22,--,--,54,7,11,1
+"Energy",kJ,91,--,--,222,28,44,5
+"Protein",g,0.35,6,0.003,0.85,0.11,0.17,0.02
+"Total lipid (fat)",g,0.24,6,0.164,0.59,0.07,0.12,0.01
+"Ash",g,0.21,6,0.043,0.51,0.06,0.10,0.01
+"Carbohydrate, by difference",g,6.90,--,--,16.84,2.10,3.31,0.41
+"Fiber, total dietary",g,0.3,6,0.092,0.7,0.1,0.1,0.0
+"Sugars, total",g,2.52,4,0.105,6.15,0.77,1.21,0.15
+"Sucrose",g,0.43,4,0.120,1.05,0.13,0.21,0.03
+"Glucose (dextrose)",g,0.99,4,0.013,2.42,0.30,0.48,0.06
+"Fructose",g,1.10,4,0.032,2.68,0.34,0.53,0.06
+"Lactose",g,0.00,4,0.000,0.00,0.00,0.00,0.00
+"Maltose",g,0.00,4,0.000,0.00,0.00,0.00,0.00
+"Galactose",g,0.00,4,0.000,0.00,0.00,0.00,0.00
+"Starch",g,0.00,1,--,0.00,0.00,0.00,0.00
+Minerals
+"Calcium, Ca",mg,6,6,2.150,15,2,3,0
+"Iron, Fe",mg,0.08,4,0.005,0.20,0.02,0.04,0.00
+"Magnesium, Mg",mg,6,6,0.915,15,2,3,0
+"Phosphorus, P",mg,8,6,2.865,20,2,4,0
+"Potassium, K",mg,103,8,6.063,251,31,49,6
+"Sodium, Na",mg,1,15,0.178,2,0,0,0
+"Zinc, Zn",mg,0.05,6,0.021,0.12,0.02,0.02,0.00
+"Copper, Cu",mg,0.016,6,0.003,0.039,0.005,0.008,0.001
+"Manganese, Mn",mg,0.012,6,0.005,0.029,0.004,0.006,0.001
+"Selenium, Se",µg,0.1,--,--,0.2,0.0,0.0,0.0
+Vitamins
+"Vitamin C, total ascorbic acid",mg,38.7,8,2.474,94.4,11.8,18.6,2.3
+"Thiamin",mg,0.024,6,0.006,0.059,0.007,0.012,0.001
+"Riboflavin",mg,0.015,4,0.000,0.037,0.005,0.007,0.001
+"Niacin",mg,0.091,6,0.006,0.222,0.028,0.044,0.005
+"Pantothenic acid",mg,0.131,6,0.016,0.320,0.040,0.063,0.008
+"Vitamin B-6",mg,0.046,6,0.006,0.112,0.014,0.022,0.003
+"Folate, total",µg,20,4,6.298,49,6,10,1
+"Folic acid",µg,0,--,--,0,0,0,0
+"Folate, food",µg,20,4,6.298,49,6,10,1
+"Folate, DFE",µg,20,--,--,49,6,10,1
+"Choline, total",mg,5.1,--,--,12.4,1.6,2.4,0.3
+"Vitamin B-12",µg,0.00,--,--,0.00,0.00,0.00,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00,0.00,0.00
+"Vitamin A, RAE",µg,0,1,--,0,0,0,0
+"Retinol",µg,0,--,--,0,0,0,0
+"Carotene, beta",µg,1,1,--,2,0,0,0
+"Carotene, alpha",µg,0,1,--,0,0,0,0
+"Cryptoxanthin, beta",µg,4,1,--,10,1,2,0
+"Vitamin A, IU",IU,6,1,--,15,2,3,0
+"Lycopene",µg,0,1,--,0,0,0,0
+"Lutein + zeaxanthin",µg,15,1,--,37,5,7,1
+"Vitamin E (alpha-tocopherol)",mg,0.15,--,--,0.37,0.05,0.07,0.01
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00,0.00,0.00
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0,0.0,0.0,0.0
+"Vitamin D",IU,0,--,--,0,0,0,0
+"Vitamin K (phylloquinone)",µg,0.0,--,--,0.0,0.0,0.0,0.0
+Lipids
+"Fatty acids, total saturated",g,0.040,--,--,0.098,0.012,0.019,0.002
+"4:0",g,0.000,--,--,0.000,0.000,0.000,0.000
+"6:0",g,0.000,1,--,0.000,0.000,0.000,0.000
+"8:0",g,0.000,1,--,0.000,0.000,0.000,0.000
+"10:0",g,0.020,1,--,0.049,0.006,0.010,0.001
+"12:0",g,0.001,1,--,0.002,0.000,0.000,0.000
+"14:0",g,0.002,1,--,0.005,0.001,0.001,0.000
+"15:0",g,0.001,1,--,0.002,0.000,0.000,0.000
+"16:0",g,0.012,1,--,0.029,0.004,0.006,0.001
+"17:0",g,0.000,1,--,0.000,0.000,0.000,0.000
+"18:0",g,0.004,1,--,0.010,0.001,0.002,0.000
+"20:0",g,0.000,1,--,0.000,0.000,0.000,0.000
+"22:0",g,0.000,1,--,0.000,0.000,0.000,0.000
+"24:0",g,0.000,1,--,0.000,0.000,0.000,0.000
+"Fatty acids, total monounsaturated",g,0.006,--,--,0.015,0.002,0.003,0.000
+"14:1",g,0.002,1,--,0.005,0.001,0.001,0.000
+"15:1",g,0.000,1,--,0.000,0.000,0.000,0.000
+"16:1 undifferentiated",g,0.000,--,--,0.000,0.000,0.000,0.000
+"16:1 c",g,0.000,1,--,0.000,0.000,0.000,0.000
+"16:1 t",g,0.000,1,--,0.000,0.000,0.000,0.000
+"17:1",g,0.000,1,--,0.000,0.000,0.000,0.000
+"18:1 undifferentiated",g,0.004,--,--,0.010,0.001,0.002,0.000
+"18:1 c",g,0.004,1,--,0.010,0.001,0.002,0.000
+"18:1 t",g,0.000,1,--,0.000,0.000,0.000,0.000
+"20:1",g,0.000,1,--,0.000,0.000,0.000,0.000
+"22:1 undifferentiated",g,0.000,--,--,0.000,0.000,0.000,0.000
+"22:1 c",g,0.000,1,--,0.000,0.000,0.000,0.000
+"22:1 t",g,0.000,1,--,0.000,0.000,0.000,0.000
+"24:1 c",g,0.000,1,--,0.000,0.000,0.000,0.000
+"Fatty acids, total polyunsaturated",g,0.021,--,--,0.051,0.006,0.010,0.001
+"18:2 undifferentiated",g,0.012,--,--,0.029,0.004,0.006,0.001
+"18:2 n-6 c,c",g,0.012,1,--,0.029,0.004,0.006,0.001
+"18:2 CLAs",g,0.000,1,--,0.000,0.000,0.000,0.000
+"18:2 t not further defined",g,0.000,1,--,0.000,0.000,0.000,0.000
+"18:3 undifferentiated",g,0.009,--,--,0.022,0.003,0.004,0.001
+"18:3 n-3 c,c,c (ALA)",g,0.009,1,--,0.022,0.003,0.004,0.001
+"18:3 n-6 c,c,c",g,0.000,1,--,0.000,0.000,0.000,0.000
+"18:4",g,0.000,1,--,0.000,0.000,0.000,0.000
+"20:2 n-6 c,c",g,0.000,1,--,0.000,0.000,0.000,0.000
+"20:3 undifferentiated",g,0.000,--,--,0.000,0.000,0.000,0.000
+"20:3 n-6",g,0.000,1,--,0.000,0.000,0.000,0.000
+"20:4 undifferentiated",g,0.000,1,--,0.000,0.000,0.000,0.000
+"20:5 n-3 (EPA)",g,0.000,1,--,0.000,0.000,0.000,0.000
+"22:4",g,0.000,1,--,0.000,0.000,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,1,--,0.000,0.000,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,1,--,0.000,0.000,0.000,0.000
+"Fatty acids, total trans",g,0.000,--,--,0.000,0.000,0.000,0.000
+"Fatty acids, total trans-monoenoic",g,0.000,--,--,0.000,0.000,0.000,0.000
+"Cholesterol",mg,0,--,--,0,0,0,0
+Amino Acids
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0,0.0,0.0
+"Caffeine",mg,0,--,--,0,0,0,0
+"Theobromine",mg,0,--,--,0,0,0,0
+Flavonoids
+Flavan-3-ols
+"(+)-Catechin",mg,0.0,1,--,0.0,0.0,0.0,0.0
+Flavanones
+"Eriodictyol",mg,4.9,31,0.190,11.9,1.5,2.3,0.3
+"Hesperetin",mg,14.5,32,4.830,35.3,4.4,6.9,0.9
+"Naringenin",mg,1.4,28,0.720,3.4,0.4,0.7,0.1
+Flavones
+"Apigenin",mg,0.0,10,0.000,0.0,0.0,0.0,0.0
+"Luteolin",mg,0.0,1,--,0.0,0.0,0.0,0.0
+Flavonols
+"Kaempferol",mg,0.0,2,--,0.0,0.0,0.0,0.0
+"Myricetin",mg,0.0,2,--,0.0,0.0,0.0,0.0
+"Quercetin",mg,0.4,10,0.210,0.9,0.1,0.2,0.0
+Isoflavones
+"Daidzein",mg,0.00,1,--,0.00,0.00,0.00,0.00
+"Genistein",mg,0.00,1,--,0.00,0.00,0.00,0.00
+"Total isoflavones",mg,0.00,1,--,0.00,0.00,0.00,0.00
+
+
+Sources of Data
+1,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Anlaysis Program Wave 12h",2008,,BeltsvilleMD
+2,"Produce Marketing Association (PMA)","Nutrient Content of Raw Lemon/Juice",1990,,MD
+3,"Berhow, M., Tisserat, B., Kanes, K., and Vandercook, C.","Survey of phenolic compounds produced in citrus.",1998,Technical Bulletin Number 1856, ARS, USDA, December 1998.,
+4,"Grandi, R., Trifiro, A., Gherardi, S. Calza, M., and Saccani G.","Characterization of lemon juice on the basis of flavonoid content.",1994,Fruit Processing,11 pp. 355-355
+5,"Mouly, P. P., Arzouyan, C. R., Gaydou, E. M., and Estienne, J. M.","Differentiation of citrus juices by factorial discriminant analysis using liquid chromatography of flavanone glycosides",1994,J. Agric. Food Chem.,42 pp. 70-70
+6,"Hertog, M. G. L., Hollman, P. C. H., and van de Putte, B.","Content of potentially anticarcinogenic flavonoids of tea infusions, wines, and fruit juices.",1993,J. Agric. Food Chem.,41 pp. 1242-1242
+7,"Liggins, J., Bluck, L. J. C., Runswick, S., Atkinson, C., Coward, W. A., Bingham, S. A.","Daidzein and genistein content of fruits and nuts.",2000,J. Nutr. Biochem.,11 pp. 326-326
+Footnotes
+(a)"Mean value contains data based on the analysis of 5-methyltetrahydrofolate plus total folate determined microbiologically"

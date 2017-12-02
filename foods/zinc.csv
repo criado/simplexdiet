@@ -1,4 +1,4 @@
-"Choline Bitartarte"
+"Zinc"
 "Energy",kcal,0.0
 "Protein",g,0.0
 "Total lipid (fat)",g,0.0
@@ -11,7 +11,7 @@
 "Phosphorus, P",mg,0.0
 "Potassium, K",mg,0.0
 "Sodium, Na",mg,0.0
-"Zinc, Zn",mg,0.0
+"Zinc, Zn",mg,15.0
 "Copper, Cu",mg,0.0
 "Manganese, Mn",mg,0.0
 "Selenium, Se",µg,0.0
@@ -22,7 +22,7 @@
 "Pantothenic acid",mg,0.0
 "Vitamin B-6",mg,0.0
 "Folate, total",µg,0.0
-"Choline, total",mg, 500
+"Choline, total",mg,0.0
 "Vitamin B-12",µg,0.0
 "Vitamin A, RAE",µg,0.0
 "Vitamin E (alpha-tocopherol)",mg,0.0

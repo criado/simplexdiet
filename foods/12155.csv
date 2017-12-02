@@ -1,0 +1,179 @@
+"Walnuts"
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.1 2017-07-28
+Full Report (All Nutrients)
+Report Run at: September 27, 2017 13:31 EDT
+"Nutrient data for: 12155, Nuts, walnuts, english"
+Food Group:  Nut and Seed Products
+Common Name:Includes USDA commodity food A259, A257
+Carbohydrate Factor: 4.07 Fat Factor: 8.37 Protein Factor: 3.47 Nitrogen to Protein Conversion Factor: 5.3 
+Refuse: 55% Refuse Description: Shells 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup, chopped = 117.0g","1 cup, ground = 80.0g","1 cup, in shell, edible yield (7 nuts) = 28.0g","1 cup shelled (50 halves) = 100.0g","1 cup pieces or chips = 120.0g","1 oz (14 halves) = 28.35g",
+Proximates
+"Water",g,4.07,7,0.155,4.76,3.26,1.14,4.07,4.88,1.15
+"Energy",kcal,654,--,--,765,523,183,654,785,185
+"Energy",kJ,2738,--,--,3203,2190,767,2738,3286,776
+"Protein",g,15.23,7,0.238,17.82,12.18,4.26,15.23,18.28,4.32
+"Total lipid (fat)",g,65.21,7,0.494,76.30,52.17,18.26,65.21,78.25,18.49
+"Ash",g,1.78,7,0.019,2.08,1.42,0.50,1.78,2.14,0.50
+"Carbohydrate, by difference",g,13.71,--,--,16.04,10.97,3.84,13.71,16.45,3.89
+"Fiber, total dietary",g,6.7,7,0.549,7.8,5.4,1.9,6.7,8.0,1.9
+"Sugars, total",g,2.61,7,0.094,3.05,2.09,0.73,2.61,3.13,0.74
+"Sucrose",g,2.43,7,0.087,2.84,1.94,0.68,2.43,2.92,0.69
+"Glucose (dextrose)",g,0.08,7,0.014,0.09,0.06,0.02,0.08,0.10,0.02
+"Fructose",g,0.09,7,0.011,0.11,0.07,0.03,0.09,0.11,0.03
+"Lactose",g,0.00,7,0.000,0.00,0.00,0.00,0.00,0.00,0.00
+"Maltose",g,0.00,7,0.000,0.00,0.00,0.00,0.00,0.00,0.00
+"Starch",g,0.06,7,0.011,0.07,0.05,0.02,0.06,0.07,0.02
+Minerals
+"Calcium, Ca",mg,98,7,3.009,115,78,27,98,118,28
+"Iron, Fe",mg,2.91,7,0.086,3.40,2.33,0.81,2.91,3.49,0.82
+"Magnesium, Mg",mg,158,7,1.204,185,126,44,158,190,45
+"Phosphorus, P",mg,346,7,3.689,405,277,97,346,415,98
+"Potassium, K",mg,441,7,6.471,516,353,123,441,529,125
+"Sodium, Na",mg,2,7,0.837,2,2,1,2,2,1
+"Zinc, Zn",mg,3.09,7,0.083,3.62,2.47,0.87,3.09,3.71,0.88
+"Copper, Cu",mg,1.586,7,0.026,1.856,1.269,0.444,1.586,1.903,0.450
+"Manganese, Mn",mg,3.414,7,0.122,3.994,2.731,0.956,3.414,4.097,0.968
+"Selenium, Se",µg,4.9,6,0.417,5.7,3.9,1.4,4.9,5.9,1.4
+Vitamins
+"Vitamin C, total ascorbic acid",mg,1.3,7,0.184,1.5,1.0,0.4,1.3,1.6,0.4
+"Thiamin",mg,0.341,7,0.010,0.399,0.273,0.095,0.341,0.409,0.097
+"Riboflavin",mg,0.150,7,0.003,0.176,0.120,0.042,0.150,0.180,0.043
+"Niacin",mg,1.125,8,0.055,1.316,0.900,0.315,1.125,1.350,0.319
+"Pantothenic acid",mg,0.570,7,0.011,0.667,0.456,0.160,0.570,0.684,0.162
+"Vitamin B-6",mg,0.537,7,0.026,0.628,0.430,0.150,0.537,0.644,0.152
+"Folate, total",µg,98,7,3.889,115,78,27,98,118,28
+"Folic acid",µg,0,--,--,0,0,0,0,0,0
+"Folate, food",µg,98,7,3.889,115,78,27,98,118,28
+"Folate, DFE",µg,98,--,--,115,78,27,98,118,28
+"Choline, total",mg,39.2,--,--,45.9,31.4,11.0,39.2,47.0,11.1
+"Betaine",mg,0.3,5,0.019,0.4,0.2,0.1,0.3,0.4,0.1
+"Vitamin B-12",µg,0.00,--,--,0.00,0.00,0.00,0.00,0.00,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00,0.00,0.00,0.00,0.00
+"Vitamin A, RAE",µg,1,6,0.613,1,1,0,1,1,0
+"Retinol",µg,0,--,--,0,0,0,0,0,0
+"Carotene, beta",µg,12,6,7.358,14,10,3,12,14,3
+"Carotene, alpha",µg,0,6,0.000,0,0,0,0,0,0
+"Cryptoxanthin, beta",µg,0,3,0.000,0,0,0,0,0,0
+"Vitamin A, IU",IU,20,6,12.264,23,16,6,20,24,6
+"Lycopene",µg,0,3,0.000,0,0,0,0,0,0
+"Lutein + zeaxanthin",µg,9,3,0.180,11,7,3,9,11,3
+"Vitamin E (alpha-tocopherol)",mg,0.70,13,0.321,0.82,0.56,0.20,0.70,0.84,0.20
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00,0.00,0.00,0.00,0.00
+"Tocopherol, beta",mg,0.15,13,0.146,0.18,0.12,0.04,0.15,0.18,0.04
+"Tocopherol, gamma",mg,20.83,13,2.609,24.37,16.66,5.83,20.83,25.00,5.91
+"Tocopherol, delta",mg,1.89,13,0.466,2.21,1.51,0.53,1.89,2.27,0.54
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0,0.0,0.0,0.0,0.0,0.0
+"Vitamin D",IU,0,--,--,0,0,0,0,0,0
+"Vitamin K (phylloquinone)",µg,2.7,8,0.253,3.2,2.2,0.8,2.7,3.2,0.8
+Lipids
+"Fatty acids, total saturated",g,6.126,--,--,7.167,4.901,1.715,6.126,7.351,1.737
+"4:0",g,0.000,--,--,0.000,0.000,0.000,0.000,0.000,0.000
+"6:0",g,0.000,--,--,0.000,0.000,0.000,0.000,0.000,0.000
+"8:0",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"10:0",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"12:0",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"13:0",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"14:0",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"15:0",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"16:0",g,4.404,7,0.095,5.153,3.523,1.233,4.404,5.285,1.249
+"17:0",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"18:0",g,1.659,7,0.035,1.941,1.327,0.465,1.659,1.991,0.470
+"20:0",g,0.063,7,0.000,0.074,0.050,0.018,0.063,0.076,0.018
+"22:0",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"24:0",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"Fatty acids, total monounsaturated",g,8.933,--,--,10.452,7.146,2.501,8.933,10.720,2.533
+"14:1",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"16:1 undifferentiated",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"18:1 undifferentiated",g,8.799,7,0.138,10.295,7.039,2.464,8.799,10.559,2.495
+"20:1",g,0.134,7,0.008,0.157,0.107,0.038,0.134,0.161,0.038
+"22:1 undifferentiated",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"24:1 c",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"Fatty acids, total polyunsaturated",g,47.174,--,--,55.194,37.739,13.209,47.174,56.609,13.374
+"18:2 undifferentiated",g,38.093,7,0.304,44.569,30.474,10.666,38.093,45.712,10.799
+"18:3 undifferentiated",g,9.080,7,0.179,10.624,7.264,2.542,9.080,10.896,2.574
+"18:4",g,0.000,--,--,0.000,0.000,0.000,0.000,0.000,0.000
+"20:2 n-6 c,c",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"20:3 undifferentiated",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"20:4 undifferentiated",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"20:5 n-3 (EPA)",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,7,0.000,0.000,0.000,0.000,0.000,0.000,0.000
+"Cholesterol",mg,0,--,--,0,0,0,0,0,0
+"Stigmasterol",mg,0,4,0.000,0,0,0,0,0,0
+"Campesterol",mg,5,4,0.143,6,4,1,5,6,1
+"Beta-sitosterol",mg,87,4,3.003,102,70,24,87,104,25
+Amino Acids
+"Tryptophan",g,0.170,--,--,0.199,0.136,0.048,0.170,0.204,0.048
+"Threonine",g,0.596,--,--,0.697,0.477,0.167,0.596,0.715,0.169
+"Isoleucine",g,0.625,--,--,0.731,0.500,0.175,0.625,0.750,0.177
+"Leucine",g,1.170,--,--,1.369,0.936,0.328,1.170,1.404,0.332
+"Lysine",g,0.424,--,--,0.496,0.339,0.119,0.424,0.509,0.120
+"Methionine",g,0.236,--,--,0.276,0.189,0.066,0.236,0.283,0.067
+"Cystine",g,0.208,--,--,0.243,0.166,0.058,0.208,0.250,0.059
+"Phenylalanine",g,0.711,--,--,0.832,0.569,0.199,0.711,0.853,0.202
+"Tyrosine",g,0.406,--,--,0.475,0.325,0.114,0.406,0.487,0.115
+"Valine",g,0.753,--,--,0.881,0.602,0.211,0.753,0.904,0.213
+"Arginine",g,2.278,--,--,2.665,1.822,0.638,2.278,2.734,0.646
+"Histidine",g,0.391,--,--,0.457,0.313,0.109,0.391,0.469,0.111
+"Alanine",g,0.696,--,--,0.814,0.557,0.195,0.696,0.835,0.197
+"Aspartic acid",g,1.829,--,--,2.140,1.463,0.512,1.829,2.195,0.519
+"Glutamic acid",g,2.816,--,--,3.295,2.253,0.788,2.816,3.379,0.798
+"Glycine",g,0.816,--,--,0.955,0.653,0.228,0.816,0.979,0.231
+"Proline",g,0.706,--,--,0.826,0.565,0.198,0.706,0.847,0.200
+"Serine",g,0.934,--,--,1.093,0.747,0.262,0.934,1.121,0.265
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0,0.0,0.0,0.0,0.0
+"Caffeine",mg,0,--,--,0,0,0,0,0,0
+"Theobromine",mg,0,--,--,0,0,0,0,0,0
+Flavonoids
+Anthocyanidins
+"Cyanidin",mg,2.71,6,0.250,3.17,2.17,0.76,2.71,3.25,0.77
+"Petunidin",mg,0.0,6,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"Delphinidin",mg,0.0,6,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"Malvidin",mg,0.0,6,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"Pelargonidin",mg,0.0,6,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"Peonidin",mg,0.0,6,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+Flavan-3-ols
+"(+)-Catechin",mg,0.0,4,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"(-)-Epigallocatechin",mg,0.0,4,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"(-)-Epicatechin",mg,0.0,4,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"(-)-Epicatechin 3-gallate",mg,0.0,4,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"(-)-Epigallocatechin 3-gallate",mg,0.0,4,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"(+)-Gallocatechin",mg,0.0,4,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+Flavanones
+"Hesperetin",mg,0.0,4,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"Naringenin",mg,0.0,4,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+Flavones
+"Apigenin",mg,0.0,6,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"Luteolin",mg,0.0,2,--,0.0,0.0,0.0,0.0,0.0,0.0
+Flavonols
+"Myricetin",mg,0.0,6,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+"Quercetin",mg,0.0,6,0.000,0.0,0.0,0.0,0.0,0.0,0.0
+Isoflavones
+"Daidzein",mg,0.02,2,--,0.02,0.02,0.01,0.02,0.02,0.01
+"Genistein",mg,0.01,2,--,0.01,0.01,0.00,0.01,0.01,0.00
+"Glycitein",mg,0.00,1,--,0.00,0.00,0.00,0.00,0.00,0.00
+"Total isoflavones",mg,0.03,2,--,0.03,0.02,0.01,0.03,0.03,0.01
+"Formononetin",mg,0.00,1,--,0.00,0.00,0.00,0.00,0.00,0.00
+"Coumestrol",mg,0.00,1,--,0.00,0.00,0.00,0.00,0.00,0.00
+Proanthocyanidin
+"Proanthocyanidin dimers",mg,5.7,8,0.890,6.6,4.5,1.6,5.7,6.8,1.6
+"Proanthocyanidin trimers",mg,7.2,8,1.160,8.4,5.8,2.0,7.2,8.6,2.0
+"Proanthocyanidin 4-6mers",mg,22.1,8,3.310,25.8,17.6,6.2,22.1,26.5,6.3
+"Proanthocyanidin 7-10mers",mg,5.4,8,0.810,6.3,4.3,1.5,5.4,6.5,1.5
+"Proanthocyanidin polymers (>10mers)",mg,20.0,8,9.270,23.4,16.0,5.6,20.0,24.0,5.7
+
+
+Sources of Data
+1,"California Walnut Commission","Nutrient Content of Walnuts",1999,,ModestoCA
+2,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 5g",2001,,BeltsvilleMD
+3,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 5e",2001,,BeltsvilleMD
+4,"Nutrient Data Laboratory, ARS, USDA","NDL Report Vitamin E 1997",1997,,BeltsvilleMD
+5,"Gu, L., Kelm, M.A., Hammerstone, J.F., Beecher, G., Holden, J., Haytowitz, D., Gebhardt, S., and Prior, R.L.","Concentrations of proanthocyanidins in common foods and estimations of normal consumption",2004,J. Nutr.,134 pp. 613-613
+6,"Harnly, J. M., Doherty, R., Beecher, G. R., Holden, J. M., Haytowitz, D. B., and Bhagwat, S., and Gebhardt S.","Flavonoid content of U.S. fruits, vegetables, and nuts",2006,J. Agric. Food Chem.,54 pp. 9966-9966
+7,"Liggins, J., Bluck, L. J. C., Runswick, S., Atkinson, C., Coward, W. A., Bingham, S. A.","Daidzein and genistein content of fruits and nuts.",2000,J. Nutr. Biochem.,11 pp. 326-326
+8,"Thompson, L. U., Boucher, B. A., Liu, Z., Cotterchio, M., and Kreiger, N.","Phytoestrogen content of foods consumed in Canada, including isoflavones, lignans, and coumestan.",2006,Nutr. Cancer,54 pp. 184-184
+Footnotes
+(b)"Other phytosterols total 18.2 mg/100g; these include delta 5-avenasterol (7.3), campestanol (2.3), and other minor phytosterols (8.6 mg)."
+(a)"Unroasted"

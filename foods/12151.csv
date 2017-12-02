@@ -1,0 +1,182 @@
+"Pistachios"
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.1 2017-07-28
+Full Report (All Nutrients)
+Report Run at: September 27, 2017 12:42 EDT
+"Nutrient data for: 12151, Nuts, pistachio nuts, raw"
+Food Group:  Nut and Seed Products
+Common Name:
+Carbohydrate Factor: 4.07 Fat Factor: 8.37 Protein Factor: 3.47 Nitrogen to Protein Conversion Factor: 5.3 
+Refuse: 47% Refuse Description: Shells 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup = 123.0g","1 oz (49 kernels) = 28.35g","1 kernel = 0.7g",
+Proximates
+"Water",g,4.37,10,0.473,5.38,1.24,0.03
+"Energy",kcal,560,--,--,689,159,4
+"Energy",kJ,2342,--,--,2881,664,16
+"Protein",g,20.16,11,0.217,24.80,5.72,0.14
+"Total lipid (fat)",g,45.32,10,0.961,55.74,12.85,0.32
+"Ash",g,2.99,10,0.109,3.68,0.85,0.02
+"Carbohydrate, by difference",g,27.17,--,--,33.42,7.70,0.19
+"Fiber, total dietary",g,10.6,10,0.361,13.0,3.0,0.1
+"Sugars, total",g,7.66,9,0.178,9.42,2.17,0.05
+"Sucrose",g,6.87,9,0.145,8.45,1.95,0.05
+"Glucose (dextrose)",g,0.32,9,0.078,0.39,0.09,0.00
+"Fructose",g,0.24,9,0.081,0.30,0.07,0.00
+"Lactose",g,0.00,9,0.000,0.00,0.00,0.00
+"Maltose",g,0.17,9,0.047,0.21,0.05,0.00
+"Starch",g,1.67,1,--,2.05,0.47,0.01
+Minerals
+"Calcium, Ca",mg,105,9,2.408,129,30,1
+"Iron, Fe",mg,3.92,9,0.247,4.82,1.11,0.03
+"Magnesium, Mg",mg,121,1,--,149,34,1
+"Phosphorus, P",mg,490,1,--,603,139,3
+"Potassium, K",mg,1025,8,64.643,1261,291,7
+"Sodium, Na",mg,1,2,--,1,0,0
+"Zinc, Zn",mg,2.20,1,--,2.71,0.62,0.02
+"Copper, Cu",mg,1.300,1,--,1.599,0.369,0.009
+"Manganese, Mn",mg,1.200,1,--,1.476,0.340,0.008
+"Selenium, Se",µg,7.0,1,--,8.6,2.0,0.0
+"Fluoride, F",µg,3.4,1,--,4.2,1.0,0.0
+Vitamins
+"Vitamin C, total ascorbic acid",mg,5.6,2,--,6.9,1.6,0.0
+"Thiamin",mg,0.870,1,--,1.070,0.247,0.006
+"Riboflavin",mg,0.160,1,--,0.197,0.045,0.001
+"Niacin",mg,1.300,1,--,1.599,0.369,0.009
+"Pantothenic acid",mg,0.520,1,--,0.640,0.147,0.004
+"Vitamin B-6",mg,1.700,1,--,2.091,0.482,0.012
+"Folate, total",µg,51,1,--,63,14,0
+"Folic acid",µg,0,--,--,0,0,0
+"Folate, food",µg,51,1,--,63,14,0
+"Folate, DFE",µg,51,--,--,63,14,0
+"Choline, total",mg,71.4
+"Vitamin B-12",µg,0.00,--,--,0.00,0.00,0.00
+"Vitamin A, RAE",µg,26,--,--,32,7,0
+"Retinol",µg,0,--,--,0,0,0
+"Carotene, beta",µg,305,4,54.217,375,86,2
+"Carotene, alpha",µg,10,3,10.000,12,3,0
+"Cryptoxanthin, beta",µg,0,1,--,0,0,0
+"Vitamin A, IU",IU,516,--,--,635,146,4
+"Lutein + zeaxanthin",µg,2903,2,--,3571,823,20
+"Vitamin E (alpha-tocopherol)",mg,2.86,2,--,3.52,0.81,0.02
+"Tocopherol, beta",mg,0.00,1,--,0.00,0.00,0.00
+"Tocopherol, gamma",mg,20.41,2,--,25.10,5.79,0.14
+"Tocopherol, delta",mg,0.80,1,--,0.98,0.23,0.01
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0,0.0,0.0
+"Vitamin D",IU,0,--,--,0,0,0
+"Vitamin K (phylloquinone)",µg,13.2
+Lipids
+"Fatty acids, total saturated",g,5.907,--,--,7.266,1.675,0.041
+"4:0",g,0.000,--,--,0.000,0.000,0.000
+"6:0",g,0.012,1,--,0.015,0.003,0.000
+"8:0",g,0.000,2,--,0.000,0.000,0.000
+"10:0",g,0.004,2,--,0.005,0.001,0.000
+"12:0",g,0.000,2,--,0.000,0.000,0.000
+"13:0",g,0.000,1,--,0.000,0.000,0.000
+"14:0",g,0.019,2,--,0.023,0.005,0.000
+"15:0",g,0.000,2,--,0.000,0.000,0.000
+"16:0",g,5.265,2,--,6.476,1.493,0.037
+"17:0",g,0.009,2,--,0.011,0.003,0.000
+"18:0",g,0.478,2,--,0.588,0.136,0.003
+"20:0",g,0.046,2,--,0.057,0.013,0.000
+"22:0",g,0.040,2,--,0.049,0.011,0.000
+"24:0",g,0.000,2,--,0.000,0.000,0.000
+"Fatty acids, total monounsaturated",g,23.257,--,--,28.606,6.593,0.163
+"14:1",g,0.000,2,--,0.000,0.000,0.000
+"16:1 undifferentiated",g,0.495,2,--,0.609,0.140,0.003
+"18:1 undifferentiated",g,22.674,2,--,27.889,6.428,0.159
+"20:1",g,0.089,2,--,0.109,0.025,0.001
+"22:1 undifferentiated",g,0.000,2,--,0.000,0.000,0.000
+"24:1 c",g,0.000,1,--,0.000,0.000,0.000
+"Fatty acids, total polyunsaturated",g,14.380,--,--,17.687,4.077,0.101
+"18:2 undifferentiated",g,14.091,2,--,17.332,3.995,0.099
+"18:2 n-6 c,c",g,14.091,1,--,17.332,3.995,0.099
+"18:3 undifferentiated",g,0.289,3,0.042,0.355,0.082,0.002
+"18:4",g,0.000,--,--,0.000,0.000,0.000
+"20:2 n-6 c,c",g,0.000,1,--,0.000,0.000,0.000
+"20:3 undifferentiated",g,0.000,1,--,0.000,0.000,0.000
+"20:4 undifferentiated",g,0.000,1,--,0.000,0.000,0.000
+"20:5 n-3 (EPA)",g,0.000,1,--,0.000,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,1,--,0.000,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,1,--,0.000,0.000,0.000
+"Fatty acids, total trans",g,0.000,1,--,0.000,0.000,0.000
+"Cholesterol",mg,0,--,--,0,0,0
+"Phytosterols",mg,214,1,--,263,61,1
+"Stigmasterol",mg,5,1,--,6,1,0
+"Campesterol",mg,10,1,--,12,3,0
+"Beta-sitosterol",mg,198,1,--,244,56,1
+Amino Acids
+"Tryptophan",g,0.251,--,--,0.309,0.071,0.002
+"Threonine",g,0.684,--,--,0.841,0.194,0.005
+"Isoleucine",g,0.917,--,--,1.128,0.260,0.006
+"Leucine",g,1.604,--,--,1.973,0.455,0.011
+"Lysine",g,1.138,--,--,1.400,0.323,0.008
+"Methionine",g,0.360,--,--,0.443,0.102,0.003
+"Cystine",g,0.292,--,--,0.359,0.083,0.002
+"Phenylalanine",g,1.092,--,--,1.343,0.310,0.008
+"Tyrosine",g,0.509,--,--,0.626,0.144,0.004
+"Valine",g,1.249,--,--,1.536,0.354,0.009
+"Arginine",g,2.134,--,--,2.625,0.605,0.015
+"Histidine",g,0.512,--,--,0.630,0.145,0.004
+"Alanine",g,0.973,--,--,1.197,0.276,0.007
+"Aspartic acid",g,1.884,--,--,2.317,0.534,0.013
+"Glutamic acid",g,4.300,--,--,5.289,1.219,0.030
+"Glycine",g,1.009,--,--,1.241,0.286,0.007
+"Proline",g,0.938,--,--,1.154,0.266,0.007
+"Serine",g,1.283,--,--,1.578,0.364,0.009
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0,0.0
+"Caffeine",mg,0,--,--,0,0,0
+"Theobromine",mg,0,--,--,0,0,0
+Flavonoids
+Anthocyanidins
+"Cyanidin",mg,7.33,15,0.750,9.02,2.08,0.05
+"Petunidin",mg,0.0,8,0.000,0.0,0.0,0.0
+"Delphinidin",mg,0.0,8,0.000,0.0,0.0,0.0
+"Malvidin",mg,0.0,8,0.000,0.0,0.0,0.0
+"Pelargonidin",mg,0.0,8,0.000,0.0,0.0,0.0
+"Peonidin",mg,0.0,8,0.000,0.0,0.0,0.0
+Flavan-3-ols
+"(+)-Catechin",mg,3.6,7,1.000,4.4,1.0,0.0
+"(-)-Epigallocatechin",mg,2.0,7,0.820,2.5,0.6,0.0
+"(-)-Epicatechin",mg,0.8,7,0.460,1.0,0.2,0.0
+"(-)-Epicatechin 3-gallate",mg,0.0,7,0.000,0.0,0.0,0.0
+"(-)-Epigallocatechin 3-gallate",mg,0.4,7,0.400,0.5,0.1,0.0
+"(+)-Gallocatechin",mg,0.0,7,0.000,0.0,0.0,0.0
+Flavanones
+"Hesperetin",mg,0.0,7,0.000,0.0,0.0,0.0
+"Naringenin",mg,0.0,7,0.000,0.0,0.0,0.0
+Flavones
+"Apigenin",mg,0.0,8,0.000,0.0,0.0,0.0
+"Luteolin",mg,0.0,4,0.000,0.0,0.0,0.0
+Flavonols
+"Myricetin",mg,0.0,8,0.000,0.0,0.0,0.0
+"Quercetin",mg,1.5,8,0.640,1.8,0.4,0.0
+Isoflavones
+"Daidzein",mg,1.88,2,--,2.31,0.53,0.01
+"Genistein",mg,1.75,2,--,2.15,0.50,0.01
+"Glycitein",mg,0.00,1,--,0.00,0.00,0.00
+"Total isoflavones",mg,3.63,2,--,4.46,1.03,0.03
+"Formononetin",mg,0.00,1,--,0.00,0.00,0.00
+"Coumestrol",mg,0.01,1,--,0.01,0.00,0.00
+Proanthocyanidin
+"Proanthocyanidin dimers",mg,13.3,7,1.800,16.3,3.8,0.1
+"Proanthocyanidin trimers",mg,10.5,7,1.220,12.9,3.0,0.1
+"Proanthocyanidin 4-6mers",mg,42.2,7,5.230,52.0,12.0,0.3
+"Proanthocyanidin 7-10mers",mg,37.9,7,4.930,46.7,10.8,0.3
+"Proanthocyanidin polymers (>10mers)",mg,122.5,7,37.100,150.6,34.7,0.9
+
+
+Sources of Data
+1,"M. Venkatachalam, S.K. Sathe","Chemical composition of selected edible nut seeds",2006,Journal of Agricultural and Food Chemistry,54 pp. 4705-4705
+2,"California Pistachio Commission","Nutrition Labeling Database for California Pistachios",1994,, pp. 4705-4705
+3,"Western Pistachio Association","Nutrient composition of pistachio nuts",2009,, pp. 4705-4705
+4,"American Pistachio Growers","Nutrient composition of pistachio nuts",2015,, pp. 4705-4705
+5,"California Pistachio Commission","Nutrient Content of Pistachio Nuts",1999,, pp. 4705-4705
+6,"Y Liu, Jeffrey B. Blumberg, C.-Y. Oliver Chen","Quantification and bioaccessibility of California pistachio bioactives",2014,Journal of Agricultural and Food Chemistry,62 pp. 1550-1550
+7,"A. Perry, H. Rasmussen, E.J. Johnson","Xanthophyll (lutein, zeaxanthin) content in fruits, vegetables and corn and egg products",2009,J Food Comp Anal,22 pp. 9-9
+8,"Gu, L., Kelm, M.A., Hammerstone, J.F., Beecher, G., Holden, J., Haytowitz, D., Gebhardt, S., and Prior, R.L.","Concentrations of proanthocyanidins in common foods and estimations of normal consumption",2004,J. Nutr.,134 pp. 613-613
+9,"Harnly, J. M., Doherty, R., Beecher, G. R., Holden, J. M., Haytowitz, D. B., and Bhagwat, S., and Gebhardt S.","Flavonoid content of U.S. fruits, vegetables, and nuts",2006,J. Agric. Food Chem.,54 pp. 9966-9966
+10,"Wu, X., Beecher, G. R., Holden, J. M., Haytowitz, D. B., Gebhardt, S. E., and Prior, R. L.","Concentrations of anthocyanins in common foods in the United States and estimation of normal consumption.",2006,J. Agric. Food Chem.,54 pp. 4069-4069
+11,"Gentile, C., Tesirier, L., Butera, D., Fazzari, M., Monastero, M., Allegra, M., and Livera, M. A.","Antioxidant activity of Sicilian pistachio (Pistacia vera L. Var Bronte) nut extract and its bioactive components.",2007,J. Agric. Food Chem.,55 pp. 643-643
+12,"Thompson, L. U., Boucher, B. A., Liu, Z., Cotterchio, M., and Kreiger, N.","Phytoestrogen content of foods consumed in Canada, including isoflavones, lignans, and coumestan.",2006,Nutr. Cancer,54 pp. 184-184
+Footnotes
+(a)"Unroasted"

@@ -1,0 +1,77 @@
+price 3.11184442778813
+                                                        225.3 g                 Bananas│
+                                                    500.0 g            Orange juice│   │
+                                                  0.2 g                    Salt│   │   │
+                                            100.0 g           Cod liver oil│   │   │   │
+                                        100.0 g      Choline Bitartarte│   │   │   │   │
+                                     42.8 g        Seeds, sunflower│   │   │   │   │   │
+                                 14.1 g               Olive oil│   │   │   │   │   │   │
+                             69.7 g       Eggs, hard-boiled│   │   │   │   │   │   │   │
+                         68.4 g         Spinach, frozen│   │   │   │   │   │   │   │   │
+                    300.0 g    Potatoes, microwaved│   │   │   │   │   │   │   │   │   │
+                  4.5 g         Seeds, flaxseed│   │   │   │   │   │   │   │   │   │   │
+              1.8 g              Wheat germ│   │   │   │   │   │   │   │   │   │   │   │
+         30.0 g       Cocoa, dry powder│   │   │   │   │   │   │   │   │   │   │   │   │
+    180.0 g                    oats│   │   │   │   │   │   │   │   │   │   │   │   │   │
+500.0 g           Milk semiskim│   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+───────────────────────────────┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼
+2274.0 kcal        Calories: 11│ 30│  3│   │  1│ 14│  1│  5│  5│ 11│   │   │   │ 10│  9│
+  73.8 g                Fat: 13│ 16│  6│   │  3│   │  1│ 10│ 19│ 30│   │   │   │  1│  1│
+  17.5 g     Saturated fats: 36│ 11│ 14│   │  1│   │   │ 13│ 11│ 11│   │   │   │  1│  1│
+ 300.0 mg       Cholesterol: 13│   │   │   │   │   │   │ 87│   │   │   │   │   │   │   │
+ 353.9 g              Carbs:  7│ 34│  5│   │   │ 21│  1│   │   │  2│   │   │   │ 15│ 15│
+ 104.8 g              Sugar: 24│  2│  1│   │   │  5│   │  1│   │  1│   │   │   │ 40│ 26│
+  50.2 g              Fiber:   │ 36│ 22│   │  2│ 14│  4│   │   │  7│   │   │   │  2│ 12│
+  80.7 g            Protein: 20│ 29│  7│  1│  1│  9│  3│ 11│   │ 11│   │   │   │  4│  3│
+1000.0 mg           Calcium: 60│  9│  4│   │  1│  3│  9│  3│   │  3│   │   │   │  6│  1│
+  22.0 mg              Iron:   │ 35│ 19│  1│  1│ 17│  6│  4│   │ 10│   │   │   │  5│  3│
+ 869.2 mg         Magnesium:  6│ 29│ 17│  1│  2│  9│  6│  1│   │ 16│   │   │   │  6│  7│
+2347.7 mg        Phosphorus: 20│ 31│  9│  1│  1│ 13│  1│  5│   │ 12│   │   │   │  4│  2│
+5609.7 mg         Potassium: 12│ 12│  8│   │  1│ 24│  4│  2│   │  5│   │   │   │ 18│ 14│
+ 500.0 mg            Sodium: 47│  2│  1│   │   │  5│ 10│ 17│   │  1│   │   │ 15│  1│   │
+  16.3 mg              Zinc: 15│ 40│ 13│  1│  1│  7│  2│  4│   │ 13│   │   │   │  2│  2│
+   4.2 mg            Copper:  1│ 17│ 27│   │  1│ 24│  2│   │   │ 18│   │   │   │  5│  4│
+  11.0 mg         Manganese:  1│ 59│ 10│  2│  1│  8│  4│   │   │  8│   │   │   │  1│  6│
+ 123.6 µg          Selenium: 10│ 42│  3│  1│  1│  1│  3│ 17│   │ 18│   │   │   │   │  2│
+ 320.3 mg             Vit C:   │   │   │   │   │ 14│  1│   │   │   │   │   │   │ 78│  6│
+   2.8 mg           Thiamin:  7│ 30│  1│  1│  3│ 13│  2│  2│   │ 23│   │   │   │ 16│  3│
+   2.4 mg        Riboflavin: 39│ 12│  3│   │   │  4│  6│ 15│   │  6│   │   │   │  6│  7│
+  16.0 mg            Niacin:  3│ 13│  4│  1│  1│ 32│  2│   │   │ 22│   │   │   │ 13│  9│
+   8.5 mg        Pant. acid: 21│ 24│  1│   │  1│ 16│  1│ 11│   │  6│   │   │   │ 11│  9│
+   3.3 mg            Vit B6:  6│  5│  1│  1│  1│ 31│  4│  3│   │ 17│   │   │   │  6│ 25│
+ 559.3 µg            Folate:  4│ 10│  2│  1│  1│  6│ 18│  5│   │ 17│   │   │   │ 27│  8│
+1004.4 mg           Choline:  8│  7│   │   │   │  4│  2│ 20│   │  2│ 50│   │   │  3│  2│
+   3.4 µg           Vit B12: 77│   │   │   │   │   │   │ 23│   │   │   │   │   │   │   │
+1502.7 µg             Vit A:  9│   │   │   │   │   │ 27│  7│   │   │   │ 53│   │  3│   │
+  21.6 mg             Vit E:  1│  3│   │  1│   │  1│  9│  3│  9│ 69│   │   │   │  1│  1│
+   6.5 µg             Vit D:   │   │   │   │   │   │   │ 23│   │   │   │ 77│   │   │   │
+ 276.0 µg             Vit K:   │  1│   │   │   │  2│ 92│   │  3│   │   │   │   │   │   │
+   1.6 g    A-Linoleic Acid:  2│ 11│   │  1│ 63│  2│  3│  2│  7│  2│   │   │   │  3│  4│
+  17.2 g      Linoleic Acid:  2│ 23│  1│  1│  2│  1│   │  5│  8│ 57│   │   │   │  1│  1│
+
+Weights of nutrients (in euros) and dual costs
+Calories          0.00128  2.91873
+Niacin            0.12776  2.04416
+Calcium           0.00190  1.89970
+Cholesterol       0.00130  0.39032
+Sodium            0.00000  0.00000
+A-Linoleic Acid  -0.01021 -0.01650
+Manganese        -0.02020 -0.22219
+Linoleic Acid    -0.06441 -1.10591
+
+Primal costs
+Salt                                          0.00000
+Wheat germ                                    0.01460
+Cod liver oil                                 0.03800
+Seeds, flaxseed                               0.04037
+Choline Bitartarte                            0.05340
+Olive oil                                     0.07053
+oats                                          0.14040
+Seeds, sunflower                              0.18728
+Potatoes, microwaved                          0.21600
+Spinach, frozen                               0.22708
+Cocoa, dry powder                             0.33870
+Milk semiskim                                 0.34000
+Bananas                                       0.45057
+Eggs, hard-boiled                             0.49491
+Orange juice                                  0.50000

@@ -1,0 +1,104 @@
+"Tahini"
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7.1 2017-03-29
+Full Report (All Nutrients)
+Report Run at: May 23, 2017 05:55 EDT
+"Nutrient data for: 12166, Seeds, sesame butter, tahini, from roasted and toasted kernels (most common type)"
+Food Group:  Nut and Seed Products
+Common Name:
+Carbohydrate Factor: 4.07 Fat Factor: 8.37 Protein Factor: 3.47 Nitrogen to Protein Conversion Factor: 5.3 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 tbsp = 15.0g","1 oz = 28.35g",
+Proximates
+"Water",g,3.05,2,--,0.46,0.86
+"Energy",kcal,595,--,--,89,169
+"Energy",kJ,2489,--,--,373,706
+"Protein",g,17.00,2,--,2.55,4.82
+"Total lipid (fat)",g,53.76,2,--,8.06,15.24
+"Ash",g,5.00,1,--,0.75,1.42
+"Carbohydrate, by difference",g,21.19,--,--,3.18,6.01
+"Fiber, total dietary",g,9.3,--,--,1.4,2.6
+"Sugars, total",g,0.49,--,--,0.07,0.14
+Minerals
+"Calcium, Ca",mg,426,--,--,64,121
+"Iron, Fe",mg,8.95,--,--,1.34,2.54
+"Magnesium, Mg",mg,95,1,--,14,27
+"Phosphorus, P",mg,732,--,--,110,208
+"Potassium, K",mg,414,--,--,62,117
+"Sodium, Na",mg,115,2,--,17,33
+"Zinc, Zn",mg,4.62,1,--,0.69,1.31
+"Copper, Cu",mg,1.610,1,--,0.242,0.456
+"Manganese, Mn",mg,1.456,--,--,0.218,0.413
+"Selenium, Se",µg,34.4,--,--,5.2,9.8
+Vitamins
+"Vitamin C, total ascorbic acid",mg,0.0,--,--,0.0,0.0
+"Thiamin",mg,1.220,--,--,0.183,0.346
+"Riboflavin",mg,0.473,--,--,0.071,0.134
+"Niacin",mg,5.450,--,--,0.818,1.545
+"Pantothenic acid",mg,0.693,--,--,0.104,0.196
+"Vitamin B-6",mg,0.149,--,--,0.022,0.042
+"Folate, total",µg,98,--,--,15,28
+"Folic acid",µg,0,--,--,0,0
+"Folate, food",µg,98,--,--,15,28
+"Folate, DFE",µg,98,--,--,15,28
+"Choline, total",mg,25.8,--,--,3.9,7.3
+"Vitamin B-12",µg,0.00,--,--,0.00,0.00
+"Vitamin B-12, added",µg,0.00,--,--,0.00,0.00
+"Vitamin A, RAE",µg,3,--,--,0,1
+"Retinol",µg,0,--,--,0,0
+"Carotene, beta",µg,40,--,--,6,11
+"Carotene, alpha",µg,0,--,--,0,0
+"Cryptoxanthin, beta",µg,0,--,--,0,0
+"Vitamin A, IU",IU,67,--,--,10,19
+"Lycopene",µg,0,--,--,0,0
+"Lutein + zeaxanthin",µg,0,--,--,0,0
+"Vitamin E (alpha-tocopherol)",mg,0.25,--,--,0.04,0.07
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00
+"Vitamin D (D2 + D3)",µg,0.0,--,--,0.0,0.0
+"Vitamin D",IU,0,--,--,0,0
+"Vitamin K (phylloquinone)",µg,0.0,--,--,0.0,0.0
+Lipids
+"Fatty acids, total saturated",g,7.529,--,--,1.129,2.134
+"4:0",g,0.000,--,--,0.000,0.000
+"6:0",g,0.000,--,--,0.000,0.000
+"8:0",g,0.000,--,--,0.000,0.000
+"10:0",g,0.000,--,--,0.000,0.000
+"12:0",g,0.000,--,--,0.000,0.000
+"14:0",g,0.134,--,--,0.020,0.038
+"16:0",g,4.807,--,--,0.721,1.363
+"18:0",g,2.262,--,--,0.339,0.641
+"Fatty acids, total monounsaturated",g,20.302,--,--,3.045,5.756
+"16:1 undifferentiated",g,0.161,--,--,0.024,0.046
+"18:1 undifferentiated",g,20.045,--,--,3.007,5.683
+"20:1",g,0.075,--,--,0.011,0.021
+"22:1 undifferentiated",g,0.000,--,--,0.000,0.000
+"Fatty acids, total polyunsaturated",g,23.564,--,--,3.535,6.680
+"18:2 undifferentiated",g,23.133,--,--,3.470,6.558
+"18:3 undifferentiated",g,0.407,--,--,0.061,0.115
+"18:4",g,0.000,--,--,0.000,0.000
+"20:4 undifferentiated",g,0.000,--,--,0.000,0.000
+"20:5 n-3 (EPA)",g,0.000,--,--,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,--,--,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,--,--,0.000,0.000
+"Cholesterol",mg,0,--,--,0,0
+Amino Acids
+"Tryptophan",g,0.372,--,--,0.056,0.105
+"Threonine",g,0.706,--,--,0.106,0.200
+"Isoleucine",g,0.731,--,--,0.110,0.207
+"Leucine",g,1.302,--,--,0.195,0.369
+"Lysine",g,0.545,--,--,0.082,0.155
+"Methionine",g,0.561,--,--,0.084,0.159
+"Cystine",g,0.343,--,--,0.051,0.097
+"Phenylalanine",g,0.901,--,--,0.135,0.255
+"Tyrosine",g,0.712,--,--,0.107,0.202
+"Valine",g,0.950,--,--,0.142,0.269
+"Arginine",g,2.521,--,--,0.378,0.715
+"Histidine",g,0.500,--,--,0.075,0.142
+"Alanine",g,0.889,--,--,0.133,0.252
+"Aspartic acid",g,1.578,--,--,0.237,0.447
+"Glutamic acid",g,3.792,--,--,0.569,1.075
+"Glycine",g,1.165,--,--,0.175,0.330
+"Proline",g,0.776,--,--,0.116,0.220
+"Serine",g,0.927,--,--,0.139,0.263
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0
+"Caffeine",mg,0,--,--,0,0
+"Theobromine",mg,0,--,--,0,0
