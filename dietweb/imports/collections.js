@@ -1,6 +1,8 @@
 import { Mongo } from 'meteor/mongo';
 
 export const Foods = new Mongo.Collection('foods');
+// export const Preferences = new Mongo.Collection('preferences');
+// export const Profiles = new Mongo.Collection('profiles');
 
 import { FilesCollection } from 'meteor/ostrio:files';
 

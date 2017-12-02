@@ -43,6 +43,10 @@ updatePreferencesMax(idx,val) {
   let preferences = this.state.preferences;
   this.setState({preferences: preferences.map((x,i) => {if (i===idx) {x.max = val;} return x})})
 }
+updatePreferencesPrice(idx,val) {
+  let preferences = this.state.preferences;
+  this.setState({preferences: preferences.map((x,i) => {if (i===idx) {x.price = val;} return x})})
+}
 writePreferences() {
   let thisComp = this;
   Meteor.call('writePreferences', [thisComp.state.preferences], (err, res) => {
@@ -88,7 +92,9 @@ render() {
               },
               arrowDown: {
                   borderTopColor: 'rgba(40, 66, 54, 0.63)'
-              }}}/>
+              }}}
+              onChange={(val)=>{
+                  thisComp.updatePreferencesPrice(i,val)}}/>
           <br/>
           <PreferenceChooser name={"Min"} pref={x.min} update={(val)=>{
             thisComp.updatePreferencesMin(i,val)}}/>

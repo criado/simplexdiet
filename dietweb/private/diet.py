@@ -1,6 +1,7 @@
 import csv
 import cvxopt as cv
 import numpy as np
+import sys
 
 class NutrientRequirements:
     def __init__(self, line):
@@ -74,11 +75,14 @@ def optimizeDiet(profile, foods):
     return (x['primal objective'], x['x'], x['z'], equations)
 
 def main():
-    with open('assets/app/guille_profile.csv', 'r') as file_profile:
+
+    (profFile, prefFile) = [x for x in sys.argv[1:]]
+
+    with open(profFile, 'r') as file_profile:
         profile= [NutrientRequirements(line)
                   for line in csv.reader(file_profile, skipinitialspace=True)]
 
-    with open('assets/app/guille_preferences.csv', 'r') as file_preferences:
+    with open(prefFile, 'r') as file_preferences:
         foods= [Food(line, profile)
                 for line in csv.reader(file_preferences, skipinitialspace=True)]
 

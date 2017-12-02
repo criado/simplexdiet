@@ -112,8 +112,10 @@ Meteor.methods({
     calculate_diet() {
       var future=new Future();
       // this.unblock();
+      let prefFileName = serverroot+"preferences_"+Meteor.userId()+".csv";
+      let profFileName = serverroot+"profile_"+Meteor.userId()+".csv";
       let dietFileName = "diet_"+Meteor.userId()+".txt";
-      let command = "python3 "+serverroot+"diet.py > "+serverroot+dietFileName
+      let command = "python3 "+serverroot+"diet.py "+profFileName+" "+prefFileName+"> "+serverroot+dietFileName;
       if (!fs.existsSync(serverroot+dietFileName)) {
 
         console.log(command);
@@ -122,7 +124,6 @@ Meteor.methods({
             console.log(error);
             throw new Meteor.Error(500,command+" failed");
           } else {
-            // console.log("hi");
             let res = fs.readFileSync(serverroot+dietFileName).toString().split('\n');
             if (res[4] === "LP HAS NO PRIMAL FEASIBLE SOLUTION") {
               future.throw(new Meteor.Error(666,"LP HAS NO PRIMAL FEASIBLE SOLUTION"))
