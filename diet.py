@@ -1,12 +1,14 @@
 import csv
+import sys
 import cvxopt as cv
 import numpy as np
+import pandas as pd
 
 class NutrientRequirements:
     def __init__(self, line):
-        self.name, self.unit, self.pattern= line[0:3]
-        self.lower = float(line[3]) if line[3]!="None" else 0.0
-        self.upper = float(line[4]) if line[4]!="None" else None
+        self.id, self.name, self.unit, self.pattern= line[0:4]
+        self.lower = float(line[4]) if line[4]!="None" else 0.0
+        self.upper = float(line[5]) if line[5]!="None" else None
 
 class Food:
     def __init__(self, line, profile):
@@ -53,13 +55,8 @@ def optimizeDiet(profile, foods):
     global c,G,h
     # We will minimize c'x subject to Gx<=h. Read the docs of cv.solvers.lp
 
-<<<<<<< HEAD
     foods+=Food.dummyFoods(profile)
 
-=======
-    # foods+=Food.dummyFoods(profile)
-    print([f.cost for f in foods])
->>>>>>> d2238ac0270e6af21dbc4b7c42378e2bd06a0bfd
     c= np.array([f.cost for f in foods])
     equations= ([n.name + "<=" + str(n.upper) for n in profile if n.upper is not None] +
                 [n.name + ">=" + str(n.lower) for n in profile if n.lower is not None] +
@@ -109,49 +106,47 @@ def prettyPrint(price, x, z, eq, profile, foods):
                 [np.zeros(len(profile)) for f in foods])
     z= np.array(z)
     weights= list(np.dot(A.transpose(), -z)[:,0])
-    duals= sorted([(profile[i].name, weights[i], weights[i]*totals[i]) for i in range(len(profile)) if weights[i]!=0.0], key= lambda x: -x[2])
+    duals= sorted([(profile[i], weights[i], weights[i]*totals[i]) for i in range(len(profile)) if weights[i]!=0.0], key= lambda x: -x[2])
 
     for (a,b,c) in duals:
-        print(a.ljust(len1),("%6.5f"%b).rjust(8), ("%6.5f"%c).rjust(8))
+        print(a.name.ljust(len1),("%6.5f"%b).rjust(8), ("%6.5f"%c).rjust(8))
+
+    d=pd.read_csv("foods/food_database.csv")
+    d["dualcost"]= sum(d[a.id]*b for (a,b,c) in duals)
+    pd.set_option('display.max_rows', len(d))
+    print(d.dropna(subset=['dualcost']).sort_values("dualcost",ascending=False)[["Shrt_Desc", "dualcost"]][:100])
+    pd.reset_option('display.max_rows')
 
     #duals=sorted([(eq[i],z[i]*h[i], z[i]) for i in range(len(eq)) if z[i]*h[i]!=0],key=lambda x: x[1])
 
     print("")
     print("Primal costs")
     primals=sorted([(foods2[i].cost*x2[i], x2[i], foods2[i].name) for i in range(len(foods2))])
+
+
     for (a,b,c) in primals:
         print(c.ljust(45), "%6.5f"%a)
 
 price, x, z, eq=(0,0,0,0)
-def main():
-<<<<<<< HEAD
+def main(argv):
     global price, x, z, eq
-    with open('paco_profile.csv', 'r') as file_profile:
-=======
-    with open('guille_profile.csv', 'r') as file_profile:
->>>>>>> d2238ac0270e6af21dbc4b7c42378e2bd06a0bfd
+    with open(argv[1]+'_profile.csv', 'r') as file_profile:
         profile= [NutrientRequirements(line)
                   for line in csv.reader(file_profile, skipinitialspace=True)]
 
-    with open('paco_preferences.csv', 'r') as file_preferences:
+    with open(argv[1]+'_preferences.csv', 'r') as file_preferences:
         foods= [Food(line, profile)
                 for line in csv.reader(file_preferences, skipinitialspace=True)]
 
     price, x, z, eq= optimizeDiet(profile, foods)
     print("price", price)
     try:
-<<<<<<< HEAD
-        prettyPrint(price,x,z,eq, profile, foods)
+       prettyPrint(price,x,z,eq, profile, foods)
        # for i, food in enumerate(foods):
        #     if (x[i] > 1e-5):
        #         print("%.2f" % x[i], food.name )
-=======
-        for i, food in enumerate(foods):
-            if (x[i] > 1e-5):
-                print("ing_amount,%.2f" % x[i], "," ,food.name )
->>>>>>> d2238ac0270e6af21dbc4b7c42378e2bd06a0bfd
     except:
         print('no solution found')
 
 if __name__=="__main__":
-    main()
+    main(sys.argv)

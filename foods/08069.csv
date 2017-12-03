@@ -1,0 +1,147 @@
+"Frosties"
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.4 2017-10-02
+Full Report (All Nutrients)
+Report Run at: December 03, 2017 05:56 EST
+"Nutrient data for: 08069, Cereals ready-to-eat, KELLOGG, KELLOGG'S FROSTED FLAKES"
+Food Group:  Breakfast Cereals
+Common Name:
+Nitrogen to Protein Conversion Factor: 6.25 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"0.75 cup ( 1 NLEA serving) = 30.0g","1 cup = 42.0g",
+Proximates
+"Water",g,4.18,6,0.095,1.25,1.76
+"Energy",kcal,369,--,--,111,155
+"Energy",kJ,1544,--,--,463,648
+"Protein",g,3.96,6,0.060,1.19,1.66
+"Total lipid (fat)",g,1.68,6,0.350,0.50,0.71
+"Ash",g,0.98,6,0.064,0.29,0.41
+"Carbohydrate, by difference",g,89.20,--,--,26.76,37.46
+"Fiber, total dietary",g,2.2,2,--,0.7,0.9
+"Sugars, total",g,35.43,3,0.328,10.63,14.88
+"Sucrose",g,31.33,3,0.467,9.40,13.16
+"Glucose (dextrose)",g,1.80,3,0.058,0.54,0.76
+"Fructose",g,1.67,3,0.088,0.50,0.70
+"Lactose",g,0.00,3,0.000,0.00,0.00
+"Maltose",g,0.63,3,0.067,0.19,0.26
+"Galactose",g,0.00,3,0.000,0.00,0.00
+"Starch",g,46.10,3,0.252,13.83,19.36
+Minerals
+"Calcium, Ca",mg,3,6,0.184,1,1
+"Iron, Fe",mg,26.70,6,0.378,8.01,11.21
+"Magnesium, Mg",mg,8,6,0.122,2,3
+"Phosphorus, P",mg,47,6,0.556,14,20
+"Potassium, K",mg,76,6,4.449,23,32
+"Sodium, Na",mg,468,6,12.476,140,197
+"Zinc, Zn",mg,0.15,6,0.002,0.04,0.06
+"Copper, Cu",mg,0.039,6,0.001,0.012,0.016
+"Manganese, Mn",mg,0.055,6,0.001,0.017,0.023
+"Selenium, Se",µg,3.3,3,1.095,1.0,1.4
+Vitamins
+"Vitamin C, total ascorbic acid",mg,24.2,1,--,7.3,10.2
+"Thiamin",mg,1.903,1,--,0.571,0.799
+"Riboflavin",mg,1.730,1,--,0.519,0.727
+"Niacin",mg,27.667,1,--,8.300,11.620
+"Pantothenic acid",mg,0.215,4,0.006,0.065,0.090
+"Vitamin B-6",mg,3.573,1,--,1.072,1.501
+"Folate, total",µg,382,--,--,115,160
+"Folic acid",µg,362,4,7.857,109,152
+"Folate, food",µg,19,--,--,6,8
+"Folate, DFE",µg,635,--,--,190,267
+"Choline, total",mg,1.9,--,--,0.6,0.8
+"Betaine",mg,1.8,1,--,0.5,0.8
+"Vitamin B-12",µg,8.10,1,--,2.43,3.40
+"Vitamin B-12, added",µg,8.10,--,--,2.43,3.40
+"Vitamin A, RAE",µg,450,1,--,135,189
+"Retinol",µg,446,1,--,134,187
+"Carotene, beta",µg,21,1,--,6,9
+"Carotene, alpha",µg,5,1,--,2,2
+"Cryptoxanthin, beta",µg,40,1,--,12,17
+"Vitamin A, IU",IU,1559,1,--,468,655
+"Lycopene",µg,0,1,--,0,0
+"Lutein + zeaxanthin",µg,676,1,--,203,284
+"Vitamin E (alpha-tocopherol)",mg,0.07,1,--,0.02,0.03
+"Vitamin E, added",mg,0.00,--,--,0.00,0.00
+"Tocopherol, beta",mg,0.00,1,--,0.00,0.00
+"Tocopherol, gamma",mg,0.69,1,--,0.21,0.29
+"Tocopherol, delta",mg,0.00,1,--,0.00,0.00
+"Vitamin D (D2 + D3)",µg,4.7,12,--,1.4,2.0
+"Vitamin D2 (ergocalciferol)",µg,0.0,6,0.000,0.0,0.0
+"Vitamin D3 (cholecalciferol)",µg,4.7,6,0.209,1.4,2.0
+"Vitamin D",IU,188,6,8.371,56,79
+"Vitamin K (phylloquinone)",µg,0.2,--,--,0.1,0.1
+Lipids
+"Fatty acids, total saturated",g,0.451,--,--,0.135,0.189
+"4:0",g,0.000,--,--,0.000,0.000
+"6:0",g,0.000,1,--,0.000,0.000
+"8:0",g,0.065,1,--,0.020,0.027
+"10:0",g,0.056,1,--,0.017,0.024
+"12:0",g,0.000,1,--,0.000,0.000
+"14:0",g,0.008,1,--,0.002,0.003
+"16:0",g,0.226,1,--,0.068,0.095
+"18:0",g,0.072,1,--,0.022,0.030
+"20:0",g,0.008,1,--,0.002,0.003
+"22:0",g,0.008,1,--,0.002,0.003
+"24:0",g,0.000,1,--,0.000,0.000
+"Fatty acids, total monounsaturated",g,0.265,--,--,0.080,0.111
+"14:1",g,0.000,1,--,0.000,0.000
+"15:1",g,0.000,1,--,0.000,0.000
+"16:1 undifferentiated",g,0.000,--,--,0.000,0.000
+"16:1 c",g,0.000,1,--,0.000,0.000
+"16:1 t",g,0.000,1,--,0.000,0.000
+"17:1",g,0.000,1,--,0.000,0.000
+"18:1 undifferentiated",g,0.265,--,--,0.080,0.111
+"18:1 c",g,0.265,1,--,0.080,0.111
+"18:1 t",g,0.000,1,--,0.000,0.000
+"20:1",g,0.000,1,--,0.000,0.000
+"22:1 undifferentiated",g,0.000,--,--,0.000,0.000
+"22:1 c",g,0.000,1,--,0.000,0.000
+"22:1 t",g,0.000,1,--,0.000,0.000
+"24:1 c",g,0.000,1,--,0.000,0.000
+"Fatty acids, total polyunsaturated",g,0.669,--,--,0.201,0.281
+"18:2 undifferentiated",g,0.629,--,--,0.189,0.264
+"18:2 n-6 c,c",g,0.629,1,--,0.189,0.264
+"18:2 CLAs",g,0.000,1,--,0.000,0.000
+"18:2 t not further defined",g,0.000,1,--,0.000,0.000
+"18:3 undifferentiated",g,0.032,--,--,0.010,0.013
+"18:3 n-3 c,c,c (ALA)",g,0.032,1,--,0.010,0.013
+"18:3 n-6 c,c,c",g,0.000,1,--,0.000,0.000
+"18:4",g,0.000,1,--,0.000,0.000
+"20:2 n-6 c,c",g,0.000,1,--,0.000,0.000
+"20:3 undifferentiated",g,0.000,--,--,0.000,0.000
+"20:3 n-6",g,0.000,1,--,0.000,0.000
+"20:4 undifferentiated",g,0.000,1,--,0.000,0.000
+"20:5 n-3 (EPA)",g,0.008,1,--,0.002,0.003
+"22:4",g,0.000,1,--,0.000,0.000
+"22:5 n-3 (DPA)",g,0.000,1,--,0.000,0.000
+"22:6 n-3 (DHA)",g,0.000,1,--,0.000,0.000
+"Fatty acids, total trans",g,0.000,--,--,0.000,0.000
+"Fatty acids, total trans-monoenoic",g,0.000,--,--,0.000,0.000
+"Cholesterol",mg,0,--,--,0,0
+Amino Acids
+"Tryptophan",g,0.028,--,--,0.008,0.012
+"Threonine",g,0.130,--,--,0.039,0.055
+"Isoleucine",g,0.149,--,--,0.045,0.063
+"Leucine",g,0.633,--,--,0.190,0.266
+"Lysine",g,0.028,--,--,0.008,0.012
+"Methionine",g,0.065,--,--,0.020,0.027
+"Cystine",g,0.065,--,--,0.020,0.027
+"Phenylalanine",g,0.223,--,--,0.067,0.094
+"Tyrosine",g,0.093,--,--,0.028,0.039
+"Valine",g,0.195,--,--,0.059,0.082
+"Arginine",g,0.084,--,--,0.025,0.035
+"Histidine",g,0.112,--,--,0.034,0.047
+"Alanine",g,0.354,--,--,0.106,0.149
+"Aspartic acid",g,0.242,--,--,0.073,0.102
+"Glutamic acid",g,0.931,--,--,0.279,0.391
+"Glycine",g,0.121,--,--,0.036,0.051
+"Proline",g,0.289,--,--,0.087,0.121
+"Serine",g,0.195,--,--,0.059,0.082
+Other
+"Alcohol, ethyl",g,0.0,--,--,0.0,0.0
+"Caffeine",mg,0,--,--,0,0
+"Theobromine",mg,0,--,--,0,0
+
+
+Sources of Data
+1,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 15h",2011,,BeltsvilleMD
+2,"Kellogg, Co.","Kellogg Company Products",2012,,MD
+3,"Nutrient Data Laboratory, ARS, USDA","National Food and Nutrient Analysis Program Wave 10i",2006,,BeltsvilleMD

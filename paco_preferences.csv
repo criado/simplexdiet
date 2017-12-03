@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 01174, 0.068, None, 5
 08120, 0.078, 0.9, 1.8
 19165, 1.129, 0.3, None
@@ -6,14 +5,14 @@
 12220, 0.9, None, None
 11675, 0.072, None, 3
 11463, 0.332, None, None
-11813, 0.2, None, 0
+11813, 0.2, None, None
 01129, 0.71, 0.5, 1
 04053, 0.5, None, None
 12036, 0.438, None, None
 "choline_bitartrate", 0.0534, 1, None
 "cod_liver_oil", 0.038, 1, None
 salt, 0.0001, None, None
-16359, 0.125, None, 0.0
+16359, 0.125, None, None
 09206, 0.1, None, 5
 09040, 0.2, None, 2.5
 09152, 0.67, None, None
@@ -22,3 +21,4 @@ salt, 0.0001, None, None
 16058, 0.3, None, None
 zinc, 0.02, None, None
 calories, 0.0417, None, None
+08069, 0.65, None, None
