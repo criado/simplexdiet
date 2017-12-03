@@ -53,13 +53,8 @@ def optimizeDiet(profile, foods):
     global c,G,h
     # We will minimize c'x subject to Gx<=h. Read the docs of cv.solvers.lp
 
-<<<<<<< HEAD
     foods+=Food.dummyFoods(profile)
 
-=======
-    # foods+=Food.dummyFoods(profile)
-    print([f.cost for f in foods])
->>>>>>> d2238ac0270e6af21dbc4b7c42378e2bd06a0bfd
     c= np.array([f.cost for f in foods])
     equations= ([n.name + "<=" + str(n.upper) for n in profile if n.upper is not None] +
                 [n.name + ">=" + str(n.lower) for n in profile if n.lower is not None] +
@@ -124,12 +119,8 @@ def prettyPrint(price, x, z, eq, profile, foods):
 
 price, x, z, eq=(0,0,0,0)
 def main():
-<<<<<<< HEAD
     global price, x, z, eq
     with open('paco_profile.csv', 'r') as file_profile:
-=======
-    with open('guille_profile.csv', 'r') as file_profile:
->>>>>>> d2238ac0270e6af21dbc4b7c42378e2bd06a0bfd
         profile= [NutrientRequirements(line)
                   for line in csv.reader(file_profile, skipinitialspace=True)]
 
@@ -140,16 +131,10 @@ def main():
     price, x, z, eq= optimizeDiet(profile, foods)
     print("price", price)
     try:
-<<<<<<< HEAD
         prettyPrint(price,x,z,eq, profile, foods)
        # for i, food in enumerate(foods):
        #     if (x[i] > 1e-5):
        #         print("%.2f" % x[i], food.name )
-=======
-        for i, food in enumerate(foods):
-            if (x[i] > 1e-5):
-                print("ing_amount,%.2f" % x[i], "," ,food.name )
->>>>>>> d2238ac0270e6af21dbc4b7c42378e2bd06a0bfd
     except:
         print('no solution found')
 

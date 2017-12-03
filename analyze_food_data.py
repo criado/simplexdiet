@@ -20,3 +20,5 @@ d.dropna(subset=['dualcost']).sort_values("dualcost",ascending=False)[["Shrt_Des
 [d.loc[8734][x]/np.mean(d[x]) for x in codes]
 
 d.loc[8734]["307"]/np.mean(d["307"])
+
+d[d["Shrt_Desc"].str.contains("CAVIAR")]
