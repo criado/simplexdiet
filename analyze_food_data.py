@@ -15,7 +15,9 @@ codes = ["208","406","301","601","307","619","315","618"]
 
 d["dualcost"]=d["208"]*0.00128+d["406"]*0.12776+d["301"]*0.00190+d["601"]*0.00130+d["307"]*0.00000+d["619"]*(-0.01021)+d["315"]*(-0.02020)+d["618"]*(-0.06441)
 
-d.dropna(subset=['dualcost']).sort_values("dualcost",ascending=False)[["Shrt_Desc", "dualcost"]]
+pd.set_option('display.max_rows', len(d))
+print(d.dropna(subset=['dualcost']).sort_values("dualcost",ascending=False)[["Shrt_Desc", "dualcost"]][:100])
+pd.reset_option('display.max_rows')
 
 [d.loc[8734][x]/np.mean(d[x]) for x in codes]
 
