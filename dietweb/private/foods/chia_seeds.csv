@@ -1,0 +1,91 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.5 2018-02-04
+Full Report (All Nutrients)
+Report Run at: March 10, 2018 08:43 EST
+"Nutrient data for: 12006, Seeds, chia seeds, dried"
+Food Group:  Nut and Seed Products
+Common Name:
+Carbohydrate Factor: 4.07 Fat Factor: 8.37 Protein Factor: 3.47 Nitrogen to Protein Conversion Factor: 5.3 
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 oz = 28.35g",
+Proximates
+"Water",g,5.80,1,--,1.64
+"Energy",kcal,486,--,--,138
+"Energy",kJ,2034,--,--,577
+"Protein",g,16.54,21,1.238,4.69
+"Total lipid (fat)",g,30.74,24,0.786,8.71
+"Ash",g,4.80,1,--,1.36
+"Carbohydrate, by difference",g,42.12,--,--,11.94
+"Fiber, total dietary",g,34.4,2,--,9.8
+Minerals
+"Calcium, Ca",mg,631,2,--,179
+"Iron, Fe",mg,7.72,2,--,2.19
+"Magnesium, Mg",mg,335,2,--,95
+"Phosphorus, P",mg,860,4,93.335,244
+"Potassium, K",mg,407,3,246.430,115
+"Sodium, Na",mg,16,3,3.020,5
+"Zinc, Zn",mg,4.58,3,1.097,1.30
+"Copper, Cu",mg,0.924,3,0.736,0.262
+"Manganese, Mn",mg,2.723,3,0.557,0.772
+"Selenium, Se",µg,55.2,2,--,15.6
+Vitamins
+"Vitamin C, total ascorbic acid",mg,1.6,2,--,0.5
+"Thiamin",mg,0.620,2,--,0.176
+"Riboflavin",mg,0.170,2,--,0.048
+"Niacin",mg,8.830,2,--,2.503
+"Folate, total",µg,49,2,--,14
+"Folate, food",µg,49,2,--,14
+"Vitamin B-12",µg,0.00,--,--,0.00
+"Vitamin A, IU",IU,54,2,--,15
+"Vitamin E (alpha-tocopherol)",mg,0.50,1,--,0.14
+Lipids
+"Fatty acids, total saturated",g,3.330,--,--,0.944
+"14:0",g,0.030,1,--,0.009
+"15:0",g,0.030,1,--,0.009
+"16:0",g,2.170,24,0.079,0.615
+"17:0",g,0.063,1,--,0.018
+"18:0",g,0.912,24,0.031,0.259
+"20:0",g,0.093,2,--,0.026
+"22:0",g,0.032,1,--,0.009
+"Fatty acids, total monounsaturated",g,2.309,--,--,0.655
+"14:1",g,0.030,1,--,0.009
+"16:1 undifferentiated",g,0.029,9,0.002,0.008
+"17:1",g,0.000,1,--,0.000
+"18:1 undifferentiated",g,2.203,23,0.122,0.625
+"20:1",g,0.046,2,--,0.013
+"Fatty acids, total polyunsaturated",g,23.665,--,--,6.709
+"18:2 undifferentiated",g,5.835,24,0.283,1.654
+"18:2 n-6 c,c",g,5.835,2,--,1.654
+"18:3 undifferentiated",g,17.830,24,0.722,5.055
+"18:3 n-3 c,c,c (ALA)",g,17.830,2,--,5.055
+"Fatty acids, total trans",g,0.140,2,--,0.040
+"Cholesterol",mg,0,--,--,0
+Amino Acids
+"Tryptophan",g,0.436,--,--,0.124
+"Threonine",g,0.709,--,--,0.201
+"Isoleucine",g,0.801,--,--,0.227
+"Leucine",g,1.371,--,--,0.389
+"Lysine",g,0.970,--,--,0.275
+"Methionine",g,0.588,--,--,0.167
+"Cystine",g,0.407,--,--,0.115
+"Phenylalanine",g,1.016,--,--,0.288
+"Tyrosine",g,0.563,--,--,0.160
+"Valine",g,0.950,--,--,0.269
+"Arginine",g,2.143,--,--,0.608
+"Histidine",g,0.531,--,--,0.151
+"Alanine",g,1.044,--,--,0.296
+"Aspartic acid",g,1.689,--,--,0.479
+"Glutamic acid",g,3.500,--,--,0.992
+"Glycine",g,0.943,--,--,0.267
+"Proline",g,0.776,--,--,0.220
+"Serine",g,1.049,--,--,0.297
+Other
+
+
+Sources of Data
+1,"R. Ayerza, Wayne Coates","An omega-3 fatty acid enriched chia diet: Influence on egg fatty acid composition, cholesterol and oil content",1999,Canadian Journal of Animal Science,79 pp. 53-53
+2,"R. Ayerza, Wayne Coates","Some quality components of four chia (Salvia hispanica L.) genotypes grown under tropical coastal desert ecosystem conditions",2009,Asian J Plant Sci,84 pp. 301-301
+3,"R. Ayerza, Wayne Coates","Influence of environment on growing period and yield, protein, oil and a-linolenic content of three chia (Salvia hispanica L.) selections",2009,Industrial Crops and Products,304 pp. 321-321
+4,"R. Ayerza, Wayne Coates","Composition of chia (Salvia hispanica) grown in six tropical and subtropical ecosystems of South America",2004,Tropical Science,444 pp. 131-131
+5,"Ministry of Public Health","Analysis of Salvia hispanica chia seed",2003,,4 pp. 131-131
+6,"B. Heuer","Effect of late salinization of chia (Salvia hispanica), stock (Matthiola tricuspidata) and evening primrose (Oenothera biennis) on their oil content and quality",2002,Industrial Crops and Products,154 pp. 163-163
+7,"R. Ayerza, Wayne Coates","Seed yield, oil content and fatty acid composition of three botanical sources of +-3 fatty acid planted in the Yungas ecosystem of tropical Argentina",2008,Tropical Science,474 pp. 183-183
+8,"AZChia","Personal communication with Wayne Coates, PhD of AZChia, professor emeritus at U Arizona",2011,,4 pp. 183-183

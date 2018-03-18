@@ -1,0 +1,68 @@
+Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.4 2017-10-02
+Full Report (All Nutrients)
+Report Run at: December 03, 2017 17:02 EST
+"Nutrient data for: 04589, Fish oil, cod liver"
+Food Group:  Fats and Oils
+Common Name:
+Fat Factor: 9.02
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 tsp = 4.5g","1 tbsp = 13.6g","1 cup = 218.0g",
+Proximates
+"Water",g,0.00,1,--,0.00,0.00,0.00
+"Energy",kcal,902,--,--,41,123,1966
+"Energy",kJ,3774,--,--,170,513,8227
+"Protein",g,0.00,1,--,0.00,0.00,0.00
+"Total lipid (fat)",g,100.00,1,--,4.50,13.60,218.00
+"Ash",g,0.00,1,--,0.00,0.00,0.00
+"Carbohydrate, by difference",g,0.00,--,--,0.00,0.00,0.00
+"Sugars, total",g,0.0
+"Thiamin",mg,0.0
+"Choline, total",mg,0.0
+"Fiber, total dietary",g,0.0,--,--,0.0,0.0,0.0
+Minerals
+"Calcium, Ca",mg,0,--,--,0,0,0
+"Iron, Fe",mg,0.00,--,--,0.00,0.00,0.00
+"Magnesium, Mg",mg,0,--,--,0,0,0
+"Phosphorus, P",mg,0,--,--,0,0,0
+"Potassium, K",mg,0,--,--,0,0,0
+"Sodium, Na",mg,0,--,--,0,0,0
+"Zinc, Zn",mg,0.00,--,--,0.00,0.00,0.00
+"Copper, Cu",mg,0.000,--,--,0.000,0.000,0.000
+"Manganese, Mn",mg,0.000,--,--,0.000,0.000,0.000
+"Selenium, Se",�g,0.0,--,--,0.0,0.0,0.0
+Vitamins
+"Vitamin C, total ascorbic acid",mg,0.0,--,--,0.0,0.0,0.0
+"Riboflavin",mg,0.000,--,--,0.000,0.000,0.000
+"Niacin",mg,0.000,--,--,0.000,0.000,0.000
+"Pantothenic acid",mg,0.000,--,--,0.000,0.000,0.000
+"Vitamin B-6",mg,0.000,--,--,0.000,0.000,0.000
+"Folate, total",�g,0,--,--,0,0,0
+"Folic acid",�g,0,--,--,0,0,0
+"Folate, food",�g,0,--,--,0,0,0
+"Folate, DFE",�g,0,--,--,0,0,0
+"Vitamin B-12",�g,0.00,--,--,0.00,0.00,0.00
+"Vitamin A, RAE",�g,30000,1,--,1350,4080,65400
+"Retinol",�g,30000,1,--,1350,4080,65400
+"Vitamin A, IU",IU,100000,1,--,4500,13600,218000
+"Vitamin D (D2 + D3)",�g,250.0,--,--,11.2,34.0,545.0
+"Vitamin D",IU,10000,--,--,450,1360,21800
+Lipids
+"Fatty acids, total saturated",g,22.608,--,--,1.017,3.075,49.285
+"14:0",g,3.568,2,--,0.161,0.485,7.778
+"16:0",g,10.630,2,--,0.478,1.446,23.173
+"18:0",g,2.799,2,--,0.126,0.381,6.102
+"Fatty acids, total monounsaturated",g,46.711,--,--,2.102,6.353,101.830
+"16:1 undifferentiated",g,8.309,2,--,0.374,1.130,18.114
+"18:1 undifferentiated",g,20.653,2,--,0.929,2.809,45.024
+"20:1",g,10.422,2,--,0.469,1.417,22.720
+"22:1 undifferentiated",g,7.328,2,--,0.330,0.997,15.975
+"Fatty acids, total polyunsaturated",g,22.541,--,--,1.014,3.066,49.139
+"18:2 undifferentiated",g,0.935,2,--,0.042,0.127,2.038
+"18:3 undifferentiated",g,0.935,2,--,0.042,0.127,2.038
+"18:4",g,0.935,2,--,0.042,0.127,2.038
+"20:4 undifferentiated",g,0.935,2,--,0.042,0.127,2.038
+"20:5 n-3 (EPA)",g,6.898,2,--,0.310,0.938,15.038
+"22:5 n-3 (DPA)",g,0.935,2,--,0.042,0.127,2.038
+"22:6 n-3 (DHA)",g,10.968,2,--,0.494,1.492,23.910
+"Cholesterol",mg,570,1,--,26,78,1243
+Amino Acids
+Other

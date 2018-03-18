@@ -18,7 +18,6 @@ class Food:
         self.cost    = float(line[1])
         self.lower   = float(line[2]) if line[2]!="None" else 0.0
         self.upper   = float(line[3]) if line[3]!="None" else 100.0 #hardcoded upper limit
-
         with open('./foods/'+self.usda_id+'.csv', encoding='latin1') as file_food:
             csvlines= [l for l in csv.reader(file_food)]
             self.name=csvlines[0][0]
@@ -55,7 +54,7 @@ def optimizeDiet(profile, foods):
     global c,G,h
     # We will minimize c'x subject to Gx<=h. Read the docs of cv.solvers.lp
 
-    foods+=Food.dummyFoods(profile)
+    # foods+=Food.dummyFoods(profile)
 
     c= np.array([f.cost for f in foods])
     equations= ([n.name + "<=" + str(n.upper) for n in profile if n.upper is not None] +

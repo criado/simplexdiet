@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-import { Foods } from '../imports/collections.js';
+// import { Foods } from '../imports/collections.js';
 
 import csv from 'fast-csv';
 

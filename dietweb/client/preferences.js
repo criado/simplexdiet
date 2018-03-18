@@ -5,34 +5,45 @@ import { createContainer } from 'meteor/react-meteor-data';
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
 
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+// import Select from 'react-select';
+// import 'react-select/dist/react-select.css';
+
+import 'react-select/dist/react-select.css'
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
+
+// Then import the virtualized Select HOC
+import VirtualizedSelect from 'react-virtualized-select'
 
 import NumericInput from 'react-numeric-input';
 
 import { Foods, FoodFiles } from '../imports/collections.js';
 
-class Preferences extends React.Component {
+export default class Preferences extends React.Component {
 constructor(props) {
   super(props);
   // let foodList = Foods.find({}).fetch();
   // console.log(foodList);
-  this.state={preferences: []}
+  this.state={preferences: [], foods:[]}
 
   // Meteor.subscribe('foods');
 }
 componentDidMount() {
   let thisComp = this;
   Meteor.call('getPreferences', (err, res) => {
-    thisComp.setState({preferences: res, mins: res.map(x=>x.min), maxs: res.map(x=>x.max)})
     console.log(res);
+    thisComp.setState({preferences: res, mins: res.map(x=>x.min), maxs: res.map(x=>x.max)})
+  });
+  Meteor.call('getFoodNamesData', (err,res)=>{
+    console.log(res);
+    thisComp.setState({foods: res.map(x=>({value:x.name,label:x.name, code:x._id}))})
   })
 }
 // componentDidUpdate(prevProps, prevState) {
 //   this.setState({foods:Foods.find({}).fetch()})
 // }
 componentDidUpdate(prevProps, prevState) {
-  console.log(this.props.foods);
+  // console.log(this.props.foods);
 
 }
 updatePreferencesMin(idx,val) {
@@ -66,7 +77,6 @@ render() {
   let thisComp = this;
   return (<div className="container">
   <div className="row">
-    <FileUploader />
     <button type="button" className="btn btn-primary toolbar-button" onClick={this.writePreferences.bind(this)}>Update preferences</button>
       <br/>
       <br/>
@@ -105,17 +115,25 @@ render() {
       <li className="list-group-item pref-wrapper">
         <a className="add-food-icon"><span className="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
         <span className="preferenceFoodName">Add food</span>
-        <Select
+        <VirtualizedSelect
           name="food"
-          options={this.props.foods.filter(x=>thisComp.state.preferences.map(x=>x.code).indexOf(x.code) === -1)}
-          onChange={this.addPref.bind(this)}
-        />
+          options={this.state.foods.filter(x=>thisComp.state.preferences.map(x=>x.code).indexOf(x.code) === -1)}
+          onChange={this.addPref.bind(this)}/>
+      </li>
+      <li className="list-group-item pref-wrapper">
+        <FileUploader />
       </li>
     </ul>
   </div>
   </div>)
 }
 }
+
+// export default createContainer(() => {
+//   return {
+//     foods: Foods.find({}, {fields: {_id:1, name:1}}).fetch().map(x=>({value:x.name,label:x.name, code:x._id})),
+//   };
+// }, Preferences);
 
 function logChange(val) {
   console.log("Selected: " + JSON.stringify(val));
@@ -150,11 +168,6 @@ render() {
 }
 }
 
-export default createContainer(() => {
-  return {
-    foods: Foods.find({}, {fields: {nutrients: 0}}).fetch().map(x=>({value:x.name, label:x.name, code:x._id})),
-  };
-}, Preferences);
 
 class FileUploader extends React.Component {
   constructor() {
@@ -195,7 +208,10 @@ class FileUploader extends React.Component {
     if (this.state.uploading) {
       thing = <span></span>
     } else {
-      thing = <input id="fileInput" type="file" onChange={this.fileUpload.bind(this)}/>
+      thing = <div>
+        <span>Upload nutrient csv file for new food: </span>
+        <input id="fileInput" type="file" onChange={this.fileUpload.bind(this)}/>
+      </div>
     }
   return <div>
     {thing}
