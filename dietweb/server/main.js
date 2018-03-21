@@ -45,25 +45,31 @@ Meteor.methods({
       var future=new Future();
       // this.unblock();
       let prefFileName = serverroot+"preferences_"+Meteor.userId()+".csv";
+      let prefFileName_command = "preferences_"+Meteor.userId()+".csv";
       let profFileName = serverroot+"profile_"+Meteor.userId()+".csv";
+      let profFileName_command = "profile_"+Meteor.userId()+".csv";
       let dietFileName = "diet_"+Meteor.userId()+".txt";
-      let command = "python3 "+serverroot+"diet.py "+profFileName+" "+prefFileName+"> "+serverroot+dietFileName;
+      let command = "python3 "+serverroot+"main.py "+profFileName_command+" "+prefFileName_command+"> "+serverroot+dietFileName;
+      // fs.unlink(serverroot+dietFileName);
       if (!fs.existsSync(serverroot+dietFileName)) {
 
         console.log(command);
         exec(command,function(error,stdout,stderr){
+          // console.log("hi");
           if(error){
             console.log(error);
             throw new Meteor.Error(500,command+" failed");
           } else {
+            // console.log(serverroot+dietFileName);
             let res = fs.readFileSync(serverroot+dietFileName).toString().split('\n');
+            console.log(res);
             if (res[4] === "LP HAS NO PRIMAL FEASIBLE SOLUTION") {
               future.throw(new Meteor.Error(666,"LP HAS NO PRIMAL FEASIBLE SOLUTION"))
             } else {
               res = res
-              .map(x=>x.split(";"))
-              .filter(x=>x[0]==="ing_amount")
-              .map(x=>({name:x[2], amount:x[1]}))
+                .map(x=>x.split(";"))
+                .filter(x=>x[0]==="ing_amount")
+                .map(x=>({name:x[2], amount:x[1]}))
               future.return(res)
             }
           }
