@@ -16,20 +16,20 @@ FlowRouter.route('/', {
   }
 })
 
-FlowRouter.route('/profile', {
-  action() {
-    mount(MainLayout, {
-        content: (<Profile />),
-        active: "profile",
-    })
-  }
-})
-
-FlowRouter.route('/pref', {
-  action() {
-    mount(MainLayout, {
-        content: (<Preferences />),
-        active: "pref"
-    })
-  }
-})
+// FlowRouter.route('/profile', {
+//   action() {
+//     mount(MainLayout, {
+//         content: (<Profile />),
+//         active: "profile",
+//     })
+//   }
+// })
+//
+// FlowRouter.route('/pref', {
+//   action() {
+//     mount(MainLayout, {
+//         content: (<Preferences />),
+//         active: "pref"
+//     })
+//   }
+// })

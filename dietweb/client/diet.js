@@ -21,13 +21,14 @@ export default class App extends React.Component {
   }
   renderDiet() {
     if (this.state.feasible) {
-      return this.state.dietVec.map((x,i)=>{
-        return (<li key={i} className="list-group-item">{x.name}: {parseFloat(x.amount)*100} g</li>)
-      })
+      // return this.state.dietVec.map((x,i)=>{
+      //   return (<li key={i} className="list-group-item">{x.name}: {parseFloat(x.amount)*100} g</li>)
+      // })
+      return <DietTable diet={this.state.dietVec} ings={} nuts={}/>
     } else {
-      return <div className="alert alert-danger" role="alert">
+      return (<div className="alert alert-danger" role="alert">
         <strong>Oh snap!</strong> No feasible primal solution!
-      </div>
+      </div>)
     }
   }
   render() {

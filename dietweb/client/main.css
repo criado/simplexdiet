@@ -113,6 +113,10 @@ body {
   background-color: #dee8ea;
 }
 
+.preferences {
+  margin-bottom: 180px;
+}
+
 .rangeslider-horizontal {
   width: 100%;
   display:inline-block !important;
