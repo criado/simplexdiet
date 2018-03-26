@@ -1,7 +1,5 @@
-
-
-
 "Cod liver oil"
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup = 115.0g",
 "Energy",kcal,0.0
 "Protein",g,0.0
 "Total lipid (fat)",g,0.0
@@ -35,3 +33,6 @@
 "18:2 undifferentiated",g,0.0
 "18:3 undifferentiated",g,0.365
 "Cholesterol",mg,0.0
+
+
+

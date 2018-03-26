@@ -1,7 +1,4 @@
-
-
-
-Salt
+Nutrient,Unit,1Value per 100 g,Data points,Std. Error,"1 cup = 158.0g",
 "Energy",kcal,0.0
 "Protein",g,0.0
 "Total lipid (fat)",g,0.0
@@ -35,3 +32,6 @@ Salt
 "18:2 undifferentiated",g,0.0
 "18:3 undifferentiated",g,0.0
 "Cholesterol",mg,0.0
+
+
+

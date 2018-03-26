@@ -4,21 +4,21 @@ GLPK Simplex Optimizer, v4.61
      55: obj =   5.748037533e+03 inf =   0.000e+00 (0)
 *   126: obj =   1.531150284e+01 inf =   0.000e+00 (0)
 OPTIMAL LP SOLUTION FOUND
-price 15.311502838595667
-ing_amount;4.40 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.1 2017-07-28
-ing_amount;0.90 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
-ing_amount;0.35 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
-ing_amount;0.11 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.1 2017-07-28
-ing_amount;0.03 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
-ing_amount;5.00 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
-ing_amount;1.05 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
-ing_amount;1.00 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
-ing_amount;0.08 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
-ing_amount;0.50 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
-ing_amount;0.47 ;Cod liver oil
-ing_amount;1.60 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.7 2017-02-22
-ing_amount;0.03 ;Salt
-ing_amount;0.85 ;Source: USDA National Nutrient Database for Standard Reference 28 slightly revised May 2016 Software v.3.8.6.1 2017-07-28
+price 15.311502838595668
+ing_amount;4.40 ;01211, Milk, whole, 3.25% milkfat, without added vitamin A and vitamin D
+ing_amount;0.90 ;08120, Cereals, oats, regular and quick, not fortified, dry
+ing_amount;0.35 ;19165, Cocoa, dry powder, unsweetened
+ing_amount;0.11 ;08084, Cereals ready-to-eat, wheat germ, toasted, plain
+ing_amount;0.03 ;12220, Seeds, flaxseed
+ing_amount;5.00 ;11675, Potatoes, microwaved, cooked in skin, flesh and skin, without salt
+ing_amount;1.05 ;11463, Spinach, frozen, chopped or leaf, unprepared
+ing_amount;1.00 ;01129, Egg, whole, cooked, hard-boiled
+ing_amount;0.08 ;04053, Oil, olive, salad or cooking
+ing_amount;0.50 ;12036, Seeds, sunflower seed kernels, dried
+ing_amount;0.47 ;
+ing_amount;1.60 ;20445, Rice, white, long-grain, regular, unenriched, cooked without salt
+ing_amount;0.03 ;
+ing_amount;0.85 ;09040, Bananas, raw
 ing_amount;1.00 ;Calcium
 ing_amount;0.00 ;Zinc
 Total weight: 1.7359832674989413

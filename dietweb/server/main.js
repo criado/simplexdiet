@@ -56,6 +56,7 @@ Meteor.methods({
         console.log(command);
         exec(command,function(error,stdout,stderr){
           // console.log("hi");
+          console.log(stderr);
           if(error){
             console.log(error);
             throw new Meteor.Error(500,command+" failed");
@@ -102,20 +103,24 @@ Meteor.methods({
           let res = fs.readFileSync(serverroot+prefFileName).toString().split('\n')
           .map(x=>x.split(","))
           .filter(x=>(x.length === 4))
-          .map(x=>({code:x[0].trim(), price:parseFloat(x[1].trim()), min:x[2].trim(), max:x[3].trim()}))
+          .map(x=>({code:x[0].trim(), price:parseFloat(x[1].trim()), min:x[2].trim(), max:x[3].trim(), food:{}}))
           for (var i = 0; i < res.length; i++) {
-            let fileName = res[i].code;
+            let code = res[i].code;
             if (res[i].code[0] === "\"") {
-              fileName = fileName.slice(1,-1);
+              code = code.slice(1,-1);
             }
             //TODO: USE FOODS ABOVE
-            let name = fs.readFileSync(serverroot+"foods/"+fileName+".csv").toString().split('\n')[3]
-            if (name.substring(0,9) === "\"Nutrient" || name.substring(0,8) === "Nutrient") {
-              name = name.slice(26,-1);
-            }
+            food = Foods.findOne({_id:code})
+            //
+            // if (food.nuts) food.nutrients = food.nuts;
+            // let name = fs.readFileSync(serverroot+"foods/"+fileName+".csv").toString().split('\n')[3]
+            // if (name.substring(0,9) === "\"Nutrient" || name.substring(0,8) === "Nutrient") {
+            //   name = name.slice(27,-1);
+            // }
             // console.log("name", name);
-            res[i].name = name;
+            res[i].food = food;
           }
+          // console.log(res);//
           future.return(res)
         }
         let val = future.wait();
@@ -173,79 +178,84 @@ Meteor.methods({
     });
 // });
 
-// Meteor.startup(() => {
-// //
-// //   // import { Foods, FoodFiles } from '../imports/collections.js';
-// //
-// // });
+Meteor.startup(() => {
 //
-// // code to run on server at startup
+//   // import { Foods, FoodFiles } from '../imports/collections.js';
 //
-// // FoodFiles.onAfterUpload = (file) => {addfood(file.name)};
-//
-// //TODO: make all methods use the better csv parsing libraries...
-// // Files are a bit messy :P
-//
-// fs.readdir( serverroot+"foods/", Meteor.bindEnvironment(function( err, files ) {
-//         if( err ) {
-//             console.error( "Could not list the directory.", err );
-//             process.exit( 1 );
-//         }
-//         console.log("HELLO");
-//         files.forEach( Meteor.bindEnvironment(function( file, idx ) {
-//           // console.log(file);
-//           let name, code, food, readingNutrients, firstSpace, nutrients = []
-//           food = {}
-//           var filePath = path.join( serverroot+"foods/", file );
-//           name = file.slice(0,-4).replace(/_/g," ");
-//           code = file.slice(0,-4);
-//           console.log(code);
-//           readingNutrients = false
-//           nutrients = []
-//           firstSpace = false
-//           csv.fromPath(filePath).on("data", Meteor.bindEnvironment(function(data){
-//             // console.log(data[0]);
-//             if (data.length === 1 && data[0].slice(0,8) === "Nutrient") {
-//                 name = data[0].slice(19)
-//                 name = name.split(", ")
-//                 code = name[0]
-//                 name = name.slice(1).join(", ")
-//             }
-//             else if (data[0] === 'Nutrient' && data[1] === 'Unit' && data[2] === '1Value per 100 g') {
-//               readingNutrients = true;
-//             }
-//             else if (readingNutrients && data.length >=3) {
-//               let nutrient = {name:data[0], unit:data[1], value:data[2]}
-//               nutrients.push(nutrient)
-//             }
-//             else if (!firstSpace && data.length === 0) {firstSpace = true}
-//             else if (firstSpace && data.length > 0) {firstSpace = false}
-//             else if (firstSpace && data.length === 0) {
-//               firstSpace = false;
-//               readingNutrients = false;
-//               console.log(code);
-//               let res = Foods.find({_id:code}).fetch();
-//               if (res.length > 0) {
-//                 console.log(name, " food found");
-//                 if (res[0].name !== name || res[0].nutrients !== nutrients) {
-//                   Foods.update({_id:code}, {name:name, nutrients:nutrients})
-//                 }
-//               } else {
-//                 console.log(name, " food added");
-//                 Foods.insert({
-//                   _id:code,
-//                   name,
-//                   nutrients
-//                 })
-//               }
-//
-//             }
-//           })).on("end", function(){ });
-//
-//           // let parsedFile = parse(fileData, {columns: ["name","unit","longName","min","max"], trim: true})
-//         } ));
-// } ));
+// });
 
+// code to run on server at startup
+
+// FoodFiles.onAfterUpload = (file) => {addfood(file.name)};
+
+//TODO: make all methods use the better csv parsing libraries...
+// Files are a bit messy :P
+
+fs.readdir( serverroot+"foods/", Meteor.bindEnvironment(function( err, files ) {
+        if( err ) {
+            console.error( "Could not list the directory.", err );
+            process.exit( 1 );
+        }
+        console.log("HELLO");
+        files.forEach( Meteor.bindEnvironment(function( file, idx ) {
+          // console.log(file);
+          let name, code, food, readingNutrients, firstSpace, nutrients = []
+          food = {}
+          var filePath = path.join( serverroot+"foods/", file );
+          name = file.slice(0,-4).replace(/_/g," ");
+          code = file.slice(0,-4);
+          // console.log(filePath);
+          readingNutrients = false
+          nutrients = []
+          firstSpace = false
+          csv.fromPath(filePath).on("data", Meteor.bindEnvironment(function(data){
+            // console.log(data[0]);
+            // if (code==="19165") console.log(name);/
+            if (data.length === 1 && data[0].slice(0,8) === "Nutrient") {
+                name = data[0].slice(19)
+                name = name.split(", ")
+                code = name[0]
+                name = name.slice(1).join(", ")
+            }
+            else if (data[0] === 'Nutrient' && data[1] === 'Unit' && data[2] === '1Value per 100 g') {
+              readingNutrients = true;
+            }
+            else if (readingNutrients && data.length >=3) {
+              let nutrient = {name:data[0], unit:data[1], value:data[2]}
+              nutrients.push(nutrient)
+            }
+            else if (!firstSpace && data.length === 0) {firstSpace = true}
+            else if (firstSpace && data.length > 0) {firstSpace = false}
+            else if (firstSpace && data.length === 0 || data[0] === "Other") {
+              //
+              //
+              firstSpace = false;
+              readingNutrients = false;
+              console.log(code,name);
+              let res = Foods.find({_id:code}).fetch();
+              if (res.length > 0) {
+                console.log(name, " food found");
+                if (res[0].name !== name || res[0].nutrients !== nutrients) {
+                  Foods.update({_id:code}, {name:name, nutrients:nutrients})
+                }
+              } else {
+                console.log(name, " food added");
+                Foods.insert({
+                  _id:code,
+                  name,
+                  nutrients
+                })
+              }
+
+            }
+          })).on("end", function(){ });
+
+          // let parsedFile = parse(fileData, {columns: ["name","unit","longName","min","max"], trim: true})
+        } ));
+} ));
+
+});
+///////////
 // Meteor.publish('foods', function () {
 //   return Rooms.find({}, {
 //     fields: { nutrients: 0 }

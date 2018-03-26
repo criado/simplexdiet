@@ -21,7 +21,7 @@ class Food:
 
         with open('./foods/'+self.usda_id+'.csv', encoding='latin1') as file_food:
             csvlines= [l for l in csv.reader(file_food) if len(l)>0]
-            self.name=csvlines[0][0]
+            self.name=csvlines[3][0][19:]
 
             self.nutrients= {n.name: float(l[2]) for n in profile
                              for l in csvlines if len(l)>=3 and n.pattern==l[0] and n.unit==l[1]}
