@@ -4,6 +4,13 @@ body {
   background-color: #f2f6f7;
 }
 
+@media (min-width: 1400px) {
+  .container{
+      width: 90vw
+      
+  }
+}
+
 .toolbar-button {
   /*background-color: rgba(40, 158, 93, 0.9);*/
   /*border-color: rgba(40, 158, 93, 0.9);*/
