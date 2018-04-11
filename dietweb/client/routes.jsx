@@ -1,9 +1,6 @@
 import React from 'react';
 import {mount} from 'react-mounter';
 import Diet from './diet.js';
-import Preferences from './preferences.js';
-import Profile from './profile.js';
-
 
 import {MainLayout} from './MainLayout.js';
 
