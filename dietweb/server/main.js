@@ -4,7 +4,9 @@ import { Mongo } from 'meteor/mongo';
 
 import { Foods, IngredientPreferences, NutrientPreferences } from '../imports/collections.js';
 
-import csv from 'fast-csv';
+// import csv from 'fast-csv';
+
+import fetch from 'node-fetch';
 
 // import {addfood} from './addfood.js'
 
@@ -33,10 +35,33 @@ Meteor.publish("nutPrefs", () =>{
 })
 
 Meteor.methods({
-    getFoodNamesData() {
-      return Foods.find({}, {
-          fields: {_id:1, name:1}
-        }).fetch();
+    getFoodNamesData(keyword) {
+      console.log(keyword);
+      
+      let future=new Future();
+      let regex = RegExp("/.*" + keyword + ".*/");
+
+      let customFoods = Foods.find({name:regex}, {
+        fields: {_id:1, name:1},
+        limit:100
+      }).fetch();
+      
+      let USDAFoods = fetch("https://api.nal.usda.gov/ndb/search/?format=json&q="+keyword+"&sort=n&max=100&offset=0&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC")
+      USDAFoods
+      .then(res=>res.json())
+      .catch(err=>console.error(err))
+      .then(body=> {
+        if (!!body.errors) {
+          future.return(customFoods)
+        console.log(body.errors.error)
+        }          
+        else future.return({USDA:body.list.item.map(f=>({id:f.ndbno,name:f.name})),customFoods})
+      })
+      .catch(err=>console.error(err))
+      
+
+      let val = future.wait();
+      return val
     },
 
-    });
+});

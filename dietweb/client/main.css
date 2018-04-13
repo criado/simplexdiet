@@ -6,9 +6,18 @@ body {
 
 @media (min-width: 1400px) {
   .container{
-      width: 90vw
+      width: 95vw
       
   }
+}
+
+
+tr .remove-ing {
+  visibility: hidden;
+}
+
+tr:hover .remove-ing {
+  visibility: visible;
 }
 
 .toolbar-button {
@@ -108,9 +117,9 @@ body {
   /*border: black 1px !important;*/
 }
 
-.remove-pref {
+/* .remove-pref {
   float: right;
-}
+} */
 
 .nav-tabs, .nav-pills {
     text-align:center;

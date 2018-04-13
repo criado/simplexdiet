@@ -66,11 +66,11 @@ let nutInfo = await fetch("https://api.nal.usda.gov/ndb/list?format=json&lt=n&ma
         return ns
         },{})))
 
-let nutNames = [];
-for (let key in nutInfo) {nutNames.push([key,nutInfo[key].long_name])}
-nutNames.sort((a,b)=>parseInt(a[1])-parseInt(b[1]))
+let nutList = [];
+for (let key in nutInfo) {nutList.push({"id":key,"name":nutInfo[key].long_name,"unit":nutInfo[key].unit})}
+nutList.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
 
-return {nutInfo, nutNames}
+return {nutInfo, nutList}
 }
   
 export function solveDiet(foodNuts, nutFoods, ingConst,nutConst, objective) {
@@ -88,41 +88,55 @@ export function solveDiet(foodNuts, nutFoods, ingConst,nutConst, objective) {
     "constraints": {...nutConst, ...ingConstProc},
     "variables": {...foodNuts, ...nutFoods}
     }
+    // console.log(model)
     return solver.Solve(model)
 }
 
 export function getSolNuts(solution,nutFoods,ingPref,nutcodes,foodNuts) {
 
-let extendedFoodNuts = {...foodNuts, ...nutFoods};
+    let extendedFoodNuts = {...foodNuts, ...nutFoods};
 
-const parseSolution = sol => {
-    if (typeof sol === "undefined") sol = 0;
-    return sol
-};
+    const parseSolution = sol => {
+        if (typeof sol === "undefined") sol = 0;
+        return sol
+    };
 
-let foundNuts = [];
-let foodIds = []
-for (let key in solution) {
-    if (key !== "feasible" && key !== "bounded" && key!=="result") {
-    let netNuts = [];
-    for (let i=0; i<nutcodes.length; i++) {
-        netNuts.push(extendedFoodNuts[key][nutcodes[i][0]]*parseSolution(solution[key]))
+    let foundNutsAll = [];
+    let foodIds = []
+    for (let key in solution) {
+        if (key !== "feasible" && key !== "bounded" && key!=="result") {
+        let netNuts = [];
+        for (let i=0; i<nutcodes.length; i++) {
+            netNuts.push(extendedFoodNuts[key][nutcodes[i][0]]*parseSolution(solution[key]))
+        }
+        foundNutsAll.push(netNuts)
+        foodIds.push(key)
+        }
     }
-    foundNuts.push(netNuts)
-    foodIds.push(key)
+
+    //exclude nutFoods for nutTot count
+    let foundNuts = [];
+    for (let key in solution) {
+        if (key !== "feasible" && key !== "bounded" && key!=="result" && (key in ingPref)) {
+        let netNuts = [];
+        for (let i=0; i<nutcodes.length; i++) {
+            netNuts.push(extendedFoodNuts[key][nutcodes[i][0]]*parseSolution(solution[key]))
+        }
+        foundNuts.push(netNuts)
+        }
     }
-}
-// console.log("foundNuts",foundNuts)
+
+    // console.log("foundNuts",foundNuts)
     let nutTots = []
     for (let i=0; i<nutcodes.length; i++) {
-    nutTots.push(foundNuts.map(x=>x[i]).reduce((a,b)=>a+b))
+        nutTots.push(foundNuts.map(x=>x[i]).reduce((a,b)=>a+b))
     }
 
-    foundNuts = foundNuts
+    foundNutsAll = foundNutsAll
     .map(f=>f.map((n,i)=>100*n/nutTots[i]))
     .reduce((fs,f,i)=>{
         fs[foodIds[i]] = f;
         return fs
     },{})
-return {foundNuts,nutTots}
+    return {foundNuts:foundNutsAll,nutTots}
 }

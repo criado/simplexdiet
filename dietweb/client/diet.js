@@ -8,6 +8,9 @@ import { IngredientPreferences, NutrientPreferences } from "../imports/collectio
 
 import { withTracker } from 'meteor/react-meteor-data';
 
+import { Async } from 'react-select';
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -22,20 +25,21 @@ class App extends React.Component {
       nutcodes,
       nutrients:[],
       nutInfo: {},
+      nutTots:[],
       nutPref: props.nutPref
     }
   }
   componentDidMount() {
     if (!this.props.prefLoading)
-      this.CalculateDiet()
+      this.calculateDiet()
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.prefLoading && !this.props.prefLoading )
-      this.CalculateDiet()
+    if ((prevProps.ingPref !== this.props.ingPref || prevProps.nutPref !== this.props.nutPref ) && !this.props.prefLoading )
+      this.calculateDiet()
   }
-  CalculateDiet() {
+  calculateDiet() {
     const thisComp = this;
-    this.updatePrefs()
+    // this.updatePrefs()
     
     const parseLimit = (lim) => {
       if (typeof lim === "number" && !isNaN(lim)) return lim
@@ -67,12 +71,13 @@ class App extends React.Component {
       obj["price"]=1e6;
       nutFoods["anti-"+key] = obj
     }
-
+    //add custom foods
     getFoodInfo(ingPref,nutcodes).then(res=>{
       // console.log("getFoods",res);
       let foodNuts = res.foodNuts;
       let foodInfo = res.foodInfo;
       let solution = solveDiet(foodNuts,nutFoods,ingPref,nutPref, "price");
+      // console.log(solution)
       let {foundNuts, nutTots} = getSolNuts(solution,nutFoods,ingPref,nutcodes,foodNuts)
       let dietVec = [];
       for (let key in solution) {
@@ -102,13 +107,14 @@ class App extends React.Component {
       thisComp.setState({
         dietVec:dietVec,
         feasible:solution.feasible,
+        nutTots,
         price:solution.result})
       // console.log(solution);
     })
     getNutInfo(nutcodes).then(res=>{
       // console.log("getNuts",res);
       thisComp.setState({
-        nutrients: res.nutNames.map(x=>({"name":x[1]})),
+        nutrients: res.nutList,
         nutInfo: res.nutInfo
       })
     })
@@ -120,6 +126,8 @@ class App extends React.Component {
     newIngPref[foodId] = { ...thisComp.state.ingPref[foodId], ...newLim}
     this.setState({
       ingPref: newIngPref
+    },()=>{
+      thisComp.updatePrefs()
     })
   }
   renderDiet() {
@@ -129,7 +137,9 @@ class App extends React.Component {
           ings={this.state.ingPref} 
           nutList={this.state.nutrients} 
           nutInfo={this.state.nutInfo} 
-          changeLims={this.changeLims.bind(this)}/>
+          nutTots={this.state.nutTots} 
+          changeLims={this.changeLims.bind(this)}
+          removeIng={this.removeIng.bind(this)}/>
     } else {
       // return (<div className="alert alert-danger" role="alert">
       //   <strong>Oh snap!</strong> No feasible primal solution!
@@ -155,21 +165,54 @@ class App extends React.Component {
     },
     {upsert:true})
   }
+  addIng(food) {
+    console.log("adding",food)
+    let newIngPref = this.state.ingPref;
+    newIngPref[food.value] = {"price": 0.0}
+    this.setState({ingPref: newIngPref})
+    this.updatePrefs()
+  }
+  removeIng(food) {
+    console.log("removing",food)
+    let newIngPref = this.state.ingPref;
+    delete newIngPref[food]
+    this.setState({ingPref: newIngPref})
+    this.updatePrefs()
+  }
   render() {
     let thisComp = this;
     return (<div className="container">
     <div className="row">
-      <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.CalculateDiet.bind(this)}>Calculate diet</button>
+      <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Calculate diet</button>
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
         <br/>
     </div>
     <div className="row">
       {this.renderDiet()}
     </div>
+    <div className="row">
+      <Async
+        name="form-field-name"
+        loadOptions={getFoodOptions}
+        onChange={this.addIng.bind(this)}
+      />
+    </div>
     <hr/>
     </div>)
   }
 }
+
+const getFoodOptions = (input, callback) => {
+  console.log(input)
+  Meteor.call("getFoodNamesData",input,(err,res)=>{
+    if (err) console.log(err)
+    let foods = res.USDA.concat(res.customFoods);
+    console.log("foodnames",foods)
+    callback(null,
+      {options: foods.map(x=>({value: x.id, label: x.name}))})
+  })
+
+};
 
 App.propTypes = {
   ingPref: PropTypes.object.isRequired,
@@ -218,6 +261,7 @@ class DietTable extends React.Component {
     }
   }
   handleLimChange(type,i,val) {
+    const thisComp = this;
     let lims = this.state[type];
     lims[i]=val;
     console.log(val)
@@ -228,52 +272,86 @@ class DietTable extends React.Component {
     return (<table className="table table-hover table-dark">
     <thead>
       <tr>
-        <th scope="col">Food</th>
+      <th scope="col">Food</th>
         {this.props.nutList.map((x,i)=>{
           return <th key={i} title={x.name} scope="col">{x.name.slice(0,3)}</th>
         })}
       </tr>
+      <tr>
+      <td scope="col"> </td>
+        {this.props.nutList.map((x,i)=>{
+          return <td key={i} title={x.name} scope="col" style={{fontSize:"10px"}}>
+          <span style={{maxWidth:"30px"}}>{thisComp.props.nutTots[i].toFixed(0).toString()}<span style={{fontSize:"8px"}}>{x.unit}</span></span>
+        </td>
+        })}
+      </tr>
     </thead>
       <tbody>
-      {this.props.diet.map((x,i)=>{
+      {this.props.diet.sort((a,b)=>{
+        if (a.id in thisComp.props.ings && b.id in thisComp.props.ings) return b.amount-a.amount
+        else if (a.id in thisComp.props.ings && !(b.id in thisComp.props.ings)) return -1
+        else if (b.id in thisComp.props.ings && !(a.id in thisComp.props.ings)) return 1
+        else return b.amount-a.amount
+      }).map((x,i)=>{
         if (x.id in thisComp.props.ings)
         {
           return (<tr key={i}>
-              <td style={{"minWidth":"200px"}}>
-                <input value={thisComp.state.mins[i]} step="10" style={{width:"50px",marginRight:"10px"}} type="number"
+              <td style={{"minWidth":"30px"}}>
+                <a className="remove-ing" style={{marginRight:"10px",color:"red"}} onClick={()=>thisComp.props.removeIng(x.id)}>
+                  <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>
+                <input value={thisComp.state.mins[i]} step="10" style={{width:"45px",marginRight:"10px"}} type="number"
                   onKeyPress={e=>{
                       if (e.key == 'Enter') thisComp.props.changeLims(x.id,{"min":parseFloat(e.target.value)/100})
                     }}
                   onChange={e=>thisComp.handleLimChange("mins",i,e.target.value)}
                 />
-                <span style={{marginRight:"15px",display:"inline-block",width:"40px",overflow:"hidden",textAlign:"right"}}>
+                <span style={{marginRight:"15px",display:"inline-block",width:"30px",overflow:"hidden",textAlign:"right"}}>
                   {(parseFloat(x.amount)*100).toFixed(0)}g
                 </span>
-                <input value={thisComp.state.maxs[i]} step="10" style={{width:"50px",marginRight:"10px"}} type="number"
+                <input value={thisComp.state.maxs[i]} step="10" style={{width:"45px",marginRight:"10px"}} type="number"
                   onKeyPress={e=>{
                       if (e.key == 'Enter') thisComp.props.changeLims(x.id,{"max":parseFloat(e.target.value)/100})
                     }}
                     onChange={e=>thisComp.handleLimChange("maxs",i,e.target.value)}
                   />
-                <span title={x.name}>{x.name.slice(0,7)}</span>
+                <span title={x.name}>{x.name.split(",").slice(0,2).join(",").slice(0,17)}</span>
               </td>
               {x.nutAmounts.map((n,j)=>(
-                <td title={thisComp.props.nutList[j].name} key={j}>{n.toFixed(0) }</td>
+                <td title={thisComp.props.nutList[j].name} style={{backgroundColor:"rgba("+(255*n/100).toFixed(0)+",0,0,"+n/100+")"}} key={j}>
+                  {n.toFixed(0)==="0" ? "" : n.toFixed(0) }
+                </td>
               ))}
             </tr>)
-        } else {
+        } else if (x.id in thisComp.props.nutInfo){
          return ( <tr key={i}>
               <td style={{"minWidth":"200px"}}>
-              <span style={{marginLeft:"60px",marginRight:"75px",display:"inline-block",width:"40px",overflow:"hidden",textAlign:"right"}}>
-                {(parseFloat(x.amount)*100).toFixed(0)}g
+              <span style={{marginLeft:"65px",marginRight:"60px",display:"inline-block",width:"50px",overflow:"hidden",textAlign:"right"}}>
+                {(parseFloat(x.amount)).toFixed(1).toString() + thisComp.props.nutInfo[x.id].unit}
               </span>
-              {thisComp.props.nutInfo[x.id].long_name}
+              {"Lacking "+thisComp.props.nutInfo[x.id].long_name.slice(0,10)}
               </td>
               {x.nutAmounts.map((n,j)=>(
-                <td title={thisComp.props.nutList[j].name} key={j}>{n.toFixed(0) }</td>
+                <td title={thisComp.props.nutList[j].name} style={{backgroundColor:"rgba("+(255*n/100).toFixed(0)+",0,0,"+n/100+")"}} key={j}>
+                {n.toFixed(0)==="0" ? "" : n.toFixed(0) }
+                </td>
               ))}
           </tr>)
-        }
+        } else if (x.id.slice(5) in thisComp.props.nutInfo){
+          return ( <tr key={i}>
+               <td style={{"minWidth":"200px"}}>
+               <span style={{marginLeft:"65px",marginRight:"60px",display:"inline-block",width:"50px",overflow:"hidden",textAlign:"right"}}>
+                 {(parseFloat(x.amount)).toFixed(1).toString() + thisComp.props.nutInfo[x.id.slice(5)].unit}
+               </span>
+               {"Excess "+thisComp.props.nutInfo[x.id.slice(5)].long_name.slice(0,10)}
+               </td>
+               {x.nutAmounts.map((n,j)=>(
+                 <td title={thisComp.props.nutList[j].name} style={{backgroundColor:"rgba("+(255*-1*n/100).toFixed(0)+",0,0,"+-1*n/100+")"}} key={j}>
+                 {(-1*n).toFixed(0) ==="0" ? "" : (-1*n).toFixed(0) }</td>
+               ))}
+
+           </tr>)
+         }
       })}
       </tbody>
       </table>)
