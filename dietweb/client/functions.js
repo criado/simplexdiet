@@ -61,7 +61,7 @@ let nutInfo = await fetch("https://api.nal.usda.gov/ndb/list?format=json&lt=n&ma
     .then(d=>(d.list.item.reduce((ns,n)=>{
             if (nutcodes.map(x=>x[0]).indexOf(n.id) !== -1) {
             let index = nutcodes.map(x=>x[0]).indexOf(n.id);
-            ns[n.id]={"unit": nutcodes[index][1], "long_name":n.name}
+            ns[n.id]={"unit": nutcodes[index][1], "long_name":n.name,"id":n.id}
             }
         return ns
         },{})))
@@ -77,10 +77,12 @@ export function solveDiet(foodNuts, nutFoods, ingConst,nutConst, objective) {
     let ingConstProc = {};
     for (let key in ingConst) {
     let obj = ingConst[key];
-    let newObj = {}
-    if (typeof obj.max !== "undefined") newObj.max = obj.max
-    if (typeof obj.min !== "undefined") newObj.min = obj.min
-    if (typeof obj.min !== "undefined" || typeof obj.max !== "undefined") ingConstProc[key] = newObj;
+    let newObj = {};
+    if (typeof obj.max !== "undefined") {newObj.max = obj.max;}
+    if (typeof obj.min !== "undefined") {newObj.min = obj.min;}
+    else {newObj.min = 1e-6;}
+    // if (typeof obj.min !== "undefined" || typeof obj.max !== "undefined") 
+    ingConstProc[key] = newObj;
     }
     let model = {
     "optimize": objective,
@@ -88,7 +90,7 @@ export function solveDiet(foodNuts, nutFoods, ingConst,nutConst, objective) {
     "constraints": {...nutConst, ...ingConstProc},
     "variables": {...foodNuts, ...nutFoods}
     }
-    // console.log(model)
+    console.log(model)
     return solver.Solve(model)
 }
 

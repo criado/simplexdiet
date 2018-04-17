@@ -34,14 +34,19 @@ Meteor.publish("nutPrefs", () =>{
   return NutrientPreferences.find();
 })
 
+Meteor.publish("foods", () =>{
+  return Foods.find();
+})
+
+
 Meteor.methods({
     getFoodNamesData(keyword) {
       console.log(keyword);
       
       let future=new Future();
-      let regex = RegExp("/.*" + keyword + ".*/");
+      // let regex = RegExp("/.*" + keyword + ".*/i");
 
-      let customFoods = Foods.find({name:regex}, {
+      let customFoods = Foods.find({name:{$regex: keyword , $options: "-i"}}, {
         fields: {_id:1, name:1},
         limit:100
       }).fetch();
@@ -52,7 +57,7 @@ Meteor.methods({
       .catch(err=>console.error(err))
       .then(body=> {
         if (!!body.errors) {
-          future.return(customFoods)
+          future.return({customFoods})
         console.log(body.errors.error)
         }          
         else future.return({USDA:body.list.item.map(f=>({id:f.ndbno,name:f.name})),customFoods})

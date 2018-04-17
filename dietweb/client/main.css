@@ -5,10 +5,13 @@ body {
 }
 
 @media (min-width: 1400px) {
-  .container{
+  .container.food-matrix{
       width: 95vw
       
   }
+  .container.new-food{
+    /* width: 40vw    */
+}
 }
 
 
@@ -39,7 +42,7 @@ tr:hover .remove-ing {
 #header-title {
   text-align:center;
   height: 50px;
-  margin-top:7px;
+  margin-top:20px;
   margin-bottom: 7px;
   font-family: 'Open Sans', sans-serif;
 }
