@@ -42,11 +42,31 @@ export default class CustomFood extends React.Component {
             nutrients: thisComp.state.foodNuts
         })
     }
+    chooseFood(food) {
+        let foodId = food.value[0]
+        let custom = food.value[1]
+        console.log("loading",foodId)
+        // newIngPref[foodId] = {"price": 0.0,"custom":custom}
+        // this.setState({ingPref: newIngPref})
+        // this.updatePrefs()
+        if (custom) {
+            let price = food.value[2];
+            let nutrients = food.value[3];
+            this.setState({foodPrice:price,foodName:})
+        }
+      }
     render() { 
         const thisComp = this;
         return ( <div className="container new-food">
             <div className="row" style={{textAlign:"center"}}>
                 <h3>Custom food</h3>
+            </div>
+            <div className="row">
+            <Async
+                name="form-field-name"
+                loadOptions={getFoodOptions}
+                onChange={this.chooseFood.bind(this)}
+            />
             </div>
             <div className="row">
             <table className="table table-hover table-dark">
@@ -125,3 +145,18 @@ export default class CustomFood extends React.Component {
 }
 
  
+const getFoodOptions = (input, callback) => {
+    console.log(input)
+    Meteor.call("getFoodNamesData",input,(err,res)=>{
+      if (err) console.log(err)
+      let foodsUSDA = res.USDA ? res.USDA : [];
+      let foodsCustom = res.customFoods;
+      // console.log("foodnames",foods)
+      callback(null,
+        {options: 
+          foodsUSDA.map(x=>({value: [x.id,false], label: x.name}))
+            .concat(foodsCustom.map(x=>({value: [x._id,true,x], label: x.name})))
+        })
+    })
+  
+  };

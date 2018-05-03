@@ -23,6 +23,17 @@ tr:hover .remove-ing {
   visibility: visible;
 }
 
+td input[type=number].nut-limits::-webkit-inner-spin-button,
+td input[type=number].nut-limits::-webkit-outer-spin-button {
+  /* display: none; */
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* 
+td:hover .nut-limits {
+  display: initial;
+} */
+
 .toolbar-button {
   /*background-color: rgba(40, 158, 93, 0.9);*/
   /*border-color: rgba(40, 158, 93, 0.9);*/
