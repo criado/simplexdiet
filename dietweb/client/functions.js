@@ -66,9 +66,8 @@ let nutInfo = await fetch("https://api.nal.usda.gov/ndb/list?format=json&lt=n&ma
         return ns
         },{})))
 
-// let nutList = [];
-// for (let key in nutInfo) {nutList.push({"id":key,"name":nutInfo[key].long_name,"unit":nutInfo[key].unit})}
 let nutList = nutcodes.map(n=>({"id":n[0],"name":nutInfo[n[0]].long_name,"unit":nutInfo[n[0]].unit}))
+// console.log("HIIIIIIIIIIIIII", nutList2,nutList);
 // nutList.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
 
 return {nutInfo, nutList}
