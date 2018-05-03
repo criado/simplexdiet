@@ -48,13 +48,14 @@ export default class DietTable extends React.Component {
   }
   componentDidUpdate(prevProps){
     const thisComp = this;
-    console.log(thisComp.props.nutPref);
     if (prevProps !== this.props) {
       this.setState({
         mins: thisComp.props.diet.filter(x=>(x.id in thisComp.props.ings)).map(x=>(thisComp.props.ings[x.id].min*100).toFixed(0)),
         maxs: thisComp.props.diet.filter(x=>(x.id in thisComp.props.ings)).map(x=>(thisComp.props.ings[x.id].max*100).toFixed(0)),
-        nutmins: thisComp.props.nutList.map(x=>thisComp.props.nutPref[x.id].min ? thisComp.props.nutPref[x.id].min.toFixed(0) : ""),
-        nutmaxs: thisComp.props.nutList.map(x=>thisComp.props.nutPref[x.id].max ? thisComp.props.nutPref[x.id].max.toFixed(0) : "")
+        nutmins: thisComp.props.nutList.map(x=>
+          thisComp.props.nutPref[x.id] && thisComp.props.nutPref[x.id].min ? thisComp.props.nutPref[x.id].min.toFixed(0) : ""),
+        nutmaxs: thisComp.props.nutList.map(x=>
+          thisComp.props.nutPref[x.id] && thisComp.props.nutPref[x.id].max ? thisComp.props.nutPref[x.id].max.toFixed(0) : "")
       })
     }
   }
@@ -140,7 +141,7 @@ export default class DietTable extends React.Component {
               <span style={{marginLeft:"65px",marginRight:"60px",display:"inline-block",width:"50px",overflow:"hidden",textAlign:"right"}}>
                 {(parseFloat(x.amount)).toFixed(1).toString() + thisComp.props.nutInfo[x.id].unit}
               </span>
-              {"Lacking "+thisComp.props.nutInfo[x.id].long_name.slice(0,10)}
+              <span title={thisComp.props.nutInfo[x.id].long_name}>{"Lacking "+thisComp.props.nutInfo[x.id].long_name.slice(0,10)}</span>
               </td>
               {x.nutAmounts.map((n,j)=>(
                 <td title={thisComp.props.nutList[j].name} style={{backgroundColor:"rgba("+(255*n/100).toFixed(0)+",0,0,"+n/100+")"}} key={j}>
@@ -154,7 +155,7 @@ export default class DietTable extends React.Component {
                <span style={{marginLeft:"65px",marginRight:"60px",display:"inline-block",width:"50px",overflow:"hidden",textAlign:"right"}}>
                  {(parseFloat(x.amount)).toFixed(1).toString() + thisComp.props.nutInfo[x.id.slice(5)].unit}
                </span>
-               {"Excess "+thisComp.props.nutInfo[x.id.slice(5)].long_name.slice(0,10)}
+               <span title={thisComp.props.nutInfo[x.id.slice(5)].long_name}>{"Excess "+thisComp.props.nutInfo[x.id.slice(5)].long_name.slice(0,10)}</span>
                </td>
                {x.nutAmounts.map((n,j)=>(
                  <td title={thisComp.props.nutList[j].name} style={{backgroundColor:"rgba("+(255*-1*n/100).toFixed(0)+",0,0,"+-1*n/100+")"}} key={j}>

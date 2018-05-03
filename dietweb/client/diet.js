@@ -12,11 +12,11 @@ import { Async } from 'react-select';
 
 import DietTable from './diet-table.js'
 
+let nutcodes = [["208","kcal"],["204","g"],["606","g"],["203","g"],["205","g"],["269","g"],["291","g"],["601","mg"],["301","mg"],["312","mg"],["303","mg"],["304","mg"],["315","mg"],["305","mg"],["306","mg"],["307","mg"],["317","µg"],["309","mg"],["421","mg"],["320","µg"],["404","mg"],["405","mg"],["406","mg"],["410","mg"],["415","mg"],["417","µg"],["418","µg"],["401","mg"],["328","µg"],["323","mg"],["430","µg"],["619","g"],["618","g"]];
+
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    let nutcodes = [["208","kcal"],["204","g"],["606","g"],["203","g"],["205","g"],["269","g"],["291","g"],["601","mg"],["301","mg"],["312","mg"],["303","mg"],["304","mg"],["315","mg"],["305","mg"],["306","mg"],["307","mg"],["317","µg"],["309","mg"],["421","mg"],["320","µg"],["404","mg"],["405","mg"],["406","mg"],["410","mg"],["415","mg"],["417","µg"],["418","µg"],["401","mg"],["328","µg"],["323","mg"],["430","µg"],["619","g"],["618","g"]];
     // nutcodes = nutcodes.sort((a,b)=>parseInt(a[0])-parseInt(b[0]))
     this.state={dietVec: [],
       feasible: true,
@@ -274,6 +274,12 @@ export default withTracker(props => {
 
   let ingPref = resultsExist? ingPrefObj.ingPref: defaultIngPref;
   let nutPref = resultsExist? nutPrefObj.nutPref: defaultNutPref;
+
+  for (var i = 0; i < nutcodes.length; i++) {
+    if (!(nutcodes[i][0] in nutPref)) {
+      nutPref[nutcodes[i][0]] = {}
+    }
+  }
 
   let ingPrefCustom = {};
   let ingPrefCutomIds = [];
