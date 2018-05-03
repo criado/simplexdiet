@@ -6,7 +6,7 @@ export const MainLayout = ({content, active}) => {
       <div className='container-fluid'>
         <div className="row" id="header-title">
           <h1>
-            Simplex diet
+            Simplex diet <small>Beta</small>
             <AccountsUIWrapper/>
           </h1>
         </div>
