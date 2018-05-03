@@ -3,12 +3,14 @@ import { getNutInfo } from './functions.js'
 
 import { Foods } from "../imports/collections.js"
 
+import { Async } from "react-select"
+
 
 export default class CustomFood extends React.Component {
-    constructor(props) {        
+    constructor(props) {
         super(props);
         let nutcodes = [["208","kcal"],["204","g"],["606","g"],["205","g"],["269","g"],["291","g"],["203","g"],["301","mg"],["303","mg"],["304","mg"],["305","mg"],["306","mg"],["307","mg"],["309","mg"],["312","mg"],["315","mg"],["317","µg"],["401","mg"],["404","mg"],["405","mg"],["406","mg"],["410","mg"],["415","mg"],["417","µg"],["421","mg"],["418","µg"],["320","µg"],["323","mg"],["328","µg"],["430","µg"],["619","g"],["618","g"]];
-        nutcodes = nutcodes.sort((a,b)=>parseInt(a[0])-parseInt(b[0]))        
+        nutcodes = nutcodes.sort((a,b)=>parseInt(a[0])-parseInt(b[0]))
         this.state = {
             nutcodes,
             foodNuts: nutcodes.map(x=>x[0]).reduce((ns,n)=>{
@@ -49,13 +51,13 @@ export default class CustomFood extends React.Component {
         // newIngPref[foodId] = {"price": 0.0,"custom":custom}
         // this.setState({ingPref: newIngPref})
         // this.updatePrefs()
-        if (custom) {
-            let price = food.value[2];
-            let nutrients = food.value[3];
-            this.setState({foodPrice:price,foodName:})
-        }
+        //if (custom) {
+        //    let price = food.value[2];
+        //    let nutrients = food.value[3];
+        //    this.setState({foodPrice:price,foodName:})
+        //}
       }
-    render() { 
+    render() {
         const thisComp = this;
         return ( <div className="container new-food">
             <div className="row" style={{textAlign:"center"}}>
@@ -77,10 +79,10 @@ export default class CustomFood extends React.Component {
                             onChange={e=>thisComp.setState({foodName: e.target.value})}
                         /></th>
                         <th>
-                            <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" 
+                            <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button"
                                 onClick={this.saveFood.bind(this)}>
                                 Save Food
-                            </button>                            
+                            </button>
                         </th>
                     </tr>
                     <tr>
@@ -88,12 +90,12 @@ export default class CustomFood extends React.Component {
                         <th><input type="number" value={this.state.foodPrice} style={{width:"80px"}}
                             onChange={e=>thisComp.setState({foodPrice: e.target.value})}
                         /></th>
-                        <th></th>                        
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
-            </div>        
+            </div>
             <div className="row">
                 <div className="col-md-6">
                 <table className="table table-hover table-dark">
@@ -115,7 +117,7 @@ export default class CustomFood extends React.Component {
                         </tr>
                     )) : ""}
                 </tbody>
-                </table> 
+                </table>
                 </div>
                 <div className="col-md-6">
                 <table className="table table-hover table-dark">
@@ -137,14 +139,14 @@ export default class CustomFood extends React.Component {
                         </tr>
                     )) : ""}
                 </tbody>
-                </table> 
+                </table>
                 </div>
             </div>
         </div>)
     }
 }
 
- 
+
 const getFoodOptions = (input, callback) => {
     console.log(input)
     Meteor.call("getFoodNamesData",input,(err,res)=>{
@@ -153,10 +155,10 @@ const getFoodOptions = (input, callback) => {
       let foodsCustom = res.customFoods;
       // console.log("foodnames",foods)
       callback(null,
-        {options: 
+        {options:
           foodsUSDA.map(x=>({value: [x.id,false], label: x.name}))
             .concat(foodsCustom.map(x=>({value: [x._id,true,x], label: x.name})))
         })
     })
-  
+
   };
