@@ -215,6 +215,7 @@ class App extends React.Component {
     <div className="row">
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Calculate diet</button> */}
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
+      <a href="/new-food"><button type="button" id="new-food" className="btn btn-primary toolbar-button">New food</button></a>
         <br/>
     </div>
     <div className="row">
