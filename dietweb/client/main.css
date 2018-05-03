@@ -7,13 +7,16 @@ body {
 @media (min-width: 1400px) {
   .container.food-matrix{
       width: 95vw
-      
+
   }
   .container.new-food{
     /* width: 40vw    */
 }
 }
 
+.food-edit-button {
+  width:100px;
+}
 
 tr .remove-ing {
   visibility: hidden;
@@ -29,7 +32,7 @@ td input[type=number].nut-limits::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-/* 
+/*
 td:hover .nut-limits {
   display: initial;
 } */

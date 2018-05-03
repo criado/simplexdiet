@@ -42,16 +42,18 @@ Meteor.publish("foods", () =>{
 Meteor.methods({
     getFoodNamesData(keyword) {
       console.log(keyword);
-      
+
       let future=new Future();
       // let regex = RegExp("/.*" + keyword + ".*/i");
 
       let customFoods = Foods.find({name:{$regex: keyword , $options: "-i"}}, {
-        fields: {_id:1, name:1},
+        fields: {_id:1, name:1, nutrients:1,price:1},
         limit:100
       }).fetch();
-      
-      let USDAFoods = fetch("https://api.nal.usda.gov/ndb/search/?format=json&q="+keyword+"&sort=n&max=100&offset=0&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC")
+
+      console.log("https://api.nal.usda.gov/ndb/search/?format=json&q="+encodeURI(keyword)+"&sort=n&max=100&offset=0&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC");
+
+      let USDAFoods = fetch("https://api.nal.usda.gov/ndb/search/?format=json&q="+encodeURI(keyword)+"&sort=n&max=100&offset=0&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC")
       USDAFoods
       .then(res=>res.json())
       .catch(err=>console.error(err))
@@ -59,11 +61,11 @@ Meteor.methods({
         if (!!body.errors) {
           future.return({customFoods})
         console.log(body.errors.error)
-        }          
+        }
         else future.return({USDA:body.list.item.map(f=>({id:f.ndbno,name:f.name})),customFoods})
       })
       .catch(err=>console.error(err))
-      
+
 
       let val = future.wait();
       return val

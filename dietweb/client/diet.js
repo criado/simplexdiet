@@ -179,7 +179,7 @@ class App extends React.Component {
   addIng(food) {
     let foodId = food.value[0]
     let custom = food.value[1]
-    console.log("adding",foodId)
+    console.log("adding",foodId,food)
     let newIngPref = this.state.ingPref;
     newIngPref[foodId] = {"price": 0.0,"custom":custom}
 
@@ -217,8 +217,7 @@ class App extends React.Component {
     return (<div className="container food-matrix">
     <div className="row">
       <button type="button" id="save-diet" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Save</button>
-      {'\u00A0'}
-      <button type="button" id="save-diet-as" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Save as</button>
+      {/*<button type="button" id="save-diet-as" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Save as</button>*/}
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
         <br/>
     </div>
