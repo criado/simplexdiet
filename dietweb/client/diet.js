@@ -31,7 +31,7 @@ class App extends React.Component {
     }
   }
   componentDidMount() {
-    const thisComp = this;    
+    const thisComp = this;
     getNutInfo(this.state.nutcodes).then(res=>{
       // console.log("getNuts",res);
       thisComp.setState({
@@ -49,14 +49,14 @@ class App extends React.Component {
   calculateDiet() {
     const thisComp = this;
     // this.updatePrefs()
-    
+
     const parseLimit = (lim) => {
       if (typeof lim === "number" && !isNaN(lim)) return lim
       else return null
     }
 
     this.setState({ingPref: thisComp.props.ingPref,nutPref:thisComp.props.nutPref})
-    
+
     let ingPref = this.props.ingPref
     let ingPrefCustom = {};
     let ingPrefCutomIds = [];
@@ -121,7 +121,7 @@ class App extends React.Component {
             "name":key,
             "id":key,
             "amount":solution[key],
-            "nutAmounts":foundNuts[key]            
+            "nutAmounts":foundNuts[key]
           })
         }
       }
@@ -178,7 +178,7 @@ class App extends React.Component {
   addIng(food) {
     let foodId = food.value[0]
     let custom = food.value[1]
-    console.log("adding",foodId)
+    console.log("adding",foodId,food) 
     let newIngPref = this.state.ingPref;
     newIngPref[foodId] = {"price": 0.0,"custom":custom}
     this.setState({ingPref: newIngPref})
@@ -193,13 +193,13 @@ class App extends React.Component {
   }
   renderDiet() {
     if (this.state.feasible) {
-      return <DietTable 
-          diet={this.state.dietVec} 
-          ings={this.state.ingPref} 
-          nutList={this.state.nutrients} 
-          nutInfo={this.state.nutInfo} 
-          nutPref={this.state.nutPref} 
-          nutTots={this.state.nutTots} 
+      return <DietTable
+          diet={this.state.dietVec}
+          ings={this.state.ingPref}
+          nutList={this.state.nutrients}
+          nutInfo={this.state.nutInfo}
+          nutPref={this.state.nutPref}
+          nutTots={this.state.nutTots}
           changeLims={this.changeLims.bind(this)}
           changeNutLims={this.changeNutLims.bind(this)}
           removeIng={this.removeIng.bind(this)}/>
@@ -240,7 +240,7 @@ const getFoodOptions = (input, callback) => {
     let foodsCustom = res.customFoods;
     // console.log("foodnames",foods)
     callback(null,
-      {options: 
+      {options:
         foodsUSDA.map(x=>({value: [x.id,false], label: x.name}))
           .concat(foodsCustom.map(x=>({value: [x._id,true], label: x.name})))
       })
@@ -270,7 +270,7 @@ export default withTracker(props => {
 
   let ingPref = resultsExist? ingPrefObj.ingPref: defaultIngPref;
   let nutPref = resultsExist? nutPrefObj.nutPref: defaultNutPref;
-  
+
   let ingPrefCustom = {};
   let ingPrefCutomIds = [];
   let ingPrefUSDA = {};
@@ -282,7 +282,7 @@ export default withTracker(props => {
     else ingPrefUSDA[key] = ingPref[key]
   }
 
-  let foodInfoCustom 
+  let foodInfoCustom
   if (resultsExist)
     foodInfoCustom = Foods.find({_id: {$in: ingPrefCutomIds}}).fetch().map(x=>({...x,id:x._id}));
     console.log("foodInfoCustom",ingPrefCutomIds, foodInfoCustom)
@@ -298,15 +298,15 @@ export default withTracker(props => {
         fs[f.id]=nutrients;
         return fs;
       },{});
-      
+
       foodInfoCustom = foodInfoCustom
       .reduce((fs,f,i)=>{
         fs[f.id]=f;
         return fs;
       },{});
     }
-    
-    
+
+
   console.log("foodNutsCustom",foodNutsCustom)
   console.log(resultsExist,ingPrefObj)
 
