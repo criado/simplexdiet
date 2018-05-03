@@ -9,10 +9,46 @@ export default class DietTable extends React.Component {
       maxs: [],
       nutmins: [],
       nutmaxs: [],
+      nutNames: {
+    "208": "Cals",
+    "204": "Fat",
+    "606": "SatF",
+    "203": "Prot",
+    "205": "Carb",
+    "269": "Sug",
+    "291": "Fib",
+    "601": "Chol",
+    "301": "Ca",
+    "312": "Cu",
+    "303": "Fe",
+    "304": "Mg",
+    "315": "Mn",
+    "305": "Phos",
+    "306": "Pota",
+    "307": "Sodi",
+    "317": "Sel",
+    "309": "Zinc",
+    "421": "Chna",
+    "320": "VitA",
+    "404": "B1",
+    "405": "B2",
+    "406": "B3",
+    "410": "B5",
+    "415": "B6",
+    "417": "B9",
+    "418": "B12",
+    "401": "VitC",
+    "328": "VitD",
+    "323": "VitE",
+    "430": "VitK",
+    "619": "Ω 3",
+    "618": "Ω 6"
+}
     }
   }
   componentDidUpdate(prevProps){
     const thisComp = this;
+    console.log(thisComp.props.nutPref);
     if (prevProps !== this.props) {
       this.setState({
         mins: thisComp.props.diet.filter(x=>(x.id in thisComp.props.ings)).map(x=>(thisComp.props.ings[x.id].min*100).toFixed(0)),
@@ -36,7 +72,7 @@ export default class DietTable extends React.Component {
       <tr>
       <th scope="col">Food</th>
         {this.props.nutList.map((x,i)=>{
-          return <th key={i} title={x.name} scope="col">{x.name.slice(0,3)}</th>
+          return <th key={i} title={x.name} scope="col">{thisComp.state.nutNames[x.id]}</th>
         })}
       </tr>
       <tr>

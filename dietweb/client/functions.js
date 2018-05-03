@@ -2,19 +2,19 @@ import solver from 'javascript-lp-solver';
 
 export async function getFoodInfo(ingPref, nutcodes) {
     const makeUrlStr = (foods) => "ndbno="+foods.join("&ndbno=")+"&type=f&format=json&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC";
-  
+
     let foodsIds=Object.keys(ingPref);
     // let foodPrices=ingPref.map(f=>f.price);
-  
+
     const response = await fetch("https://api.nal.usda.gov/ndb/V2/reports?"+makeUrlStr(foodsIds));
     let data = await response.json()
     let foods = data.foods.map(x=>x.food).filter(x=>x);
-  
+
     let foodNames = foods.reduce((fns,f)=>{
       fns[f.desc.ndbno]=f.desc.name
       return fns
     },{})
-  
+
     let foodInfo = foods
         .map(f=>{
           let nutObj = f.nutrients.reduce((ns,n)=>{
@@ -38,23 +38,23 @@ export async function getFoodInfo(ingPref, nutcodes) {
             }
           }
         );
-      
-      let foodNuts = 
+
+      let foodNuts =
         foodInfo
         .reduce((fs,f,i)=>{
             fs[f.id]=f.nutrients;
             return fs;
           },{});
-  
+
     foodInfo = foodInfo
       .reduce((fs,f,i)=>{
         fs[f.id]=f;
         return fs;
       },{});
-    
+
     return {foodNuts,foodInfo, foodNames};
   }
-  
+
 export async function getNutInfo(nutcodes) {
 let nutInfo = await fetch("https://api.nal.usda.gov/ndb/list?format=json&lt=n&max=1000&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC")
     .then(res=>res.json())
@@ -66,13 +66,14 @@ let nutInfo = await fetch("https://api.nal.usda.gov/ndb/list?format=json&lt=n&ma
         return ns
         },{})))
 
-let nutList = [];
-for (let key in nutInfo) {nutList.push({"id":key,"name":nutInfo[key].long_name,"unit":nutInfo[key].unit})}
-nutList.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
+// let nutList = [];
+// for (let key in nutInfo) {nutList.push({"id":key,"name":nutInfo[key].long_name,"unit":nutInfo[key].unit})}
+let nutList = nutcodes.map(n=>({"id":n[0],"name":nutInfo[n[0]].long_name,"unit":nutInfo[n[0]].unit}))
+// nutList.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
 
 return {nutInfo, nutList}
 }
-  
+
 export function solveDiet(foodNuts, nutFoods, ingConst,nutConst, objective) {
     let ingConstProc = {};
     for (let key in ingConst) {
@@ -81,7 +82,7 @@ export function solveDiet(foodNuts, nutFoods, ingConst,nutConst, objective) {
     if (typeof obj.max !== "undefined") {newObj.max = obj.max;}
     if (typeof obj.min !== "undefined") {newObj.min = obj.min;}
     else {newObj.min = 1e-6;}
-    // if (typeof obj.min !== "undefined" || typeof obj.max !== "undefined") 
+    // if (typeof obj.min !== "undefined" || typeof obj.max !== "undefined")
     ingConstProc[key] = newObj;
     }
     let model = {

@@ -56,7 +56,7 @@ Meteor.methods({
       let USDAFoods = fetch("https://api.nal.usda.gov/ndb/search/?format=json&q="+encodeURI(keyword)+"&sort=n&max=100&offset=0&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC")
       USDAFoods
       .then(res=>res.json())
-      .catch(err=>console.error(err))
+      // .catch(err=>console.error(err))
       .then(body=> {
         if (!!body.errors) {
           future.return({customFoods})
