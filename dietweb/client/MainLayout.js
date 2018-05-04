@@ -5,10 +5,10 @@ export const MainLayout = ({content, active}) => {
   return (
       <div className='container-fluid'>
         <div className="row" id="header-title">
-          <a href="/" style={{"text-decoration":"inherit", "color": "inherit"}}><h1>
-            Simplex diet <small>Beta</small>
+          <h1>
+          <a href="/" style={{"text-decoration":"inherit", "color": "inherit"}}>Simplex diet <small>Beta</small></a>  
             <AccountsUIWrapper/>
-          </h1></a>
+          </h1>
         </div>
         <div className="row">
         </div>
