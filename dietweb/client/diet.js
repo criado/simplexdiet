@@ -141,8 +141,6 @@ class App extends React.Component {
     newIngPref[foodId] = { ...thisComp.state.ingPref[foodId], ...newLim}
     this.setState({
       ingPref: newIngPref
-    },()=>{
-      thisComp.updatePrefs()
     })
   }
   changeNutLims(nutId,newLim) {
@@ -152,8 +150,6 @@ class App extends React.Component {
     newNutPref[nutId] = { ...thisComp.state.nutPref[nutId], ...newLim}
     this.setState({
       nutPref: newNutPref
-    },()=>{
-      thisComp.updatePrefs()
     })
   }
   updatePrefs() {
@@ -181,15 +177,16 @@ class App extends React.Component {
     console.log("adding",foodId,food)
     let newIngPref = this.state.ingPref;
     newIngPref[foodId] = {"price": 0.0,"custom":custom}
-    this.setState({ingPref: newIngPref})
-    this.updatePrefs()
+    this.setState({ingPref: newIngPref},()=>{
+      this.updatePrefs()
+    })
   }
   removeIng(food) {
     console.log("removing",food)
     let newIngPref = this.state.ingPref;
     delete newIngPref[food]
     this.setState({ingPref: newIngPref})
-    this.updatePrefs()
+    // this.updatePrefs()
   }
   renderDiet() {
     if (this.state.feasible) {
@@ -202,6 +199,7 @@ class App extends React.Component {
           nutTots={this.state.nutTots}
           changeLims={this.changeLims.bind(this)}
           changeNutLims={this.changeNutLims.bind(this)}
+          calculateDiet={this.calculateDiet.bind(this)}
           removeIng={this.removeIng.bind(this)}/>
     } else {
       return (<div className="alert alert-danger" role="alert">
@@ -213,8 +211,9 @@ class App extends React.Component {
     let thisComp = this;
     return (<div className="container food-matrix">
     <div className="row">
-      {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Calculate diet</button> */}
+      <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Calculate diet</button>
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
+      <a href="/new-food"><button type="button" id="new-food" style={{"margin-right":"10px"}} className="btn btn-primary toolbar-button">New food</button></a>
         <br/>
     </div>
     <div className="row">
@@ -299,6 +298,11 @@ export default withTracker(props => {
       foodNutsCustom = foodInfoCustom
       .reduce((fs,f,i)=>{
         let nutrients = f.nutrients;
+        for (var i = 0; i < nutcodes.length; i++) {
+          if (!(nutcodes[i][0] in nutrients)) {
+            nutrients[nutcodes[i][0]] = 0
+          }
+        }
         nutrients["price"] = f.price;
         nutrients[f.id] = 1;
         fs[f.id]=nutrients;

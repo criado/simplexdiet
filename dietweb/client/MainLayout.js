@@ -6,7 +6,7 @@ export const MainLayout = ({content, active}) => {
       <div className='container-fluid'>
         <div className="row" id="header-title">
           <h1>
-            Simplex diet
+          <a href="/" style={{"text-decoration":"inherit", "color": "inherit"}}>Simplex diet <small>Beta</small></a>  
             <AccountsUIWrapper/>
           </h1>
         </div>
