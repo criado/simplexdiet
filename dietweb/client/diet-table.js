@@ -114,7 +114,10 @@ export default class DietTable extends React.Component {
                 </a>
                 <input value={thisComp.state.mins[i]} step="10" style={{width:"45px",marginRight:"10px"}} type="number"
                   onKeyPress={e=>{
-                      if (e.key == 'Enter') thisComp.props.calculateDiet()
+                      if (e.key == 'Enter') {
+                        console.log("asdf2")
+                        thisComp.props.calculateDiet()
+                      }
                     }}
                   onChange={e=>thisComp.props.changeLims(x.id,{"min":parseFloat(e.target.value)/100})}
                 />

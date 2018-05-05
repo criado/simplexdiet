@@ -28,7 +28,7 @@ class App extends React.Component {
       nutInfo: {},
       nutTots:[],
       nutPref: props.nutPref,
-      has_changed: true // It is true because we want to compute the diet in the beginning
+      first_time: true // It is true because we want to compute the diet in the beginning
     }
   }
   componentDidMount() {
@@ -45,9 +45,9 @@ class App extends React.Component {
   }
   componentDidUpdate(prevProps) {
     //if ((prevProps.ingPref !== this.props.ingPref || prevProps.nutPref !== this.props.nutPref ) && !this.props.prefLoading ){
-    if (this.state.has_changed && !this.props.prefLoading ){
+    if (this.state.first_time){
       this.calculateDiet()
-      this.setState({has_changed: false})
+      this.setState({first_time: false})
     }
   }
   calculateDiet() {
@@ -205,7 +205,12 @@ class App extends React.Component {
           nutTots={this.state.nutTots}
           changeLims={this.changeLims.bind(this)}
           changeNutLims={this.changeNutLims.bind(this)}
-          calculateDiet={this.calculateDiet.bind(this)}
+          calculateDietIfNeeded={()=>{
+            if (this.state.has_changed){
+               this.calculateDiet.bind(this)
+               this.setState({has_changed: false})
+            }
+          }}
           removeIng={this.removeIng.bind(this)}/>
     } else {
       return (<div className="alert alert-danger" role="alert">
@@ -216,8 +221,6 @@ class App extends React.Component {
   render() {
     let thisComp = this;
     let carbs_energy = this.state.nutTots[4]*4, fat_energy = this.state.nutTots[1]*9, protein_energy = this.state.nutTots[3]*4
-    console.log("asdfasdfas")
-    console.log(this.state.nutTots)
     let total_energy = carbs_energy + fat_energy + protein_energy // Note this is not the same as this.state.nutTots["kcals"] because of the error due to the factors 4, 9, and 4 to approximate the energy
     carbs_energy = carbs_energy*100/total_energy
     fat_energy = fat_energy*100/total_energy
