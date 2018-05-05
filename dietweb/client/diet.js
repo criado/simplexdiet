@@ -145,6 +145,7 @@ class App extends React.Component {
     this.setState({
       ingPref: newIngPref,
       has_changed: true
+      ingPref: newIngPref
     })
   }
   changeNutLims(nutId,newLim) {
@@ -182,7 +183,6 @@ class App extends React.Component {
     console.log("adding",foodId,food)
     let newIngPref = this.state.ingPref;
     newIngPref[foodId] = {"price": 0.0,"custom":custom}
-
     this.setState({
       ingPref: newIngPref,
       has_changed:true
@@ -205,6 +205,7 @@ class App extends React.Component {
           nutTots={this.state.nutTots}
           changeLims={this.changeLims.bind(this)}
           changeNutLims={this.changeNutLims.bind(this)}
+          calculateDiet={this.calculateDiet.bind(this)}
           removeIng={this.removeIng.bind(this)}/>
     } else {
       return (<div className="alert alert-danger" role="alert">
@@ -216,9 +217,9 @@ class App extends React.Component {
     let thisComp = this;
     return (<div className="container food-matrix">
     <div className="row">
-      <button type="button" id="save-diet" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Save</button>
-      {/*<button type="button" id="save-diet-as" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Save as</button>*/}
+      <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Calculate diet</button>
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
+      <a href="/new-food"><button type="button" id="new-food" style={{"margin-right":"10px"}} className="btn btn-primary toolbar-button">New food</button></a>
         <br/>
     </div>
     <div className="row">
@@ -303,6 +304,11 @@ export default withTracker(props => {
       foodNutsCustom = foodInfoCustom
       .reduce((fs,f,i)=>{
         let nutrients = f.nutrients;
+        for (var i = 0; i < nutcodes.length; i++) {
+          if (!(nutcodes[i][0] in nutrients)) {
+            nutrients[nutcodes[i][0]] = 0
+          }
+        }
         nutrients["price"] = f.price;
         nutrients[f.id] = 1;
         fs[f.id]=nutrients;
