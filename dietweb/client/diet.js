@@ -210,16 +210,20 @@ class App extends React.Component {
           changeLims={this.changeLims.bind(this)}
           changeNutLims={this.changeNutLims.bind(this)}
           calculateDietIfNeeded={()=>{
-            if (this.state.has_changed){
-               this.calculateDiet()
-               this.setState({has_changed: false})
-            }
+              this.updatePrefs()
+              this.calculateDietIfNeeded()
           }}
           removeIng={this.removeIng.bind(this)}/>
     } else {
       return (<div className="alert alert-danger" role="alert">
         <strong>Oh snap!</strong> No feasible primal solution!
       </div>)
+    }
+  }
+  calculateDietIfNeeded() {
+    if (this.state.has_changed){
+       this.calculateDiet()
+       this.setState({has_changed: false})
     }
   }
   renderEmptyDiet() {
@@ -234,10 +238,8 @@ class App extends React.Component {
           changeLims={this.changeLims.bind(this)}
           changeNutLims={this.changeNutLims.bind(this)}
           calculateDietIfNeeded={()=>{
-            if (this.state.has_changed){
-               this.calculateDiet.bind(this)
-               this.setState({has_changed: false})
-            }
+              this.updatePrefs()
+              this.calculateDietIfNeeded()
           }}
           removeIng={this.removeIng.bind(this)}/>
     } else {
@@ -258,7 +260,7 @@ class App extends React.Component {
       <span> {"Carbs: " + carbs_energy.toFixed(2) + "%, Fat: " + fat_energy.toFixed(2) + " %, Protein: " + protein_energy.toFixed(2) + "%"} </span>
       <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={()=> {
         this.updatePrefs()
-        this.calculateDiet()
+        this.calculateDietIfNeeded()
       }}>Calculate diet</button>
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
       <a href="/new-food"><button type="button" id="new-food" style={{"margin-right":"10px"}} className="btn btn-primary toolbar-button">New food</button></a>
