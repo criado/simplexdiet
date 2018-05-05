@@ -22,6 +22,12 @@ tr .remove-ing {
   visibility: hidden;
 }
 
+/*.nutName {
+  display: inline-block;
+  position: relative;
+  transform: rotate(-45deg);
+}*/
+
 tr:hover .remove-ing {
   visibility: visible;
 }
