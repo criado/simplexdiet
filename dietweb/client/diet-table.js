@@ -59,6 +59,13 @@ export default class DietTable extends React.Component {
       })
     }
   }
+  // handleLimChange(type,i,val) {
+  //   const thisComp = this;
+  //   let lims = this.state[type];
+  //   lims[i]=val;
+  //   console.log(val)
+  //   this.setState({type:lims})
+  // }
   render() {
     const thisComp = this;
     return (<table className="table table-hover table-dark">
