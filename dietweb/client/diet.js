@@ -45,7 +45,7 @@ class App extends React.Component {
   }
   componentDidUpdate(prevProps) {
     //if ((prevProps.ingPref !== this.props.ingPref || prevProps.nutPref !== this.props.nutPref ) && !this.props.prefLoading ){
-    if (this.state.first_time){
+    if (this.state.first_time && !this.props.prefLoading){
       this.calculateDiet()
       this.setState({first_time: false})
     }
@@ -207,7 +207,7 @@ class App extends React.Component {
           changeNutLims={this.changeNutLims.bind(this)}
           calculateDietIfNeeded={()=>{
             if (this.state.has_changed){
-               this.calculateDiet.bind(this)
+               this.calculateDiet()
                this.setState({has_changed: false})
             }
           }}
