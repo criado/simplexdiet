@@ -6,16 +6,17 @@ import { Foods } from "../imports/collections.js"
 import { Async } from 'react-select';
 
 import {getFoodInfo} from './functions.js'
+import { nutcodes, nutInfo } from './nut-info.js'
 
 export default class CustomFood extends React.Component {
     constructor(props) {
         super(props);
-        let nutcodes = [["208","kcal"],["204","g"],["606","g"],["203","g"],["205","g"],["269","g"],["291","g"],["601","mg"],["301","mg"],["312","mg"],["303","mg"],["304","mg"],["315","mg"],["305","mg"],["306","mg"],["307","mg"],["317","µg"],["309","mg"],["421","mg"],["320","µg"],["404","mg"],["405","mg"],["406","mg"],["410","mg"],["415","mg"],["417","µg"],["418","µg"],["401","mg"],["328","µg"],["323","mg"],["430","µg"],["619","g"],["618","g"]];
-        nutcodes = nutcodes.sort((a,b)=>parseInt(a[0])-parseInt(b[0]))
         this.state = {
             foodOldName:"",
             foodId: "",
             nutcodes,
+            nutrients: nutcodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit})),
+            nutInfo: nutInfo,
             foodNuts: nutcodes.map(x=>x[0]).reduce((ns,n)=>{
                 ns[n]=0
                 return ns
@@ -23,19 +24,19 @@ export default class CustomFood extends React.Component {
             foodName:"",
             foodPrice:0,
             custom: true,
-            user: Meteor.userId()
+            user: ""
         }
     }
-    componentDidMount() {
-        const thisComp = this;
-        getNutInfo(this.state.nutcodes).then(res=>{
-            // console.log("getNuts",res);
-            thisComp.setState({
-              nutrients: res.nutList,
-              nutInfo: res.nutInfo
-            })
-          })
-        }
+    // componentDidMount() {
+    //     const thisComp = this;
+    //     getNutInfo(this.state.nutcodes).then(res=>{
+    //         // console.log("getNuts",res);
+    //         thisComp.setState({
+    //           nutrients: res.nutList,
+    //           nutInfo: res.nutInfo
+    //         })
+    //       })
+    //     }
     handleNutChange(code,value) {
         let newFoodNuts = this.state.foodNuts;
         newFoodNuts[code]=parseFloat(value)
@@ -70,13 +71,14 @@ export default class CustomFood extends React.Component {
         Foods.remove({_id: this.state.foodId})
     }
     chooseFood(food) {
+        let foodFullName = food.label;
         food = food.value;
         let foodName = food.name;
         const thisComp = this;
         let foodId = food.id;
         let custom = food.custom
         console.log("loading",foodId,food)
-        this.setState({foodOldName:foodName})
+        this.setState({foodOldName:foodFullName})
         // newIngPref[foodId] = {"price": 0.0,"custom":custom}
         // this.setState({ingPref: newIngPref})
         // this.updatePrefs()
@@ -100,7 +102,7 @@ export default class CustomFood extends React.Component {
         // console.log(Meteor.user());
         return ( <div className="container new-food">
             <div className="row" style={{textAlign:"center"}}>
-                <h3>Custom food: {this.state.foodOldName}</h3>
+                <h3>Custom food: {this.state.foodOldName} </h3>
             </div>
             <div className="row">
             <Async

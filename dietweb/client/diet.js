@@ -12,9 +12,14 @@ import { Async } from 'react-select';
 
 import DietTable from './diet-table.js'
 
-let nutcodes = ["208","204","606","203","205","269","291","601","301","312","303","304","315","305","306","307","317","309","421","320","404","405","406","410","415","417","418","401","328","323","430","619","618"];
+import { nutcodes, nutInfo } from './nut-info.js'
 
-let nutInfo = {"203":{"unit":"g","long_name":"Protein","id":"203"},"204":{"unit":"g","long_name":"Total lipid (fat)","id":"204"},"205":{"unit":"g","long_name":"Carbohydrate, by difference","id":"205"},"208":{"unit":"kcal","long_name":"Energy","id":"208"},"269":{"unit":"g","long_name":"Sugars, total","id":"269"},"291":{"unit":"g","long_name":"Fiber, total dietary","id":"291"},"301":{"unit":"mg","long_name":"Calcium, Ca","id":"301"},"303":{"unit":"mg","long_name":"Iron, Fe","id":"303"},"304":{"unit":"mg","long_name":"Magnesium, Mg","id":"304"},"305":{"unit":"mg","long_name":"Phosphorus, P","id":"305"},"306":{"unit":"mg","long_name":"Potassium, K","id":"306"},"307":{"unit":"mg","long_name":"Sodium, Na","id":"307"},"309":{"unit":"mg","long_name":"Zinc, Zn","id":"309"},"312":{"unit":"mg","long_name":"Copper, Cu","id":"312"},"315":{"unit":"mg","long_name":"Manganese, Mn","id":"315"},"317":{"unit":"µg","long_name":"Selenium, Se","id":"317"},"320":{"unit":"µg","long_name":"Vitamin A, RAE","id":"320"},"323":{"unit":"mg","long_name":"Vitamin E (alpha-tocopherol)","id":"323"},"328":{"unit":"µg","long_name":"Vitamin D (D2 + D3)","id":"328"},"401":{"unit":"mg","long_name":"Vitamin C, total ascorbic acid","id":"401"},"404":{"unit":"mg","long_name":"Thiamin","id":"404"},"405":{"unit":"mg","long_name":"Riboflavin","id":"405"},"406":{"unit":"mg","long_name":"Niacin","id":"406"},"410":{"unit":"mg","long_name":"Pantothenic acid","id":"410"},"415":{"unit":"mg","long_name":"Vitamin B-6","id":"415"},"417":{"unit":"µg","long_name":"Folate, total","id":"417"},"418":{"unit":"µg","long_name":"Vitamin B-12","id":"418"},"421":{"unit":"mg","long_name":"Choline, total","id":"421"},"430":{"unit":"µg","long_name":"Vitamin K (phylloquinone)","id":"430"},"601":{"unit":"mg","long_name":"Cholesterol","id":"601"},"606":{"unit":"g","long_name":"Fatty acids, total saturated","id":"606"},"618":{"unit":"g","long_name":"18:2 undifferentiated","id":"618"},"619":{"unit":"g","long_name":"18:3 undifferentiated","id":"619"}}
+const newEmptyFood = (id,name) => ({
+  id,
+  name,
+  amount: 0,
+  nutAmounts: nutcodes.map(x=>0)
+})
 
 class App extends React.Component {
   constructor(props) {
@@ -27,29 +32,19 @@ class App extends React.Component {
       foods:[],
       nutcodes,
       nutrients: nutcodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit})),
-      nutInfo: {},
-      nutTots:[],
+      nutInfo: nutInfo,
+      nutTots:nutcodes.map(x=>0),
+      dietVec: Object.keys(props.ingPref).map(fid=>newEmptyFood(fid,fid)),
       nutPref: props.nutPref,
       first_time: true // It is true because we want to compute the diet in the beginning
     }
   }
-  // componentDidMount() {
-  //   const thisComp = this;
-  //   // getNutInfo(this.state.nutcodes).then(res=>{
-  //   //   // console.log("getNuts",res);
-  //   //   thisComp.setState({
-  //   //     nutrients: res.nutList,
-  //   //     nutInfo: res.nutInfo
-  //   //   })
-  //   // })
-  //   if (!this.props.prefLoading)
-  //     this.calculateDiet()
-  // }
   componentDidUpdate(prevProps) {
     //if ((prevProps.ingPref !== this.props.ingPref || prevProps.nutPref !== this.props.nutPref ) && !this.props.prefLoading ){
     if (this.state.first_time && !this.props.prefLoading){
-      this.calculateDiet()
-      this.setState({first_time: false})
+      this.setState({ingPref: this.props.ingPref,nutPref:this.props.nutPref, first_time: false}, () => {
+        this.calculateDiet()
+      })
     }
   }
   calculateDiet() {
@@ -60,9 +55,9 @@ class App extends React.Component {
       else return null
     }
 
-    this.setState({ingPref: thisComp.props.ingPref,nutPref:thisComp.props.nutPref})
+    // this.setState({ingPref: thisComp.props.ingPref,nutPref:thisComp.props.nutPref})
 
-    let ingPref = this.props.ingPref
+    let ingPref = this.state.ingPref
     let ingPrefCustom = {};
     let ingPrefCutomIds = [];
     let ingPrefUSDA = {};
@@ -75,7 +70,7 @@ class App extends React.Component {
     }
     let foodNutsCustom = this.props.foodNutsCustom
     let foodInfoCustom = this.props.foodInfoCustom
-    let nutPref = this.props.nutPref
+    let nutPref = this.state.nutPref
     let nutcodes = this.state.nutcodes
 
     let nutFoods = {};
@@ -224,28 +219,6 @@ class App extends React.Component {
     if (this.state.has_changed){
        this.calculateDiet()
        this.setState({has_changed: false})
-    }
-  }
-  renderEmptyDiet() {
-    if (this.state.feasible) {
-      return <DietTable
-          ings={this.state.ingPref}
-          nutList={this.state.nutrients}
-          nutInfo={this.state.nutInfo}
-          nutPref={this.state.nutPref}
-          diet={this.state.dietVec}
-          nutTots={this.state.nutTots}
-          changeLims={this.changeLims.bind(this)}
-          changeNutLims={this.changeNutLims.bind(this)}
-          calculateDietIfNeeded={()=>{
-              this.updatePrefs()
-              this.calculateDietIfNeeded()
-          }}
-          removeIng={this.removeIng.bind(this)}/>
-    } else {
-      return (<div className="alert alert-danger" role="alert">
-        <strong>Oh snap!</strong> No feasible primal solution!
-      </div>)
     }
   }
   render() {
