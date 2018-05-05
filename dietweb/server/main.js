@@ -47,7 +47,7 @@ Meteor.methods({
       // let regex = RegExp("/.*" + keyword + ".*/i");
 
       let customFoods = Foods.find({name:{$regex: keyword , $options: "-i"}}, {
-        fields: {_id:1, name:1, nutrients:1,price:1},
+        fields: {_id:1, name:1, nutrients:1,price:1, user: 1},
         limit:100
       }).fetch();
 
