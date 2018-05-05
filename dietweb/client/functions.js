@@ -5,7 +5,6 @@ export async function getFoodInfo(ingPref, nutcodes) {
 
     let foodsIds=Object.keys(ingPref);
     // let foodPrices=ingPref.map(f=>f.price);
-
     const response = await fetch("https://api.nal.usda.gov/ndb/V2/reports?"+makeUrlStr(foodsIds));
     let data = await response.json()
     let foods = data.foods.map(x=>x.food).filter(x=>x);
@@ -38,6 +37,8 @@ export async function getFoodInfo(ingPref, nutcodes) {
             }
           }
         );
+
+      // console.log("HIIIIIIIIIIIIII", foodInfo)
 
       let foodNuts =
         foodInfo
