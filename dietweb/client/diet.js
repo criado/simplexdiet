@@ -321,8 +321,8 @@ export default withTracker(props => {
   let nutPref = resultsExist? nutPrefObj.nutPref: defaultNutPref;
 
   for (var i = 0; i < nutcodes.length; i++) {
-    if (!(nutcodes[i][0] in nutPref)) {
-      nutPref[nutcodes[i][0]] = {}
+    if (!(nutcodes[i] in nutPref)) {
+      nutPref[nutcodes[i]] = {}
     }
   }
 
