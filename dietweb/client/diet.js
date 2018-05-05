@@ -167,15 +167,17 @@ class App extends React.Component {
       _id:Meteor.userId(),
       ingPref:thisComp.state.ingPref
     },
-    {upsert:true})
-    NutrientPreferences.update({
-      _id:Meteor.userId()
-    },
-    {
-      _id:Meteor.userId(),
-      nutPref:thisComp.state.nutPref
-    },
-    {upsert:true})
+    {upsert:true},()=>{
+      NutrientPreferences.update({
+        _id:Meteor.userId()
+      },
+      {
+        _id:Meteor.userId(),
+        nutPref:thisComp.state.nutPref
+      },
+      {upsert:true})
+    })
+
   }
   addIng(food) {
     let foodId = food.value[0]
