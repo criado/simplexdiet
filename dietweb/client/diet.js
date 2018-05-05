@@ -30,6 +30,7 @@ class App extends React.Component {
       nutInfo: {},
       nutTots:[],
       nutPref: props.nutPref,
+      has_changed: false, 
       first_time: true // It is true because we want to compute the diet in the beginning
     }
   }
