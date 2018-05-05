@@ -144,7 +144,7 @@ class App extends React.Component {
     newIngPref[foodId] = { ...thisComp.state.ingPref[foodId], ...newLim}
     this.setState({
       ingPref: newIngPref,
-      has_changed: true
+      has_changed: true,
       ingPref: newIngPref
     })
   }
