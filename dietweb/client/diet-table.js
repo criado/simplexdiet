@@ -59,13 +59,6 @@ export default class DietTable extends React.Component {
       })
     }
   }
-  // handleLimChange(type,i,val) {
-  //   const thisComp = this;
-  //   let lims = this.state[type];
-  //   lims[i]=val;
-  //   console.log(val)
-  //   this.setState({type:lims})
-  // }
   render() {
     const thisComp = this;
     return (<table className="table table-hover table-dark">
@@ -82,14 +75,14 @@ export default class DietTable extends React.Component {
           return <td key={i} title={x.name} scope="col" style={{fontSize:"10px",maxWidth:"40px",padding:"5px"}}>
           <input className="nut-limits" value={thisComp.state.nutmins[i]} step="10" style={{maxWidth:"30px"}} type="number"
                 onKeyPress={e=>{
-                    if (e.key == 'Enter') thisComp.props.calculateDietIfNeeded()
+                    if (e.key == 'Enter') thisComp.props.calculateDiet()
                 }}
                 onChange={e=>thisComp.props.changeNutLims(x.id,{"min":parseFloat(e.target.value)})}
             />
             <span style={{maxWidth:"30px"}}>{thisComp.props.nutTots[i] ? thisComp.props.nutTots[i].toFixed(0).toString(): ""}<span style={{fontSize:"8px"}}>{x.unit}</span></span>
             <input className="nut-limits" value={thisComp.state.nutmaxs[i]} step="10" style={{maxWidth:"30px"}} type="number"
                 onKeyPress={e=>{
-                    if (e.key == 'Enter') thisComp.props.calculateDietIfNeeded()
+                    if (e.key == 'Enter') thisComp.props.calculateDiet()
                 }}
                 onChange={e=>thisComp.props.changeNutLims(x.id,{"max":parseFloat(e.target.value)})}
                 />
@@ -116,7 +109,7 @@ export default class DietTable extends React.Component {
                   onKeyPress={e=>{
                       if (e.key == 'Enter') {
                         console.log("asdf2")
-                        thisComp.props.calculateDietIfNeeded()
+                        thisComp.props.calculateDiet()
                       }
                     }}
                   onChange={e=>thisComp.props.changeLims(x.id,{"min":parseFloat(e.target.value)/100})}
@@ -126,7 +119,7 @@ export default class DietTable extends React.Component {
                 </span>
                 <input value={thisComp.state.maxs[i]} step="10" style={{width:"45px",marginRight:"10px"}} type="number"
                   onKeyPress={e=>{
-                      if (e.key == 'Enter') thisComp.props.calculateDietIfNeeded()
+                      if (e.key == 'Enter') thisComp.props.calculateDiet()
                     }}
                     onChange={e=>thisComp.props.changeLims(x.id,{"max":parseFloat(e.target.value)/100})}
                   />
