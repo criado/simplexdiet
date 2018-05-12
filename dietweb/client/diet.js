@@ -188,14 +188,18 @@ class App extends React.Component {
       has_changed:true
     },()=>{
       this.updatePrefs()
+      let vec = this.state.dietVec;
+      vec.push(newEmptyFood(foodId,food.label))
+      this.setState({dietVec: vec})
     })
   }
-  removeIng(food) {
-    console.log("removing",food)
+  removeIng(foodId) {
+    console.log("removing",foodId)
     let newIngPref = this.state.ingPref;
-    delete newIngPref[food]
-    this.setState({ingPref: newIngPref},()=>{
+    delete newIngPref[foodId]
+    this.setState({ingPref: newIngPref, has_changed:true},()=>{
       this.updatePrefs()
+      this.setState({dietVec: this.state.dietVec.filter(f=>f.id!==foodId)})
     })
   }
   renderDiet() {

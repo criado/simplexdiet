@@ -17,7 +17,7 @@ export default class CustomFood extends React.Component {
             nutcodes,
             nutrients: nutcodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit})),
             nutInfo: nutInfo,
-            foodNuts: nutcodes.map(x=>x[0]).reduce((ns,n)=>{
+            foodNuts: nutcodes.reduce((ns,n)=>{
                 ns[n]=0
                 return ns
             },{}),
@@ -41,7 +41,7 @@ export default class CustomFood extends React.Component {
             price: parseFloat(thisComp.state.foodPrice),
             nutrients: thisComp.state.foodNuts
         },(err,_id)=> {
-          if (!err) thisComp.setState({foodOldName:foodName, foodId:_id})
+          if (!err) thisComp.setState({foodOldName:foodName, foodId:_id, user: Meteor.user().username})
         })
     }
     saveFood() {
