@@ -200,7 +200,7 @@ const getFoodOptions = (input, callback) => {
       callback(null,
         {options:
           foodsUSDA.map(x=>({value: {id:x.id,name:x.name,custom:false}, label: x.name+" (USDA)", user: "USDA"}))
-            .concat(foodsCustom.map(x=>({value: {id:x._id,name:x.name,custom:true,price:x.price,nutrients:x.nutrients, user: x.user}, label: x.name+" ("+x.user+")"})))
+            .concat(foodsCustom.map(x=>({value: {id:x._id,name:x.name,custom:true,price:x.price,nutrients:x.nutrients, user: x.user}, label: x.name+" (USDA)"})))
         })
     })
 

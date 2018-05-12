@@ -16,6 +16,7 @@
     "javascript-lp-solver": "^0.4.5",
     "meteor-node-stubs": "~0.2.4",
     "react": "^15.6.1",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-addons-pure-render-mixin": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-mounter": "^1.2.0",

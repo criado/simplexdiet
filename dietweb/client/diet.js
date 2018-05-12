@@ -142,7 +142,16 @@ class App extends React.Component {
     this.setState({
       ingPref: newIngPref,
       has_changed: true,
-      ingPref: newIngPref
+    })
+  }
+
+  changePrice(foodId,newPrice) {
+    const thisComp = this;
+    let newIngPref = thisComp.state.ingPref;
+    newIngPref[foodId].price = newPrice;
+    this.setState({
+      ingPref: newIngPref,
+      has_changed: true,
     })
   }
 
@@ -178,18 +187,18 @@ class App extends React.Component {
     })
 }
   addIng(food) {
-    let foodId = food.value[0]
-    let custom = food.value[1]
-    console.log("adding",foodId,food)
+    let foodId = food.id
+    let custom = food.custom
+    // console.log("adding",foodId,food)
     let newIngPref = this.state.ingPref;
-    newIngPref[foodId] = {"price": 0.0,"custom":custom}
+    newIngPref[foodId] = {"price": food.price,"custom":custom}
     this.setState({
       ingPref: newIngPref,
       has_changed:true
     },()=>{
       this.updatePrefs()
       let vec = this.state.dietVec;
-      vec.push(newEmptyFood(foodId,food.label))
+      vec.push(newEmptyFood(foodId,food.name))
       this.setState({dietVec: vec})
     })
   }
@@ -212,6 +221,7 @@ class App extends React.Component {
           nutPref={this.state.nutPref}
           nutTots={this.state.nutTots}
           changeLims={this.changeLims.bind(this)}
+          changePrice={this.changePrice.bind(this)}
           changeNutLims={this.changeNutLims.bind(this)}
           calculateDietIfNeeded={()=>{
               this.updatePrefs()
@@ -272,8 +282,8 @@ const getFoodOptions = (input, callback) => {
     // console.log("foodnames",foods)
     callback(null,
       {options:
-        foodsUSDA.map(x=>({value: [x.id,false], label: x.name}))
-          .concat(foodsCustom.map(x=>({value: [x._id,true], label: x.name})))
+        foodsUSDA.map(x=>({value: {id:x.id,name:x.name,custom:false}, label: x.name+" (USDA)"}))
+          .concat(foodsCustom.map(x=>({value: {id:x._id,name:x.name,custom:true,price:x.price}, label: x.name+" (USDA)"})))
       })
   })
 

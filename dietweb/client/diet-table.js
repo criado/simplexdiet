@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
+
 
 export default class DietTable extends React.Component {
   constructor(props) {
@@ -8,8 +10,10 @@ export default class DietTable extends React.Component {
     this.state = {
       mins: [],
       maxs: [],
+      prices: [],
       nutmins: [],
-      nutmaxs: []
+      nutmaxs: [],
+      editingPrice: -1
     }
   }
   componentDidUpdate(prevProps){
@@ -18,6 +22,7 @@ export default class DietTable extends React.Component {
       this.setState({
         mins: thisComp.props.diet.filter(x=>(x.id in thisComp.props.ings)).map(x=>(thisComp.props.ings[x.id].min*100).toFixed(0)),
         maxs: thisComp.props.diet.filter(x=>(x.id in thisComp.props.ings)).map(x=>(thisComp.props.ings[x.id].max*100).toFixed(0)),
+        prices: thisComp.props.diet.filter(x=>(x.id in thisComp.props.ings)).map(x=>(thisComp.props.ings[x.id].price)),
         nutmins: thisComp.props.nutList.map(x=>
           typeof thisComp.props.nutPref[x.id] !== "undefined" && typeof thisComp.props.nutPref[x.id].min !== "undefined" ? thisComp.props.nutPref[x.id].min.toFixed(0) : ""),
         nutmaxs: thisComp.props.nutList.map(x=>
@@ -32,6 +37,12 @@ export default class DietTable extends React.Component {
   //   console.log(val)
   //   this.setState({type:lims})
   // }
+  editFoodPrice(index) {
+    if (this.state.editingPrice === index)
+      this.setState({editingPrice:-1})
+    else 
+      this.setState({editingPrice:index})      
+  }
   render() {
     const thisComp = this;
     return (<table className="table table-hover table-dark">
@@ -50,7 +61,11 @@ export default class DietTable extends React.Component {
                 onKeyPress={e=>{
                     if (e.key == 'Enter') thisComp.props.calculateDietIfNeeded()
                 }}
-                onChange={e=>thisComp.props.changeNutLims(x.id,{"min":parseFloat(e.target.value)})}
+                onChange={e=>{
+                  let nutmins = thisComp.state.nutmins;
+                  thisComp.setState({nutmins: [...nutmins.slice(0,i), e.target.value, ...nutmins.slice(i)]});
+                  thisComp.props.changeNutLims(x.id,{"min":parseFloat(e.target.value)})
+                }}
             />
             <br/>
             <span style={{maxWidth:"30px"}}>{typeof thisComp.props.nutTots[i] !== "undefined" ? thisComp.props.nutTots[i].toFixed(0).toString(): ""}<span style={{fontSize:"8px"}}>{x.unit}</span></span>
@@ -59,7 +74,11 @@ export default class DietTable extends React.Component {
                 onKeyPress={e=>{
                     if (e.key == 'Enter') thisComp.props.calculateDietIfNeeded()
                 }}
-                onChange={e=>thisComp.props.changeNutLims(x.id,{"max":parseFloat(e.target.value)})}
+                onChange={e=>{
+                  let nutmaxs = thisComp.state.nutmaxs;
+                  thisComp.setState({nutmaxs: [...nutmaxs.slice(0,i), e.target.value, ...nutmaxs.slice(i)]});
+                  thisComp.props.changeNutLims(x.id,{"max":parseFloat(e.target.value)})
+                }}
                 />
             {/* <span title={x.name}>{x.name.split(",").slice(0,2).join(",").slice(0,17)}</span> */}
         </td>
@@ -80,6 +99,7 @@ export default class DietTable extends React.Component {
                 <a className="remove-ing" style={{marginRight:"10px",color:"red"}} onClick={()=>thisComp.props.removeIng(x.id)}>
                   <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
+
                 <input value={thisComp.state.mins[i]} step="10" style={{width:"45px",marginRight:"10px"}} type="number"
                   onKeyPress={e=>{
                       if (e.key == 'Enter') {
@@ -87,18 +107,44 @@ export default class DietTable extends React.Component {
                         thisComp.props.calculateDietIfNeeded()
                       }
                     }}
-                  onChange={e=>thisComp.props.changeLims(x.id,{"min":parseFloat(e.target.value)/100})}
+                    onChange={e=>{
+                      let mins = thisComp.state.mins;
+                      thisComp.setState({mins: [...mins.slice(0,i), e.target.value, ...mins.slice(i)]});
+                      thisComp.props.changeLims(x.id,{"min":parseFloat(e.target.value)/100})
+                    }}
                 />
+
                 <span style={{marginRight:"15px",display:"inline-block",width:"30px",overflow:"hidden",textAlign:"right"}}>
                   {(parseFloat(x.amount)*100).toFixed(0)}g
                 </span>
+
                 <input value={thisComp.state.maxs[i]} step="10" style={{width:"45px",marginRight:"10px"}} type="number"
                   onKeyPress={e=>{
                       if (e.key == 'Enter') thisComp.props.calculateDietIfNeeded()
                     }}
-                    onChange={e=>thisComp.props.changeLims(x.id,{"max":parseFloat(e.target.value)/100})}
+                    onChange={e=>{
+                      let maxs = thisComp.state.maxs;
+                      thisComp.setState({maxs: [...maxs.slice(0,i), e.target.value, ...maxs.slice(i)]});
+                      thisComp.props.changeLims(x.id,{"max":parseFloat(e.target.value)/100})
+                    }}
                   />
-                <span title={x.name}>{x.name.split(",").slice(0,2).join(",").slice(0,17)}</span>
+
+                <span title={x.name} onClick={()=>{this.editFoodPrice(i)}} style={{cursor: "pointer"}}>{x.name.split(",").slice(0,2).join(",").slice(0,17)}</span>
+                {/* <span className="glyphicon glyphicon-gbp" aria-hidden="true" onClick={()=>{this.editFoodPrice(i)}} style={{cursor: "pointer", float:"right"}}></span> */}
+                <ReactCSSTransitionGroup
+                  transitionName="price-appear">
+                    {thisComp.state.editingPrice === i ? 
+                      <input className="food-price" value={thisComp.state.prices[i]} step="10" style={{width:"45px", left: "10px", marginRight: "-65px", position:"relative"}} type="number"
+                      onKeyPress={e=>{
+                          if (e.key == 'Enter') thisComp.props.calculateDietIfNeeded()
+                        }}
+                        onChange={e=>{
+                          let prices = thisComp.state.prices;
+                          thisComp.setState({prices: [...prices.slice(0,i), e.target.value, ...prices.slice(i)]});
+                          thisComp.props.changePrice(x.id,parseFloat(e.target.value))
+                        }}
+                        /> : ""}
+                </ReactCSSTransitionGroup>
               </td>
               {x.nutAmounts.map((n,j)=>(
                 <td title={thisComp.props.nutList[j].name} style={{backgroundColor:"rgba("+(255*n/100).toFixed(0)+",0,0,"+n/100+")"}} key={j}>

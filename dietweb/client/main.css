@@ -38,10 +38,39 @@ td input[type=number].nut-limits::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+input[type=number].food-price::-webkit-inner-spin-button,
+input[type=number].food-price::-webkit-outer-spin-button {
+  /* display: none; */
+    -webkit-appearance: none;
+    margin: 0;
+}
 /*
 td:hover .nut-limits {
   display: initial;
 } */
+
+.price-appear-enter {
+  opacity: 0.01;
+  transform: translateX(-10px);
+}
+
+.price-appear-enter.price-appear-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 100ms ease-in;
+}
+
+.price-appear-leave {
+  opacity: 1;
+  transform: translateX(0);  
+}
+
+.price-appear-leave.price-appear-leave-active {
+  opacity: 0.01;
+  transform: translateX(-10px);
+  transition: all 50ms ease-in
+}
 
 .toolbar-button {
   /*background-color: rgba(40, 158, 93, 0.9);*/
