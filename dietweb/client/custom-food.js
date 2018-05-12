@@ -27,16 +27,6 @@ export default class CustomFood extends React.Component {
             user: ""
         }
     }
-    // componentDidMount() {
-    //     const thisComp = this;
-    //     getNutInfo(this.state.nutcodes).then(res=>{
-    //         // console.log("getNuts",res);
-    //         thisComp.setState({
-    //           nutrients: res.nutList,
-    //           nutInfo: res.nutInfo
-    //         })
-    //       })
-    //     }
     handleNutChange(code,value) {
         let newFoodNuts = this.state.foodNuts;
         newFoodNuts[code]=parseFloat(value)

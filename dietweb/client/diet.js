@@ -186,13 +186,17 @@ class App extends React.Component {
     this.setState({
       ingPref: newIngPref,
       has_changed:true
+    },()=>{
+      this.updatePrefs()
     })
   }
   removeIng(food) {
     console.log("removing",food)
     let newIngPref = this.state.ingPref;
     delete newIngPref[food]
-    this.setState({ingPref: newIngPref})
+    this.setState({ingPref: newIngPref},()=>{
+      this.updatePrefs()
+    })
   }
   renderDiet() {
     if (this.state.feasible) {
