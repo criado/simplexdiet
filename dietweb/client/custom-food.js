@@ -5,33 +5,28 @@ import { Foods } from "../imports/collections.js"
 
 import { Async } from 'react-select';
 
+import {getFoodInfo} from './functions.js'
+import { nutcodes, nutInfo } from './nut-info.js'
+
 export default class CustomFood extends React.Component {
     constructor(props) {
         super(props);
-        let nutcodes = [["208","kcal"],["204","g"],["606","g"],["205","g"],["269","g"],["291","g"],["203","g"],["301","mg"],["303","mg"],["304","mg"],["305","mg"],["306","mg"],["307","mg"],["309","mg"],["312","mg"],["315","mg"],["317","µg"],["401","mg"],["404","mg"],["405","mg"],["406","mg"],["410","mg"],["415","mg"],["417","µg"],["421","mg"],["418","µg"],["320","µg"],["323","mg"],["328","µg"],["430","µg"],["619","g"],["618","g"]];
-        nutcodes = nutcodes.sort((a,b)=>parseInt(a[0])-parseInt(b[0]))
         this.state = {
             foodOldName:"",
             foodId: "",
             nutcodes,
-            foodNuts: nutcodes.map(x=>x[0]).reduce((ns,n)=>{
+            nutrients: nutcodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit})),
+            nutInfo: nutInfo,
+            foodNuts: nutcodes.reduce((ns,n)=>{
                 ns[n]=0
                 return ns
             },{}),
             foodName:"",
-            foodPrice:0
+            foodPrice:0,
+            custom: true,
+            user: ""
         }
     }
-    componentDidMount() {
-        const thisComp = this;
-        getNutInfo(this.state.nutcodes).then(res=>{
-            // console.log("getNuts",res);
-            thisComp.setState({
-              nutrients: res.nutList,
-              nutInfo: res.nutInfo
-            })
-          })
-        }
     handleNutChange(code,value) {
         let newFoodNuts = this.state.foodNuts;
         newFoodNuts[code]=parseFloat(value)
@@ -39,10 +34,20 @@ export default class CustomFood extends React.Component {
     }
     saveFoodAs() {
         const thisComp = this;
+        let foodName = this.state.foodName;
         Foods.insert({
-            name: thisComp.state.foodName,
+            name: foodName,
+            user: Meteor.user().username,
             price: parseFloat(thisComp.state.foodPrice),
             nutrients: thisComp.state.foodNuts
+        },(err,_id)=> {
+          if (!err) thisComp.setState({foodOldName:foodName, foodId:_id, user: Meteor.user().username})
+          else {
+              if (err.error === 409) {
+                  console.log(err)
+                  alert("You already have a food with that name")
+              }
+          }
         })
     }
     saveFood() {
@@ -51,6 +56,7 @@ export default class CustomFood extends React.Component {
         Foods.upsert({_id: thisComp.state.foodId},
             {$set: {
               name: thisComp.state.foodName,
+              user: Meteor.user().username,
               price: parseFloat(thisComp.state.foodPrice),
               nutrients: thisComp.state.foodNuts
           }},(err,num)=> {
@@ -61,24 +67,38 @@ export default class CustomFood extends React.Component {
         Foods.remove({_id: this.state.foodId})
     }
     chooseFood(food) {
-        let foodId = food.value[0]
-        let custom = food.value[1]
+        let foodFullName = food.label;
+        food = food.value;
+        let foodName = food.name;
+        const thisComp = this;
+        let foodId = food.id;
+        let custom = food.custom
         console.log("loading",foodId,food)
-        this.setState({foodOldName:food.label})
+        this.setState({foodOldName:foodFullName})
         // newIngPref[foodId] = {"price": 0.0,"custom":custom}
         // this.setState({ingPref: newIngPref})
         // this.updatePrefs()
         if (custom) {
-            let price = food.value[2];
-            let nutrients = food.value[3];
-            this.setState({foodNuts:nutrients, foodId, foodPrice:price,foodName:food.label})
+            let price = food.price;
+            let nutrients = food.nutrients;
+            // console.log(nutrients);
+            this.setState({foodNuts:nutrients, foodId, foodPrice:price,foodName,custom: true, user:food.user})
+        } else {
+            let price = 0;
+            let ingPref = {};
+            ingPref[foodId] = {};
+            getFoodInfo(ingPref,thisComp.state.nutcodes).then(res=>{
+              // console.log(res.foodNuts);
+              thisComp.setState({foodNuts:res.foodNuts[foodId], foodId, foodPrice:0,foodName,custom: false, user:food.user})
+            })
         }
       }
     render() {
         const thisComp = this;
+        // console.log(Meteor.user());
         return ( <div className="container new-food">
             <div className="row" style={{textAlign:"center"}}>
-                <h3>Custom food: {this.state.foodOldName}</h3>
+                <h3>Custom food: {this.state.foodOldName} </h3>
             </div>
             <div className="row">
             <Async
@@ -95,19 +115,19 @@ export default class CustomFood extends React.Component {
                         <th><input type="text" value={this.state.foodName} style={{width:"300px"}}
                             onChange={e=>thisComp.setState({foodName: e.target.value})}
                         /></th>
-                        <th className="food-edit-button">
+                        {Meteor.user() && this.state.user === Meteor.user().username ? <th className="food-edit-button">
                             <button type="button" id="save-food" className="btn btn-primary toolbar-button"
                                 onClick={this.saveFood.bind(this)}>
                                 Save Food
                             </button>
-                        </th>
+                        </th> : ""}
                         <th className="food-edit-button">
                             <button type="button" id="save-food-as" className="btn btn-primary toolbar-button"
                                 onClick={this.saveFoodAs.bind(this)}>
                                 Save Food As
                             </button>
                         </th>
-                        {this.state.foodId!=="" ? <th className="food-edit-button">
+                        {Meteor.user() && this.state.foodId!=="" && this.state.user === Meteor.user().username ? <th className="food-edit-button">
                             <button type="button" id="remove-food" className="btn btn-danger toolbar-button"
                                 onClick={this.removeFood.bind(this)}>
                                 Remove Food
@@ -176,18 +196,32 @@ export default class CustomFood extends React.Component {
 }
 
 
-const getFoodOptions = (input, callback) => {
+// const getFoodOptions = (input, callback) => {
+//     console.log(input)
+//     Meteor.call("getFoodNamesData",input,(err,res)=>{
+//       if (err) console.log(err)
+//       let foodsUSDA = res.USDA ? res.USDA : [];
+//       let foodsCustom = res.customFoods;
+//       // console.log("foodnames",foods)
+//       callback(null,
+//         {options:
+//           foodsUSDA.map(x=>({value: {id:x.id,name:x.name,custom:false}, label: x.name+" (USDA)", user: "USDA"}))
+//             .concat(foodsCustom.map(x=>({value: {id:x._id,name:x.name,custom:true,price:x.price,nutrients:x.nutrients, user: x.user}, label: x.name+" (USDA)"})))
+//         })
+//     })
+
+//   };
+
+  const getFoodOptions = (input, callback) => {
     console.log(input)
     Meteor.call("getFoodNamesData",input,(err,res)=>{
       if (err) console.log(err)
-      let foodsUSDA = res.USDA ? res.USDA : [];
-      let foodsCustom = res.customFoods;
+      let foodsCustom = res;
       // console.log("foodnames",foods)
       callback(null,
         {options:
-          foodsUSDA.map(x=>({value: [x.id,false], label: x.name}))
-            .concat(foodsCustom.map(x=>({value: [x._id,true,x.price,x.nutrients], label: x.name})))
+          foodsCustom.map(x=>({value: {id:x._id,name:x.name,custom:true,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"}))
         })
     })
-
+  
   };

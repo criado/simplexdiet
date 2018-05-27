@@ -5,7 +5,6 @@ export async function getFoodInfo(ingPref, nutcodes) {
 
     let foodsIds=Object.keys(ingPref);
     // let foodPrices=ingPref.map(f=>f.price);
-
     const response = await fetch("https://api.nal.usda.gov/ndb/V2/reports?"+makeUrlStr(foodsIds));
     let data = await response.json()
     let foods = data.foods.map(x=>x.food).filter(x=>x);
@@ -18,15 +17,15 @@ export async function getFoodInfo(ingPref, nutcodes) {
     let foodInfo = foods
         .map(f=>{
           let nutObj = f.nutrients.reduce((ns,n)=>{
-            if (nutcodes.map(x=>x[0]).indexOf(n.nutrient_id.toString()) !== -1) {
+            if (nutcodes.indexOf(n.nutrient_id.toString()) !== -1) {
               ns[n.nutrient_id.toString()]=parseFloat(n.value)
-              let index = nutcodes.map(x=>x[0]).indexOf(n.nutrient_id.toString());
-              if (nutcodes[index][1]!==n.unit) throw Error("Units for nutrient in USDA database doesn't match expected unit")
+              let index = nutcodes.indexOf(n.nutrient_id.toString());
+              // if (nutcodes[index][1]!==n.unit) throw Error("Units for nutrient in USDA database doesn't match expected unit")
             }
             return ns
           },{});
           for (let i=0; i<nutcodes.length; i++) {
-                  if (!(nutcodes[i][0] in nutObj)) nutObj[nutcodes[i][0]]=0;
+                  if (!(nutcodes[i] in nutObj)) nutObj[nutcodes[i]]=0;
           }
           nutObj[f.desc.ndbno]=1;
           nutObj["price"] = ingPref[f.desc.ndbno].price
@@ -38,6 +37,8 @@ export async function getFoodInfo(ingPref, nutcodes) {
             }
           }
         );
+
+      // console.log("HIIIIIIIIIIIIII", foodInfo)
 
       let foodNuts =
         foodInfo
@@ -55,23 +56,23 @@ export async function getFoodInfo(ingPref, nutcodes) {
     return {foodNuts,foodInfo, foodNames};
   }
 
-export async function getNutInfo(nutcodes) {
-let nutInfo = await fetch("https://api.nal.usda.gov/ndb/list?format=json&lt=n&max=1000&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC")
-    .then(res=>res.json())
-    .then(d=>(d.list.item.reduce((ns,n)=>{
-            if (nutcodes.map(x=>x[0]).indexOf(n.id) !== -1) {
-            let index = nutcodes.map(x=>x[0]).indexOf(n.id);
-            ns[n.id]={"unit": nutcodes[index][1], "long_name":n.name,"id":n.id}
-            }
-        return ns
-        },{})))
-
-let nutList = nutcodes.map(n=>({"id":n[0],"name":nutInfo[n[0]].long_name,"unit":nutInfo[n[0]].unit}))
-// console.log("HIIIIIIIIIIIIII", nutList2,nutList);
-// nutList.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
-
-return {nutInfo, nutList}
-}
+// export async function getNutInfo(nutcodes) {
+// let nutInfo = await fetch("https://api.nal.usda.gov/ndb/list?format=json&lt=n&max=1000&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC")
+//     .then(res=>res.json())
+//     .then(d=>(d.list.item.reduce((ns,n)=>{
+//             if (nutcodes.indexOf(n.id) !== -1) {
+//             let index = nutcodes.indexOf(n.id);
+//             ns[n.id]={"unit": nutcodes[index][1], "long_name":n.name,"id":n.id}
+//             }
+//         return ns
+//         },{})))
+//
+// let nutList = nutcodes.map(n=>({"id":n[0],"name":nutInfo[n[0]].long_name,"unit":nutInfo[n[0]].unit}))
+// // console.log("HIIIIIIIIIIIIII", nutList2,nutList);
+// // nutList.sort((a,b)=>parseInt(a.id)-parseInt(b.id))
+//
+// return {nutInfo, nutList}
+// }
 
 export function solveDiet(foodNuts, nutFoods, ingConst,nutConst, objective) {
     let ingConstProc = {};
@@ -109,7 +110,7 @@ export function getSolNuts(solution,nutFoods,ingPref,nutcodes,foodNuts) {
         if (key !== "feasible" && key !== "bounded" && key!=="result") {
         let netNuts = [];
         for (let i=0; i<nutcodes.length; i++) {
-            netNuts.push(extendedFoodNuts[key][nutcodes[i][0]]*parseSolution(solution[key]))
+            netNuts.push(extendedFoodNuts[key][nutcodes[i]]*parseSolution(solution[key]))
         }
         foundNutsAll.push(netNuts)
         foodIds.push(key)
@@ -122,7 +123,7 @@ export function getSolNuts(solution,nutFoods,ingPref,nutcodes,foodNuts) {
         if (key !== "feasible" && key !== "bounded" && key!=="result" && (key in ingPref)) {
         let netNuts = [];
         for (let i=0; i<nutcodes.length; i++) {
-            netNuts.push(extendedFoodNuts[key][nutcodes[i][0]]*parseSolution(solution[key]))
+            netNuts.push(extendedFoodNuts[key][nutcodes[i]]*parseSolution(solution[key]))
         }
         foundNuts.push(netNuts)
         }
@@ -135,7 +136,7 @@ export function getSolNuts(solution,nutFoods,ingPref,nutcodes,foodNuts) {
     }
 
     foundNutsAll = foundNutsAll
-    .map(f=>f.map((n,i)=>100*n/nutTots[i]))
+    .map(f=>f.map((n,i)=>(nutTots[i] === 0 ? 0: 100*n/nutTots[i])))
     .reduce((fs,f,i)=>{
         fs[foodIds[i]] = f;
         return fs
