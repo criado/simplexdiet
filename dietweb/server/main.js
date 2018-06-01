@@ -47,7 +47,7 @@ Meteor.methods({
 
       // let future=new Future();
       // let regex = RegExp("/.*" + keyword + ".*/i");
-      // customFoods = 
+      // customFoods =
       return Foods.find({name:{$regex: keyword , $options: "-i"}}, {
         fields: {_id:1, name:1, nutrients:1,price:1, user: 1},
         limit:100
@@ -118,7 +118,7 @@ Meteor.methods({
 //     if (prop === "NDB_No") {
 //       code=foods[i][prop]
 //       for (let j = 1; j < foodnames.length; j++) {
-//         if (foodnames[j].id===code) 
+//         if (foodnames[j].id===code)
 //           {
 //             name = foodnames[j].name
 //             break;

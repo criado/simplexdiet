@@ -223,5 +223,5 @@ export default class CustomFood extends React.Component {
           foodsCustom.map(x=>({value: {id:x._id,name:x.name,custom:true,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"}))
         })
     })
-  
+
   };
