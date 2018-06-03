@@ -46,7 +46,7 @@ class App extends React.Component {
     //if ((prevProps.ingPref !== this.props.ingPref || prevProps.nutPref !== this.props.nutPref ) && !this.props.prefLoading ){
     if (this.state.first_time && !this.props.prefLoading){
       this.setState({dietVec: Object.keys(this.props.ingPref).map(fid=>newEmptyFood(fid,fid)), ingPref: this.props.ingPref,nutPref:this.props.nutPref, first_time: false}, () => {
-        this.calculateDiet()
+        // this.calculateDiet()
       })
     }
   }
@@ -347,8 +347,8 @@ export default withTracker(props => {
   let loading = !handle1.ready() || !handle2.ready() || !handle3.ready()
   let resultsExist = !loading && !!ingPrefObj && !!nutPrefObj
 
-  let ingPref = resultsExist? ingPrefObj.ingPref: defaultIngPref;
-  let nutPref = resultsExist? nutPrefObj.nutPref: defaultNutPref;
+  let ingPref = resultsExist? ingPrefObj.ingPref : defaultIngPref;
+  let nutPref = resultsExist? nutPrefObj.nutPref : defaultNutPref;
   // console.log("ingPref", ingPref)
   for (var i = 0; i < nutcodes.length; i++) {
     if (!(nutcodes[i] in nutPref)) {
