@@ -16,14 +16,34 @@ import { nutInfo } from '../imports/nut-info.js'
 
 let MAX_DIETRUNS_SAVED = 15;
 
+function swapInArray(arr, id1,id2) {
+  let result;
+  if (id2 > id1) {
+    result = [...arr.slice(0,id1),
+                    arr[id2],
+                    ...arr.slice(id1,id2),
+                    ...arr.slice(id2+1)
+                ]
+  } else if (id2 < id1) {
+    result = [...arr.slice(0,id2),
+                ...arr.slice(id2+1,id1),
+                arr[id2],
+                ...arr.slice(id1)
+                ]
+  } else {
+    result = arr
+  }
+  return result
+}
+
 let dietRunToAppState = (dietRun,nutInfo) => ({
   ingPref: dietRun.ingPref.reduce((xs,x)=>{xs[x.id]={min:x.min,max:x.max,price:x.price}; return xs},{}),
   nutPref: dietRun.nutPref.reduce((xs,x)=>{xs[x.id]={min:x.min,max:x.max}; return xs},{}),
   nutCodes: dietRun.nutPref.map(n=>n.id), //specify the order
   ingCodes: dietRun.ingPref.map(n=>n.id), //specify the order
-  nutrients: dietRun.nutPref.map(n=>n.id).map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit})),
-  nutTots: dietRun.nutPref.map(x=>0),
-  dietVec: dietRun.sol || Object.keys(dietRun.ingPref).map(fid=>newEmptyFood(fid,fid,dietRun.nutPref.map(n=>n.id))), 
+  nutrients: dietRun.nutPref.map(n=>n.id).map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit})), //like nutcodes but with extra info
+  dietVec: dietRun.sol || Object.keys(dietRun.ingPref).map(fid=>newEmptyFood(fid,fid,dietRun.nutPref.map(n=>n.id))), //like with ingcodes, but with solution, and extra info
+  nutTots: dietRun.nutTots || dietRun.nutPref.map(x=>0),
 })
 
 const newEmptyFood = (id,name,nutCodes) => ({
@@ -58,7 +78,7 @@ class App extends React.Component {
         first_time: false
       }, () => {
         console.log("CALCULATE DIET")
-        if (!lastDietRun.sol)
+        if (!lastDietRun.sol || !lastDietRun.nutTots)
           this.calculateDiet()
       })
     }
@@ -187,6 +207,7 @@ class App extends React.Component {
     this.setState({dietRuns: runs}, ()=>{
       Diets.update({_id:this.props.diet._id},
       { "$set": { name: "Default",
+      user:Meteor.user(),
       runs:this.state.dietRuns } },
       {upsert:true})
     })
@@ -234,37 +255,30 @@ class App extends React.Component {
   }
 
   changeIngOrder(id1,id2) {
-
-    function swapInArray(arr, id1,id2) {
-      let result;
-      if (id2 > id1) {
-        result = [...arr.slice(0,id1),
-                        arr[id2],
-                        ...arr.slice(id1,id2),
-                        ...arr.slice(id2+1)
-                    ]
-      } else if (id2 < id1) {
-        result = [...arr.slice(0,id2),
-                    ...arr.slice(id2+1,id1),
-                    arr[id2],
-                    ...arr.slice(id1)
-                    ]
-      } else {
-        result = arr
-      }
-      return result
-    }
-
     //id2 is moved to be before id1
     id1 = parseInt(id1)
     id2 = parseInt(id2)
-    console.log("swapping", id1, id2, typeof id1, typeof id2)
-    console.log(this.state.ingCodes, swapInArray(this.state.ingCodes,id1,id2), swapInArray(this.state.dietVec,id1,id2))
 
       this.setState({
         ingCodes: swapInArray(this.state.ingCodes,id1,id2), 
         dietVec: swapInArray(this.state.dietVec,id1,id2), 
-        has_changed: true
+        // has_changed: true
+      })
+  }
+
+  changeNutOrder(id1,id2) {
+    //id2 is moved to be before id1
+    id1 = parseInt(id1)
+    id2 = parseInt(id2)
+
+    console.log("swapping",id1,id2)
+
+      this.setState({
+        nutCodes: swapInArray(this.state.nutCodes,id1,id2), 
+        nutrients: swapInArray(this.state.nutrients,id1,id2), 
+        nutTots: swapInArray(this.state.nutTots,id1,id2),
+        dietVec: this.state.dietVec.map(x=>({...x, nutAmounts:swapInArray(x.nutAmounts,id1,id2)})) 
+        // has_changed: true
       })
   }
 
@@ -295,6 +309,7 @@ class App extends React.Component {
         changePrice={this.changePrice.bind(this)}
         changeNutLims={this.changeNutLims.bind(this)}
         changeIngOrder={this.changeIngOrder.bind(this)}
+        changeNutOrder={this.changeNutOrder.bind(this)}
         calculateDietIfNeeded={()=>{
             this.updatePrefs()
             this.calculateDietIfNeeded()
@@ -320,9 +335,11 @@ class App extends React.Component {
   }
   render() {
     let caloriesSpan = "";
-    if (this.state.feasible && this.state.dietVec.length !== 0) {
+    if (this.state.feasible && this.state.dietVec.length !== 0 && !this.props.loading) {
       let thisComp = this;
-      let carbs_energy = this.state.nutTots[4]*4, fat_energy = this.state.nutTots[1]*9, protein_energy = this.state.nutTots[3]*4
+      let carbs_energy = this.state.nutTots[this.state.nutCodes.indexOf("205")]*4, 
+          fat_energy = this.state.nutTots[this.state.nutCodes.indexOf("204")]*9, 
+          protein_energy = this.state.nutTots[this.state.nutCodes.indexOf("203")]*4
       let total_energy = carbs_energy + fat_energy + protein_energy // Note this is not the same as this.state.nutTots["kcals"] because of the error due to the factors 4, 9, and 4 to approximate the energy
       carbs_energy = carbs_energy*100/total_energy
       fat_energy = fat_energy*100/total_energy
@@ -337,7 +354,7 @@ class App extends React.Component {
         this.calculateDietIfNeeded()
       }}>Calculate diet</button>
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
-      <a href="/new-food"><button type="button" id="new-food" style={{"margin-right":"10px"}} className="btn btn-primary toolbar-button">New food</button></a>
+      <a href="/new-food"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary toolbar-button">New food</button></a>
         <br/>
     </div>
     <div className="row">

@@ -27,10 +27,27 @@ export default class DietTable extends React.Component {
         let id1 = ui.item.next() ? ui.item.next().attr("diet-array-pos") : id2+1
         // console.log(ui.item,id2,id1)
         thisComp.props.changeIngOrder(id1,id2)
+        $(tableBodyEl).sortable("cancel")
       }
     });
-    // const tableHeadEl = this.tableHeadEl.current;
-    // $(tableHeadEl).sortable()
+    const tableHeadEl = this.tableHeadEl.current;
+    $(tableHeadEl).sortable({
+      helper: (e,el) => {return el.clone().show()}
+      ,forcePlaceholderSize:true, 
+      forceHelperSize:true}, {
+      start: function(event,ui) {
+        // ui.placeholder.css({"width":"40px", "backgroundColor":"red"})
+        // ui.item.css({"display":"visible"})
+        // ui.item.css({"width":"0px"})
+      },
+      stop: function( event, ui ) {
+        let id2 = ui.item.attr("nut-array-pos")
+        let id1 = ui.item.next() ? ui.item.next().attr("nut-array-pos") : id2+1
+        console.log(ui.item)
+        thisComp.props.changeNutOrder(id1,id2)
+        $(tableHeadEl).sortable("cancel")        
+      }
+    })
   }
   componentDidUpdate(prevProps){
     const thisComp = this;
@@ -67,14 +84,14 @@ export default class DietTable extends React.Component {
       <tr ref={this.tableHeadEl}>
       <th scope="col">Food</th>
         {this.props.nutList.map((x,i)=>{
-          return <th key={i} title={x.name} scope="col" className="nutName">{thisComp.props.nutInfo[x.id].short_name}</th>
+          return <th key={i} nut-array-pos={i} title={x.name} scope="col" className="nutName">{thisComp.props.nutInfo[x.id].short_name}</th>
         })}
       </tr>
       <tr>
       <td scope="col"> </td>
       {/* NUTRIENTS */}
         {this.props.nutList.map((x,i)=>{
-          return <td key={i} title={x.name} scope="col" style={{fontSize:"10px",maxWidth:"40px",padding:"5px"}}>
+          return <td key={i} nut-array-pos={i} title={x.name} scope="col" style={{fontSize:"10px",maxWidth:"40px",padding:"5px"}}>
           <input className="nut-limits" value={thisComp.state.nutmins[i]} step="10" style={{maxWidth:"30px"}} type="number"
                 onKeyPress={e=>{
                     if (e.key == 'Enter') thisComp.props.calculateDietIfNeeded()
