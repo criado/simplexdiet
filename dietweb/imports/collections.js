@@ -1,8 +1,12 @@
 import { Mongo } from 'meteor/mongo';
 
 export const Foods = new Mongo.Collection('foods');
-export const IngredientPreferences = new Mongo.Collection('ingPrefs');
+
+export const Diets = new Mongo.Collection('diets');
+
 export const NutrientPreferences = new Mongo.Collection('nutPrefs');
+
+// export const IngredientPreferences = new Mongo.Collection('ingPrefs');
 //
 // import { FilesCollection } from 'meteor/ostrio:files';
 

@@ -33,7 +33,9 @@ tr:hover .remove-ing {
 }
 
 td input[type=number].nut-limits::-webkit-inner-spin-button,
-td input[type=number].nut-limits::-webkit-outer-spin-button {
+td input[type=number].nut-limits::-webkit-outer-spin-button,
+td input[type=number].ing-limits::-webkit-inner-spin-button,
+td input[type=number].ing-limits::-webkit-outer-spin-button {
   /* display: none; */
     -webkit-appearance: none;
     margin: 0;
@@ -45,10 +47,6 @@ input[type=number].food-price::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-/*
-td:hover .nut-limits {
-  display: initial;
-} */
 
 .price-appear-enter {
   opacity: 0.01;

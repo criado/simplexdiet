@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import {getFoodInfo, getNutInfo, solveDiet, getSolNuts} from './functions.js'
 
-import { Foods, IngredientPreferences, NutrientPreferences } from "../imports/collections.js"
+import { Foods, Diets, NutrientPreferences } from "../imports/collections.js"
 
 import { withTracker } from 'meteor/react-meteor-data';
 
@@ -12,41 +12,54 @@ import { Async } from 'react-select';
 
 import DietTable from './diet-table.js'
 
-import { nutcodes, nutInfo } from '../imports/nut-info.js'
+import { nutInfo } from '../imports/nut-info.js'
 
-const newEmptyFood = (id,name) => ({
+let MAX_DIETRUNS_SAVED = 15;
+
+let dietRunToAppState = (dietRun,nutInfo) => ({
+  ingPref: dietRun.ingPref.reduce((xs,x)=>{xs[x.id]={min:x.min,max:x.max,price:x.price}; return xs},{}),
+  nutPref: dietRun.nutPref.reduce((xs,x)=>{xs[x.id]={min:x.min,max:x.max}; return xs},{}),
+  nutCodes: dietRun.nutPref.map(n=>n.id), //specify the order
+  ingCodes: dietRun.ingPref.map(n=>n.id), //specify the order
+  nutrients: dietRun.nutPref.map(n=>n.id).map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit})),
+  nutTots: dietRun.nutPref.map(x=>0),
+  dietVec: dietRun.sol || Object.keys(dietRun.ingPref).map(fid=>newEmptyFood(fid,fid,dietRun.nutPref.map(n=>n.id))), 
+})
+
+const newEmptyFood = (id,name,nutCodes) => ({
   id,
   name,
   amount: 0,
-  nutAmounts: nutcodes.map(x=>0)
+  nutAmounts: nutCodes.map(x=>0)
 })
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // nutcodes = nutcodes.sort((a,b)=>parseInt(a[0])-parseInt(b[0]))
+    // nutCodes = nutCodes.sort((a,b)=>parseInt(a[0])-parseInt(b[0]))
+    let lastDietRun = props.diet.runs[props.diet.runs.length-1];
     this.state={dietVec: [],
       feasible: true,
       price:0,
-      ingPref: props.ingPref,
-      foods:[],
-      nutcodes,
-      nutrients: nutcodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit})),
-      nutInfo: nutInfo,
-      nutTots:nutcodes.map(x=>0),
-      dietVec: [],
-      nutPref: props.nutPref,
+      nutInfo,
+      dietRuns: this.props.diet.runs,
+      ...dietRunToAppState(lastDietRun,nutInfo),
       has_changed: false,
       first_time: true // It is true because we want to compute the diet in the beginning
     }
   }
   componentDidUpdate(prevProps) {
-    console.log("NUTPREF", this.props.nutPref)
-    console.log("foodNutsCustom", this.props.foodNutsCustom)
-    //if ((prevProps.ingPref !== this.props.ingPref || prevProps.nutPref !== this.props.nutPref ) && !this.props.prefLoading ){
-    if (this.state.first_time && !this.props.prefLoading){
-      this.setState({dietVec: Object.keys(this.props.ingPref).map(fid=>newEmptyFood(fid,fid)), ingPref: this.props.ingPref,nutPref:this.props.nutPref, first_time: false}, () => {
-        // this.calculateDiet()
+    let lastDietRun = this.props.diet.runs[this.props.diet.runs.length-1];
+    //If this is the first time, and we have retrieved a diet without a calculated solution... (this shouldn't really happen except when testing)
+    if (this.state.first_time && !this.props.loading){
+      this.setState({
+        dietRuns: this.props.diet.runs,
+        ...dietRunToAppState(lastDietRun,nutInfo),
+        first_time: false
+      }, () => {
+        console.log("CALCULATE DIET")
+        if (!lastDietRun.sol)
+          this.calculateDiet()
       })
     }
   }
@@ -58,14 +71,12 @@ class App extends React.Component {
       else return null
     }
 
-    // this.setState({ingPref: thisComp.props.ingPref,nutPref:thisComp.props.nutPref})
-
     let ingPref = this.state.ingPref
 
     let foodNutsCustom = this.props.foodNutsCustom
     let foodInfoCustom = this.props.foodInfoCustom
     let nutPref = this.state.nutPref
-    let nutcodes = this.state.nutcodes
+    let nutCodes = this.state.nutCodes
 
     let nutFoods = {};
     for (let key in nutPref) {
@@ -86,21 +97,19 @@ class App extends React.Component {
       obj["price"]=1e6;
       nutFoods["anti-"+key] = obj
     }
-    console.log(foodNutsCustom)
-    // getFoodInfo(ingPrefUSDA,nutcodes).then(res=>{
-    //   console.log("getFoods",res);
-    // let foodNuts = {...res.foodNuts, ...foodNutsCustom};
+    // console.log(foodNutsCustom)
     let foodNuts = foodNutsCustom;
-    // console.log("foodNuts", foodNuts)
-    // let foodInfo = {...res.foodInfo, ...foodInfoCustom};
     let foodInfo = foodInfoCustom;
+
     let solution = solveDiet(foodNuts,nutFoods,ingPref,nutPref, "price");
     console.log("solution",solution)
-    let {foundNuts, nutTots} = getSolNuts(solution,nutFoods,ingPref,nutcodes,foodNuts)
+
+    let {foundNuts, nutTots} = getSolNuts(solution,nutFoods,ingPref,nutCodes,foodNuts)
     console.log(nutTots)
+
     let dietVec = [];
-    for (let key in solution) {
-      if (key !== "feasible" && key !== "bounded" && key!=="result" && (key in foodInfo) ) {
+    for (let key of [...this.state.ingCodes, ...this.state.nutCodes] ) {
+      if ((key in solution) && (key in foodInfo)) {
         // console.log(ingPref);
         dietVec.push({
           "name":foodInfo[key].name,
@@ -110,6 +119,7 @@ class App extends React.Component {
         })
       }
     }
+
     for (let key in solution) {
       if (key !== "feasible" && key !== "bounded" && key!=="result" && !(key in foodInfo) ) {
         // console.log(ingPref);
@@ -152,10 +162,8 @@ class App extends React.Component {
   }
 
   changeNutLims(nutId,newLim) {
-    const thisComp = this;
-    console.log(newLim)
-    let newNutPref = thisComp.state.nutPref;
-    newNutPref[nutId] = { ...thisComp.state.nutPref[nutId], ...newLim}
+    let newNutPref = this.state.nutPref;
+    newNutPref[nutId] = { ...this.state.nutPref[nutId], ...newLim}
     this.setState({
       nutPref: newNutPref,
       has_changed: true
@@ -163,25 +171,32 @@ class App extends React.Component {
   }
 
   updatePrefs() {
-    const thisComp = this;
-    IngredientPreferences.update({
-      _id:Meteor.userId()
-    },
-    {
-      _id:Meteor.userId(),
-      ingPref:thisComp.state.ingPref
-    },
-    {upsert:true},()=>{
-      NutrientPreferences.update({
-        _id:Meteor.userId()
-      },
-      {
-        _id:Meteor.userId(),
-        nutPref:thisComp.state.nutPref
-      },
+    //Update diet history
+
+    let runs = this.state.dietRuns;
+    
+    let ingPref = this.state.ingCodes.map(f=>({id:f, ...this.state.ingPref[f]}))
+    let nutPref = this.state.nutCodes.map(f=>({id:f, ...this.state.nutPref[f]}))
+    
+    if (runs.length === MAX_DIETRUNS_SAVED) {
+      runs.splice(0, 1)
+    }
+    runs.push({ingPref, nutPref, sol:this.state.dietVec})
+
+    console.log(this.props.diet._id)
+    this.setState({dietRuns: runs}, ()=>{
+      Diets.update({_id:this.props.diet._id},
+      { "$set": { name: "Default",
+      runs:this.state.dietRuns } },
       {upsert:true})
     })
-}
+    //TODO: save as
+    // Diets.insert({ name: "Default",
+    //     user:Meteor.user(),
+    //     runs:this.state.dietRuns})
+    // })
+  }
+
   addIng(food) {
     food = food.value;
     let foodId = food.id
@@ -189,34 +204,78 @@ class App extends React.Component {
     console.log("adding",foodId,food)
     let newIngPref = this.state.ingPref;
     newIngPref[foodId] = {"price": food.price,"custom":custom}
+    let newIngCodes = this.state.ingCodes;
+    newIngCodes.push(foodId)
     this.setState({
       ingPref: newIngPref,
+      ingCodes: newIngCodes,
       has_changed:true
     },()=>{
       this.updatePrefs()
       let vec = this.state.dietVec;
-      vec.push(newEmptyFood(foodId,food.name))
+      vec.push(newEmptyFood(foodId,food.name,this.state.nutCodes))
       this.setState({dietVec: vec})
     })
   }
+
   removeIng(foodId) {
     console.log("removing",foodId)
     let newIngPref = this.state.ingPref;
+    let newIngCodes = this.state.ingCodes;    
     delete newIngPref[foodId]
-    this.setState({ingPref: newIngPref, has_changed:true},()=>{
+    let index = newIngCodes.indexOf(foodId);
+    if (index > -1) {
+      newIngCodes.splice(index, 1);
+    }
+    this.setState({ingPref: newIngPref, ingCodes:newIngCodes, has_changed:true},()=>{
       this.updatePrefs()
       this.setState({dietVec: this.state.dietVec.filter(f=>f.id!==foodId)})
     })
   }
+
+  changeIngOrder(id1,id2) {
+
+    function swapInArray(arr, id1,id2) {
+      let result;
+      if (id2 > id1) {
+        result = [...arr.slice(0,id1),
+                        arr[id2],
+                        ...arr.slice(id1,id2),
+                        ...arr.slice(id2+1)
+                    ]
+      } else if (id2 < id1) {
+        result = [...arr.slice(0,id2),
+                    ...arr.slice(id2+1,id1),
+                    arr[id2],
+                    ...arr.slice(id1)
+                    ]
+      } else {
+        result = arr
+      }
+      return result
+    }
+
+    //id2 is moved to be before id1
+    id1 = parseInt(id1)
+    id2 = parseInt(id2)
+    console.log("swapping", id1, id2, typeof id1, typeof id2)
+    console.log(this.state.ingCodes, swapInArray(this.state.ingCodes,id1,id2), swapInArray(this.state.dietVec,id1,id2))
+
+      this.setState({
+        ingCodes: swapInArray(this.state.ingCodes,id1,id2), 
+        dietVec: swapInArray(this.state.dietVec,id1,id2), 
+        has_changed: true
+      })
+  }
+
   renderDiet() {
-    console.log("this.state.ingPref !== {}", this.state.ingPref !== {})
     if (this.state.dietVec.length === 0) {
-      if (!this.props.prefLoading && !Meteor.user()) {
+      if (!this.props.loading && !Meteor.user()) {
         return (<div className="alert alert-warning" role="alert">
           <strong>Hi!</strong> Login to create a diet!
         </div>)
       }
-      if (!this.props.prefLoading) {
+      if (!this.props.loading) {
         return (<div className="alert alert-info" role="alert">
           <strong>Heads up!</strong> Please add an ingredient to start creating your diet!
         </div>)
@@ -224,43 +283,33 @@ class App extends React.Component {
         return ""
       }
     }
-    else if (this.state.feasible) {
-      return <DietTable
-          diet={this.state.dietVec}
-          ings={this.state.ingPref}
-          nutList={this.state.nutrients}
-          nutInfo={this.state.nutInfo}
-          nutPref={this.state.nutPref}
-          nutTots={this.state.nutTots}
-          changeLims={this.changeLims.bind(this)}
-          changePrice={this.changePrice.bind(this)}
-          changeNutLims={this.changeNutLims.bind(this)}
-          calculateDietIfNeeded={()=>{
-              this.updatePrefs()
-              this.calculateDietIfNeeded()
-          }}
-          removeIng={this.removeIng.bind(this)}/>
-    } else { //no feasible and vector isn't []
-      return (<div>
-        <div className="alert alert-danger" role="alert">
-          <strong>Oh snap!</strong> No feasible primal solution!
-        </div>
-        <DietTable
-          diet={this.state.dietVec}
-          ings={this.state.ingPref}
-          nutList={this.state.nutrients}
-          nutInfo={this.state.nutInfo}
-          nutPref={this.state.nutPref}
-          nutTots={this.state.nutTots}
-          changeLims={this.changeLims.bind(this)}
-          changePrice={this.changePrice.bind(this)}
-          changeNutLims={this.changeNutLims.bind(this)}
-          calculateDietIfNeeded={()=>{
-              this.updatePrefs()
-              this.calculateDietIfNeeded()
-          }}
-          removeIng={this.removeIng.bind(this)}/>
-      </div>)
+    else {
+      let dietObject = <DietTable
+        diet={this.state.dietVec}
+        ings={this.state.ingPref}
+        nutList={this.state.nutrients}
+        nutInfo={this.state.nutInfo}
+        nutPref={this.state.nutPref}
+        nutTots={this.state.nutTots}
+        changeLims={this.changeLims.bind(this)}
+        changePrice={this.changePrice.bind(this)}
+        changeNutLims={this.changeNutLims.bind(this)}
+        changeIngOrder={this.changeIngOrder.bind(this)}
+        calculateDietIfNeeded={()=>{
+            this.updatePrefs()
+            this.calculateDietIfNeeded()
+        }}
+        removeIng={this.removeIng.bind(this)}/>
+      if (this.state.feasible) {
+        return dietObject
+      } else { //no feasible and vector isn't []
+        return (<div>
+          <div className="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> No feasible primal solution!
+          </div>
+          {dietObject}
+        </div>)
+      }
     }
   }
   calculateDietIfNeeded() {
@@ -306,6 +355,7 @@ class App extends React.Component {
   }
 }
 
+//function to populate the food selector, to add new foods
 const getFoodOptions = (input, callback) => {
   console.log(input)
   Meteor.call("getFoodNamesData",input,(err,res)=>{
@@ -321,63 +371,61 @@ const getFoodOptions = (input, callback) => {
 };
 
 App.propTypes = {
-  ingPref: PropTypes.object.isRequired,
-  nutPref: PropTypes.object.isRequired,
+  diet: PropTypes.object.isRequired,
+  nutPrefs: PropTypes.array.isRequired,
 };
+
+// THIS IS WHERE THE APP COMPONENT GETS THE DATA FROM SERVER, 
+//whenever data in server changes, component is udpated a la React
 
 export default withTracker(props => {
 
-  // const handle1 = Meteor.subscribe('diets');
-  const handle1 = Meteor.subscribe('ingPrefs');
+  const handle1 = Meteor.subscribe('diets');
+  // const handle1 = Meteor.subscribe('ingPrefs');
   const handle2 = Meteor.subscribe('nutPrefs');
   const handle3 = Meteor.subscribe('foods');
 
-  // let diet = IngredientPreferences.findOne({_id:Meteor.userId()});
-  let ingPrefObj = IngredientPreferences.findOne({_id:Meteor.userId()});
+  let dietObj = Diets.findOne({user:Meteor.user()});
+  // let ingPrefObj = IngredientPreferences.findOne({_id:Meteor.userId()});
   // console.log("ingPrefObj", ingPrefObj, !!ingPrefObj)
-  // let defaultIngPref = {"11463":{"price":0.155},"11675":{"max":4,"price":0.08},"12036":{"price":0.59},"12166":{"price":0.8},"12220":{"price":0.783},"19165":{"price":1.129},"20445":{"max":1.6,"price":0.045},"01211":{"max":5,"price":0.04},"08120":{"max":0.9,"price":0.075},"08084":{"price":0.275},"01129":{"min":0.5,"max":1.2,"price":0.6},"04053":{"price":0.411},"09040":{"max":3,"price":0.1},"04589":{"max":0.01,"price":0.038},"09037":{"price":0.56}}
-  //////TODO defaultDiet
-  // let defaultDiet = {"name":"Default", }
-  let defaultIngPref = {}
-  let nutPrefObj = NutrientPreferences.findOne({_id:Meteor.userId()});
-  // let defaultNutPref = {"203":{"min":70,"max":96},"204":{"min":66.66666666666667,"max":78},"205":{"min":325,"max":380.25},"208":{"min":2000,"max":2340},"269":{"max":150},"291":{"min":23,"max":46},"301":{"min":1000,"max":2500},"303":{"min":14.4,"max":45},"304":{"min":400},"305":{"min":700,"max":4000},"306":{"min":4700},"307":{"min":1500,"max":2300},"309":{"min":16.5,"max":40},"312":{"min":0.9,"max":10},"315":{"min":2.3,"max":11},"317":{"min":55,"max":400},"320":{"min":900,"max":1350},"323":{"min":15,"max":1000},"328":{"min":5,"max":100},"401":{"min":90,"max":2000},"404":{"min":1.2},"405":{"min":1.3},"406":{"min":16,"max":35},"410":{"min":5},"415":{"min":1.3,"max":100},"417":{"min":400,"max":1000},"418":{"min":2.4},"421":{"min":550,"max":3500},"430":{"min":120},"606":{"max":25},"618":{"min":16.83,"max":17.17},"619":{"min":1.584,"max":1.616}}
+  // let defaultIngPref = {}
+  // let defaultNutPref = {}
+  let nutPrefsServer = NutrientPreferences.findOne({user:Meteor.user()});
+  let defaultIngPrefObj = [{"id":"11463","price":0.155},{"id":"11675","max":4,"price":0.08},{"id":"12036","price":0.59},{"id":"12166","price":0.8},{"id":"12220","price":0.783},{"id":"19165","price":1.129},{"id":"20445","max":1.6,"price":0.045},{"id":"01211","max":5,"price":0.04},{"id":"08120","max":0.9,"price":0.075},{"id":"08084","price":0.275},{"id":"01129","min":0.5,"max":1.2,"price":0.6},{"id":"04053","price":0.411},{"id":"09040","max":3,"price":0.1},{"id":"04589","max":0.01,"price":0.038},{"id":"09037","price":0.56}]
+
+  let defaultNutPrefObj = [{"id":"203","min":70,"max":96},{"id":"204","min":66.66666666666667,"max":78},{"id":"205","min":325,"max":380.25},{"id":"208","min":2000,"max":2340},{"id":"269","max":150},{"id":"291","min":23,"max":46},{"id":"301","min":1000,"max":2500},{"id":"303","min":14.4,"max":45},{"id":"304","min":400},{"id":"305","min":700,"max":4000},{"id":"306","min":4700},{"id":"307","min":1500,"max":2300},{"id":"309","min":16.5,"max":40},{"id":"312","min":0.9,"max":10},{"id":"315","min":2.3,"max":11},{"id":"317","min":55,"max":400},{"id":"320","min":900,"max":1350},{"id":"323","min":15,"max":1000},{"id":"328","min":5,"max":100},{"id":"401","min":90,"max":2000},{"id":"404","min":1.2},{"id":"405","min":1.3},{"id":"406","min":16,"max":35},{"id":"410","min":5},{"id":"415","min":1.3,"max":100},{"id":"417","min":400,"max":1000},{"id":"418","min":2.4},{"id":"421","min":550,"max":3500},{"id":"430","min":120},{"id":"606","max":25},{"id":"618","min":16.83,"max":17.17},{"id":"619","min":1.584,"max":1.616}]
+
+  let defaultDietObj = {"name":"Default", user:Meteor.user(), runs: [{ingPref: defaultIngPrefObj, nutPref: defaultNutPrefObj, sol:null}]}
+  let defaultNutPrefs = [{"name":"Default", user:Meteor.user(), nutPref: defaultNutPrefObj}]
   // console.log("nutPrefObj", nutPrefObj, !!nutPrefObj)
-  let defaultNutPref = {}
 
   let loading = !handle1.ready() || !handle2.ready() || !handle3.ready()
-  let resultsExist = !loading && !!ingPrefObj && !!nutPrefObj
 
-  let ingPref = resultsExist? ingPrefObj.ingPref : defaultIngPref;
-  let nutPref = resultsExist? nutPrefObj.nutPref : defaultNutPref;
-  // console.log("ingPref", ingPref)
-  for (var i = 0; i < nutcodes.length; i++) {
-    if (!(nutcodes[i] in nutPref)) {
-      nutPref[nutcodes[i]] = {}
-    }
-  }
+  //If we get them from database, use them, otherwise use the default ones
+  let diet = (!loading && !!dietObj) ? dietObj : defaultDietObj;
+  let nutPrefs = (!loading && !!nutPrefsServer) ? nutPrefsServer : defaultNutPrefs;
 
-  let ingPrefCustom = {};
-  let ingPrefCutomIds = [];
-  for (key in ingPref) {
-    ingPrefCustom[key] = ingPref[key]
-    ingPrefCutomIds.push(key)
-  }
-  // console.log("ingPrefCutomIds", ingPrefCutomIds)
+  console.log("dietObj",dietObj)
+
+  let lastDietRun = diet.runs[diet.runs.length-1];  
+  
+  //PROCESSING FOOD DATA
 
   let foodInfoCustom
   if (!loading)
-    foodInfoCustom = Foods.find({_id: {$in: ingPrefCutomIds}}).fetch().map(x=>({...x,id:x._id}));
+    foodInfoCustom = Foods.find({_id: {$in: lastDietRun.ingPref.map(f=>f.id)}}).fetch().map(x=>({...x,id:x._id}));
     // console.log("foodInfoCustom",ingPrefCutomIds, foodInfoCustom)
 
+    let nutCodes = lastDietRun.nutPref.map(n=>n.id)
     let foodsFound = !loading && !!foodInfoCustom
     let foodNutsCustom
     if (foodsFound) {
       foodNutsCustom = foodInfoCustom
       .reduce((fs,f,i)=>{
         let nutrients = f.nutrients;
-        for (var i = 0; i < nutcodes.length; i++) {
-          if (!(nutcodes[i] in nutrients)) {
-            nutrients[nutcodes[i]] = 0
+        for (var i = 0; i < nutCodes.length; i++) {
+          if (!(nutCodes[i] in nutrients)) {
+            nutrients[nutCodes[i]] = 0
           }
         }
         nutrients["price"] = f.price;
@@ -394,14 +442,13 @@ export default withTracker(props => {
     }
 
 
-  console.log("foodNutsCustom",foodNutsCustom)
-  console.log(resultsExist,ingPrefObj)
+  // console.log("foodNutsCustom",foodNutsCustom)
+  // console.log(resultsExist,ingPrefObj)
 
   return {
-    currentUser:Meteor.user(),
-    prefLoading: loading,
-    ingPref,
-    nutPref,
+    loading,
+    diet,
+    nutPrefs,
     foodNutsCustom,
     foodInfoCustom
   };

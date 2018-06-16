@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 
 import { Mongo } from 'meteor/mongo';
 
-import { Foods, IngredientPreferences, NutrientPreferences } from '../imports/collections.js';
+import { Foods, Diets, NutrientPreferences } from '../imports/collections.js';
 
 Foods.rawCollection().createIndex({name: 1, user: 1}, {unique: true});
 
@@ -28,8 +28,8 @@ var Future = Npm.require("fibers/future");
 //   });
 // });
 
-Meteor.publish("ingPrefs", () =>{
-  return IngredientPreferences.find();
+Meteor.publish("diets", () =>{
+  return Diets.find();
 })
 
 Meteor.publish("nutPrefs", () =>{
