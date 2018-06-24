@@ -6,7 +6,7 @@ import { Foods } from "../imports/collections.js"
 import { Async } from 'react-select';
 
 import {getFoodInfo} from './functions.js'
-import { nutcodes, nutInfo } from './nut-info.js'
+import { nutcodes, nutInfo } from '../imports/nut-info.js'
 
 export default class CustomFood extends React.Component {
     constructor(props) {
@@ -23,7 +23,7 @@ export default class CustomFood extends React.Component {
             },{}),
             foodName:"",
             foodPrice:0,
-            custom: true,
+            // custom: true,
             user: ""
         }
     }
@@ -72,26 +72,15 @@ export default class CustomFood extends React.Component {
         let foodName = food.name;
         const thisComp = this;
         let foodId = food.id;
-        let custom = food.custom
         console.log("loading",foodId,food)
         this.setState({foodOldName:foodFullName})
         // newIngPref[foodId] = {"price": 0.0,"custom":custom}
         // this.setState({ingPref: newIngPref})
         // this.updatePrefs()
-        if (custom) {
-            let price = food.price;
-            let nutrients = food.nutrients;
-            // console.log(nutrients);
-            this.setState({foodNuts:nutrients, foodId, foodPrice:price,foodName,custom: true, user:food.user})
-        } else {
-            let price = 0;
-            let ingPref = {};
-            ingPref[foodId] = {};
-            getFoodInfo(ingPref,thisComp.state.nutcodes).then(res=>{
-              // console.log(res.foodNuts);
-              thisComp.setState({foodNuts:res.foodNuts[foodId], foodId, foodPrice:0,foodName,custom: false, user:food.user})
-            })
-        }
+        let price = food.price;
+        let nutrients = food.nutrients;
+        // console.log(nutrients);
+        this.setState({foodNuts:nutrients, foodId, foodPrice:price,foodName, user:food.user})
       }
     render() {
         const thisComp = this;
@@ -220,7 +209,7 @@ export default class CustomFood extends React.Component {
       // console.log("foodnames",foods)
       callback(null,
         {options:
-          foodsCustom.map(x=>({value: {id:x._id,name:x.name,custom:true,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"}))
+          foodsCustom.map(x=>({value: {id:x._id,name:x.name,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"}))
         })
     })
 

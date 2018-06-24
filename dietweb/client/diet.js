@@ -117,9 +117,19 @@ class App extends React.Component {
       obj["price"]=1e6;
       nutFoods["anti-"+key] = obj
     }
-    // console.log(foodNutsCustom)
+    console.log(foodNutsCustom)
     let foodNuts = foodNutsCustom;
     let foodInfo = foodInfoCustom;
+
+    // foodNuts = Object.keys(foodNuts).reduce((xs,x)=>{
+    //   xs["$"+x]=foodNuts[x]
+    //   return xs
+    // },{})
+
+    // ingPref = Object.keys(ingPref).reduce((xs,x)=>{
+    //   xs["$"+x]=ingPref[x]
+    //   return xs
+    // },{})
 
     let solution = solveDiet(foodNuts,nutFoods,ingPref,nutPref, "price");
     console.log("solution",solution)
@@ -128,7 +138,9 @@ class App extends React.Component {
     console.log(nutTots)
 
     let dietVec = [];
-    for (let key of [...this.state.ingCodes, ...this.state.nutCodes] ) {
+
+    //Adding the normal foods
+    for (let key of this.state.ingCodes) {
       if ((key in solution) && (key in foodInfo)) {
         // console.log(ingPref);
         dietVec.push({
@@ -140,22 +152,26 @@ class App extends React.Component {
       }
     }
 
+    //adding the nuts and anti-nuts
     for (let key in solution) {
       if (key !== "feasible" && key !== "bounded" && key!=="result" && !(key in foodInfo) ) {
         // console.log(ingPref);
         dietVec.push({
           "name":key,
+          "nutFood":true,
           "id":key,
           "amount":solution[key],
           "nutAmounts":foundNuts[key]
         })
       }
     }
+
     thisComp.setState({
       dietVec:dietVec,
       feasible:solution.feasible,
       nutTots,
-      price:solution.result})
+      price:solution.result
+    })
       // console.log(solution);
     // })
   }
@@ -221,10 +237,10 @@ class App extends React.Component {
   addIng(food) {
     food = food.value;
     let foodId = food.id
-    let custom = food.custom
+    // let custom = food.custom
     console.log("adding",foodId,food)
     let newIngPref = this.state.ingPref;
-    newIngPref[foodId] = {"price": food.price,"custom":custom}
+    newIngPref[foodId] = {"price": food.price}
     let newIngCodes = this.state.ingCodes;
     newIngCodes.push(foodId)
     this.setState({
@@ -232,10 +248,12 @@ class App extends React.Component {
       ingCodes: newIngCodes,
       has_changed:true
     },()=>{
-      this.updatePrefs()
       let vec = this.state.dietVec;
-      vec.push(newEmptyFood(foodId,food.name,this.state.nutCodes))
-      this.setState({dietVec: vec})
+      let idx = vec.findIndex(x=>x.nutFood)
+      vec.splice(idx, 0, newEmptyFood(foodId,food.name,this.state.nutCodes))
+      this.setState({dietVec: vec}, () => {
+        this.updatePrefs()
+      })
     })
   }
 
@@ -249,16 +267,15 @@ class App extends React.Component {
       newIngCodes.splice(index, 1);
     }
     this.setState({ingPref: newIngPref, ingCodes:newIngCodes, has_changed:true},()=>{
-      this.updatePrefs()
-      this.setState({dietVec: this.state.dietVec.filter(f=>f.id!==foodId)})
+      this.setState({dietVec: this.state.dietVec.filter(f=>f.id!==foodId)}, () => {
+        this.updatePrefs()
+      })
     })
   }
 
   changeIngOrder(id1,id2) {
     //id2 is moved to be before id1
-    id1 = parseInt(id1)
-    id2 = parseInt(id2)
-
+    console.log(id2,id1)
       this.setState({
         ingCodes: swapInArray(this.state.ingCodes,id1,id2), 
         dietVec: swapInArray(this.state.dietVec,id1,id2), 
@@ -273,13 +290,13 @@ class App extends React.Component {
 
     console.log("swapping",id1,id2)
 
-      this.setState({
-        nutCodes: swapInArray(this.state.nutCodes,id1,id2), 
-        nutrients: swapInArray(this.state.nutrients,id1,id2), 
-        nutTots: swapInArray(this.state.nutTots,id1,id2),
-        dietVec: this.state.dietVec.map(x=>({...x, nutAmounts:swapInArray(x.nutAmounts,id1,id2)})) 
-        // has_changed: true
-      })
+    this.setState({
+      nutCodes: swapInArray(this.state.nutCodes,id1,id2), 
+      nutrients: swapInArray(this.state.nutrients,id1,id2), 
+      nutTots: swapInArray(this.state.nutTots,id1,id2),
+      dietVec: this.state.dietVec.map(x=>({...x, nutAmounts:swapInArray(x.nutAmounts,id1,id2)})) 
+      // has_changed: true
+    })
   }
 
   renderDiet() {
@@ -310,10 +327,7 @@ class App extends React.Component {
         changeNutLims={this.changeNutLims.bind(this)}
         changeIngOrder={this.changeIngOrder.bind(this)}
         changeNutOrder={this.changeNutOrder.bind(this)}
-        calculateDietIfNeeded={()=>{
-            this.updatePrefs()
-            this.calculateDietIfNeeded()
-        }}
+        calculateDietIfNeeded={this.calculateDietIfNeeded.bind(this)}
         removeIng={this.removeIng.bind(this)}/>
       if (this.state.feasible) {
         return dietObject
@@ -329,9 +343,10 @@ class App extends React.Component {
   }
   calculateDietIfNeeded() {
     if (this.state.has_changed){
-       this.calculateDiet()
-       this.setState({has_changed: false})
-    }
+      this.calculateDiet()
+      this.setState({has_changed: false})
+      this.updatePrefs()
+   }
   }
   render() {
     let caloriesSpan = "";
@@ -349,10 +364,7 @@ class App extends React.Component {
     return (<div className="container food-matrix">
     <div className="row">
       {caloriesSpan}
-      <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={()=> {
-        this.updatePrefs()
-        this.calculateDietIfNeeded()
-      }}>Calculate diet</button>
+      <button type="button" id="calculate-diet-button" className="btn toolbar-button btn-primary" disabled={!this.state.has_changed} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
       <a href="/new-food"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary toolbar-button">New food</button></a>
         <br/>
@@ -381,7 +393,7 @@ const getFoodOptions = (input, callback) => {
     // console.log("foodnames",foods)
     callback(null,
       {options:
-        foodsCustom.map(x=>({value: {id:x._id,name:x.name,custom:true,price:x.price}, label: x.name+" ("+x.user+")"}))
+        foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name+" ("+x.user+")"}))
       })
   })
 
@@ -409,6 +421,7 @@ export default withTracker(props => {
   // let defaultNutPref = {}
   let nutPrefsServer = NutrientPreferences.findOne({user:Meteor.user()});
   let defaultIngPrefObj = [{"id":"11463","price":0.155},{"id":"11675","max":4,"price":0.08},{"id":"12036","price":0.59},{"id":"12166","price":0.8},{"id":"12220","price":0.783},{"id":"19165","price":1.129},{"id":"20445","max":1.6,"price":0.045},{"id":"01211","max":5,"price":0.04},{"id":"08120","max":0.9,"price":0.075},{"id":"08084","price":0.275},{"id":"01129","min":0.5,"max":1.2,"price":0.6},{"id":"04053","price":0.411},{"id":"09040","max":3,"price":0.1},{"id":"04589","max":0.01,"price":0.038},{"id":"09037","price":0.56}]
+  // defaultIngPrefObj = []
 
   let defaultNutPrefObj = [{"id":"203","min":70,"max":96},{"id":"204","min":66.66666666666667,"max":78},{"id":"205","min":325,"max":380.25},{"id":"208","min":2000,"max":2340},{"id":"269","max":150},{"id":"291","min":23,"max":46},{"id":"301","min":1000,"max":2500},{"id":"303","min":14.4,"max":45},{"id":"304","min":400},{"id":"305","min":700,"max":4000},{"id":"306","min":4700},{"id":"307","min":1500,"max":2300},{"id":"309","min":16.5,"max":40},{"id":"312","min":0.9,"max":10},{"id":"315","min":2.3,"max":11},{"id":"317","min":55,"max":400},{"id":"320","min":900,"max":1350},{"id":"323","min":15,"max":1000},{"id":"328","min":5,"max":100},{"id":"401","min":90,"max":2000},{"id":"404","min":1.2},{"id":"405","min":1.3},{"id":"406","min":16,"max":35},{"id":"410","min":5},{"id":"415","min":1.3,"max":100},{"id":"417","min":400,"max":1000},{"id":"418","min":2.4},{"id":"421","min":550,"max":3500},{"id":"430","min":120},{"id":"606","max":25},{"id":"618","min":16.83,"max":17.17},{"id":"619","min":1.584,"max":1.616}]
 
@@ -422,7 +435,7 @@ export default withTracker(props => {
   let diet = (!loading && !!dietObj) ? dietObj : defaultDietObj;
   let nutPrefs = (!loading && !!nutPrefsServer) ? nutPrefsServer : defaultNutPrefs;
 
-  console.log("dietObj",dietObj)
+  // console.log("dietObj",dietObj)
 
   let lastDietRun = diet.runs[diet.runs.length-1];  
   
@@ -445,7 +458,9 @@ export default withTracker(props => {
             nutrients[nutCodes[i]] = 0
           }
         }
-        nutrients["price"] = f.price;
+        nutrients["price"] = lastDietRun.ingPref.filter(x=>x.id===f.id)[0].price ? lastDietRun.ingPref.filter(x=>x.id===f.id)[0].price : f.price;
+        if (nutrients["price"] === 0 ) nutrients["price"] = 0.0001
+        // console.log("f.price", f.price)
         nutrients[f.id] = 1;
         fs[f.id]=nutrients;
         return fs;
@@ -460,6 +475,7 @@ export default withTracker(props => {
 
 
   // console.log("foodNutsCustom",foodNutsCustom)
+  // console.log(lastDietRun.ingPref.map(f=>f.id), "foodInfoCustom",foodInfoCustom)
   // console.log(resultsExist,ingPrefObj)
 
   return {
