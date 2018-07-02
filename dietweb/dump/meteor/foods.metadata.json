@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"meteor.foods"},{"v":2,"unique":true,"key":{"name":1,"user":1},"name":"name_1_user_1","ns":"meteor.foods"}],"uuid":"b3c69d66bf06438eb759abf69a8af1ba"}
