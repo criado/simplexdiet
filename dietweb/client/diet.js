@@ -65,9 +65,10 @@ class App extends React.Component {
     let lastDietRun = props.diet.runs[props.diet.runs.length-1];
     this.state={dietVec: [],
       feasible: true,
-      price:0,
+      name: props.diet.name,
+      price:props.diet.price,
       nutInfo,
-      dietRuns: this.props.diet.runs,
+      dietRuns: props.diet.runs,
       ...dietRunToAppState(lastDietRun,nutInfo),
       requires_recalculate: false,
       requires_save: false,
@@ -102,6 +103,7 @@ class App extends React.Component {
 
   calculateDiet(calculate_solution=true) {
     const thisComp = this;
+    const nutFoodPrice = 1e6;
 
     const parseLimit = (lim) => {
       if (typeof lim === "number" && !isNaN(lim)) return lim
@@ -131,7 +133,7 @@ class App extends React.Component {
         if (key2!==key) obj[key2]=0
         else obj[key2] = -1
       }
-      obj["price"]=1e6;
+      obj["price"]=nutFoodPrice;
       nutFoods["anti-"+key] = obj
     }
     console.log(foodNutsCustom)
@@ -174,9 +176,12 @@ class App extends React.Component {
       }
     }
 
+    let price = solution.result;
+
     //adding the nuts and anti-nuts
     for (let key in solution) {
       if (key !== "feasible" && key !== "bounded" && key!=="result" && !(key in foodInfo) ) {
+        price -= solution[key]*nutFoodPrice;
         // console.log(ingPref);
         dietVec.push({
           "name":key,
@@ -192,7 +197,7 @@ class App extends React.Component {
       dietVec:dietVec,
       feasible:solution.feasible,
       nutTots,
-      price:solution.result,
+      price,
       solution
     })
       // console.log(solution);
@@ -462,7 +467,8 @@ class App extends React.Component {
     }
     return (<div className="container food-matrix">
     <div className="row">
-      {caloriesSpan}
+      {caloriesSpan}&nbsp;
+      <span>{"Price: £"+this.state.price.toFixed(2)}</span>
       <button type="button" id="calculate-diet-button" className="btn toolbar-button btn-primary" disabled={!this.state.requires_recalculate} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
       <a href="/new-food"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary toolbar-button">New food</button></a>
@@ -471,6 +477,7 @@ class App extends React.Component {
     <br/>
     <div className="row">
       <div className="col-lg-2">
+        <span>{"Diet: "+this.state.name}</span>
           <Async
             name="load-diet"
             loadOptions={getDietOptions}
