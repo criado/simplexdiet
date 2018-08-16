@@ -8,11 +8,13 @@ export default class DietTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mins: [],
-      maxs: [],
-      prices: [],
-      nutmins: [],
-      nutmaxs: [],
+      mins: props.diet.filter(x=>(x.id in props.ings)).map(x=>(props.ings[x.id].min*100).toFixed(0)),
+      maxs: props.diet.filter(x=>(x.id in props.ings)).map(x=>(props.ings[x.id].max*100).toFixed(0)),
+      prices: props.diet.filter(x=>(x.id in props.ings)).map(x=>(props.ings[x.id].price)),
+      nutmins: props.nutList.map(x=>
+        typeof props.nutPref[x.id] !== "undefined" && typeof props.nutPref[x.id].min !== "undefined" ? props.nutPref[x.id].min.toFixed(0) : ""),
+      nutmaxs: props.nutList.map(x=>
+        typeof props.nutPref[x.id] !== "undefined" && typeof props.nutPref[x.id].max !== "undefined" ? props.nutPref[x.id].max.toFixed(0) : ""),
       editingPrice: -1
     }
     this.tableBodyEl = React.createRef();
@@ -82,7 +84,7 @@ export default class DietTable extends React.Component {
     {/* HEAD OF TABLE */}
     <thead>
       <tr ref={this.tableHeadEl}>
-      <th style={{width: "450px", padding: "1px"}} scope="col">Food</th>
+      <th style={{width: "350px", padding: "1px"}} scope="col">Food</th>
         {this.props.nutList.map((x,i)=>{
           return <th key={i} nut-array-pos={i} title={x.name} scope="col" style={{width: "41px", padding: "1px", textAlign: "center"}} className="nutName">{thisComp.props.nutInfo[x.id].short_name}</th>
         })}
@@ -92,6 +94,9 @@ export default class DietTable extends React.Component {
       {/* NUTRIENTS */}
         {this.props.nutList.map((x,i)=>{
           return <td key={i} nut-array-pos={i} title={x.name} scope="col" style={{fontSize:"10px", padding:"1px 2px", textAlign: "center"}}>
+          <a className="remove-nut" style={{marginRight:"10px",color:"red"}} onClick={()=>thisComp.props.removeNut(x.id)}>
+                  <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </a>
           <input className="nut-limits" value={thisComp.state.nutmins[i]} step="10" style={{width:"30px", textAlign: "right"}} type="number"
                 onKeyPress={e=>{
                     if (e.key == 'Enter') thisComp.props.calculateDietIfNeeded()
@@ -103,9 +108,11 @@ export default class DietTable extends React.Component {
                 }}
             />
             <br/>
+
             <div style={{textAlign: "right", display: "inline-block", width:"100%", padding: "2px"}}>
               <span style={{width:"35px"}}>{typeof thisComp.props.nutTots[i] !== "undefined" ? thisComp.props.nutTots[i].toFixed(0).toString(): ""}<span style={{fontSize:"8px"}}>{x.unit}</span></span>
             </div>
+
             <br/>
             <input className="nut-limits" value={thisComp.state.nutmaxs[i]} step="10" style={{width:"30px", textAlign: "right"}} type="number"
                 onKeyPress={e=>{
@@ -118,6 +125,7 @@ export default class DietTable extends React.Component {
                 }}
                 />
             {/* <span title={x.name}>{x.name.split(",").slice(0,2).join(",").slice(0,17)}</span> */}
+
         </td>
         })}
       </tr>
@@ -128,7 +136,7 @@ export default class DietTable extends React.Component {
         if (x.id in thisComp.props.ings)
         {
           return (<tr key={i} className="ings" diet-array-pos={i} style={{"height":"45px"}}>
-              <td style={{"width":"450px"}}>
+              <td style={{"width":"350px"}}>
                 <a className="remove-ing" style={{marginRight:"10px",color:"red"}} onClick={()=>thisComp.props.removeIng(x.id)}>
                   <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
@@ -180,7 +188,7 @@ export default class DietTable extends React.Component {
               </td>
               {/* NUTRIENT ROW */}
               {x.nutAmounts.map((n,j)=>(
-                <td title={thisComp.props.nutList[j].name} style={{backgroundColor:"rgba("+(255*n/100).toFixed(0)+",0,0,"+n/100+")", width:"41px"}} key={j}>
+                <td title={thisComp.props.nutList[j]} style={{backgroundColor:"rgba("+(255*n/100).toFixed(0)+",0,0,"+n/100+")", width:"41px"}} key={j}>
                   {n.toFixed(0)==="0" ? "" : n.toFixed(0) }
                 </td>
               ))}

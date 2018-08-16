@@ -74,7 +74,22 @@ Meteor.methods({
       // return val
     },
 
+  getDiets(keyword) {
+    console.log(keyword);
+
+    return Diets.find({name:{$regex: keyword , $options: "-i"}, user:Meteor.user()}, {
+      fields: {_id:1, name:1, runs: 1,price:1},
+      limit:100
+    }).fetch();
+
+    //TODO: make it possible to have public diets, so you can share with furenzu
+  },
+
 });
+
+
+
+////////////////////////////
 
 // //CODE TO INSERT CSV FROM USDA TO DATABASE
 

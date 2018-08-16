@@ -27,6 +27,10 @@ tr .remove-ing {
   visibility: hidden;
 }
 
+td .remove-nut {
+  visibility: hidden;
+}
+
 /* .sortable-placeholder {
   position: absolute;
   width:40px;
@@ -55,6 +59,10 @@ tr .remove-ing {
 }*/
 
 tr:hover .remove-ing {
+  visibility: visible;
+}
+
+td:hover .remove-nut {
   visibility: visible;
 }
 

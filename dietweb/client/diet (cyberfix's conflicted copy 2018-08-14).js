@@ -53,11 +53,6 @@ const newEmptyFood = (id,name,nutCodes) => ({
   nutAmounts: nutCodes.map(x=>0)
 })
 
-/*
-we store ingPref, nutPref lists in database, and then we split them into ingPref, nutPref objects, and nutCodes, ingCodes lists, which 
-store the info and the order separately.
-*/
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -69,16 +64,13 @@ class App extends React.Component {
       nutInfo,
       dietRuns: this.props.diet.runs,
       ...dietRunToAppState(lastDietRun,nutInfo),
-      requires_recalculate: false,
-      requires_save: false,
-      first_time: true, // It is true because we want to compute the diet in the beginning
-      solution: {}
+      has_changed: false,
+      first_time: true // It is true because we want to compute the diet in the beginning
     }
   }
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps) {
     let lastDietRun = this.props.diet.runs[this.props.diet.runs.length-1];
     //If this is the first time, and we have retrieved a diet without a calculated solution... (this shouldn't really happen except when testing)
-    
     if (this.state.first_time && !this.props.loading){
       this.setState({
         dietRuns: this.props.diet.runs,
@@ -89,18 +81,9 @@ class App extends React.Component {
         if (!lastDietRun.sol || !lastDietRun.nutTots)
           this.calculateDiet()
       })
-    } else if (this.state.requires_save && prevState !== this.state) {
-        //we ONLY 
-        this.setState({
-          requires_save:false,
-        })
-        this.updatePrefs()
     }
-
-
   }
-
-  calculateDiet(calculate_solution=true) {
+  calculateDiet() {
     const thisComp = this;
 
     const parseLimit = (lim) => {
@@ -148,12 +131,7 @@ class App extends React.Component {
     //   return xs
     // },{})
 
-
-    let solution;
-    if (calculate_solution) 
-      solution= solveDiet(foodNuts,nutFoods,ingPref,nutPref, "price");
-    else
-      solution = this.state.solution
+    let solution = solveDiet(foodNuts,nutFoods,ingPref,nutPref, "price");
     console.log("solution",solution)
 
     let {foundNuts, nutTots} = getSolNuts(solution,nutFoods,ingPref,nutCodes,foodNuts)
@@ -192,11 +170,40 @@ class App extends React.Component {
       dietVec:dietVec,
       feasible:solution.feasible,
       nutTots,
-      price:solution.result,
-      solution
+      price:solution.result
     })
       // console.log(solution);
     // })
+  }
+
+  changeLims(foodId,newLim) {
+    const thisComp = this;
+    console.log(newLim)
+    let newIngPref = thisComp.state.ingPref;
+    newIngPref[foodId] = { ...thisComp.state.ingPref[foodId], ...newLim}
+    this.setState({
+      ingPref: newIngPref,
+      has_changed: true,
+    })
+  }
+
+  changePrice(foodId,newPrice) {
+    const thisComp = this;
+    let newIngPref = thisComp.state.ingPref;
+    newIngPref[foodId].price = newPrice;
+    this.setState({
+      ingPref: newIngPref,
+      has_changed: true,
+    })
+  }
+
+  changeNutLims(nutId,newLim) {
+    let newNutPref = this.state.nutPref;
+    newNutPref[nutId] = { ...this.state.nutPref[nutId], ...newLim}
+    this.setState({
+      nutPref: newNutPref,
+      has_changed: true
+    })
   }
 
   updatePrefs() {
@@ -205,7 +212,7 @@ class App extends React.Component {
     let runs = this.state.dietRuns;
     
     let ingPref = this.state.ingCodes.map(f=>({id:f, ...this.state.ingPref[f]}))
-    let nutPref = this.state.nutCodes.map(f=>({id:f, ...this.state.nutPref[f]}));
+    let nutPref = this.state.nutCodes.map(f=>({id:f, ...this.state.nutPref[f]}))
     
     if (runs.length === MAX_DIETRUNS_SAVED) {
       runs.splice(0, 1)
@@ -213,11 +220,10 @@ class App extends React.Component {
     runs.push({ingPref, nutPref, sol:this.state.dietVec})
 
     console.log(this.props.diet._id)
-    this.setState({dietRuns: runs, doesnt_require_save:true}, ()=>{
+    this.setState({dietRuns: runs}, ()=>{
       Diets.update({_id:this.props.diet._id},
-      { "$set": { name: "Default", //TODO: change name!
+      { "$set": { name: "Default",
       user:Meteor.user(),
-      price: this.state.price,
       runs:this.state.dietRuns } },
       {upsert:true})
     })
@@ -228,133 +234,65 @@ class App extends React.Component {
     // })
   }
 
-  //FUNDAMENTAL CHANGES TO STATE (things that require recalculation of diet)
-
-  changeLims(foodId,newLim) {
-    console.log(newLim)
-
-    let ingPref = this.state.ingPref;
-    ingPref[foodId] = { ...this.state.ingPref[foodId], ...newLim}
-
-    this.setState({
-      ingPref,
-      requires_recalculate: true,
-    })
-  }
-
-  changePrice(foodId,newPrice) {
-    let ingPref = this.state.ingPref;
-    ingPref[foodId].price = newPrice;
-
-    this.setState({
-      ingPref,
-      requires_recalculate: true,
-    })
-  }
-
-  changeNutLims(nutId,newLim) {
-    let nutPref = this.state.nutPref;
-    nutPref[nutId] = { ...this.state.nutPref[nutId], ...newLim};
-    
-    this.setState({
-      nutPref,
-      requires_recalculate: true
-    })
-  }
-
-  //Things that change ingCodes or nutCodes//
-  //Adding
-
   addIng(food) {
     food = food.value;
     let foodId = food.id
     // let custom = food.custom
     console.log("adding",foodId,food)
-    let ingPref = this.state.ingPref;
-    ingPref[foodId] = {"price": food.price}
-
-    let ingCodes = this.state.ingCodes;
-    ingCodes.push(foodId)
-
-    let vec = this.state.dietVec;
-    let idx = vec.findIndex(x=>x.nutFood)
-    vec.splice(idx, 0, newEmptyFood(foodId,food.name,this.state.nutCodes))
-
+    let newIngPref = this.state.ingPref;
+    newIngPref[foodId] = {"price": food.price}
+    let newIngCodes = this.state.ingCodes;
+    newIngCodes.push(foodId)
     this.setState({
-      ingPref,
-      ingCodes,
-      requires_recalculate:true,
-      dietVec: vec
+      ingPref: newIngPref,
+      ingCodes: newIngCodes,
+      has_changed:true
     },()=>{
-      this.updatePrefs() //this is a special case: a requires_recalculate which calls updatePrefs, so that we retrieve the nutrients from database for new food      
+      let vec = this.state.dietVec;
+      let idx = vec.findIndex(x=>x.nutFood)
+      vec.splice(idx, 0, newEmptyFood(foodId,food.name,this.state.nutCodes))
+      this.setState({dietVec: vec}, () => {
+        this.updatePrefs()
+      })
     })
   }
-
-  addNut(nut) {
-    let nutId = nut.value;
-    // let custom = food.custom
-    console.log("adding",nutId)
-    let nutPref = this.state.nutPref;
-    nutPref[nutId] = {}
-
-    let nutCodes = this.state.nutCodes;
-    nutCodes.push(nutId)
-    let nutrients = nutCodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit}));      
-
-    this.setState({
-      nutPref,
-      nutCodes,
-      nutrients,
-      requires_recalculate:true,
-    },()=> {
-      this.calculateDiet(false)
-    })
-  }
-
-  //Removing
 
   removeIng(foodId) {
     console.log("removing food",foodId)
-    let ingPref = this.state.ingPref;
-    let ingCodes = this.state.ingCodes;    
-    delete ingPref[foodId]
-    let index = ingCodes.indexOf(foodId);
+    let newIngPref = this.state.ingPref;
+    let newIngCodes = this.state.ingCodes;    
+    delete newIngPref[foodId]
+    let index = newIngCodes.indexOf(foodId);
     if (index > -1) {
-      ingCodes.splice(index, 1);
+      newIngCodes.splice(index, 1);
     }
-    this.setState({
-      ingPref,
-      ingCodes,
-      dietVec: this.state.dietVec.filter(f=>f.id!==foodId),
-      requires_recalculate:true      
+    this.setState({ingPref: newIngPref, ingCodes:newIngCodes, has_changed:true},()=>{
+      this.setState({dietVec: this.state.dietVec.filter(f=>f.id!==foodId)}, () => {
+        this.updatePrefs()
+      })
     })
   }
 
   removeNut(nutId) {
-    console.log("removing nut", nutId)
-    let nutPref = this.state.nutPref;
-    let nutCodes = this.state.nutCodes.slice();
-    delete nutPref[nutId]
-    let index = nutCodes.indexOf(nutId);
+    console.log("removing nut",nutId)
+    let newNutPref = this.state.nutPref;
+    let newNutCodes = this.state.nutCodes;    
+    delete newNutPref[nutId]
+    let index = newNutCodes.indexOf(nutId);
     if (index > -1) {
-      nutCodes.splice(index, 1);
+      newNutCodes.splice(index, 1);
     }
-
-    let nutrients = nutCodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit}));
-    
-    this.setState({
-      nutPref,
-      nutCodes,
-      nutrients,
-      dietVec: this.state.dietVec.map(ing=>{
+    this.setState({nutPref: newNutPref, nutCodes:newNutCodes, has_changed:true},()=>{
+      this.setState({dietVec: this.state.dietVec.map(ing=>{
+        console.log(ing)
         ing.nutAmounts = ing.nutAmounts.filter((n,i)=>this.state.nutCodes[i]!==nutId)
+        console.log(ing)        
         return ing
-      }),
-      requires_recalculate:true
+      })}, () => {
+        this.updatePrefs()
+      })
     })
   }
-
-  //Change order
 
   changeIngOrder(id1,id2) {
     //id2 is moved to be before id1
@@ -362,7 +300,9 @@ class App extends React.Component {
       this.setState({
         ingCodes: swapInArray(this.state.ingCodes,id1,id2), 
         dietVec: swapInArray(this.state.dietVec,id1,id2), 
-        requires_save: true
+        // has_changed: true
+      },() => {
+        this.updatePrefs()
       })
   }
 
@@ -371,29 +311,16 @@ class App extends React.Component {
     id1 = parseInt(id1)
     id2 = parseInt(id2)
 
-    // console.log("swapping",id1,id2)
-
-    let nutCodes = swapInArray(this.state.nutCodes,id1,id2);
-    let nutrients = nutCodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit}));
-    let nutTots = swapInArray(this.state.nutTots,id1,id2);    
-    
+    console.log("swapping",id1,id2)
 
     this.setState({
-      nutCodes, 
-      nutrients,
-      nutTots,
+      nutCodes: swapInArray(this.state.nutCodes,id1,id2), 
+      nutrients: swapInArray(this.state.nutrients,id1,id2), 
+      nutTots: swapInArray(this.state.nutTots,id1,id2),
       dietVec: this.state.dietVec.map(x=>({...x, nutAmounts:swapInArray(x.nutAmounts,id1,id2)})),
-      requires_save: true
-    })
-  }
-
-  loadDiet(diet) {
-    let lastDietRun = diet.runs[diet.runs.length-1];
-    
-    this.setState({
-      price:diet.price,
-      dietRuns: diet.runs,
-      ...dietRunToAppState(lastDietRun,nutInfo),
+      // has_changed: true
+    },() => {
+      this.updatePrefs()
     })
   }
 
@@ -441,9 +368,9 @@ class App extends React.Component {
     }
   }
   calculateDietIfNeeded() {
-    if (this.state.requires_recalculate){
+    if (this.state.has_changed){
       this.calculateDiet()
-      this.setState({requires_recalculate: false})
+      this.setState({has_changed: false})
       this.updatePrefs()
    }
   }
@@ -463,43 +390,17 @@ class App extends React.Component {
     return (<div className="container food-matrix">
     <div className="row">
       {caloriesSpan}
-      <button type="button" id="calculate-diet-button" className="btn toolbar-button btn-primary" disabled={!this.state.requires_recalculate} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
+      <button type="button" id="calculate-diet-button" className="btn toolbar-button btn-primary" disabled={!this.state.has_changed} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
       <a href="/new-food"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary toolbar-button">New food</button></a>
         <br/>
-    </div>
-    <br/>
-    <div className="row">
-      <div className="col-lg-2">
-          <Async
-            name="load-diet"
-            loadOptions={getDietOptions}
-            onChange={this.loadDiet.bind(this)}
-          />
-        </div>
-
-      {/* <div className="col-lg-2">
-          <Async
-            name="load-pref"
-            loadOptions={getNutPrefOptions}
-            onChange={this.loadNutPref.bind(this)}
-          />
-        </div> */}
-
-      <div className="col-lg-2 col-lg-offset-8">
-        <Async
-          name="add-new-nut"
-          loadOptions={getNutOptions}
-          onChange={this.addNut.bind(this)}
-        />
-      </div>
     </div>
     <div className="row">
       {this.renderDiet()}
     </div>
     <div className="row">
       <Async
-        name="add-new-ing"
+        name="form-field-name"
         loadOptions={getFoodOptions}
         onChange={this.addIng.bind(this)}
       />
@@ -519,30 +420,6 @@ const getFoodOptions = (input, callback) => {
     callback(null,
       {options:
         foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name+" ("+x.user+")"}))
-      })
-  })
-
-};
-
-//function to populate the nutrient selector, to add new nutrients
-const getNutOptions = (input, callback) => {
-
-  callback(null,
-    {options:
-      Object.keys(nutInfo).map(id=>({value: id, label: nutInfo[id].long_name}))
-    })
-
-};
-
-const getDietOptions = (input, callback) => {
-  console.log(input)
-  Meteor.call("getDiets",input,(err,res)=>{
-    if (err) console.log(err)
-    let diets = res;
-    // console.log("foodnames",foods)
-    callback(null,
-      {options:
-        diets.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name}))
       })
   })
 
@@ -574,7 +451,7 @@ export default withTracker(props => {
 
   let defaultNutPrefObj = [{"id":"203","min":70,"max":94},{"id":"204","min":66.66666666666667,"max":78},{"id":"205","min":325,"max":380.25},{"id":"208","min":2000,"max":2340},{"id":"269","max":150},{"id":"291","min":23,"max":46},{"id":"601"},{"id":"301","min":1000,"max":2500},{"id":"303","min":14.4,"max":45},{"id":"304","min":400},{"id":"305","min":700,"max":4000},{"id":"306","min":4700},{"id":"307","min":1500,"max":2300},{"id":"309","min":16.5,"max":40},{"id":"312","min":0.9,"max":10},{"id":"315","min":2.3,"max":11},{"id":"317","min":55,"max":400},{"id":"320","min":900,"max":1350},{"id":"323","min":15,"max":1000},{"id":"328","min":5,"max":100},{"id":"401","min":90,"max":2000},{"id":"404","min":1.2},{"id":"405","min":1.3},{"id":"406","min":16,"max":35},{"id":"410","min":5},{"id":"415","min":1.3,"max":100},{"id":"417","min":400,"max":1000},{"id":"418","min":2.4},{"id":"421","min":550,"max":3500},{"id":"430","min":120},{"id":"606","max":25},{"id":"618","min":16.83,"max":17.17},{"id":"619","min":1.584,"max":1.616}]
 
-  let defaultDietObj = {"_id":"Default", "name":"Default", user:Meteor.user(), price: 0, runs: [{ingPref: defaultIngPrefObj, nutPref: defaultNutPrefObj, sol:null}]}
+  let defaultDietObj = {"name":"Default", user:Meteor.user(), runs: [{ingPref: defaultIngPrefObj, nutPref: defaultNutPrefObj, sol:null}]}
   let defaultNutPrefs = [{"name":"Default", user:Meteor.user(), nutPref: defaultNutPrefObj}]
   // console.log("nutPrefObj", nutPrefObj, !!nutPrefObj)
 
