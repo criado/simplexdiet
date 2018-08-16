@@ -65,6 +65,7 @@ class App extends React.Component {
     let lastDietRun = props.diet.runs[props.diet.runs.length-1];
     this.state={dietVec: [],
       feasible: true,
+      dietId: props.diet._id,
       name: props.diet.name,
       price:props.diet.price,
       nutInfo,
@@ -82,6 +83,9 @@ class App extends React.Component {
     
     if (this.state.first_time && !this.props.loading){
       this.setState({
+        dietId: this.props.diet._id,
+        name: this.props.diet.name,
+        price:this.props.diet.price,
         dietRuns: this.props.diet.runs,
         ...dietRunToAppState(lastDietRun,nutInfo),
         first_time: false
@@ -207,6 +211,8 @@ class App extends React.Component {
   updatePrefs() {
     //Update diet history
 
+    let username = Meteor.user() ? Meteor.user().username : "";
+
     let runs = this.state.dietRuns;
     
     let ingPref = this.state.ingCodes.map(f=>({id:f, ...this.state.ingPref[f]}))
@@ -217,20 +223,42 @@ class App extends React.Component {
     }
     runs.push({ingPref, nutPref, sol:this.state.dietVec})
 
-    console.log(this.props.diet._id)
-    this.setState({dietRuns: runs, doesnt_require_save:true}, ()=>{
-      Diets.update({_id:this.props.diet._id},
-      { "$set": { name: "Default", //TODO: change name!
-      user:Meteor.user(),
+    // console.log(this.props.diet._id)
+    this.setState({dietRuns: runs}, ()=>{
+      Diets.update({_id:this.state.dietId},
+      { "$set": { name: this.state.name,
+      user:username,
       price: this.state.price,
       runs:this.state.dietRuns } },
       {upsert:true})
     })
-    //TODO: save as
-    // Diets.insert({ name: "Default",
-    //     user:Meteor.user(),
-    //     runs:this.state.dietRuns})
-    // })
+  }
+
+  forkDiet() {
+    //Basically, "save as"
+
+    let username = Meteor.user() ? Meteor.user().username : "";
+
+    // let runs = this.state.dietRuns;
+    
+    // let ingPref = this.state.ingCodes.map(f=>({id:f, ...this.state.ingPref[f]}))
+    // let nutPref = this.state.nutCodes.map(f=>({id:f, ...this.state.nutPref[f]}));
+    
+    // if (runs.length === MAX_DIETRUNS_SAVED) {
+    //   runs.splice(0, 1)
+    // }
+    // runs.push({ingPref, nutPref, sol:this.state.dietVec})
+
+    console.log(this.props.diet._id)
+
+    Diets.insert({ name: this.state.name,
+      user:username,
+      price: this.state.price,
+      runs:this.state.dietRuns
+      },(err,id)=>{
+        if (err) console.log(err)
+        else this.setState({dietId:id})
+    })
   }
 
   //FUNDAMENTAL CHANGES TO STATE (things that require recalculation of diet)
@@ -393,12 +421,17 @@ class App extends React.Component {
   }
 
   loadDiet(diet) {
+    diet = diet.value
     let lastDietRun = diet.runs[diet.runs.length-1];
     
     this.setState({
+      name:diet.name,
       price:diet.price,
       dietRuns: diet.runs,
       ...dietRunToAppState(lastDietRun,nutInfo),
+    },()=>{
+      if (!lastDietRun.sol || !lastDietRun.nutTots)
+          this.calculateDiet()
     })
   }
 
@@ -445,6 +478,7 @@ class App extends React.Component {
       }
     }
   }
+
   calculateDietIfNeeded() {
     if (this.state.requires_recalculate){
       this.calculateDiet()
@@ -452,6 +486,14 @@ class App extends React.Component {
       this.updatePrefs()
    }
   }
+
+  handleForkDiet() {
+    let dietName = prompt("Please enter diet name", this.state.name);
+    this.setState({name:dietName},()=>{
+      this.forkDiet()
+    })
+  }
+
   render() {
     let caloriesSpan = "";
     if (this.state.feasible && this.state.dietVec.length !== 0 && !this.props.loading) {
@@ -468,8 +510,9 @@ class App extends React.Component {
     return (<div className="container food-matrix">
     <div className="row">
       {caloriesSpan}&nbsp;
-      <span>{"Price: £"+this.state.price.toFixed(2)}</span>
-      <button type="button" id="calculate-diet-button" className="btn toolbar-button btn-primary" disabled={!this.state.requires_recalculate} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
+      <span><b>{"Price: £"+this.state.price.toFixed(2)}</b></span>
+      <button type="button" id="fork-diet-button" className="btn toolbar-button btn-primary" onClick={this.handleForkDiet.bind(this)}>Fork diet</button>
+      <button type="button" id="calculate-diet-button" style={{"marginRight":"10px"}} className="btn toolbar-button btn-primary" disabled={!this.state.requires_recalculate} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
       <a href="/new-food"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary toolbar-button">New food</button></a>
         <br/>
@@ -549,7 +592,7 @@ const getDietOptions = (input, callback) => {
     // console.log("foodnames",foods)
     callback(null,
       {options:
-        diets.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name}))
+        diets.map(x=>({value: {id:x._id,name:x.name,price:x.price,runs:x.runs}, label: x.name}))
       })
   })
 
@@ -570,28 +613,30 @@ export default withTracker(props => {
   const handle2 = Meteor.subscribe('nutPrefs');
   const handle3 = Meteor.subscribe('foods');
 
-  let dietObj = Diets.findOne({user:Meteor.user()});
+  let username = Meteor.user() ? Meteor.user().username : ""
+
+  let dietObj = Diets.findOne({user:username});
   // let ingPrefObj = IngredientPreferences.findOne({_id:Meteor.userId()});
   // console.log("ingPrefObj", ingPrefObj, !!ingPrefObj)
   // let defaultIngPref = {}
   // let defaultNutPref = {}
-  let nutPrefsServer = NutrientPreferences.findOne({user:Meteor.user()});
+  let nutPrefsServer = NutrientPreferences.findOne({user:username});
   let defaultIngPrefObj = [{"id":"11463","price":0.155},{"id":"11675","max":4,"price":0.08},{"id":"12036","price":0.59},{"id":"12166","price":0.8},{"id":"12220","price":0.783},{"id":"19165","price":1.129},{"id":"20445","max":1.6,"price":0.045},{"id":"01211","max":5,"price":0.04},{"id":"08120","max":0.9,"price":0.075},{"id":"08084","price":0.275},{"id":"01129","min":0.5,"max":1.2,"price":0.6},{"id":"04053","price":0.411},{"id":"09040","max":3,"price":0.1},{"id":"04589","max":0.01,"price":0.038},{"id":"09037","price":0.56}]
   // defaultIngPrefObj = []
 
   let defaultNutPrefObj = [{"id":"203","min":70,"max":94},{"id":"204","min":66.66666666666667,"max":78},{"id":"205","min":325,"max":380.25},{"id":"208","min":2000,"max":2340},{"id":"269","max":150},{"id":"291","min":23,"max":46},{"id":"601"},{"id":"301","min":1000,"max":2500},{"id":"303","min":14.4,"max":45},{"id":"304","min":400},{"id":"305","min":700,"max":4000},{"id":"306","min":4700},{"id":"307","min":1500,"max":2300},{"id":"309","min":16.5,"max":40},{"id":"312","min":0.9,"max":10},{"id":"315","min":2.3,"max":11},{"id":"317","min":55,"max":400},{"id":"320","min":900,"max":1350},{"id":"323","min":15,"max":1000},{"id":"328","min":5,"max":100},{"id":"401","min":90,"max":2000},{"id":"404","min":1.2},{"id":"405","min":1.3},{"id":"406","min":16,"max":35},{"id":"410","min":5},{"id":"415","min":1.3,"max":100},{"id":"417","min":400,"max":1000},{"id":"418","min":2.4},{"id":"421","min":550,"max":3500},{"id":"430","min":120},{"id":"606","max":25},{"id":"618","min":16.83,"max":17.17},{"id":"619","min":1.584,"max":1.616}]
 
-  let defaultDietObj = {"_id":"Default", "name":"Default", user:Meteor.user(), price: 0, runs: [{ingPref: defaultIngPrefObj, nutPref: defaultNutPrefObj, sol:null}]}
-  let defaultNutPrefs = [{"name":"Default", user:Meteor.user(), nutPref: defaultNutPrefObj}]
+  let defaultDietObj = {"_id":"Default", "name":"Default", user:username, price: 0, runs: [{ingPref: defaultIngPrefObj, nutPref: defaultNutPrefObj, sol:null}]}
+  let defaultNutPrefs = [{"name":"Default", user:username, nutPref: defaultNutPrefObj}]
   // console.log("nutPrefObj", nutPrefObj, !!nutPrefObj)
 
   let loading = !handle1.ready() || !handle2.ready() || !handle3.ready()
 
   //If we get them from database, use them, otherwise use the default ones
-  let diet = (!loading && !!dietObj) ? dietObj : defaultDietObj;
+  let diet = (handle1.ready() && !!dietObj) ? dietObj : defaultDietObj;
   let nutPrefs = (!loading && !!nutPrefsServer) ? nutPrefsServer : defaultNutPrefs;
 
-  // console.log("dietObj",dietObj)
+  // console.log("diet",diet)
 
   let lastDietRun = diet.runs[diet.runs.length-1];  
   

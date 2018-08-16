@@ -77,7 +77,9 @@ Meteor.methods({
   getDiets(keyword) {
     console.log(keyword);
 
-    return Diets.find({name:{$regex: keyword , $options: "-i"}, user:Meteor.user()}, {
+  let username = Meteor.user() ? Meteor.user().username : ""    
+
+    return Diets.find({name:{$regex: keyword , $options: "-i"}, user:username}, {
       fields: {_id:1, name:1, runs: 1,price:1},
       limit:100
     }).fetch();
