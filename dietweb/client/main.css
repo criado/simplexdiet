@@ -101,13 +101,21 @@ input[type=number].food-price::-webkit-outer-spin-button {
 .price-appear-leave.price-appear-leave-active {
   opacity: 0.01;
   transform: translateX(-10px);
-  transition: all 50ms ease-in
+  transition: all 50ms ease-in;
+}
+
+.toolbar > * {
+  float:right;
+}
+
+.toolbar {
+  padding: 0px 10px;
 }
 
 .toolbar-button {
   /*background-color: rgba(40, 158, 93, 0.9);*/
   /*border-color: rgba(40, 158, 93, 0.9);*/
-  float: right;
+  float: left;
   color: white;
   /*font-weight: bold;*/
 }

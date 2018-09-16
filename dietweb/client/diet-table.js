@@ -84,13 +84,13 @@ export default class DietTable extends React.Component {
     {/* HEAD OF TABLE */}
     <thead>
       <tr ref={this.tableHeadEl}>
-      <th style={{width: "350px", padding: "1px"}} scope="col">Food</th>
+      <th style={{width: "350px", padding: "1px"}} scope="col">{this.props.DietSelector}</th>
         {this.props.nutList.map((x,i)=>{
-          return <th key={i} nut-array-pos={i} title={x.name} scope="col" style={{width: "41px", padding: "1px", textAlign: "center"}} className="nutName">{thisComp.props.nutInfo[x.id].short_name}</th>
+          return <th key={i} nut-array-pos={i} title={x.name} scope="col" valign="middle" style={{width: "41px", padding: "1px", textAlign: "center"}} className="nutName">{thisComp.props.nutInfo[x.id].short_name}</th>
         })}
       </tr>
       <tr>
-      <td scope="col"> </td>
+      <td scope="col"> {this.props.dietStats} </td>
       {/* NUTRIENTS */}
         {this.props.nutList.map((x,i)=>{
           return <td key={i} nut-array-pos={i} title={x.name} scope="col" style={{fontSize:"10px", padding:"1px 2px", textAlign: "center"}}>
@@ -188,7 +188,7 @@ export default class DietTable extends React.Component {
               </td>
               {/* NUTRIENT ROW */}
               {x.nutAmounts.map((n,j)=>(
-                <td title={thisComp.props.nutList[j]} style={{backgroundColor:"rgba("+(255*n/100).toFixed(0)+",0,0,"+n/100+")", width:"41px"}} key={j}>
+                <td title={this.props.nutList[j].protein} style={{backgroundColor:"rgba("+(255*n/100).toFixed(0)+",0,0,"+n/100+")", width:"41px"}} key={j}>
                   {n.toFixed(0)==="0" ? "" : n.toFixed(0) }
                 </td>
               ))}

@@ -87,6 +87,19 @@ Meteor.methods({
     //TODO: make it possible to have public diets, so you can share with furenzu
   },
 
+  getNutPrefs(keyword) {
+    console.log(keyword);
+
+  let username = Meteor.user() ? Meteor.user().username : ""    
+
+    return NutrientPreferences.find({name:{$regex: keyword , $options: "-i"}, user:username}, {
+      fields: {_id:1, name:1},
+      limit:100
+    }).fetch();
+
+    //TODO: make it possible to have public nutPrefs, so you can share with furenzu
+  },
+
 });
 
 

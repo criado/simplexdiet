@@ -10,6 +10,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 
 import { Async } from 'react-select';
 
+import PopoutSelect from './cool-select.jsx'
+
 import DietTable from './diet-table.js'
 
 import { nutInfo } from '../imports/nut-info.js'
@@ -435,48 +437,9 @@ class App extends React.Component {
     })
   }
 
-  renderDiet() {
-    if (this.state.dietVec.length === 0) {
-      if (!this.props.loading && !Meteor.user()) {
-        return (<div className="alert alert-warning" role="alert">
-          <strong>Hi!</strong> Login to create a diet!
-        </div>)
-      }
-      if (!this.props.loading) {
-        return (<div className="alert alert-info" role="alert">
-          <strong>Heads up!</strong> Please add an ingredient to start creating your diet!
-        </div>)
-      } else {
-        return ""
-      }
-    }
-    else {
-      let dietObject = <DietTable
-        diet={this.state.dietVec}
-        ings={this.state.ingPref}
-        nutList={this.state.nutrients}
-        nutInfo={this.state.nutInfo}
-        nutPref={this.state.nutPref}
-        nutTots={this.state.nutTots}
-        changeLims={this.changeLims.bind(this)}
-        changePrice={this.changePrice.bind(this)}
-        changeNutLims={this.changeNutLims.bind(this)}
-        changeIngOrder={this.changeIngOrder.bind(this)}
-        changeNutOrder={this.changeNutOrder.bind(this)}
-        calculateDietIfNeeded={this.calculateDietIfNeeded.bind(this)}
-        removeIng={this.removeIng.bind(this)}
-        removeNut={this.removeNut.bind(this)}/>
-      if (this.state.feasible) {
-        return dietObject
-      } else { //no feasible and vector isn't []
-        return (<div>
-          <div className="alert alert-danger" role="alert">
-            <strong>Oh snap!</strong> No feasible primal solution!
-          </div>
-          {dietObject}
-        </div>)
-      }
-    }
+  loadNutPref(nutPref) {
+    nutPref = nutPref.value.nutPref
+    this.setState({nutPref})
   }
 
   calculateDietIfNeeded() {
@@ -494,56 +457,130 @@ class App extends React.Component {
     })
   }
 
-  render() {
-    let caloriesSpan = "";
-    if (this.state.feasible && this.state.dietVec.length !== 0 && !this.props.loading) {
-      let thisComp = this;
-      let carbs_energy = this.state.nutTots[this.state.nutCodes.indexOf("205")]*4, 
-          fat_energy = this.state.nutTots[this.state.nutCodes.indexOf("204")]*9, 
-          protein_energy = this.state.nutTots[this.state.nutCodes.indexOf("203")]*4
-      let total_energy = carbs_energy + fat_energy + protein_energy // Note this is not the same as this.state.nutTots["kcals"] because of the error due to the factors 4, 9, and 4 to approximate the energy
-      carbs_energy = carbs_energy*100/total_energy
-      fat_energy = fat_energy*100/total_energy
-      protein_energy = protein_energy*100/total_energy
-      caloriesSpan = <span> {"Carbs: " + carbs_energy.toFixed(2) + "%, Fat: " + fat_energy.toFixed(2) + " %, Protein: " + protein_energy.toFixed(2) + "%"} </span>
+  renderDiet() {
+    if (this.state.dietVec.length === 0) {
+      if (!this.props.loading && !Meteor.user()) {
+        return (<div className="alert alert-warning" role="alert">
+          <strong>Hi!</strong> Login to create a diet!
+        </div>)
+      }
+      if (!this.props.loading) {
+        return (<div className="alert alert-info" role="alert">
+          <strong>Heads up!</strong> Please add an ingredient to start creating your diet!
+        </div>)
+      } else {
+        return ""
+      }
     }
-    return (<div className="container food-matrix">
-    <div className="row">
-      {caloriesSpan}&nbsp;
-      <span><b>{"Price: £"+this.state.price.toFixed(2)}</b></span>
-      <button type="button" id="fork-diet-button" className="btn toolbar-button btn-primary" onClick={this.handleForkDiet.bind(this)}>Fork diet</button>
-      <button type="button" id="calculate-diet-button" style={{"marginRight":"10px"}} className="btn toolbar-button btn-primary" disabled={!this.state.requires_recalculate} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
-      {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
-      <a href="/new-food"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary toolbar-button">New food</button></a>
-        <br/>
-    </div>
-    <br/>
-    <div className="row">
-      <div className="col-lg-2">
-        <span>{"Diet: "+this.state.name}</span>
-          <Async
+    else {
+      let caloriesSpan = "";
+      if (this.state.feasible && this.state.dietVec.length !== 0 && !this.props.loading) {
+        let thisComp = this;
+        let carbs_energy = this.state.nutTots[this.state.nutCodes.indexOf("205")]*4, 
+            fat_energy = this.state.nutTots[this.state.nutCodes.indexOf("204")]*9, 
+            protein_energy = this.state.nutTots[this.state.nutCodes.indexOf("203")]*4
+        let total_energy = carbs_energy + fat_energy + protein_energy // Note this is not the same as this.state.nutTots["kcals"] because of the error due to the factors 4, 9, and 4 to approximate the energy
+        carbs_energy = carbs_energy*100/total_energy
+        fat_energy = fat_energy*100/total_energy
+        protein_energy = protein_energy*100/total_energy
+        caloriesSpan = <div><span><b>{"Price: £"+this.state.price.toFixed(2)}</b></span> <br/> <span> {"Carbs: " + carbs_energy.toFixed(2) + "%, Fat: " + fat_energy.toFixed(2) + " %, Protein: " + protein_energy.toFixed(2) + "%"} </span>&nbsp; </div>
+      }
+
+      let DietSelector = <Async
             name="load-diet"
             loadOptions={getDietOptions}
             onChange={this.loadDiet.bind(this)}
+            defaultOptions
+            cacheOptions
+            placeholder={"Diet: "+this.state.name}
+            styles={{
+              control: styles => ({ ...styles, backgroundColor: "#f2f6f7", borderRadius: 0, height: "26px", minHeight: "26px", borderWidth: 0}),
+              placeholder: styles => ({ ...styles, color:"black" }),
+            }}
           />
-        </div>
 
-      {/* <div className="col-lg-2">
-          <Async
-            name="load-pref"
-            loadOptions={getNutPrefOptions}
-            onChange={this.loadNutPref.bind(this)}
-          />
-        </div> */}
+      let dietObject = <DietTable
+        diet={this.state.dietVec}
+        ings={this.state.ingPref}
+        nutList={this.state.nutrients}
+        nutInfo={this.state.nutInfo}
+        nutPref={this.state.nutPref}
+        nutTots={this.state.nutTots}
+        changeLims={this.changeLims.bind(this)}
+        changePrice={this.changePrice.bind(this)}
+        changeNutLims={this.changeNutLims.bind(this)}
+        changeIngOrder={this.changeIngOrder.bind(this)}
+        changeNutOrder={this.changeNutOrder.bind(this)}
+        calculateDietIfNeeded={this.calculateDietIfNeeded.bind(this)}
+        removeIng={this.removeIng.bind(this)}
+        removeNut={this.removeNut.bind(this)}
+        dietStats={caloriesSpan}
+        DietSelector={DietSelector}/>
+      if (this.state.feasible) {
+        return dietObject
+      } else { //no feasible and vector isn't []
+        return (<div>
+          <div className="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> No feasible primal solution!
+          </div>
+          {dietObject}
+        </div>)
+      }
+    }
+  }
 
-      <div className="col-lg-2 col-lg-offset-8">
-        <Async
-          name="add-new-nut"
-          loadOptions={getNutOptions}
-          onChange={this.addNut.bind(this)}
-        />
-      </div>
+  render() {
+    return (<div className="container food-matrix">
+    <div className="row toolbar">
+
+      {/* <span>{"NutPref: "}</span>       */}
+      <Async
+        name="add-new-nut"
+        loadOptions={getNutOptions}
+        onChange={this.addNut.bind(this)}
+        placeholder="Add nutrient..."        
+        styles={{
+            control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
+            container: (base) => ({
+                  ...base,
+                  display:'inline-block',
+                  width: "150px",
+              }),
+            // placeholder: styles => ({ ...styles, color:"black" }),
+          }}
+        defaultOptions
+        cacheOptions
+      />
+      &nbsp;
+      <Async
+        name="load-pref"
+        loadOptions={getNutPrefOptions}
+        onChange={this.loadNutPref.bind(this)}
+        styles={{
+          control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
+          container: (base) => ({
+                ...base,
+                display:'inline-block',
+                width: "200px",
+                marginRight: "10px"
+            }),
+          // placeholder: styles => ({ ...styles, color:"black" }),
+        }}
+        placeholder="Nutrient prefs..."            
+        defaultOptions
+        cacheOptions
+      />
+      <button type="button" id="fork-diet-button" className="btn toolbar-button btn-primary" style={{"marginRight":"10px"}} onClick={this.handleForkDiet.bind(this)}>Fork diet</button>
+      <button type="button" id="calculate-diet-button" style={{"marginRight":"10px"}} className="btn toolbar-button btn-primary" disabled={!this.state.requires_recalculate} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
+      <a href="/new-food" className="toolbar-button"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary">Custom food</button></a>
+      {/* TODO: Need button for saving nutPref.. */}
+      {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
+        {/* <br/> */}
     </div>
+    <br/>
+    {/* <div className="row">
+      
+    </div> */}
     <div className="row">
       {this.renderDiet()}
     </div>
@@ -566,10 +603,7 @@ const getFoodOptions = (input, callback) => {
     if (err) console.log(err)
     let foodsCustom = res;
     // console.log("foodnames",foods)
-    callback(null,
-      {options:
-        foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name+" ("+x.user+")"}))
-      })
+    callback(foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name+" ("+x.user+")"})))
   })
 
 };
@@ -577,10 +611,7 @@ const getFoodOptions = (input, callback) => {
 //function to populate the nutrient selector, to add new nutrients
 const getNutOptions = (input, callback) => {
 
-  callback(null,
-    {options:
-      Object.keys(nutInfo).map(id=>({value: id, label: nutInfo[id].long_name}))
-    })
+  callback(Object.keys(nutInfo).map(id=>({value: id, label: nutInfo[id].long_name})).filter(n=>n.label.toUpperCase().includes(input.toUpperCase())))
 
 };
 
@@ -589,14 +620,23 @@ const getDietOptions = (input, callback) => {
   Meteor.call("getDiets",input,(err,res)=>{
     if (err) console.log(err)
     let diets = res;
-    // console.log("foodnames",foods)
-    callback(null,
-      {options:
-        diets.map(x=>({value: {id:x._id,name:x.name,price:x.price,runs:x.runs}, label: x.name}))
-      })
+    console.log("results",diets)
+    callback(diets.map(x=>({value: {id:x._id,name:x.name,price:x.price,runs:x.runs}, label: x.name})))
   })
 
 };
+
+const getNutPrefOptions = (input, callback) => {
+  console.log(input)
+  Meteor.call("getNutPrefs",input,(err,res)=>{
+    if (err) console.log(err)
+    let nutPrefs = res;
+    // console.log("foodnames",foods)
+    callback(nutPrefs.map(x=>({value: {id:x._id,name:x.name,nutPref}, label: x.name})))
+  })
+
+};
+
 
 App.propTypes = {
   diet: PropTypes.object.isRequired,
