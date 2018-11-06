@@ -9,6 +9,7 @@ import { Foods, Diets, NutrientPreferences } from "../imports/collections.js"
 import { withTracker } from 'meteor/react-meteor-data';
 
 import { Async } from 'react-select';
+import 'react-select/dist/react-select.css';
 
 import PopoutSelect from './cool-select.jsx'
 
@@ -116,7 +117,7 @@ class App extends React.Component {
       else return null
     }
 
-    let ingPref = this.state.ingPref
+    let ingPref = this.state.ingPref;
 
     let foodNutsCustom = this.props.foodNutsCustom
     let foodInfoCustom = this.props.foodInfoCustom
@@ -130,7 +131,7 @@ class App extends React.Component {
         if (key2!==key) obj[key2]=0
         else obj[key2] = 1
       }
-      obj["price"]=1e6;
+      obj["price"]=1e9;
       nutFoods[key] = obj
     }
     for (let key in nutPref) {
@@ -141,6 +142,9 @@ class App extends React.Component {
       }
       obj["price"]=nutFoodPrice;
       nutFoods["anti-"+key] = obj
+    }
+    for (let key in foodNutsCustom) {
+      foodNutsCustom[key].price=ingPref[key].price;
     }
     console.log(foodNutsCustom)
     let foodNuts = foodNutsCustom;
@@ -277,14 +281,15 @@ class App extends React.Component {
     })
   }
 
-  changePrice(foodId,newPrice) {
+  changePrice(foodId,newPrice,callback) {
+    console.log(newPrice)    
     let ingPref = this.state.ingPref;
     ingPref[foodId].price = newPrice;
 
     this.setState({
       ingPref,
       requires_recalculate: true,
-    })
+    },callback)
   }
 
   changeNutLims(nutId,newLim) {
@@ -304,6 +309,9 @@ class App extends React.Component {
     food = food.value;
     let foodId = food.id
     // let custom = food.custom
+    if (this.state.ingCodes.includes(foodId)) {
+      return
+    }
     console.log("adding",foodId,food)
     let ingPref = this.state.ingPref;
     ingPref[foodId] = {"price": food.price}
@@ -319,7 +327,8 @@ class App extends React.Component {
       ingPref,
       ingCodes,
       requires_recalculate:true,
-      dietVec: vec
+      dietVec: vec,
+      selectIngValue:null,
     },()=>{
       this.updatePrefs() //this is a special case: a requires_recalculate which calls updatePrefs, so that we retrieve the nutrients from database for new food      
     })
@@ -528,7 +537,14 @@ class App extends React.Component {
       }
     }
   }
-
+  // renderInput = props => {
+  //   delete props.value;
+  //   return (
+  //     <div className="Select-input" style={{ display: "inline-block" }}>
+  //       <input {...props} />
+  //     </div>
+  //   );
+  // };
   render() {
     return (<div className="container food-matrix">
     <div className="row toolbar">
@@ -555,6 +571,7 @@ class App extends React.Component {
       <Async
         name="load-pref"
         loadOptions={getNutPrefOptions}
+        value={this.state.selectNutPrefValue}
         onChange={this.loadNutPref.bind(this)}
         styles={{
           control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
@@ -587,14 +604,70 @@ class App extends React.Component {
     <div className="row">
       <Async
         name="add-new-ing"
+        value={this.state.selectIngValue}
         loadOptions={getFoodOptions}
+        onBlurResetsInput={false} 
+        // onCloseResetsInput={false}
+        // onBlur={(e)=>{e.stopPropagation(); console.log(e)}}
+        // inputRenderer={this.renderInput}
+        filterOptions={(options, filter, currentValues) => {
+          // Do no filtering, just return all options
+          return options.filter(x=>!this.state.ingCodes.includes(x.value.id));
+        }}
+        cache={false}
+        filterOption={() => true}
         onChange={this.addIng.bind(this)}
+        onInputChange={(e)=>{console.log(e)}}
+        // defaultInputValue="blah"
       />
     </div>
     <hr/>
     </div>)
   }
 }
+
+//FOR react-select VERSION 2
+
+// //function to populate the food selector, to add new foods
+// const getFoodOptions = (input, callback) => {
+//   console.log(input)
+//   Meteor.call("getFoodNamesData",input,(err,res)=>{
+//     if (err) console.log(err)
+//     let foodsCustom = res;
+//     // console.log("foodnames",foods)
+//     callback(foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name+" ("+x.user+")"})))
+//   })
+
+// };
+
+// //function to populate the nutrient selector, to add new nutrients
+// const getNutOptions = (input, callback) => {
+
+//   callback(Object.keys(nutInfo).map(id=>({value: id, label: nutInfo[id].long_name})).filter(n=>n.label.toUpperCase().includes(input.toUpperCase())))
+
+// };
+
+// const getDietOptions = (input, callback) => {
+//   console.log(input)
+//   Meteor.call("getDiets",input,(err,res)=>{
+//     if (err) console.log(err)
+//     let diets = res;
+//     console.log("results",diets)
+//     callback(diets.map(x=>({value: {id:x._id,name:x.name,price:x.price,runs:x.runs}, label: x.name})))
+//   })
+
+// };
+
+// const getNutPrefOptions = (input, callback) => {
+//   console.log(input)
+//   Meteor.call("getNutPrefs",input,(err,res)=>{
+//     if (err) console.log(err)
+//     let nutPrefs = res;
+//     // console.log("foodnames",foods)
+//     callback(nutPrefs.map(x=>({value: {id:x._id,name:x.name,nutPref}, label: x.name})))
+//   })
+
+// };
 
 //function to populate the food selector, to add new foods
 const getFoodOptions = (input, callback) => {
@@ -603,7 +676,11 @@ const getFoodOptions = (input, callback) => {
     if (err) console.log(err)
     let foodsCustom = res;
     // console.log("foodnames",foods)
-    callback(foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name+" ("+x.user+")"})))
+    callback(null,
+      {options:
+        foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name+" ("+x.user+")"})),
+        cache:false
+      })
   })
 
 };
@@ -611,8 +688,10 @@ const getFoodOptions = (input, callback) => {
 //function to populate the nutrient selector, to add new nutrients
 const getNutOptions = (input, callback) => {
 
-  callback(Object.keys(nutInfo).map(id=>({value: id, label: nutInfo[id].long_name})).filter(n=>n.label.toUpperCase().includes(input.toUpperCase())))
-
+  callback(null,
+    {options:
+      Object.keys(nutInfo).map(id=>({value: id, label: nutInfo[id].long_name})).filter(n=>n.label.toUpperCase().includes(input.toUpperCase()))
+    })
 };
 
 const getDietOptions = (input, callback) => {
@@ -621,7 +700,10 @@ const getDietOptions = (input, callback) => {
     if (err) console.log(err)
     let diets = res;
     console.log("results",diets)
-    callback(diets.map(x=>({value: {id:x._id,name:x.name,price:x.price,runs:x.runs}, label: x.name})))
+    callback(null,
+      {options:
+        diets.map(x=>({value: {id:x._id,name:x.name,price:x.price,runs:x.runs}, label: x.name}))
+      })
   })
 
 };
@@ -632,7 +714,10 @@ const getNutPrefOptions = (input, callback) => {
     if (err) console.log(err)
     let nutPrefs = res;
     // console.log("foodnames",foods)
-    callback(nutPrefs.map(x=>({value: {id:x._id,name:x.name,nutPref}, label: x.name})))
+    callback(null,
+      {options:
+        nutPrefs.map(x=>({value: {id:x._id,name:x.name,nutPref}, label: x.name}))
+      })
   })
 
 };

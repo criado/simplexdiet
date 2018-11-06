@@ -31,6 +31,19 @@ td .remove-nut {
   visibility: hidden;
 }
 
+#add-new-nut, #load-pref {
+  backgroundColor: "#f7f7f7";
+  height: "35px";
+  minHeight: "35px";
+}
+
+#load-diet {
+  backgroundColor: "#f2f6f7";
+   borderRadius: 0;
+   height: "26px";
+   minHeight: "26px";
+   borderWidth: 0;
+}
 /* .sortable-placeholder {
   position: absolute;
   width:40px;

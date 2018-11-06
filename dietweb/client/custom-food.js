@@ -100,7 +100,7 @@ export default class CustomFood extends React.Component {
             <table className="table table-hover table-dark">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Food name</th>
                         <th><input type="text" value={this.state.foodName} style={{width:"300px"}}
                             onChange={e=>thisComp.setState({foodName: e.target.value})}
                         /></th>
@@ -201,16 +201,27 @@ export default class CustomFood extends React.Component {
 
 //   };
 
-  const getFoodOptions = (input, callback) => {
+const getFoodOptions = (input, callback) => {
     console.log(input)
     Meteor.call("getFoodNamesData",input,(err,res)=>{
       if (err) console.log(err)
       let foodsCustom = res;
       // console.log("foodnames",foods)
-      callback(null,
-        {options:
-          foodsCustom.map(x=>({value: {id:x._id,name:x.name,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"}))
-        })
+      callback(foodsCustom.map(x=>({value: {id:x._id,name:x.name,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"})))
     })
-
+  
   };
+
+//   const getFoodOptions = (input, callback) => {
+//     console.log(input)
+//     Meteor.call("getFoodNamesData",input,(err,res)=>{
+//       if (err) console.log(err)
+//       let foodsCustom = res;
+//       // console.log("foodnames",foods)
+//       callback(null,
+//         {options:
+//           foodsCustom.map(x=>({value: {id:x._id,name:x.name,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"}))
+//         })
+//     })
+
+//   };
