@@ -1,8 +1,6 @@
-import { Meteor } from 'meteor/meteor';
-
-import { Mongo } from 'meteor/mongo';
-
-import { Foods, Diets, NutrientPreferences } from '../imports/collections.js';
+import {Meteor} from 'meteor/meteor';
+import {Mongo} from 'meteor/mongo';
+import {Foods, Diets, NutrientPreferences} from '../imports/collections.js';
 
 Foods.rawCollection().createIndex({name: 1, user: 1}, {unique: true});
 
@@ -16,107 +14,80 @@ import fetch from 'node-fetch';
 
 let serverroot = process.env['METEOR_SHELL_DIR'] + '/../../../private/';
 var parse = require('csv-parse/lib/sync');
-var path = require( 'path' );
+var path = require('path');
 var fs = require('fs');
 
 var exec = Npm.require("child_process").exec;
 var Future = Npm.require("fibers/future");
 
-// Meteor.publish('foods', ()=>{
-//   return Foods.find({}, {
-//     fields: {fields: {_id:1, name:1, nutrients:0}}
-//   });
-// });
-
-Meteor.publish("diets", () =>{
+Meteor.publish("diets", () => {
   return Diets.find();
-})
+});
 
-Meteor.publish("nutPrefs", () =>{
+Meteor.publish("nutPrefs", () => {
   return NutrientPreferences.find();
-})
+});
 
-Meteor.publish("foods", () =>{
+Meteor.publish("foods", () => {
   return Foods.find();
-})
+});
 
-Foods.rawCollection().createIndex( { "name": "text" } )
-
+Foods.rawCollection().createIndex({"name": "text"});
 
 Meteor.methods({
-    getFoodNamesData(keyword) {
-      console.log(keyword);
+  getFoodNamesData(keyword) {
+    let searchRegex = keyword
+        .replace(/(\w)-/g, '$1 -')
+        .split(/[^\w-]/)
+        .filter(x => x !== "-")
+    // If the first character is "-", make the regex match not this word
+        .map(x => (x.slice(0, 1) === "-"
+                   ? "^((?!" + x.slice(1) + ").)*$"
+                   : x));
 
-      // let future=new Future();
-      // let regex = RegExp("/.*" + keyword + ".*/i");
-      // customFoods =
-      // return Foods.find({name:{$search: keyword.split(/[^\w]/).map(x=>"\""+x+"\"") , $options: "-i"}}, {
-      let searchString = keyword
-          .replace(/(\w)-/g,'$1 -')
-          .split(/[^\w-]/)
-          .filter(x=>x!=="-")
-          // .map(x=>("\""+x+"\"").replace(/\"-/g,'-\"'))
-          // .join(" ");
-      console.log(searchString)
-      // return Foods.find({$text:{$search: searchString}}, {
-        return Foods.find({
-          $and: searchString.filter(x=>x.slice(0,1)!=="-").map(x=>({name:{$regex: x, $options:"i"}}))
-            .concat(searchString.filter(x=>x.slice(0,1)==="-").map(x=>({name:{$regex: "^((?!" + x.slice(1) + ").)*$", $options:"i"} })))
-        }, {
-        fields: {_id:1, name:1, nutrients:1,price:1, user: 1},
-        limit:100
-      }).fetch();
+    console.log("GetFoodNamesData: \"" + keyword + "\" to array \"" +
+                searchRegex + "\"");
 
-      // console.log("https://api.nal.usda.gov/ndb/search/?format=json&q="+encodeURI(keyword)+"&sort=n&max=100&offset=0&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC");
-
-      // let USDAFoods = fetch("https://api.nal.usda.gov/ndb/search/?format=json&q="+encodeURI(keyword)+"&sort=n&max=100&offset=0&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC")
-      // USDAFoods
-      // .then(res=>res.json())
-      // // .catch(err=>console.error(err))
-      // .then(body=> {
-      //   if (!!body.errors) {
-      //     future.return({customFoods})
-      //   console.log(body.errors.error)
-      //   }
-      //   else future.return({USDA:body.list.item.map(f=>({id:f.ndbno,name:f.name})),customFoods})
-      // })
-      // .catch(err=>console.error(err))
-
-      // future.return({customFoods})
-
-      // let val = future.wait();
-      // return val
-    },
+    return Foods.find({
+      $and: searchRegex.map(x => ({name: {$regex: x, $options: "i"}}))
+    }, {
+      fields: {_id: 1, name: 1, nutrients: 1, price: 1, user: 1},
+      limit: 100
+    }).fetch();
+  },
 
   getDiets(keyword) {
-    console.log(keyword);
+    console.log("getDiets: \"" + keyword + "\"");
 
-  let username = Meteor.user() ? Meteor.user().username : ""    
+    let username = Meteor.user() ? Meteor.user().username : "";
 
-    return Diets.find({name:{$regex: keyword , $options: "-i"}, user:username}, {
-      fields: {_id:1, name:1, runs: 1,price:1},
-      limit:100
+    return Diets.find({
+      name: {$regex: keyword, $options: "-i"},
+      user: username
+    }, {
+      fields: {_id: 1, name: 1, runs: 1, price: 1},
+      limit: 100
     }).fetch();
 
-    //TODO: make it possible to have public diets, so you can share with furenzu
+    //TODO: make it possible to have public diets, so you can share with furenzu (friends)
   },
 
   getNutPrefs(keyword) {
-    console.log(keyword);
+    console.log("getNutPrefs: \"" + keyword + "\"");
 
-  let username = Meteor.user() ? Meteor.user().username : ""    
+    let username = Meteor.user() ? Meteor.user() .username : "";
 
-    return NutrientPreferences.find({name:{$regex: keyword , $options: "-i"}, user:username}, {
-      fields: {_id:1, name:1},
-      limit:100
+    return NutrientPreferences.find({
+      name: {$regex: keyword, $options: "-i"},
+      user: username
+    }, {
+      fields: {_id: 1, name: 1},
+      limit: 100
     }).fetch();
 
-    //TODO: make it possible to have public nutPrefs, so you can share with furenzu
+    //TODO: make it possible to have public nutPrefs, so you can share with furenzu (friends)
   },
-
 });
-
-
 
 ////////////////////////////
 
@@ -140,7 +111,6 @@ Meteor.methods({
 
 // let foods = parse(FoodFileData, {columns: ['NDB_No', 'Shrt_Desc', '203', '204', '205', '207', '208', '209', '210', '211', '212', '213', '214', '221', '255', '257', '262', '263', '268', '269', '287', '291', '301', '303', '304', '305', '306', '307', '309', '312', '313', '315', '317', '318', '319', '320', '321', '322', '323', '324', '325', '326', '328', '334', '337', '338', '341', '342', '343', '344', '345', '346', '347', '401', '404', '405', '406', '410', '415', '417', '418',
 // '421', '428', '429', '430', '431', '432', '435', '454', '501', '502', '503', '504', '505', '506', '507', '508', '509', '510', '511', '512', '513', '514', '515', '516', '517', '518', '521', '573', '578', '601', '605', '606', '607', '608', '609', '610', '611', '612', '613', '614', '615', '617', '618', '619', '620', '621', '624', '625', '626', '627', '628', '629', '630', '631', '636', '638', '639', '641', '645', '646', '652', '653', '654', '662', '663', '664', '665', '666', '669', '670', '671', '672', '673', '674', '675', '676', '685', '687', '689', '693', '695', '696', '697', '851', '852', '853', '855', '856', '857', '858', '859'], trim: true})
-
 
 // let foodnames = parse(FoodNameFile, {columns: ['id','name'], trim: true, escape: '\\'})
 

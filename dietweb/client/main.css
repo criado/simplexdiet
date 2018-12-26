@@ -32,13 +32,13 @@ td .remove-nut {
 }
 
 #add-new-nut, #load-pref {
-  backgroundColor: "#f7f7f7";
+  backgroundColor: #f7f7f7;
   height: "35px";
   minHeight: "35px";
 }
 
 #load-diet {
-  backgroundColor: "#f2f6f7";
+  backgroundColor: #f2f6f7;
    borderRadius: 0;
    height: "26px";
    minHeight: "26px";
