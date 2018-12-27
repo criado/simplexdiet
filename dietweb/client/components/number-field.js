@@ -1,40 +1,59 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
+import {beautifyNumber} from '../functions';
 
-import {beautifyNumber} from '../functions'
+export default class NumberField extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default NumberField = (props) => {
-    const { style, className, thisComp, setValue, onPressedEnter, processOnSetValue, processOnChange} = props;
-    //processOnSetValue and processOnChange may process the number in some way before sending it over to setValue, thisComp.state respectively
-      const {name,index}=props;
-      console.log("I AM BEING RERENDERED")
-    return <input className={className} value={thisComp.state[name][index]} step="10" style={style} type="number"
-        onKeyPress={e=>{
-            if (e.key == 'Enter') {
-              setValue(processOnSetValue(e.target.value),onPressedEnter)
-            //   thisComp.forceUpdate()
-            }
-          }}
-          onChange={e=>{
-            let variable = thisComp.state[name];
-            // console.log(e.target.value,name,thisComp,[...variable.slice(0,index), e.target.value, ...variable.slice(index)],index)
-            let stateChange = {}
-            stateChange[name]=[...variable.slice(0,index), processOnChange(e.target.value), ...variable.slice(index+1)];
-            thisComp.setState(stateChange);
-            
-          }}
-          onBlur={e=>{
-            setValue(processOnSetValue(e.target.value))
-            // thisComp.forceUpdate()
-          }}
-          />
+    // processOnSetValue may process the number in some way before sending it
+    // over to setValue
+    const {index, thisComp, name} = props;
+    this.state = {value: thisComp.state[name][index]};
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  NumberField.defaultProps = {
-    processOnSetValue: x=>parseFloat(x),
-    processOnChange: x=>x
-  };
+  handleKeyPress(e) {
+    if (e.key == 'Enter')
+      this.handleBlur(e);
+  }
+  handleBlur(e) {
+    const {index, thisComp, name, processOnSetValue} = this.props;
+
+    let value = processOnSetValue(e.target.value);
+    if(value != value) {
+      // value is NaN, which means "no limit"
+      this.setState({value: ''});
+    }
+
+    let stateArray = thisComp.state[name];
+    let stateChange = {};
+    stateChange[name] = [...stateArray.slice(0, index),
+                         value,
+                         ...stateArray.slice(index+1)];
+    thisComp.setState(stateChange);
+  }
+
+  handleChange(e) {
+    this.setState({value: e.target.value});
+  }
+
+  render () {
+    const {className, style} = this.props;
+    return (
+      <input className={className} style={style}
+             value={this.state.value}
+             type="text" onKeyPress={this.handleKeyPress}
+             onChange={this.handleChange} onBlur={this.handleBlur}
+      />);
+  }
+};
+
+NumberField.defaultProps = {
+  processOnSetValue(x) { return parseFloat(x); }
+}
 
 export let PriceField = (props) => {
-    return <NumberField processOnSetValue={n=>Math.min(parseFloat(n),1e6)} {...props}/>
+  return <NumberField processOnSetValue={n=>Math.min(parseFloat(n), 1e6)} {...props}/>
 }
