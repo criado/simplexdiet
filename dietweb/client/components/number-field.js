@@ -25,6 +25,8 @@ export default class NumberField extends React.Component {
     if(value != value) {
       // value is NaN, which means "no limit"
       this.setState({value: ''});
+    } else {
+      this.setState({value: value});
     }
 
     let stateArray = thisComp.state[name];
