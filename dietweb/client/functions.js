@@ -213,3 +213,7 @@ export function getSolNuts(solution,nutFoods,ingPref,nutcodes,foodNuts) {
 
     return {foundNuts:{...foundNutsNormalFood, ...foundNutsNutFood},nutTots}
 }
+
+export function isNaN(number) {
+  return (number !== number);
+}

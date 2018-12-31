@@ -105,7 +105,7 @@ export default class DietTable extends React.Component {
                   <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
           </a>
           <NumberField thisComp={thisComp} style={{width:"30px", textAlign: "right"}} className="nut-limits" 
-            setValue={(value, onValueSet)=>{thisComp.props.changeNutLims(x.id,{"min":value},onValueSet)}}
+                       setValue={(value)=>{thisComp.props.changeNutLims(x.id, {min: value});}}
             onPressedEnter={thisComp.props.calculateDietIfNeeded}
             index={i}
             name="nutmins"
@@ -117,7 +117,7 @@ export default class DietTable extends React.Component {
 
             <br/>
               <NumberField thisComp={thisComp} style={{width:"30px", textAlign: "right"}} className="nut-limits" 
-                setValue={(value, onValueSet)=>{thisComp.props.changeNutLims(x.id,{"max":value},onValueSet)}}
+                           setValue={(value)=>{thisComp.props.changeNutLims(x.id, {max: value});}}
                 onPressedEnter={thisComp.props.calculateDietIfNeeded}
                 index={i}
                 name="nutmaxs"
@@ -140,7 +140,7 @@ export default class DietTable extends React.Component {
                 </a>
 
                 <NumberField thisComp={thisComp} style={{width:"45px",marginRight:"10px"}} className="ing-limits" 
-                    setValue={(value, onValueSet)=>{thisComp.props.changeLims(x.id,{"min":value/100},onValueSet)}}
+                             setValue={(value)=>{thisComp.props.changeLims(x.id, {min: value/100});}}
                     onPressedEnter={thisComp.props.calculateDietIfNeeded}
                     index={i}
                     name="mins"
@@ -151,7 +151,7 @@ export default class DietTable extends React.Component {
                 </span>
 
                   <NumberField thisComp={thisComp} style={{width:"45px",marginRight:"10px"}} className="ing-limits"
-                    setValue={(value, onValueSet)=>{thisComp.props.changeLims(x.id,{"max":value/100},onValueSet)}}
+                               setValue={(value)=>{thisComp.props.changeLims(x.id, {max: value/100});}}
                     onPressedEnter={thisComp.props.calculateDietIfNeeded}
                     index={i}
                     name="maxs"
@@ -163,7 +163,7 @@ export default class DietTable extends React.Component {
                   transitionName="price-appear">
                     {thisComp.state.editingPrice === i ? 
                       <PriceField thisComp={thisComp} style={{width:"45px", left: "10px", marginRight: "-65px", position:"relative"}} className="food-price" 
-                      setValue={(value, onValueSet)=>{thisComp.props.changePrice(x.id,value,onValueSet)}}
+                                  setValue={(value)=>{thisComp.props.changePrice(x.id, value);}}
                       onPressedEnter={thisComp.props.calculateDietIfNeeded}
                       index={i}
                       name="prices"

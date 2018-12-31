@@ -1,6 +1,12 @@
 import React from 'react';
-import {beautifyNumber} from '../functions';
+import {beautifyNumber, isNaN} from '../functions';
 
+
+/**
+ * NumberField: component used for the upper and lower limits of nutrients and
+ * of foods. Every time its value changes, it validates that the result is a
+ * float, and then sets the underlying variables to reflect the value.
+ */
 export default class NumberField extends React.Component {
   constructor(props) {
     super(props);
@@ -10,35 +16,21 @@ export default class NumberField extends React.Component {
     const {index, thisComp, name} = props;
     this.state = {value: thisComp.state[name][index]};
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleKeyPress(e) {
-    if (e.key == 'Enter')
-      this.handleBlur(e);
+    if (e.key == 'Enter') {
+      this.handleChange(e);
+      this.props.onPressedEnter();
+    }
   }
-  handleBlur(e) {
-    const {index, thisComp, name, processOnSetValue} = this.props;
+  handleChange(e) {
+    const {setValue, processOnSetValue} = this.props;
 
     let value = processOnSetValue(e.target.value);
-    if(value != value) {
-      // value is NaN, which means "no limit"
-      this.setState({value: ''});
-    } else {
-      this.setState({value: value});
-    }
-
-    let stateArray = thisComp.state[name];
-    let stateChange = {};
-    stateChange[name] = [...stateArray.slice(0, index),
-                         value,
-                         ...stateArray.slice(index+1)];
-    thisComp.setState(stateChange);
-  }
-
-  handleChange(e) {
-    this.setState({value: e.target.value});
+    this.setState({value: (isNaN(value) ? '' : value)});
+    setValue(value);
   }
 
   render () {
@@ -46,16 +38,21 @@ export default class NumberField extends React.Component {
     return (
       <input className={className} style={style}
              value={this.state.value}
-             type="text" onKeyPress={this.handleKeyPress}
-             onChange={this.handleChange} onBlur={this.handleBlur}
+             onKeyPress={this.handleKeyPress}
+             type="text" onChange={this.handleChange}
       />);
   }
 };
 
 NumberField.defaultProps = {
   processOnSetValue(x) { return parseFloat(x); }
-}
+};
 
+/**
+ * PriceField: a NumberField that is limited above by 1e6. The prices of food
+ * items need to be below 1e9 per unit for the "excess nutrient" variables to
+ * work as intended.
+ */
 export let PriceField = (props) => {
   return <NumberField processOnSetValue={n=>Math.min(parseFloat(n), 1e6)} {...props}/>
-}
+};
