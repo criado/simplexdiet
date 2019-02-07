@@ -143,7 +143,7 @@ class App extends React.Component {
       obj["price"]=nutFoodPrice;
       nutFoods["anti-"+key] = obj
     }
-    for (let key in foodNutsCustom) {
+    for (let key in ingPref) {
       foodNutsCustom[key].price=ingPref[key].price;
     }
     console.log(foodNutsCustom)
@@ -269,7 +269,7 @@ class App extends React.Component {
 
   //FUNDAMENTAL CHANGES TO STATE (things that require recalculation of diet)
 
-  changeLims(foodId,newLim) {
+  changeLims(foodId,newLim,callback) {
     console.log(newLim)
 
     let ingPref = this.state.ingPref;
@@ -278,7 +278,7 @@ class App extends React.Component {
     this.setState({
       ingPref,
       requires_recalculate: true,
-    })
+    },callback)
   }
 
   changePrice(foodId,newPrice,callback) {
@@ -292,14 +292,14 @@ class App extends React.Component {
     },callback)
   }
 
-  changeNutLims(nutId,newLim) {
+  changeNutLims(nutId,newLim,callback) {
     let nutPref = this.state.nutPref;
     nutPref[nutId] = { ...this.state.nutPref[nutId], ...newLim};
     
     this.setState({
       nutPref,
       requires_recalculate: true
-    })
+    },callback)
   }
 
   //Things that change ingCodes or nutCodes//
@@ -550,46 +550,56 @@ class App extends React.Component {
     <div className="row toolbar">
 
       {/* <span>{"NutPref: "}</span>       */}
-      <Async
-        name="add-new-nut"
-        loadOptions={getNutOptions}
-        onChange={this.addNut.bind(this)}
-        placeholder="Add nutrient..."        
-        styles={{
-            control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
-            container: (base) => ({
-                  ...base,
-                  display:'inline-block',
-                  width: "150px",
-              }),
-            // placeholder: styles => ({ ...styles, color:"black" }),
-          }}
-        defaultOptions
-        cacheOptions
-      />
-      &nbsp;
-      <Async
-        name="load-pref"
-        loadOptions={getNutPrefOptions}
-        value={this.state.selectNutPrefValue}
-        onChange={this.loadNutPref.bind(this)}
-        styles={{
-          control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
-          container: (base) => ({
-                ...base,
-                display:'inline-block',
-                width: "200px",
-                marginRight: "10px"
-            }),
-          // placeholder: styles => ({ ...styles, color:"black" }),
-        }}
-        placeholder="Nutrient prefs..."            
-        defaultOptions
-        cacheOptions
-      />
-      <button type="button" id="fork-diet-button" className="btn toolbar-button btn-primary" style={{"marginRight":"10px"}} onClick={this.handleForkDiet.bind(this)}>Fork diet</button>
-      <button type="button" id="calculate-diet-button" style={{"marginRight":"10px"}} className="btn toolbar-button btn-primary" disabled={!this.state.requires_recalculate} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
-      <a href="/new-food" className="toolbar-button"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary">Custom food</button></a>
+      <div className="col-md-3">
+        <button type="button" id="fork-diet-button" className="btn toolbar-button btn-primary" style={{"marginRight":"10px"}} onClick={this.handleForkDiet.bind(this)}>Fork diet</button>
+        <button type="button" id="calculate-diet-button" style={{"marginRight":"10px"}} className="btn toolbar-button btn-primary" disabled={!this.state.requires_recalculate} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
+        <a href="/new-food" className="toolbar-button"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary">Custom food</button></a>
+      </div>
+      <div className="3col-md-3 ml-auto" style={{float:"right"}}>
+        <Async
+          name="load-pref"
+          className="load-pref"
+          loadOptions={getNutPrefOptions}
+          value={this.state.selectNutPrefValue}
+          onChange={this.loadNutPref.bind(this)}
+          // style={{display:'inline-block',
+          // width: "200px",
+          // marginRight: "10px"}}
+          // styles={{
+          //   control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
+          //   container: (base) => ({
+          //         ...base,
+          //         display:'inline-block',
+          //         width: "200px",
+          //         marginRight: "10px"
+          //     }),
+          //   // placeholder: styles => ({ ...styles, color:"black" }),
+          // }}
+          placeholder="Nutrient prefs..."            
+          defaultOptions
+          cacheOptions
+        />
+        &nbsp;
+        <Async
+          name="add-new-nut"
+          className="add-new-nut"        
+          loadOptions={getNutOptions}
+          onChange={this.addNut.bind(this)}
+          placeholder="Add nutrient..."   
+          // style={{display:'inline-block',width: "150px"}}     
+          // styles={{
+          //     control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
+          //     container: (base) => ({
+          //           ...base,
+          //           display:'inline-block',
+          //           width: "150px",
+          //       }),
+          //     // placeholder: styles => ({ ...styles, color:"black" }),
+          //   }}
+          defaultOptions
+          cacheOptions
+        />
+      </div>
       {/* TODO: Need button for saving nutPref.. */}
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
         {/* <br/> */}
@@ -604,12 +614,8 @@ class App extends React.Component {
     <div className="row">
       <Async
         name="add-new-ing"
-        value={this.state.selectIngValue}
         loadOptions={getFoodOptions}
-        onBlurResetsInput={false} 
-        // onCloseResetsInput={false}
-        // onBlur={(e)=>{e.stopPropagation(); console.log(e)}}
-        // inputRenderer={this.renderInput}
+        onBlurResetsInput={false}
         filterOptions={(options, filter, currentValues) => {
           // Do no filtering, just return all options
           return options.filter(x=>!this.state.ingCodes.includes(x.value.id));
@@ -617,8 +623,6 @@ class App extends React.Component {
         cache={false}
         filterOption={() => true}
         onChange={this.addIng.bind(this)}
-        onInputChange={(e)=>{console.log(e)}}
-        // defaultInputValue="blah"
       />
     </div>
     <hr/>
@@ -759,6 +763,7 @@ export default withTracker(props => {
 
   //If we get them from database, use them, otherwise use the default ones
   let diet = (handle1.ready() && !!dietObj) ? dietObj : defaultDietObj;
+  console.log(diet)
   let nutPrefs = (!loading && !!nutPrefsServer) ? nutPrefsServer : defaultNutPrefs;
 
   // console.log("diet",diet)

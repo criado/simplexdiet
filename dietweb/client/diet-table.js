@@ -87,7 +87,7 @@ export default class DietTable extends React.Component {
   }
   render() {
     const thisComp = this;
-    return (<table className="table table-hover table-dark">
+    return (<table className="table table-hover">
     {/* HEAD OF TABLE */}
     <thead>
       <tr ref={this.tableHeadEl}>
@@ -136,7 +136,7 @@ export default class DietTable extends React.Component {
           return (<tr key={i} className="ings" diet-array-pos={i} style={{"height":"45px"}}>
               <td style={{"width":"350px"}}>
                 <a className="remove-ing" style={{marginRight:"10px",color:"red"}} onClick={()=>thisComp.props.removeIng(x.id)}>
-                  <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                  <span className="glyphicon glyphicon-remove" aria-hidden="true">x</span>
                 </a>
 
                 <NumberField thisComp={thisComp} style={{width:"45px",marginRight:"10px"}} className="ing-limits" 

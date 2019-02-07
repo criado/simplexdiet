@@ -8,6 +8,14 @@ export default NumberField = (props) => {
     //processOnSetValue and processOnChange may process the number in some way before sending it over to setValue, thisComp.state respectively
       const {name,index}=props;
       console.log("I AM BEING RERENDERED")
+    const onChangeDefault = e=>{
+      let variable = thisComp.state[name];
+      // console.log(e.target.value,name,thisComp,[...variable.slice(0,index), e.target.value, ...variable.slice(index)],index)
+      let stateChange = {}
+      stateChange[name]=[...variable.slice(0,index), processOnChange(e.target.value), ...variable.slice(index+1)];
+      thisComp.setState(stateChange);
+      
+    }
     return <input className={className} value={thisComp.state[name][index]} step="10" style={style} type="number"
         onKeyPress={e=>{
             if (e.key == 'Enter') {
@@ -15,14 +23,7 @@ export default NumberField = (props) => {
             //   thisComp.forceUpdate()
             }
           }}
-          onChange={e=>{
-            let variable = thisComp.state[name];
-            // console.log(e.target.value,name,thisComp,[...variable.slice(0,index), e.target.value, ...variable.slice(index)],index)
-            let stateChange = {}
-            stateChange[name]=[...variable.slice(0,index), processOnChange(e.target.value), ...variable.slice(index+1)];
-            thisComp.setState(stateChange);
-            
-          }}
+          onChange={props.onChange ? props.onChange : onChangeDefault}
           onBlur={e=>{
             setValue(processOnSetValue(e.target.value))
             // thisComp.forceUpdate()

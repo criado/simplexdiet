@@ -8,6 +8,8 @@ import { Async } from 'react-select';
 import {getFoodInfo} from './functions.js'
 import { nutcodes, nutInfo } from '../imports/nut-info.js'
 
+import NumberField, {PriceField} from './components/number-field'
+
 export default class CustomFood extends React.Component {
     constructor(props) {
         super(props);
@@ -22,7 +24,7 @@ export default class CustomFood extends React.Component {
                 return ns
             },{}),
             foodName:"",
-            foodPrice:0,
+            foodPrice:["0"],
             // custom: true,
             user: ""
         }
@@ -35,10 +37,11 @@ export default class CustomFood extends React.Component {
     saveFoodAs() {
         const thisComp = this;
         let foodName = this.state.foodName;
+        if (foodName === "") alert("Name field is empty")
         Foods.insert({
             name: foodName,
             user: Meteor.user().username,
-            price: parseFloat(thisComp.state.foodPrice),
+            price: parseFloat(thisComp.state.foodPrice[0]),
             nutrients: thisComp.state.foodNuts
         },(err,_id)=> {
           if (!err) thisComp.setState({foodOldName:foodName, foodId:_id, user: Meteor.user().username})
@@ -57,7 +60,7 @@ export default class CustomFood extends React.Component {
             {$set: {
               name: thisComp.state.foodName,
               user: Meteor.user().username,
-              price: parseFloat(thisComp.state.foodPrice),
+              price: parseFloat(thisComp.state.foodPrice[0]),
               nutrients: thisComp.state.foodNuts
           }},(err,num)=> {
             if (!err) thisComp.setState({foodOldName:foodName})
@@ -80,7 +83,7 @@ export default class CustomFood extends React.Component {
         let price = food.price;
         let nutrients = food.nutrients;
         // console.log(nutrients);
-        this.setState({foodNuts:nutrients, foodId, foodPrice:price,foodName, user:food.user})
+        this.setState({foodNuts:nutrients, foodId, foodPrice:[price],foodName, user:food.user})
       }
     render() {
         const thisComp = this;
@@ -92,51 +95,72 @@ export default class CustomFood extends React.Component {
             <div className="row">
             <Async
                 name="form-field-name"
+                // value={this.state.selectIngValue}
                 loadOptions={getFoodOptions}
+                onBlurResetsInput={false} 
+                filterOptions={(options, filter, currentValues) => {
+                // Do no filtering, just return all options
+                return options
+                }}
+                cache={false}
+                filterOption={() => true}
                 onChange={this.chooseFood.bind(this)}
+
             />
             </div>
-            <div className="row">
-            <table className="table table-hover table-dark">
-                <thead>
-                    <tr>
-                        <th>Food name</th>
-                        <th><input type="text" value={this.state.foodName} style={{width:"300px"}}
-                            onChange={e=>thisComp.setState({foodName: e.target.value})}
-                        /></th>
-                        {Meteor.user() && this.state.user === Meteor.user().username ? <th className="food-edit-button">
-                            <button type="button" id="save-food" className="btn btn-primary toolbar-button"
-                                onClick={this.saveFood.bind(this)}>
-                                Save Food
-                            </button>
-                        </th> : ""}
-                        <th className="food-edit-button">
-                            <button type="button" id="save-food-as" className="btn btn-primary toolbar-button"
-                                onClick={this.saveFoodAs.bind(this)}>
-                                Save Food As
-                            </button>
-                        </th>
-                        {Meteor.user() && this.state.foodId!=="" && this.state.user === Meteor.user().username ? <th className="food-edit-button">
-                            <button type="button" id="remove-food" className="btn btn-danger toolbar-button"
-                                onClick={this.removeFood.bind(this)}>
-                                Remove Food
-                            </button>
-                        </th>  : ""}
-                    </tr>
-                    <tr>
-                        <th>Price</th>
-                        <th><input type="number" value={this.state.foodPrice} style={{width:"80px"}}
-                            onChange={e=>thisComp.setState({foodPrice: e.target.value})}
-                        /></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+            <div className="row" style={{marginTop:"10px"}}>
+                <div className="col-md-1" style={{padding:"0px"}}>
+                    <b>Food name</b>
+
+                </div>
+                <div className="col-md-6">
+                    <input type="text" value={this.state.foodName} style={{width:"500px", marginLeft:"10px"}}
+                        onChange={e=>thisComp.setState({foodName: e.target.value})}
+                    />
+                </div>
+                <div className={Meteor.user() && this.state.user === Meteor.user().username ? "col-md-5 ml-auto": "col-md-2 ml-auto"}>                
+                    {Meteor.user() && this.state.foodId!=="" && this.state.user === Meteor.user().username ? <span className="food-edit-button">
+                        <button type="button" id="remove-food" className="btn btn-danger toolbar-button"
+                            onClick={this.removeFood.bind(this)}>
+                            Remove Food
+                        </button>
+                    </span>  : ""}
+                    <span className="food-edit-button">
+                        <button type="button" id="save-food-as" className="btn btn-primary toolbar-button"
+                            onClick={this.saveFoodAs.bind(this)}>
+                            Save Food As
+                        </button>
+                    </span>
+                    {Meteor.user() && this.state.user === Meteor.user().username ? <span className="food-edit-button">
+                        <button type="button" id="save-food" className="btn btn-primary toolbar-button"
+                            onClick={this.saveFood.bind(this)}>
+                            Save Food
+                        </button>
+                    </span> : ""}
+                </div>
+            </div>
+            <div className="row" style={{marginBottom:"10px"}}>
+            <div className="col-md-1" style={{padding:"0px"}}>
+                    <b>Price</b>
+                </div>
+                <div className="col-md-11">
+                    <PriceField thisComp={thisComp} style={{width:"80px", marginLeft:"10px"}} className="food-price" 
+                      onChange={e=>thisComp.setState({foodPrice: [e.target.value]})}
+                      setValue={(value, onValueSet)=>{thisComp.setState({foodPrice: [value]},onValueSet)}}
+                      onPressedEnter={()=>{
+                          if (Meteor.user() && this.state.user === Meteor.user().username)
+                              this.saveFood()
+                          else 
+                              this.saveFoodAs()
+                      }}
+                      index={0}
+                      name={"foodPrice"}
+                      />
+                </div>
             </div>
             <div className="row">
                 <div className="col-md-6">
-                <table className="table table-hover table-dark">
+                <table className="table table-hover">
                 <thead>
                     <tr>
                         <th>Nutrient</th>
@@ -147,8 +171,17 @@ export default class CustomFood extends React.Component {
                     {this.state.nutrients ? this.state.nutrients.filter((n,i)=>i<16).map((n,i)=>(
                         <tr key={i}><td>{n.name}</td>
                         <td>
-                            <input value={thisComp.state.foodNuts[n.id]} step="10" style={{width:"80px"}} type="number"
+                            <NumberField thisComp={thisComp} style={{width:"80px"}} className="ing-limits"
+                                setValue={(value, onValueSet)=>{if (typeof onValueSet !== "undefined") onValueSet() }}
+                                onPressedEnter={()=>{
+                                    if (Meteor.user() && this.state.user === Meteor.user().username)
+                                        this.saveFood()
+                                    else 
+                                        this.saveFoodAs()
+                                }}
                                 onChange={e=>thisComp.handleNutChange.call(thisComp,n.id,e.target.value)}
+                                index={n.id}
+                                name="foodNuts"
                             />
                             &nbsp;
                             {n.unit}</td>
@@ -158,7 +191,7 @@ export default class CustomFood extends React.Component {
                 </table>
                 </div>
                 <div className="col-md-6">
-                <table className="table table-hover table-dark">
+                <table className="table table-hover">
                 <thead>
                     <tr>
                         <th>Nutrient</th>
@@ -201,13 +234,28 @@ export default class CustomFood extends React.Component {
 
 //   };
 
-const getFoodOptions = (input, callback) => {
+// const getFoodOptions = (input, callback) => {
+//     console.log(input)
+//     Meteor.call("getFoodNamesData",input,(err,res)=>{
+//       if (err) console.log(err)
+//       let foodsCustom = res;
+//       // console.log("foodnames",foods)
+//       callback(foodsCustom.map(x=>({value: {id:x._id,name:x.name,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"})))
+//     })
+  
+//   };
+
+  const getFoodOptions = (input, callback) => {
     console.log(input)
     Meteor.call("getFoodNamesData",input,(err,res)=>{
       if (err) console.log(err)
       let foodsCustom = res;
       // console.log("foodnames",foods)
-      callback(foodsCustom.map(x=>({value: {id:x._id,name:x.name,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"})))
+      callback(null,
+        {options:
+          foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"})),
+          cache:false
+        })
     })
   
   };
