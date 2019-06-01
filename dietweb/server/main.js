@@ -40,6 +40,8 @@ Meteor.publish("foods", () =>{
   return Foods.find();
 })
 
+Foods.rawCollection().createIndex( { "name": "text" } )
+
 
 Meteor.methods({
     getFoodNamesData(keyword) {
@@ -48,7 +50,19 @@ Meteor.methods({
       // let future=new Future();
       // let regex = RegExp("/.*" + keyword + ".*/i");
       // customFoods =
-      return Foods.find({name:{$regex: keyword , $options: "-i"}}, {
+      // return Foods.find({name:{$search: keyword.split(/[^\w]/).map(x=>"\""+x+"\"") , $options: "-i"}}, {
+      let searchString = keyword
+          .replace(/(\w)-/g,'$1 -')
+          .split(/[^\w-]/)
+          .filter(x=>x!=="-")
+          // .map(x=>("\""+x+"\"").replace(/\"-/g,'-\"'))
+          // .join(" ");
+      console.log(searchString)
+      // return Foods.find({$text:{$search: searchString}}, {
+        return Foods.find({
+          $and: searchString.filter(x=>x.slice(0,1)!=="-").map(x=>({name:{$regex: x, $options:"i"}}))
+            .concat(searchString.filter(x=>x.slice(0,1)==="-").map(x=>({name:{$regex: "^((?!" + x.slice(1) + ").)*$", $options:"i"} })))
+        }, {
         fields: {_id:1, name:1, nutrients:1,price:1, user: 1},
         limit:100
       }).fetch();

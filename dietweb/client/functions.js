@@ -1,5 +1,32 @@
 import solver from 'javascript-lp-solver';
 
+export function beautifyNumber(number) {
+    if (number === null || typeof number === "undefined") {
+        return number
+    }
+    let string = number.toString()
+    let splitString = string.split(".")
+    let charac = splitString[0]
+    if (splitString.length <= 1) return charac
+    number = parseFloat(string)
+    if (charac.length < 4)
+        number = number.toFixed(4-charac.length)
+        // if (number-Math.floor(number) === 0) {
+        //     number = number.toFixed(0)
+        // }
+        // else if (10*number-Math.floor(10*number) === 0) {
+        //     number = number.toFixed(1)
+        // }
+    else
+        number = Math.round(number)
+
+    // let mantissa = charac.length >= 4 ? "" : splitString[1].slice(0,4-charac.length)
+    // console.log(parseFloat(charac + "." + mantissa), charac + "." + mantissa)
+    // let a = Number(number)
+    // return parseFloat(20)
+    return parseFloat(number).toString()
+}
+
 export async function getFoodInfo(ingPref, nutcodes) {
     const makeUrlStr = (foods) => "ndbno="+foods.join("&ndbno=")+"&type=f&format=json&api_key=HDnNFBlfLWMeNNVU8zIavWrL8VKGIt7GkWgORQaC";
 
@@ -77,13 +104,13 @@ export async function getFoodInfo(ingPref, nutcodes) {
 export function solveDiet(foodNuts, nutFoods, ingConst,nutConst, objective) {
     let ingConstProc = {};
     for (let key in ingConst) {
-    let obj = ingConst[key];
-    let newObj = {};
-    if (typeof obj.max !== "undefined") {newObj.max = obj.max;}
-    if (typeof obj.min !== "undefined") {newObj.min = obj.min;}
-    else {newObj.min = 1e-6;}
-    // if (typeof obj.min !== "undefined" || typeof obj.max !== "undefined")
-    ingConstProc[key] = newObj;
+        let obj = ingConst[key];
+        let newObj = {};
+        if (typeof obj.max !== "undefined") {newObj.max = obj.max;}
+        if (typeof obj.min !== "undefined") {newObj.min = obj.min;}
+        else {newObj.min = 1e-6;}
+        // if (typeof obj.min !== "undefined" || typeof obj.max !== "undefined")
+        ingConstProc[key] = newObj;
     }
     let model = {
     "optimize": objective,
@@ -104,19 +131,35 @@ export function getSolNuts(solution,nutFoods,ingPref,nutcodes,foodNuts) {
         return sol
     };
 
-    let foundNutsAll = [];
-    let foodIds = []
+    //NUT AMOUNTS FOR NORMAL FOODS
+    let foundNutsNormalFood = [];
+    let foodIdsNormaFood = []
     for (let key in solution) {
-        if (key !== "feasible" && key !== "bounded" && key!=="result") {
+        if (key !== "feasible" && key !== "bounded" && key!=="result" && (key in ingPref)) {
         let netNuts = [];
         for (let i=0; i<nutcodes.length; i++) {
             netNuts.push(extendedFoodNuts[key][nutcodes[i]]*parseSolution(solution[key]))
         }
-        foundNutsAll.push(netNuts)
-        foodIds.push(key)
+        foundNutsNormalFood.push(netNuts)
+        foodIdsNormaFood.push(key)
         }
     }
 
+    //NUT AMOUNTS FOR NUTFOODS
+    let foundNutsNutFood = [];
+    let foodIdsNutFood = []
+    for (let key in solution) {
+        if (key !== "feasible" && key !== "bounded" && key!=="result" && !(key in ingPref)) {
+        let netNuts = [];
+        for (let i=0; i<nutcodes.length; i++) {
+            netNuts.push(extendedFoodNuts[key][nutcodes[i]]*parseSolution(solution[key]))
+        }
+        foundNutsNutFood.push(netNuts)
+        foodIdsNutFood.push(key)
+        }
+    }
+
+    //TOTAL NUTRIENTS WITHOUT NUTFOODS
     //exclude nutFoods for nutTot count
     let foundNuts = [];
     for (let key in solution) {
@@ -135,11 +178,38 @@ export function getSolNuts(solution,nutFoods,ingPref,nutcodes,foodNuts) {
         nutTots.push(foundNuts.map(x=>x[i]).reduce((a,b)=>a+b))
     }
 
-    foundNutsAll = foundNutsAll
+
+    //TOTAL NUTRIENTS WITH NUTFOODS
+    let foundNutsFake = [];
+    for (let key in solution) {
+        if (key !== "feasible" && key !== "bounded" && key!=="result") {
+        let netNuts = [];
+        for (let i=0; i<nutcodes.length; i++) {
+            netNuts.push(extendedFoodNuts[key][nutcodes[i]]*parseSolution(solution[key]))
+        }
+        foundNutsFake.push(netNuts)
+        }
+    }
+
+    let nutTotsFake = []
+    for (let i=0; i<nutcodes.length; i++) {
+        nutTotsFake.push(foundNutsFake.map(x=>x[i]).reduce((a,b)=>a+b))
+    }
+
+
+    foundNutsNormalFood = foundNutsNormalFood
     .map(f=>f.map((n,i)=>(nutTots[i] === 0 ? 0: 100*n/nutTots[i])))
     .reduce((fs,f,i)=>{
-        fs[foodIds[i]] = f;
+        fs[foodIdsNormaFood[i]] = f;
         return fs
     },{})
-    return {foundNuts:foundNutsAll,nutTots}
+
+    foundNutsNutFood = foundNutsNutFood
+    .map(f=>f.map((n,i)=>(nutTots[i] === 0 ? 0: 100*n/nutTotsFake[i])))
+    .reduce((fs,f,i)=>{
+        fs[foodIdsNutFood[i]] = f;
+        return fs
+    },{})
+
+    return {foundNuts:{...foundNutsNormalFood, ...foundNutsNutFood},nutTots}
 }

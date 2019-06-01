@@ -9,6 +9,7 @@ import { Foods, Diets, NutrientPreferences } from "../imports/collections.js"
 import { withTracker } from 'meteor/react-meteor-data';
 
 import { Async } from 'react-select';
+import 'react-select/dist/react-select.css';
 
 import PopoutSelect from './cool-select.jsx'
 
@@ -116,7 +117,7 @@ class App extends React.Component {
       else return null
     }
 
-    let ingPref = this.state.ingPref
+    let ingPref = this.state.ingPref;
 
     let foodNutsCustom = this.props.foodNutsCustom
     let foodInfoCustom = this.props.foodInfoCustom
@@ -130,7 +131,7 @@ class App extends React.Component {
         if (key2!==key) obj[key2]=0
         else obj[key2] = 1
       }
-      obj["price"]=1e6;
+      obj["price"]=1e9;
       nutFoods[key] = obj
     }
     for (let key in nutPref) {
@@ -141,6 +142,9 @@ class App extends React.Component {
       }
       obj["price"]=nutFoodPrice;
       nutFoods["anti-"+key] = obj
+    }
+    for (let key in ingPref) {
+      foodNutsCustom[key].price=ingPref[key].price;
     }
     console.log(foodNutsCustom)
     let foodNuts = foodNutsCustom;
@@ -265,7 +269,7 @@ class App extends React.Component {
 
   //FUNDAMENTAL CHANGES TO STATE (things that require recalculation of diet)
 
-  changeLims(foodId,newLim) {
+  changeLims(foodId,newLim,callback) {
     console.log(newLim)
 
     let ingPref = this.state.ingPref;
@@ -274,27 +278,28 @@ class App extends React.Component {
     this.setState({
       ingPref,
       requires_recalculate: true,
-    })
+    },callback)
   }
 
-  changePrice(foodId,newPrice) {
+  changePrice(foodId,newPrice,callback) {
+    console.log(newPrice)    
     let ingPref = this.state.ingPref;
     ingPref[foodId].price = newPrice;
 
     this.setState({
       ingPref,
       requires_recalculate: true,
-    })
+    },callback)
   }
 
-  changeNutLims(nutId,newLim) {
+  changeNutLims(nutId,newLim,callback) {
     let nutPref = this.state.nutPref;
     nutPref[nutId] = { ...this.state.nutPref[nutId], ...newLim};
     
     this.setState({
       nutPref,
       requires_recalculate: true
-    })
+    },callback)
   }
 
   //Things that change ingCodes or nutCodes//
@@ -304,6 +309,9 @@ class App extends React.Component {
     food = food.value;
     let foodId = food.id
     // let custom = food.custom
+    if (this.state.ingCodes.includes(foodId)) {
+      return
+    }
     console.log("adding",foodId,food)
     let ingPref = this.state.ingPref;
     ingPref[foodId] = {"price": food.price}
@@ -319,7 +327,8 @@ class App extends React.Component {
       ingPref,
       ingCodes,
       requires_recalculate:true,
-      dietVec: vec
+      dietVec: vec,
+      selectIngValue:null,
     },()=>{
       this.updatePrefs() //this is a special case: a requires_recalculate which calls updatePrefs, so that we retrieve the nutrients from database for new food      
     })
@@ -528,51 +537,69 @@ class App extends React.Component {
       }
     }
   }
-
+  // renderInput = props => {
+  //   delete props.value;
+  //   return (
+  //     <div className="Select-input" style={{ display: "inline-block" }}>
+  //       <input {...props} />
+  //     </div>
+  //   );
+  // };
   render() {
     return (<div className="container food-matrix">
     <div className="row toolbar">
 
       {/* <span>{"NutPref: "}</span>       */}
-      <Async
-        name="add-new-nut"
-        loadOptions={getNutOptions}
-        onChange={this.addNut.bind(this)}
-        placeholder="Add nutrient..."        
-        styles={{
-            control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
-            container: (base) => ({
-                  ...base,
-                  display:'inline-block',
-                  width: "150px",
-              }),
-            // placeholder: styles => ({ ...styles, color:"black" }),
-          }}
-        defaultOptions
-        cacheOptions
-      />
-      &nbsp;
-      <Async
-        name="load-pref"
-        loadOptions={getNutPrefOptions}
-        onChange={this.loadNutPref.bind(this)}
-        styles={{
-          control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
-          container: (base) => ({
-                ...base,
-                display:'inline-block',
-                width: "200px",
-                marginRight: "10px"
-            }),
-          // placeholder: styles => ({ ...styles, color:"black" }),
-        }}
-        placeholder="Nutrient prefs..."            
-        defaultOptions
-        cacheOptions
-      />
-      <button type="button" id="fork-diet-button" className="btn toolbar-button btn-primary" style={{"marginRight":"10px"}} onClick={this.handleForkDiet.bind(this)}>Fork diet</button>
-      <button type="button" id="calculate-diet-button" style={{"marginRight":"10px"}} className="btn toolbar-button btn-primary" disabled={!this.state.requires_recalculate} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
-      <a href="/new-food" className="toolbar-button"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary">Custom food</button></a>
+      <div className="col-md-3">
+        <button type="button" id="fork-diet-button" className="btn toolbar-button btn-primary" style={{"marginRight":"10px"}} onClick={this.handleForkDiet.bind(this)}>Fork diet</button>
+        <button type="button" id="calculate-diet-button" style={{"marginRight":"10px"}} className="btn toolbar-button btn-primary" disabled={!this.state.requires_recalculate} onClick={this.calculateDietIfNeeded.bind(this)}>Calculate diet</button>
+        <a href="/new-food" className="toolbar-button"><button type="button" id="new-food" style={{"marginRight":"10px"}} className="btn btn-primary">Custom food</button></a>
+      </div>
+      <div className="3col-md-3 ml-auto" style={{float:"right"}}>
+        <Async
+          name="load-pref"
+          className="load-pref"
+          loadOptions={getNutPrefOptions}
+          value={this.state.selectNutPrefValue}
+          onChange={this.loadNutPref.bind(this)}
+          // style={{display:'inline-block',
+          // width: "200px",
+          // marginRight: "10px"}}
+          // styles={{
+          //   control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
+          //   container: (base) => ({
+          //         ...base,
+          //         display:'inline-block',
+          //         width: "200px",
+          //         marginRight: "10px"
+          //     }),
+          //   // placeholder: styles => ({ ...styles, color:"black" }),
+          // }}
+          placeholder="Nutrient prefs..."            
+          defaultOptions
+          cacheOptions
+        />
+        &nbsp;
+        <Async
+          name="add-new-nut"
+          className="add-new-nut"        
+          loadOptions={getNutOptions}
+          onChange={this.addNut.bind(this)}
+          placeholder="Add nutrient..."   
+          // style={{display:'inline-block',width: "150px"}}     
+          // styles={{
+          //     control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
+          //     container: (base) => ({
+          //           ...base,
+          //           display:'inline-block',
+          //           width: "150px",
+          //       }),
+          //     // placeholder: styles => ({ ...styles, color:"black" }),
+          //   }}
+          defaultOptions
+          cacheOptions
+        />
+      </div>
       {/* TODO: Need button for saving nutPref.. */}
       {/* <button type="button" id="calculate-diet-button" className="btn btn-primary toolbar-button" onClick={this.updatePrefs.bind(this)}>Update preferences</button> */}
         {/* <br/> */}
@@ -588,6 +615,13 @@ class App extends React.Component {
       <Async
         name="add-new-ing"
         loadOptions={getFoodOptions}
+        onBlurResetsInput={false}
+        filterOptions={(options, filter, currentValues) => {
+          // Do no filtering, just return all options
+          return options.filter(x=>!this.state.ingCodes.includes(x.value.id));
+        }}
+        cache={false}
+        filterOption={() => true}
         onChange={this.addIng.bind(this)}
       />
     </div>
@@ -596,6 +630,49 @@ class App extends React.Component {
   }
 }
 
+//FOR react-select VERSION 2
+
+// //function to populate the food selector, to add new foods
+// const getFoodOptions = (input, callback) => {
+//   console.log(input)
+//   Meteor.call("getFoodNamesData",input,(err,res)=>{
+//     if (err) console.log(err)
+//     let foodsCustom = res;
+//     // console.log("foodnames",foods)
+//     callback(foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name+" ("+x.user+")"})))
+//   })
+
+// };
+
+// //function to populate the nutrient selector, to add new nutrients
+// const getNutOptions = (input, callback) => {
+
+//   callback(Object.keys(nutInfo).map(id=>({value: id, label: nutInfo[id].long_name})).filter(n=>n.label.toUpperCase().includes(input.toUpperCase())))
+
+// };
+
+// const getDietOptions = (input, callback) => {
+//   console.log(input)
+//   Meteor.call("getDiets",input,(err,res)=>{
+//     if (err) console.log(err)
+//     let diets = res;
+//     console.log("results",diets)
+//     callback(diets.map(x=>({value: {id:x._id,name:x.name,price:x.price,runs:x.runs}, label: x.name})))
+//   })
+
+// };
+
+// const getNutPrefOptions = (input, callback) => {
+//   console.log(input)
+//   Meteor.call("getNutPrefs",input,(err,res)=>{
+//     if (err) console.log(err)
+//     let nutPrefs = res;
+//     // console.log("foodnames",foods)
+//     callback(nutPrefs.map(x=>({value: {id:x._id,name:x.name,nutPref}, label: x.name})))
+//   })
+
+// };
+
 //function to populate the food selector, to add new foods
 const getFoodOptions = (input, callback) => {
   console.log(input)
@@ -603,7 +680,11 @@ const getFoodOptions = (input, callback) => {
     if (err) console.log(err)
     let foodsCustom = res;
     // console.log("foodnames",foods)
-    callback(foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name+" ("+x.user+")"})))
+    callback(null,
+      {options:
+        foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price}, label: x.name+" ("+x.user+")"})),
+        cache:false
+      })
   })
 
 };
@@ -611,8 +692,10 @@ const getFoodOptions = (input, callback) => {
 //function to populate the nutrient selector, to add new nutrients
 const getNutOptions = (input, callback) => {
 
-  callback(Object.keys(nutInfo).map(id=>({value: id, label: nutInfo[id].long_name})).filter(n=>n.label.toUpperCase().includes(input.toUpperCase())))
-
+  callback(null,
+    {options:
+      Object.keys(nutInfo).map(id=>({value: id, label: nutInfo[id].long_name})).filter(n=>n.label.toUpperCase().includes(input.toUpperCase()))
+    })
 };
 
 const getDietOptions = (input, callback) => {
@@ -621,7 +704,10 @@ const getDietOptions = (input, callback) => {
     if (err) console.log(err)
     let diets = res;
     console.log("results",diets)
-    callback(diets.map(x=>({value: {id:x._id,name:x.name,price:x.price,runs:x.runs}, label: x.name})))
+    callback(null,
+      {options:
+        diets.map(x=>({value: {id:x._id,name:x.name,price:x.price,runs:x.runs}, label: x.name}))
+      })
   })
 
 };
@@ -632,7 +718,10 @@ const getNutPrefOptions = (input, callback) => {
     if (err) console.log(err)
     let nutPrefs = res;
     // console.log("foodnames",foods)
-    callback(nutPrefs.map(x=>({value: {id:x._id,name:x.name,nutPref}, label: x.name})))
+    callback(null,
+      {options:
+        nutPrefs.map(x=>({value: {id:x._id,name:x.name,nutPref}, label: x.name}))
+      })
   })
 
 };
@@ -674,6 +763,7 @@ export default withTracker(props => {
 
   //If we get them from database, use them, otherwise use the default ones
   let diet = (handle1.ready() && !!dietObj) ? dietObj : defaultDietObj;
+  console.log(diet)
   let nutPrefs = (!loading && !!nutPrefsServer) ? nutPrefsServer : defaultNutPrefs;
 
   // console.log("diet",diet)
