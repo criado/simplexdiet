@@ -17,7 +17,7 @@
     "fast-csv": "^2.4.1",
     "find-npm-prefix": "^1.0.2",
     "javascript-lp-solver": "^0.4.5",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.1",
     "meteor-node-stubs": "~0.2.4",
     "popper": "^1.0.1",
     "popper.js": "^1.14.5",
