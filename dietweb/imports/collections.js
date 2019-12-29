@@ -4,6 +4,8 @@ export const Foods = new Mongo.Collection('foods');
 
 export const Diets = new Mongo.Collection('diets');
 
+//TODO: make users databse,and make suer diets user field exists as a user
+
 export const NutrientPreferences = new Mongo.Collection('nutPrefs');
 
 // export const IngredientPreferences = new Mongo.Collection('ingPrefs');

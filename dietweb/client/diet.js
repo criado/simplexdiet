@@ -41,12 +41,12 @@ function swapInArray(arr, id1,id2) {
 
 let dietRunToAppState = (dietRun,nutInfo) => ({
   ingPref: dietRun.ingPref.reduce((xs,x)=>{xs[x.id]={min:x.min,max:x.max,price:x.price}; return xs},{}),
-  nutPref: dietRun.nutPref.reduce((xs,x)=>{xs[x.id]={min:x.min,max:x.max}; return xs},{}),
-  nutCodes: dietRun.nutPref.map(n=>n.id), //specify the order
+  nutPref: dietRun.nutPref.nutPref.reduce((xs,x)=>{xs[x.id]={min:x.min,max:x.max}; return xs},{}),
+  nutCodes: dietRun.nutPref.nutPref.map(n=>n.id), //specify the order
   ingCodes: dietRun.ingPref.map(n=>n.id), //specify the order
-  nutrients: dietRun.nutPref.map(n=>n.id).map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit})), //like nutcodes but with extra info
-  dietVec: dietRun.sol || Object.keys(dietRun.ingPref).map(fid=>newEmptyFood(fid,fid,dietRun.nutPref.map(n=>n.id))), //like with ingcodes, but with solution, and extra info
-  nutTots: dietRun.nutTots || dietRun.nutPref.map(x=>0),
+  nutrients: dietRun.nutPref.nutPref.map(n=>n.id).map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit})), //like nutcodes but with extra info
+  dietVec: dietRun.sol || Object.keys(dietRun.ingPref).map(fid=>newEmptyFood(fid,fid,dietRun.nutPref.nutPref.map(n=>n.id))), //like with ingcodes, but with solution, and extra info
+  nutTots: dietRun.nutTots || dietRun.nutPref.nutPref.map(x=>0),
 })
 
 const newEmptyFood = (id,name,nutCodes) => ({
@@ -57,7 +57,7 @@ const newEmptyFood = (id,name,nutCodes) => ({
 })
 
 /*
-we store ingPref, nutPref lists in database, and then we split them into ingPref, nutPref objects, and nutCodes, ingCodes lists, which 
+we store ingPref, nutPref lists in database, and then we split them into ingPref, nutPref objects, and nutCodes, ingCodes lists, which
 store the info and the order separately.
 */
 
@@ -73,7 +73,7 @@ class App extends React.Component {
       price:props.diet.price,
       nutInfo,
       dietRuns: props.diet.runs,
-      ...dietRunToAppState(lastDietRun,nutInfo),
+      ...dietRunToAppState(lastDietRun,nutInfo), //adding ingPrefs, nutPrefs, etc as state variables
       requires_recalculate: false,
       requires_save: false,
       first_time: true, // It is true because we want to compute the diet in the beginning
@@ -83,7 +83,7 @@ class App extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     let lastDietRun = this.props.diet.runs[this.props.diet.runs.length-1];
     //If this is the first time, and we have retrieved a diet without a calculated solution... (this shouldn't really happen except when testing)
-    
+
     if (this.state.first_time && !this.props.loading){
       this.setState({
         dietId: this.props.diet._id,
@@ -98,7 +98,7 @@ class App extends React.Component {
           this.calculateDiet()
       })
     } else if (this.state.requires_save && prevState !== this.state) {
-        //we ONLY 
+        //we ONLY
         this.setState({
           requires_save:false,
         })
@@ -162,7 +162,7 @@ class App extends React.Component {
 
 
     let solution;
-    if (calculate_solution) 
+    if (calculate_solution)
       solution= solveDiet(foodNuts,nutFoods,ingPref,nutPref, "price");
     else
       solution = this.state.solution
@@ -220,10 +220,10 @@ class App extends React.Component {
     let username = Meteor.user() ? Meteor.user().username : "";
 
     let runs = this.state.dietRuns;
-    
+
     let ingPref = this.state.ingCodes.map(f=>({id:f, ...this.state.ingPref[f]}))
     let nutPref = this.state.nutCodes.map(f=>({id:f, ...this.state.nutPref[f]}));
-    
+
     if (runs.length === MAX_DIETRUNS_SAVED) {
       runs.splice(0, 1)
     }
@@ -246,10 +246,10 @@ class App extends React.Component {
     let username = Meteor.user() ? Meteor.user().username : "";
 
     // let runs = this.state.dietRuns;
-    
+
     // let ingPref = this.state.ingCodes.map(f=>({id:f, ...this.state.ingPref[f]}))
     // let nutPref = this.state.nutCodes.map(f=>({id:f, ...this.state.nutPref[f]}));
-    
+
     // if (runs.length === MAX_DIETRUNS_SAVED) {
     //   runs.splice(0, 1)
     // }
@@ -282,7 +282,7 @@ class App extends React.Component {
   }
 
   changePrice(foodId,newPrice,callback) {
-    console.log(newPrice)    
+    console.log(newPrice)
     let ingPref = this.state.ingPref;
     ingPref[foodId].price = newPrice;
 
@@ -295,7 +295,7 @@ class App extends React.Component {
   changeNutLims(nutId,newLim,callback) {
     let nutPref = this.state.nutPref;
     nutPref[nutId] = { ...this.state.nutPref[nutId], ...newLim};
-    
+
     this.setState({
       nutPref,
       requires_recalculate: true
@@ -330,7 +330,7 @@ class App extends React.Component {
       dietVec: vec,
       selectIngValue:null,
     },()=>{
-      this.updatePrefs() //this is a special case: a requires_recalculate which calls updatePrefs, so that we retrieve the nutrients from database for new food      
+      this.updatePrefs() //this is a special case: a requires_recalculate which calls updatePrefs, so that we retrieve the nutrients from database for new food
     })
   }
 
@@ -343,7 +343,7 @@ class App extends React.Component {
 
     let nutCodes = this.state.nutCodes;
     nutCodes.push(nutId)
-    let nutrients = nutCodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit}));      
+    let nutrients = nutCodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit}));
 
     this.setState({
       nutPref,
@@ -360,7 +360,7 @@ class App extends React.Component {
   removeIng(foodId) {
     console.log("removing food",foodId)
     let ingPref = this.state.ingPref;
-    let ingCodes = this.state.ingCodes;    
+    let ingCodes = this.state.ingCodes;
     delete ingPref[foodId]
     let index = ingCodes.indexOf(foodId);
     if (index > -1) {
@@ -370,7 +370,7 @@ class App extends React.Component {
       ingPref,
       ingCodes,
       dietVec: this.state.dietVec.filter(f=>f.id!==foodId),
-      requires_recalculate:true      
+      requires_recalculate:true
     })
   }
 
@@ -385,7 +385,7 @@ class App extends React.Component {
     }
 
     let nutrients = nutCodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit}));
-    
+
     this.setState({
       nutPref,
       nutCodes,
@@ -404,8 +404,8 @@ class App extends React.Component {
     //id2 is moved to be before id1
     console.log(id2,id1)
       this.setState({
-        ingCodes: swapInArray(this.state.ingCodes,id1,id2), 
-        dietVec: swapInArray(this.state.dietVec,id1,id2), 
+        ingCodes: swapInArray(this.state.ingCodes,id1,id2),
+        dietVec: swapInArray(this.state.dietVec,id1,id2),
         requires_save: true
       })
   }
@@ -419,11 +419,11 @@ class App extends React.Component {
 
     let nutCodes = swapInArray(this.state.nutCodes,id1,id2);
     let nutrients = nutCodes.map(n=>({"id":n,"name":nutInfo[n].long_name,"unit":nutInfo[n].unit}));
-    let nutTots = swapInArray(this.state.nutTots,id1,id2);    
-    
+    let nutTots = swapInArray(this.state.nutTots,id1,id2);
+
 
     this.setState({
-      nutCodes, 
+      nutCodes,
       nutrients,
       nutTots,
       dietVec: this.state.dietVec.map(x=>({...x, nutAmounts:swapInArray(x.nutAmounts,id1,id2)})),
@@ -434,7 +434,7 @@ class App extends React.Component {
   loadDiet(diet) {
     diet = diet.value
     let lastDietRun = diet.runs[diet.runs.length-1];
-    
+
     this.setState({
       name:diet.name,
       price:diet.price,
@@ -485,8 +485,8 @@ class App extends React.Component {
       let caloriesSpan = "";
       if (this.state.feasible && this.state.dietVec.length !== 0 && !this.props.loading) {
         let thisComp = this;
-        let carbs_energy = this.state.nutTots[this.state.nutCodes.indexOf("205")]*4, 
-            fat_energy = this.state.nutTots[this.state.nutCodes.indexOf("204")]*9, 
+        let carbs_energy = this.state.nutTots[this.state.nutCodes.indexOf("205")]*4,
+            fat_energy = this.state.nutTots[this.state.nutCodes.indexOf("204")]*9,
             protein_energy = this.state.nutTots[this.state.nutCodes.indexOf("203")]*4
         let total_energy = carbs_energy + fat_energy + protein_energy // Note this is not the same as this.state.nutTots["kcals"] because of the error due to the factors 4, 9, and 4 to approximate the energy
         carbs_energy = carbs_energy*100/total_energy
@@ -575,18 +575,18 @@ class App extends React.Component {
           //     }),
           //   // placeholder: styles => ({ ...styles, color:"black" }),
           // }}
-          placeholder="Nutrient prefs..."            
+          placeholder="Nutrient prefs..."
           defaultOptions
           cacheOptions
         />
         &nbsp;
         <Async
           name="add-new-nut"
-          className="add-new-nut"        
+          className="add-new-nut"
           loadOptions={getNutOptions}
           onChange={this.addNut.bind(this)}
-          placeholder="Add nutrient..."   
-          // style={{display:'inline-block',width: "150px"}}     
+          placeholder="Add nutrient..."
+          // style={{display:'inline-block',width: "150px"}}
           // styles={{
           //     control: styles => ({ ...styles, backgroundColor: "#f7f7f7", height: "35px", minHeight: "35px"}),
           //     container: (base) => ({
@@ -606,7 +606,7 @@ class App extends React.Component {
     </div>
     <br/>
     {/* <div className="row">
-      
+
     </div> */}
     <div className="row">
       {this.renderDiet()}
@@ -732,7 +732,7 @@ App.propTypes = {
   nutPrefs: PropTypes.array.isRequired,
 };
 
-// THIS IS WHERE THE APP COMPONENT GETS THE DATA FROM SERVER, 
+// THIS IS WHERE THE APP COMPONENT GETS THE DATA FROM SERVER,
 //whenever data in server changes, component is udpated a la React
 
 export default withTracker(props => {
@@ -754,9 +754,9 @@ export default withTracker(props => {
   // defaultIngPrefObj = []
 
   let defaultNutPrefObj = [{"id":"203","min":70,"max":94},{"id":"204","min":66.66666666666667,"max":78},{"id":"205","min":325,"max":380.25},{"id":"208","min":2000,"max":2340},{"id":"269","max":150},{"id":"291","min":23,"max":46},{"id":"601"},{"id":"301","min":1000,"max":2500},{"id":"303","min":14.4,"max":45},{"id":"304","min":400},{"id":"305","min":700,"max":4000},{"id":"306","min":4700},{"id":"307","min":1500,"max":2300},{"id":"309","min":16.5,"max":40},{"id":"312","min":0.9,"max":10},{"id":"315","min":2.3,"max":11},{"id":"317","min":55,"max":400},{"id":"320","min":900,"max":1350},{"id":"323","min":15,"max":1000},{"id":"328","min":5,"max":100},{"id":"401","min":90,"max":2000},{"id":"404","min":1.2},{"id":"405","min":1.3},{"id":"406","min":16,"max":35},{"id":"410","min":5},{"id":"415","min":1.3,"max":100},{"id":"417","min":400,"max":1000},{"id":"418","min":2.4},{"id":"421","min":550,"max":3500},{"id":"430","min":120},{"id":"606","max":25},{"id":"618","min":16.83,"max":17.17},{"id":"619","min":1.584,"max":1.616}]
+  let defaultNutPrefs = [{"name":"Default", user:username, nutPref: defaultNutPrefObj, extraConstraints:[] }]
 
-  let defaultDietObj = {"_id":"Default", "name":"Default", user:username, price: 0, runs: [{ingPref: defaultIngPrefObj, nutPref: defaultNutPrefObj, sol:null}]}
-  let defaultNutPrefs = [{"name":"Default", user:username, nutPref: defaultNutPrefObj}]
+  let defaultDietObj = {"_id":"Default", "name":"Default", user:username, price: 0, runs: [{ingPref: defaultIngPrefObj, nutPref: defaultNutPrefs[0], sol:null}]}
   // console.log("nutPrefObj", nutPrefObj, !!nutPrefObj)
 
   let loading = !handle1.ready() || !handle2.ready() || !handle3.ready()
@@ -768,8 +768,8 @@ export default withTracker(props => {
 
   // console.log("diet",diet)
 
-  let lastDietRun = diet.runs[diet.runs.length-1];  
-  
+  let lastDietRun = diet.runs[diet.runs.length-1];
+
   //PROCESSING FOOD DATA
 
   let foodInfoCustom
@@ -777,7 +777,8 @@ export default withTracker(props => {
     foodInfoCustom = Foods.find({_id: {$in: lastDietRun.ingPref.map(f=>f.id)}}).fetch().map(x=>({...x,id:x._id}));
     // console.log("foodInfoCustom",ingPrefCutomIds, foodInfoCustom)
 
-    let nutCodes = lastDietRun.nutPref.map(n=>n.id)
+    console.log(lastDietRun.nutPref);
+    let nutCodes = lastDietRun.nutPref.nutPref.map(n=>n.id)
     let foodsFound = !loading && !!foodInfoCustom
     let foodNutsCustom
     if (foodsFound) {

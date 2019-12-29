@@ -17,6 +17,50 @@
   width: 200px;
 }
 
+.rct-node-icon * , .rct-checkbox * {
+  width: inherit !important;
+}
+
+// .react-checkbox-tree input.do-display {
+//   display:default !important;
+// }
+
+.rct-node-icon *.ing-limits, .rct-checkbox *.ing-limits {
+  width: 45px !important;
+  height: 25px !important;
+  // margin: 0px !important;
+  float:right !important;
+}
+
+// .ing-field-container {
+//   margin: 0px;
+//   padding: 0px;
+//   width: 200px !important;
+// }
+
+.constraintField {
+  margin: 5px !important;
+  text-align: left !important;
+  width: 350px !important;
+}
+
+.units-span {
+  float: right;
+  width: 10px !important;
+}
+
+.constraintField span {
+  width: 210px !important;
+  height: 21px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  // margin: 0px;
+  position: relative;
+  top: 2px;
+  // padding: 0px;
+}
+
 .profile-form input, .profile-form select {
   width: 100%;
 }
@@ -117,20 +161,24 @@ td:hover .remove-nut {
   visibility: visible;
 }
 
-td input[type=number].nut-limits::-webkit-inner-spin-button,
-td input[type=number].nut-limits::-webkit-outer-spin-button,
-td input[type=number].ing-limits::-webkit-inner-spin-button,
-td input[type=number].ing-limits::-webkit-outer-spin-button {
+input[type=number].nut-limits::-webkit-inner-spin-button,
+input[type=number].nut-limits::-webkit-outer-spin-button,
+input[type=number].ing-limits::-webkit-inner-spin-button,
+input[type=number].ing-limits::-webkit-outer-spin-button {
   /* display: none; */
-    -webkit-appearance: none;
-    margin: 0;
+    -webkit-appearance: none !important;
+    margin: 0 !important;
 }
 
 input[type=number].food-price::-webkit-inner-spin-button,
 input[type=number].food-price::-webkit-outer-spin-button {
   /* display: none; */
-    -webkit-appearance: none;
-    margin: 0;
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+input[type=number] {
+  -moz-appearance:textfield !important; /* Firefox */
 }
 
 .price-appear-enter {

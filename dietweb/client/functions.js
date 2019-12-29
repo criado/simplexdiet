@@ -1,5 +1,7 @@
 import solver from 'javascript-lp-solver';
 
+window.solver = solver;
+
 export function beautifyNumber(number) {
     if (number === null || typeof number === "undefined") {
         return number

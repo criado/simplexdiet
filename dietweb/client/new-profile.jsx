@@ -15,10 +15,84 @@ import NumberField, {PriceField} from './components/number-field'
 
 import 'rc-slider/assets/index.css';
 
+import { bigNutCodes, bigNutInfo, nutClassesList } from '../imports/nut-info.js'
+
+import { defaultNutPref, ageRanges } from '../imports/simplex_diet_micros_defaults.js'
+
+// import TreeMenu, { TreeNode } from 'react-tree-menu'
+
+// var TreeMenu = require('react-tree-menu').TreeMenu,
+//     TreeNode = require('react-tree-menu').TreeNode;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckSquare, faCoffee, faSquareFull, faMinusSquare, faChevronDown, faChevronRight, faLemon, faDog, faCat, faRobot } from '@fortawesome/free-solid-svg-icons'
+
+
+import 'react-checkbox-tree/lib/react-checkbox-tree.css';
+import CheckboxTree from 'react-checkbox-tree';
+
+// const nodes = [{
+//     value: 'mars',
+//     label: 'Mars',
+//     icon: <span>hi</span>,
+//     children: [
+//         { value: 'phobos', label: 'Phobos' },
+//         { value: 'deimos', label: 'Deimos' ,
+//             children: [
+//             { value: 'qaa', label: 'dogog' },
+//             { value: 'assd', label: 'gato' },
+//         ]},
+//     ],
+// }];
+
+// console.log(bigNutCodes.map((c,i)=>({value:bigNutInfo[c]["long_name"], icon:<span>{bigNutInfo[c]["long_name"]}</span>,label:""})))
+
+function calculate_cals(weight, height, age, sex, exercise, weight_goal) {
+    if (!weight || !height || !age) return null;
+    let cals = 10*weight + 6.25*height - 4.92*age;
+    if (sex=="male") cals +=5;
+    else if (sex=="female") cals -= 161;
+
+    let exercise_multiplier = [1.2,1.375,1.55,1.725,1.9];
+    cals *= exercise_multiplier[parseInt(exercise)-1];
+
+    switch (weight_goal) {
+        case "gain-steady":
+            cals *= 1.15;
+            break;
+        case "gain-quick":
+            cals *= 1.25;
+            break;
+        case "lose-steady":
+            cals *= 0.85;
+            break;
+        case "lose-quick":
+            cals *= 0.75;
+            break;
+        case "maintain":
+            break;
+    }
+
+    cals = Math.max(cals,weight*2.20462*8) //8 calories per pound of weight, minimum
+
+    return cals;
+}
+
 export default class CustomProfile extends React.Component {
     constructor(props) {
         super(props);
+        this.constraintsEl = React.createRef();
+        this.defaultRatios = {
+            "standard": [40,80],
+            "keto": [10,80],
+            "highcarb": [70,85],
+        }
         this.state = {
+            checked: [],
+            expanded: [],
+            mins: bigNutCodes.map(n=>null),
+            maxs: bigNutCodes.map(n=>null),
+            calories:null,
+            profName: "",
             // foodOldName:"",
             // foodId: "",
             // nutcodes,
@@ -34,21 +108,61 @@ export default class CustomProfile extends React.Component {
             // user: ""
             age:null,
             sex:"female",
-            reproduction_phase:"none",
+            reproduction_phase:"no_reprod",
             height:null,
             weight:null,
-            exercise:"",
-            weight_goal:"",
-            diet_type:"",
-            macro_ratios:[50,85],
-            macro_ratios_defaults: "standard"
+            exercise:"1",
+            weight_goal:"maintain",
+            diet_type:"anything",
+            macro_ratios:this.defaultRatios["standard"],
+            macro_ratios_defaults: "standard",
         }
-        this.defaultRatios = {
-            "standard": [0,0],
-            "keto": [0,0],
-            "highcarb": [0,0],
+
+    }
+    componentDidUpdate(prevProps, prevState) {
+        const { weight, height, age, sex, exercise, weight_goal, reproduction_phase } = this.state;
+        // let new_cals = this.state.calories;
+        if (weight != prevState["weight"] || height != prevState["height"] || age != prevState["age"] || exercise != prevState["exercise"] || sex != prevState["sex"] || weight_goal != prevState["weight_goal"] || reproduction_phase != prevState["reproduction_phase"]){
+            // console.log("hi");
+            let new_cals = calculate_cals(weight, height, age, sex, exercise, weight_goal);
+            this.setState({calories:new_cals})
+            if (sex==="male") reproduction_phase = "no_reprod";
+            let age_range = 0;
+            for (let range of ageRanges) {
+                if (range > age) break;
+                age_range = range;
+            }
+            let nutPref = defaultNutPref.nutPref[sex][reproduction_phase][age_range];
+            let calories = new_cals;
+            console.log("cal_max",calories,calories*1.05);
+            nutPref["208"] = {"min": calories*0.95, "max": calories*1.05};
+            const {macro_ratios} = this.state;
+            // let carbs = calories*macro_ratios[0]/100/4 //carbohydrates (in grams, thus the /4 )
+            // let fats = calories*(macro_ratios[1] - macro_ratios[0])/100/9 //lipds (in grams)
+            // let prots = calories*(100-macro_ratios[1])/100/4 //prots (in grams)
+            let epsilon = 1e-4;
+            let perc_carbs = macro_ratios[0]/100
+            let perc_fats = (macro_ratios[1] - macro_ratios[0])/100
+            let perc_prots = (100-macro_ratios[1])/100
+            let extraConstraints = [
+              {"coeffs":{"205":4*(perc_carbs-1), "204":9*perc_carbs, "203":4*perc_carbs },"rel":"max","const":epsilon},
+              {"coeffs":{"205":4*(perc_carbs-1), "204":9*perc_carbs, "203":4*perc_carbs },"rel":"min","const":-epsilon},
+              {"coeffs":{"205":4*perc_fats, "204":9*(perc_fats-1), "203":4*perc_fats },"rel":"max","const":epsilon},
+              {"coeffs":{"205":4*perc_fats, "204":9*(perc_fats-1), "203":4*perc_fats },"rel":"min","const":-epsilon},
+              {"coeffs":{"205":4*perc_prots, "204":9*perc_prots, "203":4*(perc_prots-1) },"rel":"max","const":epsilon},
+              {"coeffs":{"205":4*perc_prots, "204":9*perc_prots, "203":4*(perc_prots-1) },"rel":"min","const":-epsilon},
+            ]
+            //
+            nutPref["291"] = {"min": 38};//fibre
+            // prof["205"] = {"min": carbs*0.95, "max": carbs*1.05};
+            // prof["204"] = {"min": fats*0.95, "max": fats*1.05};
+            // prof["203"] = {"min": prots*0.95, "max": prots*1.05};
+            this.setState({mins:bigNutCodes.map(c=>((c in nutPref && "min" in nutPref[c]) ? nutPref[c]["min"]: null))})
+            this.setState({maxs:bigNutCodes.map(c=>((c in nutPref && "max" in nutPref[c]) ? nutPref[c]["max"]: null))})
+            this.setState({ checked: Object.keys(nutPref).concat(["205","204","203"]) })
         }
     }
+
     handleChange(variable, event) {
         let value;
         if (variable==="macro_ratios") {
@@ -70,22 +184,37 @@ export default class CustomProfile extends React.Component {
             this.setState(change);
         }
     }
+
+    saveProfile() {
+
+    }
+
     render() {
         let inputFieldClass="col-6";
         let sliderHandleStyle={width:"24px", height:"24px", marginLeft:"-14px", marginTop:"-9px"}
         return ( <div className="container new-food">
-        <div className="row" style={{textAlign:"center"}}>
-            <h3>New profile: {this.state.foodOldName} </h3>
+        <div className="row my-3">
+          <div className="col-md-4">
+            <h3><span>New profile:</span> <input className="form-control" type="text" value={this.state.profName} style={{display:"inline-block", width:"70%", marginLeft:"2em"}}
+                placeholder="Profile name"
+                onChange={e=>this.setState({profName: e.target.value})}
+                />
+            </h3>
+          </div>
+          <div className="col-md-4" style={{textAlign:"right"}}>
+            <button type="button" className="btn toolbar-button btn-primary" onClick={this.saveProfile.bind(this)}>Save profile</button>
+          </div>
         </div>
-        <div className="row justify-content-md-center">
-        <div className="col-md-7 profile-form">
+
+        <div className="row">
+        <div className="col-md-8 offset-md-2 profile-form">
             <div className="form-group row">
-                <label htmlFor="age" className="col-3 col-form-label">Age</label>
-                <div className={inputFieldClass}>
-                    <input className="form-control" type="number" placeholder="23" value={this.state.age} id="age"/>
-                </div>
+              <label htmlFor="age" className="col-3 col-form-label">Age</label>
+              <div className={inputFieldClass}>
+                  <input className="form-control" onChange={this.handleChange.bind(this,"age")} type="number" placeholder="23" value={this.state.age} id="age"/>
+              </div>
             </div>
-            <div className="form-group row">            
+            <div className="form-group row">
                     <label className="col-3 col-form-label" htmlFor="sex">Sex</label>
                     <div className={inputFieldClass}>
                     <select value={this.state.sex} onChange={this.handleChange.bind(this,"sex")} className="custom-select" id="sex">
@@ -95,13 +224,13 @@ export default class CustomProfile extends React.Component {
                     </select>
                     </div>
             </div>
-            {this.state.sex==="female"? 
-                <div className="form-group row">            
+            {this.state.sex==="female"?
+                <div className="form-group row">
                     <label className="col-3 col-form-label" htmlFor="reproduction_phase"></label>
                     <div className={inputFieldClass}>
                     <select value={this.state.reproduction_phase} onChange={this.handleChange.bind(this,"reproduction_phase")} className="custom-select mb-2 mr-sm-2 mb-sm-0" style={{width: "100%"}} id="reproduction_phase">
                         {/* <option selected>Choose...</option> */}
-                        <option value="none">Not pregnant nor lactating</option>
+                        <option value="no_reprod">Not pregnant nor lactating</option>
                         <option value="pregnant">Pregnant</option>
                         <option value="lactating">Lactating</option>
                     </select>
@@ -109,26 +238,26 @@ export default class CustomProfile extends React.Component {
                 </div> : ""
             }
             <div className="form-group row">
-                <label htmlFor="height" className="col-3 col-form-label">Height</label>
+                <label htmlFor="height" className="col-3 col-form-label">Height <small>(cm)</small></label>
                 <div className={inputFieldClass}>
-                    <input className="form-control" type="number" placeholder="180" value={this.state.height} id="height"/>
+                    <input className="form-control" type="number" onChange={this.handleChange.bind(this,"height")} placeholder="180" value={this.state.height} id="height"/>
                 </div>
             </div>
             <div className="form-group row">
-                <label htmlFor="weight" className="col-3 col-form-label">Weight</label>
+                <label htmlFor="weight" className="col-3 col-form-label">Weight <small>(kg)</small></label>
                 <div className={inputFieldClass}>
-                    <input className="form-control" type="number" placeholder="70" value={this.state.weight} id="weight"/>
+                    <input className="form-control" type="number" onChange={this.handleChange.bind(this,"weight")} placeholder="70" value={this.state.weight} id="weight"/>
                 </div>
             </div>
             <div className="form-group row">
                 <label className="col-3 col-form-label" htmlFor="exercise">Exercise</label>
                 <div className={inputFieldClass}>
                 <select value={this.state.exercise} onChange={this.handleChange.bind(this,"exercise")} className="custom-select mb-2 mr-sm-2 mb-sm-0" id="exercise">
-                    <option selected value="1">Rarely</option>
-                    <option value="2">3 times per week</option>
-                    <option value="3">4 times per week</option>
-                    <option value="4">5 times per week</option>
-                    <option value="5">Everyday</option>
+                <option selected value="1">Little to no exercise</option>
+                    <option value="2">1-3 hrs/wk strenuous cardio</option>
+                    <option value="3">3-5 hrs/wk strenuous cardio</option>
+                    <option value="4">5-6 hrs/wk strenuous cardio</option>
+                    <option value="5">7-21 hrs/wk strenuous cardio</option>
                 </select>
                 </div>
             </div>
@@ -168,139 +297,112 @@ export default class CustomProfile extends React.Component {
                 <div className="col-9" style={{height:"52px", paddingTop: "20px"}}>
                     <Range value={this.state.macro_ratios} count={1} onChange={this.handleChange.bind(this,"macro_ratios")} className="macro-slider" handleStyle={[sliderHandleStyle,sliderHandleStyle]} id="macro-ratios" />
                 </div>
+                <div className="col-9" style={{}}>
+                    <div className="row">
+                        <div className="col-4 text-md-center" style={{}}>
+
+                            <b>Carbohydrates</b>
+                            <div>{this.state.macro_ratios[0]}%</div>
+
+                        </div>
+                        <div className="col-4 text-md-center" style={{}}>
+
+                            <b>Fats</b>
+                            <div>{this.state.macro_ratios[1] - this.state.macro_ratios[0]}%</div>
+
+                        </div>
+                        <div className="col-4 text-md-center" style={{}}>
+
+                            <b>Proteins</b>
+                            <div>{100-this.state.macro_ratios[1]}%</div>
+
+                        </div>
+                    </div>
+                </div>
                 {/* <div className="col-3"></div> */}
             </div>
+            <div className="form-group row">
+                <span className="col-3 col-form-label">Daily calories:</span>
+                <div className={inputFieldClass}>
+                    <span>{parseInt(this.state.calories) || ""}{parseInt(this.state.calories) ? " kcal" : ""}</span>
+                </div>
+            </div>
+
+            <div className="form-group row">
+                <div className="col-9" style={{}}>
+                        <CheckboxTree
+                        // icons={{
+                        //     check: <span className="rct-icon rct-icon-check" />,
+                        //     uncheck: <span className="rct-icon rct-icon-uncheck" />,
+                        //     halfCheck: <span className="rct-icon rct-icon-half-check" />,
+                        //     expandClose: <span className="rct-icon rct-icon-expand-close" />,
+                        //     expandOpen: <span className="rct-icon rct-icon-expand-open" />,
+                        //     expandAll: <span className="rct-icon rct-icon-expand-all" />,
+                        //     collapseAll: <span className="rct-icon rct-icon-collapse-all" />,
+                        //     parentClose: <span className="rct-icon rct-icon-parent-close" />,
+                        //     parentOpen: <span className="rct-icon rct-icon-parent-open" />,
+                        //     leaf: <span className="rct-icon rct-icon-leaf" />,
+                        // }}
+                        icons={{
+                            check: <FontAwesomeIcon className="rct-icon rct-icon-check" icon={faCheckSquare} />,
+                            uncheck: <FontAwesomeIcon icon={faSquareFull} />,
+                            halfCheck: <FontAwesomeIcon className="rct-icon rct-icon-half-check" icon={faMinusSquare} />,
+                            expandOpen: <FontAwesomeIcon icon={faChevronDown} />,
+                            expandClose: <FontAwesomeIcon icon={faChevronRight} />,
+                            // expandAll: null,
+                            // collapseAll: null,
+                            // parentClose: null,
+                            // parentOpen: null,
+                            // leaf: null
+                        }}
+                            nodes={nutClassesList.map(nut_class=>({value:nut_class,label:nut_class,children: bigNutCodes.map((x,i)=>([i,x]))
+                                .filter(c=>c[1] in bigNutInfo[nut_class])
+                                .map(c=>[c[0],c[1],bigNutInfo[nut_class][c[1]]])
+                                .map(n=>({value:n[0+1], icon:constraintField(this,n[1+1]["long_name"],n[1+1]["unit"],n[0]),label:""}))
+                                }))}
+                            checked={this.state.checked}
+                            expanded={this.state.expanded}
+                            onCheck={checked => this.setState({ checked })}
+                            onExpand={expanded => this.setState({ expanded })}
+                        />
+                    </div>
+            </div>
+
         </div>
         </div>
+        <div className="row">
+          <div className="col-md-6">
+          </div>
+          <div className="col-md-6 mb-3" style={{textAlign:"right"}}>
+            <button type="button" className="btn toolbar-button btn-primary" onClick={this.saveProfile.bind(this)}>Save profile</button>
+          </div>
+        </div>
 
-        {/* <div className="row">
-        <Async
-            name="form-field-name"
-            // value={this.state.selectIngValue}
-            loadOptions={getFoodOptions}
-            onBlurResetsInput={false} 
-            filterOptions={(options, filter, currentValues) => {
-            // Do no filtering, just return all options
-            return options
-            }}
-            cache={false}
-            filterOption={() => true}
-            onChange={this.chooseFood.bind(this)}
-
-        />
-        </div> */}
-        {/* <div className="row" style={{marginTop:"10px"}}>
-            <div className="col-md-1" style={{padding:"0px"}}>
-                <b>Food name</b>
-
-            </div>
-            <div className="col-md-6">
-                <input type="text" value={this.state.foodName} style={{width:"500px", marginLeft:"10px"}}
-                    onChange={e=>thisComp.setState({foodName: e.target.value})}
-                />
-            </div>
-            <div className={Meteor.user() && this.state.user === Meteor.user().username ? "col-md-5 ml-auto": "col-md-2 ml-auto"}>                
-                {Meteor.user() && this.state.foodId!=="" && this.state.user === Meteor.user().username ? <span className="food-edit-button">
-                    <button type="button" id="remove-food" className="btn btn-danger toolbar-button"
-                        onClick={this.removeFood.bind(this)}>
-                        Remove Food
-                    </button>
-                </span>  : ""}
-                <span className="food-edit-button">
-                    <button type="button" id="save-food-as" className="btn btn-primary toolbar-button"
-                        onClick={this.saveFoodAs.bind(this)}>
-                        Save Food As
-                    </button>
-                </span>
-                {Meteor.user() && this.state.user === Meteor.user().username ? <span className="food-edit-button">
-                    <button type="button" id="save-food" className="btn btn-primary toolbar-button"
-                        onClick={this.saveFood.bind(this)}>
-                        Save Food
-                    </button>
-                </span> : ""}
-            </div>
-        </div> */}
-        {/* <div className="row" style={{marginBottom:"10px"}}>
-        <div className="col-md-1" style={{padding:"0px"}}>
-                <b>Price</b>
-            </div>
-            <div className="col-md-11">
-                <input type="number" value={this.state.foodPrice} style={{width:"80px", marginLeft:"10px"}}
-                    onChange={e=>thisComp.setState({foodPrice: e.target.value})}
-                />
-            </div>
-        </div> */}
-        {/* <div className="row">
-            <div className="col-md-6">
-            <table className="table table-hover">
-            <thead>
-                <tr>
-                    <th>Nutrient</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {this.state.nutrients ? this.state.nutrients.filter((n,i)=>i<16).map((n,i)=>(
-                    <tr key={i}><td>{n.name}</td>
-                    <td>
-                        <NumberField thisComp={thisComp} style={{width:"80px"}} className="ing-limits"
-                            setValue={(value, onValueSet)=>{if (typeof onValueSet !== "undefined") onValueSet() }}
-                            onPressedEnter={()=>{
-                                if (Meteor.user() && this.state.user === Meteor.user().username)
-                                    this.saveFood()
-                                else 
-                                    this.saveFoodAs()
-                            }}
-                            onChange={e=>thisComp.handleNutChange.call(thisComp,n.id,e.target.value)}
-                            index={n.id}
-                            name="foodNuts"
-                        />
-                        &nbsp;
-                        {n.unit}</td>
-                    </tr>
-                )) : ""}
-            </tbody>
-            </table>
-            </div>
-            <div className="col-md-6">
-            <table className="table table-hover">
-            <thead>
-                <tr>
-                    <th>Nutrient</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {this.state.nutrients ? this.state.nutrients.filter((n,i)=>i>=16).map((n,i)=>(
-                    <tr key={i}><td>{n.name}</td>
-                    <td>
-                        <input value={thisComp.state.foodNuts[n.id]} step="10" style={{width:"80px"}} type="number"
-                            onChange={e=>thisComp.handleNutChange.call(thisComp,n.id,e.target.value)}
-                        />
-                        &nbsp;
-                        {n.unit}</td>
-                    </tr>
-                )) : ""}
-            </tbody>
-            </table>
-            </div>
-        </div> */}
     </div>)
     }
 }
 
+// constraintField(this,c["long_name"],c["unit"],i)
 
-const getFoodOptions = (input, callback) => {
-    console.log(input)
-    Meteor.call("getFoodNamesData",input,(err,res)=>{
-      if (err) console.log(err)
-      let foodsCustom = res;
-      // console.log("foodnames",foods)
-      callback(null,
-        {options:
-          foodsCustom.map(x=>({value: {id:x._id,name:x.name,price:x.price,nutrients:x.nutrients,price:x.price, user: x.user}, label: x.name+" ("+x.user+")"})),
-          cache:false
-        })
-    })
-  
-  };
+let constraintField = (thisComp,name,units,i) => {
+    return (
+    <div key={i} className="constraintField">
+        <span title={name}>{name}</span>
+    <small className="units-span">{units}</small>
+    {/* <div className="ing-field-container"> */}
+    <NumberField thisComp={thisComp} style={{width:"20px",marginLeft:"10px",marginRight:"10px", display:"inherit"}} className="ing-limits"
+        setValue={(value, onValueSet)=>{thisComp.props.changeLims(i,{"max":value/100},onValueSet)}}
+        onPressedEnter={thisComp.props.calculateDietIfNeeded}
+        index={i}
+        name="maxs"
+        />
+    <NumberField thisComp={thisComp} style={{width:"20px",marginLeft:"10px",marginRight:"10px", display:"inherit"}} className="ing-limits"
+        setValue={(value, onValueSet)=>{thisComp.props.changeLims(i,{"min":value/100},onValueSet)}}
+        onPressedEnter={thisComp.props.calculateDietIfNeeded}
+        index={i}
+        name="mins"
+        />
+    {/* </div> */}
+    </div>
+    )
+}
