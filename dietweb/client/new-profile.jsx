@@ -120,7 +120,7 @@ export default class CustomProfile extends React.Component {
 
     }
     componentDidUpdate(prevProps, prevState) {
-        const { weight, height, age, sex, exercise, weight_goal, reproduction_phase } = this.state;
+        let { weight, height, age, sex, exercise, weight_goal, reproduction_phase } = this.state;
         // let new_cals = this.state.calories;
         if (weight != prevState["weight"] || height != prevState["height"] || age != prevState["age"] || exercise != prevState["exercise"] || sex != prevState["sex"] || weight_goal != prevState["weight_goal"] || reproduction_phase != prevState["reproduction_phase"]){
             // console.log("hi");

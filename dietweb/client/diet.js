@@ -216,18 +216,21 @@ class App extends React.Component {
 
   updatePrefs() {
     //Update diet history
+    //and here is where we save to database too :)
 
     let username = Meteor.user() ? Meteor.user().username : "";
 
     let runs = this.state.dietRuns;
+    let oldNutPrefObj = runs[runs.length-1].nutPref;
 
     let ingPref = this.state.ingCodes.map(f=>({id:f, ...this.state.ingPref[f]}))
     let nutPref = this.state.nutCodes.map(f=>({id:f, ...this.state.nutPref[f]}));
+    let nutPrefObj = {name:oldNutPrefObj.name, user:oldNutPrefObj.user, nutPref: nutPref, extraConstraints: oldNutPrefObj.extraConstraints}
 
     if (runs.length === MAX_DIETRUNS_SAVED) {
       runs.splice(0, 1)
     }
-    runs.push({ingPref, nutPref, sol:this.state.dietVec})
+    runs.push({ingPref, nutPref:nutPrefObj, sol:this.state.dietVec})
 
     // console.log(this.props.diet._id)
     this.setState({dietRuns: runs}, ()=>{
@@ -782,6 +785,7 @@ export default withTracker(props => {
     let foodsFound = !loading && !!foodInfoCustom
     let foodNutsCustom
     if (foodsFound) {
+      console.log("foods found!", foodInfoCustom);
       foodNutsCustom = foodInfoCustom
       .reduce((fs,f,i)=>{
         let nutrients = f.nutrients;
@@ -806,7 +810,7 @@ export default withTracker(props => {
     }
 
 
-  // console.log("foodNutsCustom",foodNutsCustom)
+  console.log("foodNutsCustom",foodNutsCustom)
   // console.log(lastDietRun.ingPref.map(f=>f.id), "foodInfoCustom",foodInfoCustom)
   // console.log(resultsExist,ingPrefObj)
 
